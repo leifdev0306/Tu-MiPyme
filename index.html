@@ -4,21 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tu MiPyme – Gestión inteligente para tu negocio</title>
-    <!-- Google Fonts -->
+
+    <!-- Google Fonts (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
     <style>
         /* ============================================
-                   RESET Y VARIABLES
+                   RESET Y BASE
                    ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         :root {
             --primary: #0d1b4a;
             --primary-light: #1a2d6b;
@@ -38,20 +42,28 @@
             --radius-sm: 12px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         html {
             scroll-behavior: smooth;
         }
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--gray-50);
             color: var(--gray-800);
             line-height: 1.6;
+            overflow-x: hidden;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
+
+        /* ============================================
+                   BOTONES
+                   ============================================ */
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -68,14 +80,17 @@
             cursor: pointer;
             box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
         }
+
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 40px rgba(37, 99, 235, 0.4);
             background: #1d4ed8;
         }
+
         .btn-primary i {
             font-size: 1.2rem;
         }
+
         .btn-outline {
             display: inline-flex;
             align-items: center;
@@ -90,13 +105,14 @@
             border: 2px solid var(--primary);
             transition: var(--transition);
         }
+
         .btn-outline:hover {
             background: var(--primary);
             color: var(--white);
         }
 
         /* ============================================
-                   HEADER
+                   HEADER (estilo app)
                    ============================================ */
         .header {
             background: var(--primary);
@@ -106,6 +122,7 @@
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(13, 27, 74, 0.2);
         }
+
         .header .container {
             display: flex;
             align-items: center;
@@ -113,12 +130,14 @@
             flex-wrap: wrap;
             gap: 16px;
         }
+
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
+
         .logo-icon {
             width: 44px;
             height: 44px;
@@ -131,21 +150,25 @@
             font-weight: 800;
             color: var(--primary);
         }
+
         .logo-text {
             color: var(--white);
             font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
+
         .logo-text span {
             color: var(--accent);
             font-weight: 300;
         }
+
         .nav {
             display: flex;
             align-items: center;
             gap: 28px;
         }
+
         .nav a {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
@@ -154,9 +177,11 @@
             transition: var(--transition);
             position: relative;
         }
+
         .nav a:hover {
             color: var(--white);
         }
+
         .nav a::after {
             content: '';
             position: absolute;
@@ -167,9 +192,11 @@
             background: var(--accent);
             transition: var(--transition);
         }
+
         .nav a:hover::after {
             width: 100%;
         }
+
         .nav .btn-download-nav {
             background: var(--accent);
             color: var(--primary) !important;
@@ -177,13 +204,16 @@
             border-radius: 40px;
             font-weight: 700;
         }
+
         .nav .btn-download-nav::after {
             display: none;
         }
+
         .nav .btn-download-nav:hover {
             background: var(--accent-dark);
             transform: scale(1.05);
         }
+
         .menu-toggle {
             display: none;
             background: none;
@@ -192,6 +222,7 @@
             font-size: 1.8rem;
             cursor: pointer;
         }
+
         @media (max-width: 820px) {
             .menu-toggle {
                 display: block;
@@ -217,7 +248,7 @@
         }
 
         /* ============================================
-                   HERO
+                   HERO (con mockup estilo app)
                    ============================================ */
         .hero {
             padding: 80px 0 60px;
@@ -225,6 +256,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .hero::before {
             content: '';
             position: absolute;
@@ -236,6 +268,7 @@
             border-radius: 50%;
             pointer-events: none;
         }
+
         .hero .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -244,6 +277,7 @@
             position: relative;
             z-index: 1;
         }
+
         .hero-content h1 {
             font-size: 3.2rem;
             font-weight: 800;
@@ -251,21 +285,25 @@
             letter-spacing: -1px;
             color: var(--primary);
         }
+
         .hero-content h1 span {
             color: var(--secondary);
         }
+
         .hero-content p {
             font-size: 1.2rem;
             color: var(--gray-600);
             margin: 20px 0 32px;
             max-width: 520px;
         }
+
         .hero-badges {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             margin: 24px 0 16px;
         }
+
         .hero-badge {
             background: var(--white);
             padding: 6px 18px;
@@ -278,147 +316,117 @@
             align-items: center;
             gap: 6px;
         }
+
         .hero-badge i {
             color: var(--secondary);
         }
-        .hero-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        /* Mockup mejorado - más parecido a la app real */
+
+        /* Mockup de la app (más realista) */
         .hero-mockup {
             width: 100%;
-            max-width: 380px;
+            max-width: 420px;
             background: var(--primary);
-            border-radius: 36px;
-            padding: 16px 12px 12px;
-            box-shadow: 0 30px 80px rgba(13, 27, 74, 0.25);
+            border-radius: 40px;
+            padding: 20px 16px 16px;
+            box-shadow: 0 30px 80px rgba(13, 27, 74, 0.2);
             position: relative;
         }
+
         .hero-mockup .screen {
             background: var(--gray-50);
-            border-radius: 20px;
-            padding: 16px 12px;
+            border-radius: 24px;
+            padding: 20px 16px;
             min-height: 400px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
-        .mockup-appbar {
+
+        .mockup-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: var(--primary);
-            font-weight: 700;
-            font-size: 0.9rem;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--gray-200);
+            font-weight: 600;
         }
-        .mockup-appbar i {
+
+        .mockup-header i {
             color: var(--secondary);
         }
-        .mockup-summary {
+
+        .mockup-stats {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 6px;
+            gap: 8px;
         }
-        .mockup-summary .item {
+
+        .mockup-stat {
             background: var(--white);
             border-radius: var(--radius-sm);
-            padding: 8px 4px;
+            padding: 10px 8px;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
-        .mockup-summary .item .num {
+
+        .mockup-stat .num {
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: var(--primary);
         }
-        .mockup-summary .item .label {
-            font-size: 0.6rem;
+
+        .mockup-stat .label {
+            font-size: 0.7rem;
             color: var(--gray-600);
         }
-        .mockup-menu {
+
+        .mockup-row {
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin: 6px 0;
-        }
-        .mockup-menu .chip {
-            background: var(--gray-200);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            color: var(--primary);
-            font-weight: 500;
-        }
-        .mockup-menu .chip.active {
-            background: var(--secondary);
-            color: var(--white);
-        }
-        .mockup-list {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: 4px;
-        }
-        .mockup-item {
-            display: flex;
+            gap: 8px;
             align-items: center;
-            gap: 10px;
             background: var(--white);
-            padding: 8px 10px;
+            padding: 10px 12px;
             border-radius: var(--radius-sm);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
-        .mockup-item .icon {
-            width: 28px;
-            height: 28px;
-            background: var(--gray-100);
-            border-radius: 6px;
+
+        .mockup-row .icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gray-200);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
-            font-size: 0.8rem;
         }
-        .mockup-item .info {
+
+        .mockup-row .info {
             flex: 1;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
         }
-        .mockup-item .info .title {
+
+        .mockup-row .info .title {
             font-weight: 600;
             color: var(--primary);
         }
-        .mockup-item .info .sub {
-            font-size: 0.65rem;
+
+        .mockup-row .info .sub {
+            font-size: 0.75rem;
             color: var(--gray-600);
         }
-        .mockup-item .price {
+
+        .mockup-row .amount {
             font-weight: 700;
-            font-size: 0.8rem;
             color: #16a34a;
         }
-        .mockup-item .stock {
-            font-size: 0.65rem;
-            color: var(--gray-600);
-        }
-        .mockup-fab {
+
+        .mockup-row.highlight {
             background: var(--accent);
             color: var(--primary);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            align-self: flex-end;
-            margin-top: 4px;
-            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
-            cursor: default;
+        }
+
+        .mockup-row.highlight .icon {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         @media (max-width: 900px) {
@@ -437,18 +445,19 @@
                 font-size: 2.4rem;
             }
             .hero-mockup {
-                max-width: 300px;
+                max-width: 340px;
                 margin: 0 auto;
             }
         }
 
         /* ============================================
-                   SECCIÓN TUTORIAL (CÓMO USAR)
+                   TUTORIAL (pasos interactivos)
                    ============================================ */
         .tutorial {
             padding: 80px 0;
             background: var(--white);
         }
+
         .tutorial .section-title {
             text-align: center;
             font-size: 2.2rem;
@@ -456,18 +465,21 @@
             color: var(--primary);
             margin-bottom: 12px;
         }
+
         .tutorial .section-sub {
             text-align: center;
             color: var(--gray-600);
             margin-bottom: 48px;
             font-size: 1.1rem;
         }
+
         .steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
             counter-reset: step;
         }
+
         .step {
             text-align: center;
             padding: 24px 16px;
@@ -475,11 +487,15 @@
             background: var(--gray-50);
             transition: var(--transition);
             position: relative;
+            border: 1px solid transparent;
         }
+
         .step:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow-hover);
+            border-color: var(--secondary);
         }
+
         .step::before {
             counter-increment: step;
             content: counter(step);
@@ -498,32 +514,31 @@
             justify-content: center;
             font-size: 1rem;
         }
+
         .step .icon {
             font-size: 2.8rem;
             margin: 16px 0 12px;
         }
+
         .step h4 {
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 6px;
         }
+
         .step p {
             font-size: 0.95rem;
             color: var(--gray-600);
         }
-        .tutorial .btn-guia {
-            display: block;
-            width: fit-content;
-            margin: 40px auto 0;
-        }
 
         /* ============================================
-                   CARACTERÍSTICAS
+                   CARACTERÍSTICAS (estilo app)
                    ============================================ */
         .features {
             padding: 80px 0;
             background: var(--gray-50);
         }
+
         .features .section-title {
             text-align: center;
             font-size: 2.2rem;
@@ -531,17 +546,20 @@
             color: var(--primary);
             margin-bottom: 12px;
         }
+
         .features .section-sub {
             text-align: center;
             color: var(--gray-600);
             margin-bottom: 48px;
             font-size: 1.1rem;
         }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 30px;
         }
+
         .feature-card {
             background: var(--white);
             padding: 32px 24px;
@@ -549,35 +567,41 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             border: 1px solid transparent;
+            text-align: center;
         }
+
         .feature-card:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow-hover);
             border-color: var(--secondary);
         }
+
         .feature-card .icon {
             font-size: 2.4rem;
             margin-bottom: 16px;
             color: var(--secondary);
         }
+
         .feature-card h4 {
             font-weight: 700;
             font-size: 1.2rem;
             color: var(--primary);
             margin-bottom: 8px;
         }
+
         .feature-card p {
             color: var(--gray-600);
             font-size: 0.95rem;
         }
 
         /* ============================================
-                   PLANES
+                   PLANES (como en la app)
                    ============================================ */
         .plans {
             padding: 80px 0;
             background: var(--white);
         }
+
         .plans .section-title {
             text-align: center;
             font-size: 2.2rem;
@@ -585,18 +609,21 @@
             color: var(--primary);
             margin-bottom: 12px;
         }
+
         .plans .section-sub {
             text-align: center;
             color: var(--gray-600);
             margin-bottom: 48px;
             font-size: 1.1rem;
         }
+
         .plans-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
             align-items: stretch;
         }
+
         .plan-card {
             background: var(--gray-50);
             border-radius: var(--radius);
@@ -608,15 +635,18 @@
             flex-direction: column;
             justify-content: space-between;
         }
+
         .plan-card:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow-hover);
         }
+
         .plan-card.popular {
             border-color: var(--secondary);
             background: linear-gradient(160deg, var(--gray-50), #eef2ff);
             position: relative;
         }
+
         .plan-card.popular::before {
             content: 'MÁS POPULAR';
             position: absolute;
@@ -631,28 +661,33 @@
             border-radius: 40px;
             letter-spacing: 1px;
         }
+
         .plan-card .name {
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary);
         }
+
         .plan-card .price {
             font-size: 2.6rem;
             font-weight: 800;
             color: var(--primary);
             margin: 12px 0 4px;
         }
+
         .plan-card .price small {
             font-size: 1rem;
             font-weight: 400;
             color: var(--gray-600);
         }
+
         .plan-card .features-list {
             list-style: none;
             padding: 0;
             margin: 24px 0 32px;
             text-align: left;
         }
+
         .plan-card .features-list li {
             padding: 8px 0;
             border-bottom: 1px solid var(--gray-200);
@@ -661,13 +696,16 @@
             gap: 10px;
             font-size: 0.95rem;
         }
+
         .plan-card .features-list li:last-child {
             border-bottom: none;
         }
+
         .plan-card .features-list li i {
             color: #16a34a;
             width: 20px;
         }
+
         .plan-card .btn-plan {
             display: inline-block;
             background: var(--primary);
@@ -679,13 +717,16 @@
             transition: var(--transition);
             margin-top: auto;
         }
+
         .plan-card .btn-plan:hover {
             background: var(--secondary);
             transform: scale(1.03);
         }
+
         .plan-card.popular .btn-plan {
             background: var(--secondary);
         }
+
         .plan-card.popular .btn-plan:hover {
             background: #1d4ed8;
         }
@@ -697,6 +738,7 @@
             padding: 80px 0;
             background: var(--gray-50);
         }
+
         .payment .section-title {
             text-align: center;
             font-size: 2.2rem;
@@ -704,12 +746,14 @@
             color: var(--primary);
             margin-bottom: 12px;
         }
+
         .payment .section-sub {
             text-align: center;
             color: var(--gray-600);
             margin-bottom: 48px;
             font-size: 1.1rem;
         }
+
         .payment-card {
             max-width: 720px;
             margin: 0 auto;
@@ -718,6 +762,7 @@
             padding: 40px;
             box-shadow: var(--shadow);
         }
+
         .payment-card .row {
             display: flex;
             align-items: center;
@@ -725,17 +770,21 @@
             padding: 12px 0;
             border-bottom: 1px solid var(--gray-200);
         }
+
         .payment-card .row:last-child {
             border-bottom: none;
         }
+
         .payment-card .row .label {
             font-weight: 600;
             color: var(--primary);
             min-width: 100px;
         }
+
         .payment-card .row .value {
             color: var(--gray-800);
         }
+
         .payment-card .highlight {
             background: #fef9e7;
             padding: 16px 20px;
@@ -744,6 +793,7 @@
             margin-top: 20px;
             font-size: 0.95rem;
         }
+
         .payment-card .highlight strong {
             color: var(--primary);
         }
@@ -756,17 +806,20 @@
             background: var(--primary);
             color: var(--white);
         }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 30px;
             text-align: center;
         }
+
         .stats-grid .stat-number {
             font-size: 2.8rem;
             font-weight: 800;
             color: var(--accent);
         }
+
         .stats-grid .stat-label {
             font-size: 1rem;
             opacity: 0.8;
@@ -780,6 +833,7 @@
             padding: 40px 0 24px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
+
         .footer .container {
             display: flex;
             justify-content: space-between;
@@ -787,26 +841,32 @@
             gap: 20px;
             align-items: center;
         }
+
         .footer .brand {
             color: var(--white);
             font-weight: 700;
             font-size: 1.2rem;
         }
+
         .footer .brand span {
             color: var(--accent);
         }
+
         .footer a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: var(--transition);
         }
+
         .footer a:hover {
             color: var(--white);
         }
+
         .footer .copy {
             color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
         }
+
         @media (max-width: 600px) {
             .footer .container {
                 flex-direction: column;
@@ -822,12 +882,14 @@
             transform: translateY(30px);
             animation: fadeUp 0.8s ease forwards;
         }
+
         @keyframes fadeUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .delay-1 {
             animation-delay: 0.1s;
         }
@@ -842,7 +904,7 @@
         }
 
         /* ============================================
-                   RESPONSIVE
+                   RESPONSIVE FINO
                    ============================================ */
         @media (max-width: 480px) {
             .hero-content h1 {
@@ -872,16 +934,21 @@
     </style>
 </head>
 <body>
-    <!-- HEADER -->
+
+    <!-- ========================================
+    HEADER
+    ======================================== -->
     <header class="header" id="header">
         <div class="container">
             <a href="#" class="logo">
                 <span class="logo-icon">📊</span>
                 <span class="logo-text">Tu <span>MiPyme</span></span>
             </a>
+
             <button class="menu-toggle" id="menuToggle" aria-label="Menú">
                 <i class="fas fa-bars"></i>
             </button>
+
             <nav class="nav" id="mainNav">
                 <a href="#features">Características</a>
                 <a href="#tutorial">Cómo usar</a>
@@ -894,7 +961,9 @@
         </div>
     </header>
 
-    <!-- HERO -->
+    <!-- ========================================
+    HERO (con enlace de descarga REAL)
+    ======================================== -->
     <section class="hero" id="download">
         <div class="container">
             <div class="hero-content">
@@ -909,58 +978,71 @@
                     <span class="hero-badge"><i class="fas fa-lock"></i> Segura</span>
                     <span class="hero-badge"><i class="fas fa-chart-bar"></i> Reportes</span>
                 </div>
-                <a href="https://github.com/leifdev0306/Tu-MiPyne/releases/latest/download/TuMiPyme.apk" class="btn-primary">
+                <!-- ✅ ENLACE DE DESCARGA REAL (el que me diste) -->
+                <a href="https://github.com/leifdev0306/Tu-MiPyme/releases/download/v1.0.0/TuMiPyme.apk" class="btn-primary">
                     <i class="fas fa-download"></i> Descargar APK
                 </a>
                 <p style="margin-top:12px; font-size:0.85rem; color:var(--gray-600);">
-                    Última versión · Android 5.0+
+                    Versión 1.0.0 · Android 5.0+
                 </p>
             </div>
             <div class="hero-image">
                 <div class="hero-mockup">
                     <div class="screen">
-                        <div class="mockup-appbar">
-                            <span><i class="fas fa-store-alt"></i> Tu MiPyme</span>
-                            <span><i class="fas fa-bell"></i></span>
+                        <div class="mockup-header">
+                            <span>📊 Tu MiPyme</span>
+                            <i class="fas fa-bell"></i>
                         </div>
-                        <div class="mockup-summary">
-                            <div class="item"><div class="num">$1,240</div><div class="label">Ventas</div></div>
-                            <div class="item"><div class="num">12</div><div class="label">Productos</div></div>
-                            <div class="item"><div class="num">8</div><div class="label">Clientes</div></div>
-                        </div>
-                        <div class="mockup-menu">
-                            <span class="chip active">Hoy</span>
-                            <span class="chip">Semana</span>
-                            <span class="chip">Mes</span>
-                        </div>
-                        <div class="mockup-list">
-                            <div class="mockup-item">
-                                <div class="icon"><i class="fas fa-tag"></i></div>
-                                <div class="info"><div class="title">Café molido 500g</div><div class="sub">Stock: 24</div></div>
-                                <div class="price">$8.50</div>
+                        <div class="mockup-stats">
+                            <div class="mockup-stat">
+                                <div class="num">$1,240</div>
+                                <div class="label">Ventas hoy</div>
                             </div>
-                            <div class="mockup-item">
-                                <div class="icon"><i class="fas fa-tag"></i></div>
-                                <div class="info"><div class="title">Pan integral</div><div class="sub">Stock: 12</div></div>
-                                <div class="price">$2.30</div>
+                            <div class="mockup-stat">
+                                <div class="num">12</div>
+                                <div class="label">Productos</div>
                             </div>
-                            <div class="mockup-item" style="background:var(--accent); color:var(--primary);">
-                                <div class="icon"><i class="fas fa-plus-circle"></i></div>
-                                <div class="info"><div class="title">Nueva venta</div><div class="sub">Toca para registrar</div></div>
-                                <div class="price">→</div>
+                            <div class="mockup-stat">
+                                <div class="num">8</div>
+                                <div class="label">Clientes</div>
                             </div>
                         </div>
-                        <div class="mockup-fab"><i class="fas fa-plus"></i></div>
+                        <div class="mockup-row">
+                            <div class="icon"><i class="fas fa-tag"></i></div>
+                            <div class="info">
+                                <div class="title">Café molido 500g</div>
+                                <div class="sub">Stock: 24 unidades</div>
+                            </div>
+                            <div class="amount">$8.50</div>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="icon"><i class="fas fa-tag"></i></div>
+                            <div class="info">
+                                <div class="title">Pan integral</div>
+                                <div class="sub">Stock: 12 unidades</div>
+                            </div>
+                            <div class="amount">$2.30</div>
+                        </div>
+                        <div class="mockup-row highlight">
+                            <div class="icon"><i class="fas fa-plus-circle"></i></div>
+                            <div class="info">
+                                <div class="title">Nueva venta</div>
+                                <div class="sub">Toca para registrar</div>
+                            </div>
+                            <div class="amount">→</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TUTORIAL -->
+    <!-- ========================================
+    TUTORIAL
+    ======================================== -->
     <section class="tutorial" id="tutorial">
         <div class="container">
-            <h2 class="section-title fade-up">📖 ¿Cómo usar Tu MiPyme?</h2>
+            <h2 class="section-title fade-up">📖 Cómo usar Tu MiPyme</h2>
             <p class="section-sub fade-up delay-1">
                 Sigue estos pasos y empieza a gestionar tu negocio en minutos.
             </p>
@@ -996,13 +1078,12 @@
                     <p>Después de la prueba, paga mensualmente para seguir usando todas las funciones.</p>
                 </div>
             </div>
-            <a href="como-usar.html" class="btn-primary btn-guia">
-                <i class="fas fa-book-open"></i> Ver guía detallada
-            </a>
         </div>
     </section>
 
-    <!-- CARACTERÍSTICAS -->
+    <!-- ========================================
+    CARACTERÍSTICAS
+    ======================================== -->
     <section class="features" id="features">
         <div class="container">
             <h2 class="section-title fade-up">✨ Características principales</h2>
@@ -1044,7 +1125,9 @@
         </div>
     </section>
 
-    <!-- PLANES -->
+    <!-- ========================================
+    PLANES
+    ======================================== -->
     <section class="plans" id="plans">
         <div class="container">
             <h2 class="section-title fade-up">📋 Elige tu plan</h2>
@@ -1085,7 +1168,9 @@
         </div>
     </section>
 
-    <!-- PAGO -->
+    <!-- ========================================
+    PAGO
+    ======================================== -->
     <section class="payment" id="payment">
         <div class="container">
             <h2 class="section-title fade-up">💰 Instrucciones de pago</h2>
@@ -1117,7 +1202,9 @@
         </div>
     </section>
 
-    <!-- ESTADÍSTICAS -->
+    <!-- ========================================
+    ESTADÍSTICAS
+    ======================================== -->
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
@@ -1141,14 +1228,16 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ========================================
+    FOOTER
+    ======================================== -->
     <footer class="footer">
         <div class="container">
             <div class="brand">
                 Tu <span>MiPyme</span> — Gestión inteligente
             </div>
             <div>
-                <a href="https://github.com/leifdev0306/Tu-MiPyne" target="_blank">
+                <a href="https://github.com/leifdev0306/Tu-MiPyme" target="_blank">
                     <i class="fab fa-github"></i> GitHub
                 </a>
                 &nbsp;·&nbsp;
@@ -1162,21 +1251,27 @@
         </div>
     </footer>
 
+    <!-- ========================================
+    SCRIPTS
+    ======================================== -->
     <script>
         // Menú móvil
         const toggle = document.getElementById('menuToggle');
         const nav = document.getElementById('mainNav');
+
         toggle.addEventListener('click', () => {
             nav.classList.toggle('open');
         });
+
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('open');
             });
         });
 
-        // Animaciones con Intersection Observer
+        // Animaciones al hacer scroll
         const fadeElements = document.querySelectorAll('.fade-up');
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1184,10 +1279,12 @@
                 }
             });
         }, { threshold: 0.15 });
+
         fadeElements.forEach(el => {
             el.style.animationPlayState = 'paused';
             observer.observe(el);
         });
+
         window.addEventListener('load', () => {
             fadeElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
@@ -1197,5 +1294,6 @@
             });
         });
     </script>
+
 </body>
 </html>
