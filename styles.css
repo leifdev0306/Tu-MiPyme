@@ -1,0 +1,463 @@
+/* ======================================================
+   Tu MiPyme - Landing Page Styles
+   ====================================================== */
+
+/* ---------- RESET ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ---------- BARRA DE NAVEGACIÓN ---------- */
+nav {
+    background-color: #1A237E;
+    color: #fff;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo i {
+    font-size: 1.8rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links a {
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* ---------- HERO ---------- */
+.hero {
+    background: linear-gradient(135deg, #0d47a1, #1A237E);
+    color: #fff;
+    padding: 80px 0 60px 0;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin-bottom: 32px;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: #00c853;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #00b34a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,200,80,0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+.hero-image {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.hero-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+/* ---------- FEATURES ---------- */
+.features {
+    padding: 80px 0 60px 0;
+    background: #fff;
+}
+
+.features h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 48px;
+    color: #1A237E;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: #f8f9fa;
+    padding: 30px 20px;
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.feature-card i {
+    font-size: 2.8rem;
+    color: #1A237E;
+    margin-bottom: 16px;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.feature-card p {
+    color: #666;
+}
+
+/* ---------- PLANES ---------- */
+.plans {
+    padding: 80px 0 60px 0;
+    background: #e8eaf6;
+}
+
+.plans h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 48px;
+    color: #1A237E;
+}
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.plan-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.plan-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+}
+
+.plan-card.premium {
+    border: 2px solid #ffb300;
+    position: relative;
+}
+
+.plan-card.premium::after {
+    content: "RECOMENDADO";
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ffb300;
+    color: #1A237E;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.plan-header {
+    padding: 24px 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.plan-header.normal {
+    background: #455a64;
+}
+
+.plan-header.premium {
+    background: #1A237E;
+}
+
+.plan-header h3 {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+}
+
+.plan-header .price {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.plan-header .price span {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 24px 20px;
+}
+
+.plan-features li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plan-features li i {
+    width: 20px;
+    text-align: center;
+}
+
+.plan-features .fa-check {
+    color: #00c853;
+}
+
+.plan-features .fa-times {
+    color: #e53935;
+}
+
+.btn-plan {
+    display: block;
+    margin: 0 20px 24px 20px;
+    text-align: center;
+    background: #1A237E;
+    color: #fff;
+    padding: 12px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-plan:hover {
+    background: #0d47a1;
+}
+
+.premium .btn-plan {
+    background: #ffb300;
+    color: #1A237E;
+}
+
+.premium .btn-plan:hover {
+    background: #ffa000;
+}
+
+/* ---------- DESCARGA ---------- */
+.download {
+    padding: 80px 0 60px 0;
+    text-align: center;
+    background: #fff;
+}
+
+.download h2 {
+    font-size: 2.2rem;
+    color: #1A237E;
+    margin-bottom: 16px;
+}
+
+.download p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto 32px auto;
+}
+
+.btn-download {
+    background: #00c853;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 16px 48px;
+}
+
+.btn-download:hover {
+    background: #00b34a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,200,80,0.4);
+}
+
+.version-info {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+    background: #1A237E;
+    color: #fff;
+    padding: 32px 0;
+    text-align: center;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-links a {
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-buttons .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .plans-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+
+    footer .container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .plan-card.premium::after {
+        top: 8px;
+        right: 8px;
+        font-size: 0.6rem;
+        padding: 2px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn-download {
+        padding: 14px 32px;
+        font-size: 1rem;
+    }
+}
