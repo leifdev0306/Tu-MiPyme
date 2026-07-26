@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tu MiPyme – Gestión inteligente para tu negocio</title>
     <!-- Meta tags SEO -->
-    <meta name="description" content="Gestiona tu negocio con Tu MiPyme: inventario, ventas, clientes y reportes, todo offline y sincronizado." />
-    <meta name="keywords" content="gestión, negocio, inventario, ventas, clientes, app, offline" />
+    <meta name="description" content="Gestiona tu negocio con Tu MiPyme: ventas, inventario, gastos, clientes, reportes y vendedores. Prueba 7 días gratis con asesoramiento." />
+    <meta name="keywords" content="gestión, negocio, inventario, ventas, clientes, app, offline, vendedores, reportes" />
     <link rel="canonical" href="https://tumipyme.com" />
     <!-- Open Graph -->
-    <meta property="og:title" content="Tu MiPyme – Gestión inteligente para tu negocio" />
-    <meta property="og:description" content="Administra inventario, ventas, gastos y clientes desde una app móvil que funciona sin internet." />
+    <meta property="og:title" content="Tu MiPyme – Gestiona tu negocio, donde estés" />
+    <meta property="og:description" content="Todo lo que tu negocio necesita en una sola app. Ventas, inventario, gastos, clientes, reportes y vendedores." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://tumipyme.com" />
     <meta property="og:image" content="https://tumipyme.com/og-image.jpg" />
-    <meta name="theme-color" content="#0d1b4a" />
+    <meta name="theme-color" content="#1A237E" />
 
-    <!-- Google Fonts (Inter + display swap) -->
+    <!-- Google Fonts (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
 
-    <!-- Font Awesome 6 (versión optimizada) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
         /* ============================================
-                   RESET Y VARIABLES (mejoradas)
-                   ============================================ */
+           RESET Y VARIABLES (estilo Flutter + mejoras)
+           ============================================ */
         *,
         *::before,
         *::after {
@@ -37,8 +37,8 @@
         }
 
         :root {
-            --primary: #0b1a3a;
-            --primary-light: #1a2d6b;
+            --primary: #1A237E;
+            --primary-light: #283593;
             --secondary: #2563eb;
             --secondary-dark: #1d4ed8;
             --accent: #fbbf24;
@@ -50,10 +50,10 @@
             --gray-300: #cbd5e1;
             --gray-600: #475569;
             --gray-800: #1e293b;
-            --shadow-sm: 0 4px 20px rgba(11, 26, 58, 0.06);
-            --shadow-md: 0 10px 40px rgba(11, 26, 58, 0.10);
-            --shadow-lg: 0 20px 60px rgba(11, 26, 58, 0.15);
-            --shadow-xl: 0 30px 80px rgba(11, 26, 58, 0.20);
+            --shadow-sm: 0 4px 20px rgba(26, 35, 126, 0.06);
+            --shadow-md: 0 10px 40px rgba(26, 35, 126, 0.10);
+            --shadow-lg: 0 20px 60px rgba(26, 35, 126, 0.15);
+            --shadow-xl: 0 30px 80px rgba(26, 35, 126, 0.20);
             --radius: 28px;
             --radius-sm: 14px;
             --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -61,7 +61,7 @@
             --bg-body: var(--gray-50);
             --text-body: var(--gray-800);
             --card-bg: var(--white);
-            --header-bg: rgba(11, 26, 58, 0.92);
+            --header-bg: rgba(26, 35, 126, 0.92);
             --border-color: var(--gray-200);
         }
 
@@ -104,8 +104,8 @@
         }
 
         /* ============================================
-                   BOTONES MEJORADOS
-                   ============================================ */
+           BOTONES (estilo Flutter)
+           ============================================ */
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -174,8 +174,8 @@
         }
 
         /* ============================================
-                   HEADER (con vidrio esmerilado)
-                   ============================================ */
+           HEADER (con vidrio esmerilado)
+           ============================================ */
         .header {
             position: fixed;
             top: 0;
@@ -296,7 +296,6 @@
             color: var(--primary) !important;
         }
 
-        /* Dark mode toggle */
         .theme-toggle {
             background: rgba(255, 255, 255, 0.08);
             border: none;
@@ -363,8 +362,8 @@
         }
 
         /* ============================================
-                   HERO (mejorado con gradiente y glassmorphism)
-                   ============================================ */
+           HERO (con mockup mejorado)
+           ============================================ */
         .hero {
             padding: 140px 0 80px;
             background: linear-gradient(165deg, var(--bg-body) 0%, #eef2ff 100%);
@@ -430,10 +429,17 @@
             background-clip: text;
         }
 
-        .hero-content p {
+        .hero-content .tagline {
             font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-top: 8px;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
             color: var(--gray-600);
-            margin: 24px 0 36px;
+            margin: 16px 0 28px;
             max-width: 520px;
             transition: color 0.3s;
         }
@@ -473,14 +479,16 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* Mockup del teléfono mejorado */
+        /* ============================================
+           MOCKUP DEL TELÉFONO (RÉPLICA DE LA APP FLUTTER)
+           ============================================ */
         .hero-mockup {
             width: 100%;
-            max-width: 400px;
+            max-width: 390px;
             margin: 0 auto;
-            background: var(--primary);
+            background: #1A237E;
             border-radius: 44px;
-            padding: 20px 16px 16px;
+            padding: 18px 14px 14px;
             box-shadow: var(--shadow-xl);
             position: relative;
             transition: transform 0.5s ease;
@@ -493,137 +501,284 @@
         .hero-mockup .screen {
             background: var(--gray-50);
             border-radius: 28px;
-            padding: 20px 16px;
-            min-height: 420px;
+            padding: 12px 8px 8px;
+            min-height: 560px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 8px;
             transition: background 0.3s;
+            overflow: hidden;
+            position: relative;
         }
 
         [data-theme="dark"] .hero-mockup .screen {
             background: #1e293b;
         }
 
-        .mockup-header {
+        .mockup-appbar {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        [data-theme="dark"] .mockup-header {
+            justify-content: space-between;
+            padding: 4px 8px 4px 4px;
+            background: var(--primary);
+            border-radius: 16px;
             color: var(--white);
+            flex-shrink: 0;
         }
 
-        .mockup-header i {
-            color: var(--secondary);
-        }
-
-        .mockup-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .mockup-appbar .left {
+            display: flex;
+            align-items: center;
             gap: 8px;
         }
 
-        .mockup-stat {
-            background: var(--card-bg);
-            border-radius: var(--radius-sm);
-            padding: 12px 8px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .mockup-stat .num {
-            font-weight: 800;
-            font-size: 1.3rem;
-            color: var(--primary);
-            transition: color 0.3s;
-        }
-
-        [data-theme="dark"] .mockup-stat .num {
-            color: var(--white);
-        }
-
-        .mockup-stat .label {
-            font-size: 0.7rem;
-            color: var(--gray-600);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .mockup-row {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            background: var(--card-bg);
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .mockup-row .icon {
-            width: 36px;
-            height: 36px;
-            background: var(--gray-200);
-            border-radius: 10px;
+        .mockup-appbar .logo-small {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
             color: var(--primary);
-            flex-shrink: 0;
-            transition: background 0.3s;
         }
 
-        [data-theme="dark"] .mockup-row .icon {
-            background: #334155;
-            color: var(--white);
-        }
-
-        .mockup-row .info {
-            flex: 1;
-            font-size: 0.85rem;
-        }
-
-        .mockup-row .info .title {
+        .mockup-appbar .title {
             font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: -0.3px;
+        }
+
+        .mockup-appbar .title span {
+            font-weight: 300;
+            color: var(--accent);
+        }
+
+        .mockup-appbar .subtitle {
+            font-size: 0.55rem;
+            opacity: 0.7;
+            margin-left: 2px;
+            display: block;
+        }
+
+        .mockup-appbar .actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mockup-appbar .actions i {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            cursor: default;
+            padding: 4px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .mockup-appbar .actions i:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mockup-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 4px 0;
+            overflow-y: auto;
+            max-height: 480px;
+        }
+
+        .mockup-body::-webkit-scrollbar {
+            width: 3px;
+        }
+        .mockup-body::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 10px;
+        }
+
+        .mockup-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-sm);
+            padding: 12px 10px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .mockup-card .card-title {
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .mockup-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+        }
+
+        .mockup-summary-item {
+            text-align: center;
+            padding: 4px 2px;
+        }
+
+        .mockup-summary-item .icon {
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .mockup-summary-item .value {
+            font-weight: 800;
+            font-size: 0.9rem;
             color: var(--primary);
             transition: color 0.3s;
         }
 
-        [data-theme="dark"] .mockup-row .info .title {
+        [data-theme="dark"] .mockup-summary-item .value {
             color: var(--white);
         }
 
-        .mockup-row .info .sub {
-            font-size: 0.75rem;
+        .mockup-summary-item .label {
+            font-size: 0.55rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+        }
+
+        .mockup-summary-item .value.green {
+            color: #16a34a;
+        }
+        .mockup-summary-item .value.red {
+            color: #dc2626;
+        }
+        .mockup-summary-item .value.orange {
+            color: #ea580c;
+        }
+
+        .mockup-meta {
+            margin-top: 6px;
+            padding: 4px 0;
+        }
+
+        .mockup-meta .meta-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
             color: var(--gray-600);
         }
 
-        .mockup-row .amount {
-            font-weight: 700;
-            color: #16a34a;
+        .mockup-meta .progress-bar {
+            height: 6px;
+            background: var(--gray-200);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 2px;
         }
 
-        .mockup-row.highlight {
+        .mockup-meta .progress-bar .fill {
+            height: 100%;
+            width: 65%;
             background: var(--accent);
-            color: var(--primary);
-            border-color: var(--accent);
+            border-radius: 10px;
         }
 
-        .mockup-row.highlight .icon {
-            background: rgba(255, 255, 255, 0.3);
+        .mockup-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-top: 4px;
         }
 
-        .mockup-row.highlight .amount {
+        .mockup-action {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 8px 4px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .mockup-action:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .mockup-action .icon {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .mockup-action .label {
+            font-size: 0.5rem;
+            font-weight: 600;
+            color: var(--text-body);
+            margin-top: 2px;
+            display: block;
+        }
+
+        .mockup-ventas {
+            margin-top: 4px;
+        }
+
+        .mockup-ventas .venta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 4px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mockup-ventas .venta-item:last-child {
+            border-bottom: none;
+        }
+
+        .mockup-ventas .venta-item .avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.7rem;
             color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .mockup-ventas .venta-item .info {
+            flex: 1;
+        }
+
+        .mockup-ventas .venta-item .info .name {
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .mockup-ventas .venta-item .info .name {
+            color: var(--white);
+        }
+
+        .mockup-ventas .venta-item .info .meta {
+            font-size: 0.6rem;
+            color: var(--gray-600);
+        }
+
+        .mockup-ventas .venta-item .monto {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #16a34a;
         }
 
         @media (max-width: 900px) {
@@ -645,7 +800,7 @@
                 font-size: 2.6rem;
             }
             .hero-mockup {
-                max-width: 320px;
+                max-width: 340px;
             }
         }
 
@@ -653,17 +808,252 @@
             .hero-content h1 {
                 font-size: 2rem;
             }
+            .hero-mockup {
+                max-width: 300px;
+                padding: 12px 8px 8px;
+            }
+            .hero-mockup .screen {
+                min-height: 460px;
+                padding: 8px 6px;
+            }
+            .mockup-summary-item .value {
+                font-size: 0.75rem;
+            }
+            .mockup-action .icon {
+                font-size: 1rem;
+            }
+            .mockup-ventas .venta-item .info .name {
+                font-size: 0.65rem;
+            }
         }
 
         /* ============================================
-                   SECCIÓN TUTORIAL (con tarjetas mejoradas)
-                   ============================================ */
-        .tutorial {
+           NUEVA SECCIÓN: TODO LO QUE TU NEGOCIO NECESITA
+           ============================================ */
+        .features-highlight {
+            padding: 80px 0;
+            background: var(--card-bg);
+            transition: background 0.3s;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .features-highlight .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .features-highlight .grid-item {
+            text-align: center;
+            padding: 20px 12px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .features-highlight .grid-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary);
+        }
+
+        .features-highlight .grid-item .icon {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .features-highlight .grid-item h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .features-highlight .grid-item h4 {
+            color: var(--white);
+        }
+
+        .features-highlight .grid-item p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           SECCIÓN: 7 DÍAS DE PRUEBA GRATIS
+           ============================================ */
+        .trial {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .trial h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .trial h2 span {
+            color: var(--accent);
+        }
+
+        .trial p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 640px;
+            margin: 16px auto 32px;
+        }
+
+        .trial .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .trial .btn-primary:hover {
+            background: var(--accent-dark);
+            box-shadow: 0 12px 40px rgba(251, 191, 36, 0.5);
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        /* ============================================
+           SECCIÓN: GESTIÓN DE VENDEDORES
+           ============================================ */
+        .vendedores {
             padding: 90px 0;
+            background: var(--bg-body);
+            transition: background 0.3s;
+        }
+
+        .vendedores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .vendedor-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .vendedor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary);
+        }
+
+        .vendedor-card .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 auto 12px;
+        }
+
+        .vendedor-card .nombre {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .vendedor-card .nombre {
+            color: var(--white);
+        }
+
+        .vendedor-card .rol {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .vendedor-card .ventas {
+            margin-top: 12px;
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #16a34a;
+        }
+
+        .vendedor-card .ventas small {
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: var(--gray-600);
+        }
+
+        /* ============================================
+           SECCIÓN: NOTIFICACIONES INTELIGENTES
+           ============================================ */
+        .notificaciones {
+            padding: 80px 0;
             background: var(--card-bg);
             transition: background 0.3s;
         }
 
+        .notificaciones .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .notificacion-item {
+            background: var(--bg-body);
+            padding: 28px 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .notificacion-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .notificacion-item .icon {
+            font-size: 2.4rem;
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .notificacion-item h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .notificacion-item h4 {
+            color: var(--white);
+        }
+
+        .notificacion-item p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           RESTO DE SECCIONES (tutorial, características, planes, etc.)
+           ============================================ */
         .section-title {
             text-align: center;
             font-size: 2.5rem;
@@ -691,6 +1081,12 @@
 
         [data-theme="dark"] .section-sub {
             color: #94a3b8;
+        }
+
+        .tutorial {
+            padding: 90px 0;
+            background: var(--card-bg);
+            transition: background 0.3s;
         }
 
         .steps {
@@ -765,9 +1161,6 @@
             color: #94a3b8;
         }
 
-        /* ============================================
-                   CARACTERÍSTICAS (con iconos animados)
-                   ============================================ */
         .features {
             padding: 90px 0;
             background: var(--bg-body);
@@ -848,9 +1241,6 @@
             color: #94a3b8;
         }
 
-        /* ============================================
-                   PLANES (con mejor jerarquía)
-                   ============================================ */
         .plans {
             padding: 90px 0;
             background: var(--card-bg);
@@ -990,9 +1380,6 @@
             background: var(--secondary-dark);
         }
 
-        /* ============================================
-                   TESTIMONIOS (nuevo)
-                   ============================================ */
         .testimonials {
             padding: 90px 0;
             background: var(--bg-body);
@@ -1062,9 +1449,6 @@
             color: var(--gray-600);
         }
 
-        /* ============================================
-                   PAGO (mejorado con copiar)
-                   ============================================ */
         .payment {
             padding: 90px 0;
             background: var(--card-bg);
@@ -1148,9 +1532,6 @@
             color: var(--primary);
         }
 
-        /* ============================================
-                   ESTADÍSTICAS (con contador animado)
-                   ============================================ */
         .stats {
             padding: 70px 0;
             background: var(--primary);
@@ -1182,9 +1563,6 @@
             font-weight: 400;
         }
 
-        /* ============================================
-                   NEWSLETTER (nuevo)
-                   ============================================ */
         .newsletter {
             padding: 70px 0;
             background: var(--bg-body);
@@ -1267,9 +1645,6 @@
             box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
         }
 
-        /* ============================================
-                   FOOTER (mejorado)
-                   ============================================ */
         .footer {
             background: var(--primary);
             padding: 48px 0 28px;
@@ -1327,8 +1702,8 @@
         }
 
         /* ============================================
-                   TOAST NOTIFICATIONS
-                   ============================================ */
+           TOAST, REVEAL, RIPPLE
+           ============================================ */
         .toast-container {
             position: fixed;
             bottom: 24px;
@@ -1376,9 +1751,6 @@
             color: #dc2626;
         }
 
-        /* ============================================
-                   SCROLL REVEAL (mejorado)
-                   ============================================ */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -1403,9 +1775,16 @@
             transition-delay: 0.4s;
         }
 
+        @keyframes rippleAnim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
         /* ============================================
-                   RESPONSIVE FINO
-                   ============================================ */
+           RESPONSIVE FINO
+           ============================================ */
         @media (max-width: 480px) {
             .container {
                 padding: 0 16px;
@@ -1435,11 +1814,20 @@
             .section-title {
                 font-size: 2rem;
             }
+            .trial h2 {
+                font-size: 2rem;
+            }
+            .features-highlight .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .vendedores-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ============================================
-                   MODO OSCURO PARA SELECTORES ESPECÍFICOS
-                   ============================================ */
+           MODO OSCURO AJUSTES FINOS
+           ============================================ */
         [data-theme="dark"] .hero-mockup {
             background: #1e293b;
         }
@@ -1448,45 +1836,24 @@
             background: #0f172a;
         }
 
-        [data-theme="dark"] .mockup-row.highlight {
-            background: var(--accent-dark);
+        [data-theme="dark"] .mockup-appbar {
+            background: #0b1a3a;
         }
 
-        [data-theme="dark"] .payment-card .highlight {
-            background: rgba(251, 191, 36, 0.08);
+        [data-theme="dark"] .mockup-ventas .venta-item .avatar {
+            background: #334155;
+            color: var(--white);
         }
 
-        /* Ripple effect en botones */
-        .ripple {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ripple::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            width: 0;
-            height: 0;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s, opacity 0.6s;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .ripple:active::after {
-            width: 300px;
-            height: 300px;
-            opacity: 1;
-            transition: 0s;
+        [data-theme="dark"] .trial {
+            background: linear-gradient(135deg, #0b1a3a, #1a2d6b);
         }
     </style>
 </head>
 <body>
 
     <!-- ========================================
-    HEADER (con modo oscuro y scroll)
+    HEADER
     ======================================== -->
     <header class="header" id="header">
         <div class="container">
@@ -1505,8 +1872,9 @@
             </div>
 
             <nav class="nav" id="mainNav" role="navigation" aria-label="Navegación principal">
-                <a href="#features">Características</a>
-                <a href="#tutorial">Cómo usar</a>
+                <a href="#features-highlight">Funcionalidades</a>
+                <a href="#vendedores">Vendedores</a>
+                <a href="#trial">Prueba gratis</a>
                 <a href="#plans">Planes</a>
                 <a href="#payment">Pago</a>
                 <a href="#download" class="btn-download-nav">
@@ -1517,15 +1885,15 @@
     </header>
 
     <!-- ========================================
-    HERO
+    HERO (con mockup mejorado)
     ======================================== -->
     <section class="hero" id="download">
         <div class="container">
             <div class="hero-content">
-                <h1>Gestiona tu negocio <br /><span>de forma inteligente</span></h1>
+                <h1>Gestiona tu negocio <br /><span>donde estés</span></h1>
+                <div class="tagline">Todo lo que tu negocio necesita en una sola app</div>
                 <p>
-                    Administra inventario, ventas, gastos, clientes y más, todo desde
-                    una aplicación móvil que funciona <strong>sin internet</strong>.
+                    Controla ventas, inventario, gastos, clientes, reportes y tu equipo de vendedores desde cualquier lugar. Fácil, rápido y seguro.
                 </p>
                 <div class="hero-badges">
                     <span class="hero-badge"><i class="fas fa-check-circle"></i> Offline</span>
@@ -1541,49 +1909,115 @@
                 </p>
             </div>
             <div class="hero-image">
+                <!-- MOCKUP RÉPLICA DE LA APP FLUTTER -->
                 <div class="hero-mockup">
                     <div class="screen">
-                        <div class="mockup-header">
-                            <span>📊 Tu MiPyme</span>
-                            <i class="fas fa-bell"></i>
-                        </div>
-                        <div class="mockup-stats">
-                            <div class="mockup-stat">
-                                <div class="num">$1,240</div>
-                                <div class="label">Ventas hoy</div>
+                        <!-- AppBar -->
+                        <div class="mockup-appbar">
+                            <div class="left">
+                                <div class="logo-small">📊</div>
+                                <div>
+                                    <span class="title">Tu <span>MiPyme</span></span>
+                                    <span class="subtitle">Mi Empresa S.A.</span>
+                                </div>
                             </div>
-                            <div class="mockup-stat">
-                                <div class="num">12</div>
-                                <div class="label">Productos</div>
-                            </div>
-                            <div class="mockup-stat">
-                                <div class="num">8</div>
-                                <div class="label">Clientes</div>
+                            <div class="actions">
+                                <i class="fas fa-sync-alt"></i>
+                                <i class="fas fa-history"></i>
+                                <i class="fas fa-sign-out-alt"></i>
                             </div>
                         </div>
-                        <div class="mockup-row">
-                            <div class="icon"><i class="fas fa-tag"></i></div>
-                            <div class="info">
-                                <div class="title">Café molido 500g</div>
-                                <div class="sub">Stock: 24 unidades</div>
+
+                        <!-- Cuerpo -->
+                        <div class="mockup-body">
+                            <!-- Tarjeta de resumen -->
+                            <div class="mockup-card">
+                                <div class="card-title">Resumen Hoy</div>
+                                <div class="mockup-summary-grid">
+                                    <div class="mockup-summary-item">
+                                        <span class="icon">💰</span>
+                                        <span class="value green">$1,240</span>
+                                        <span class="label">Ventas</span>
+                                    </div>
+                                    <div class="mockup-summary-item">
+                                        <span class="icon">🛒</span>
+                                        <span class="value red">-$320</span>
+                                        <span class="label">Gastos</span>
+                                    </div>
+                                    <div class="mockup-summary-item">
+                                        <span class="icon">📈</span>
+                                        <span class="value orange">$920</span>
+                                        <span class="label">Ganancia</span>
+                                    </div>
+                                    <div class="mockup-summary-item">
+                                        <span class="icon">🧾</span>
+                                        <span class="value">12</span>
+                                        <span class="label">Ventas</span>
+                                    </div>
+                                    <div class="mockup-summary-item">
+                                        <span class="icon">👥</span>
+                                        <span class="value">8</span>
+                                        <span class="label">Clientes</span>
+                                    </div>
+                                    <div class="mockup-summary-item">
+                                        <span class="icon">📦</span>
+                                        <span class="value">45</span>
+                                        <span class="label">Stock</span>
+                                    </div>
+                                </div>
+                                <!-- Meta -->
+                                <div class="mockup-meta">
+                                    <div class="meta-label">
+                                        <span>Meta diaria: $2,000</span>
+                                        <span>65%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="fill" style="width:65%"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="amount">$8.50</div>
-                        </div>
-                        <div class="mockup-row">
-                            <div class="icon"><i class="fas fa-tag"></i></div>
-                            <div class="info">
-                                <div class="title">Pan integral</div>
-                                <div class="sub">Stock: 12 unidades</div>
+
+                            <!-- Acciones rápidas -->
+                            <div class="mockup-actions">
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-shopping-cart"></i></span><span class="label">Venta</span></div>
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-inventory"></i></span><span class="label">Inventario</span></div>
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-receipt"></i></span><span class="label">Gastos</span></div>
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-plus-box"></i></span><span class="label">Reabastecer</span></div>
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-people"></i></span><span class="label">Clientes</span></div>
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-chart-bar"></i></span><span class="label">Reportes</span></div>
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-tags"></i></span><span class="label">Categorías</span></div>
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-users-cog"></i></span><span class="label">Vendedores</span></div>
+                                <div class="mockup-action"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label">Pago</span></div>
                             </div>
-                            <div class="amount">$2.30</div>
-                        </div>
-                        <div class="mockup-row highlight">
-                            <div class="icon"><i class="fas fa-plus-circle"></i></div>
-                            <div class="info">
-                                <div class="title">Nueva venta</div>
-                                <div class="sub">Toca para registrar</div>
+
+                            <!-- Últimas ventas -->
+                            <div class="mockup-ventas">
+                                <div style="font-weight:600; font-size:0.7rem; margin-bottom:4px; color:var(--gray-600);">Últimas ventas</div>
+                                <div class="venta-item">
+                                    <div class="avatar">3</div>
+                                    <div class="info">
+                                        <div class="name">Café molido 500g</div>
+                                        <div class="meta">Hoy 10:30 · Efectivo</div>
+                                    </div>
+                                    <div class="monto">$25.50</div>
+                                </div>
+                                <div class="venta-item">
+                                    <div class="avatar">2</div>
+                                    <div class="info">
+                                        <div class="name">Pan integral</div>
+                                        <div class="meta">Hoy 09:15 · Transfermóvil</div>
+                                    </div>
+                                    <div class="monto">$4.60</div>
+                                </div>
+                                <div class="venta-item">
+                                    <div class="avatar">1</div>
+                                    <div class="info">
+                                        <div class="name">Leche entera 1L</div>
+                                        <div class="meta">Ayer 18:45 · Efectivo</div>
+                                    </div>
+                                    <div class="monto">$3.20</div>
+                                </div>
                             </div>
-                            <div class="amount">→</div>
                         </div>
                     </div>
                 </div>
@@ -1592,7 +2026,132 @@
     </section>
 
     <!-- ========================================
-    TUTORIAL
+    SECCIÓN: TODO LO QUE TU NEGOCIO NECESITA
+    ======================================== -->
+    <section class="features-highlight" id="features-highlight">
+        <div class="container">
+            <h2 class="section-title reveal">🚀 Todo lo que tu negocio necesita en una sola app</h2>
+            <p class="section-sub reveal delay-1">Controla cada área de tu negocio desde un solo lugar, con la potencia y simplicidad que necesitas.</p>
+            <div class="grid">
+                <div class="grid-item reveal delay-1">
+                    <span class="icon"><i class="fas fa-cart-plus"></i></span>
+                    <h4>Ventas</h4>
+                    <p>Registra y controla todas tus ventas de manera rápida.</p>
+                </div>
+                <div class="grid-item reveal delay-2">
+                    <span class="icon"><i class="fas fa-boxes"></i></span>
+                    <h4>Inventario</h4>
+                    <p>Controla tu stock en tiempo real y evita faltantes.</p>
+                </div>
+                <div class="grid-item reveal delay-3">
+                    <span class="icon"><i class="fas fa-money-bill-wave"></i></span>
+                    <h4>Gastos</h4>
+                    <p>Organiza tus gastos por categorías y mejora tu rentabilidad.</p>
+                </div>
+                <div class="grid-item reveal delay-1">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <h4>Clientes</h4>
+                    <p>Gestiona tus clientes y su historial en un solo lugar.</p>
+                </div>
+                <div class="grid-item reveal delay-2">
+                    <span class="icon"><i class="fas fa-chart-pie"></i></span>
+                    <h4>Reportes</h4>
+                    <p>Visualiza reportes claros para tomar mejores decisiones.</p>
+                </div>
+                <div class="grid-item reveal delay-3">
+                    <span class="icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                    <h4>Sincronización</h4>
+                    <p>Tus datos siempre seguros y disponibles en la nube.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    SECCIÓN: 7 DÍAS DE PRUEBA GRATIS
+    ======================================== -->
+    <section class="trial" id="trial">
+        <div class="container">
+            <h2 class="reveal">🎯 <span>7 días de prueba gratis</span> con asesoramiento</h2>
+            <p class="reveal delay-1">Descarga la app, regístrate y recibe acompañamiento personalizado durante tu prueba. Sin compromiso, sin tarjeta de crédito.</p>
+            <a href="#download" class="btn-primary reveal delay-2">
+                <i class="fas fa-rocket"></i> Comenzar prueba gratis
+            </a>
+        </div>
+    </section>
+
+    <!-- ========================================
+    SECCIÓN: GESTIÓN DE VENDEDORES
+    ======================================== -->
+    <section class="vendedores" id="vendedores">
+        <div class="container">
+            <h2 class="section-title reveal">👥 Crea y gestiona tus vendedores</h2>
+            <p class="section-sub reveal delay-1">Impulsa a tu equipo y vende más con herramientas diseñadas para el rendimiento.</p>
+            <div class="vendedores-grid">
+                <div class="vendedor-card reveal delay-1">
+                    <div class="avatar">CR</div>
+                    <div class="nombre">Carlos Rodríguez</div>
+                    <div class="rol">Vendedor</div>
+                    <div class="ventas">$3,250 <small>en ventas</small></div>
+                </div>
+                <div class="vendedor-card reveal delay-2">
+                    <div class="avatar">AM</div>
+                    <div class="nombre">Ana María</div>
+                    <div class="rol">Vendedora</div>
+                    <div class="ventas">$2,180 <small>en ventas</small></div>
+                </div>
+                <div class="vendedor-card reveal delay-3">
+                    <div class="avatar">LF</div>
+                    <div class="nombre">Luis Fernández</div>
+                    <div class="rol">Vendedor</div>
+                    <div class="ventas">$1,540 <small>en ventas</small></div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:40px;">
+                <ul style="list-style:none; display:inline-block; text-align:left; color:var(--gray-600);">
+                    <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Crea vendedores en segundos</li>
+                    <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Asigna permisos y roles</li>
+                    <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Consulta ventas por vendedor</li>
+                    <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Monitorea su rendimiento</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    SECCIÓN: NOTIFICACIONES INTELIGENTES
+    ======================================== -->
+    <section class="notificaciones" id="notificaciones">
+        <div class="container">
+            <h2 class="section-title reveal">🔔 Notificaciones inteligentes</h2>
+            <p class="section-sub reveal delay-1">Mantente al tanto de todo lo que pasa en tu negocio, al instante.</p>
+            <div class="grid">
+                <div class="notificacion-item reveal delay-1">
+                    <span class="icon"><i class="fas fa-bell"></i></span>
+                    <h4>Avisos al momento</h4>
+                    <p>Recibe alertas dentro de la app para que no se te escape nada importante.</p>
+                </div>
+                <div class="notificacion-item reveal delay-2">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <h4>Notificaciones a tu equipo</h4>
+                    <p>Mantén a tu equipo informado y coordinado para resolver problemas rápidamente.</p>
+                </div>
+                <div class="notificacion-item reveal delay-3">
+                    <span class="icon"><i class="fas fa-sync-alt"></i></span>
+                    <h4>Actualizaciones constantes</h4>
+                    <p>Seguimos mejorando la app para darte más facilidades, sin costo adicional.</p>
+                </div>
+                <div class="notificacion-item reveal delay-4">
+                    <span class="icon"><i class="fas fa-headset"></i></span>
+                    <h4>Soporte activo en la app</h4>
+                    <p>Atención continua para responder tus dudas y escuchar tus necesidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    TUTORIAL (pasos)
     ======================================== -->
     <section class="tutorial" id="tutorial">
         <div class="container">
@@ -1636,7 +2195,7 @@
     </section>
 
     <!-- ========================================
-    CARACTERÍSTICAS
+    CARACTERÍSTICAS (detalladas)
     ======================================== -->
     <section class="features" id="features">
         <div class="container">
@@ -1723,7 +2282,7 @@
     </section>
 
     <!-- ========================================
-    TESTIMONIOS (nuevo)
+    TESTIMONIOS
     ======================================== -->
     <section class="testimonials" id="testimonials">
         <div class="container">
@@ -1783,7 +2342,7 @@
                 </div>
                 <div class="row">
                     <span class="label"><i class="fas fa-phone"></i> Confirmación</span>
-                    <span class="value"><strong>Teléfono:</strong> 59721408</span>
+                    <span class="value" id="phoneNumber"><strong>Teléfono:</strong> 59721408</span>
                     <button class="btn-copy" aria-label="Copiar teléfono" data-copy="phoneNumber">
                         <i class="fas fa-copy"></i>
                     </button>
@@ -1805,7 +2364,7 @@
     </section>
 
     <!-- ========================================
-    ESTADÍSTICAS (con contador)
+    ESTADÍSTICAS
     ======================================== -->
     <section class="stats" id="stats">
         <div class="container">
@@ -1831,7 +2390,7 @@
     </section>
 
     <!-- ========================================
-    NEWSLETTER (nuevo)
+    NEWSLETTER
     ======================================== -->
     <section class="newsletter" id="newsletter">
         <div class="container">
@@ -1885,7 +2444,7 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- ========================================
-    SCRIPTS (mejorados)
+    SCRIPTS
     ======================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1939,7 +2498,6 @@
                             <span>${message}</span>
                         `;
                 toastContainer.appendChild(toast);
-                // Forzar reflow para activar transición
                 toast.getBoundingClientRect();
                 toast.classList.add('show');
                 setTimeout(() => {
@@ -1967,7 +2525,6 @@
                         navigator.clipboard.writeText(text).then(() => {
                             showToast('✅ Copiado al portapapeles', 'success');
                         }).catch(() => {
-                            // Fallback
                             const temp = document.createElement('input');
                             temp.value = text;
                             document.body.appendChild(temp);
@@ -1992,7 +2549,7 @@
                 }
             });
 
-            // ---- SCROLL REVEAL (Intersection Observer) ----
+            // ---- SCROLL REVEAL ----
             const revealElements = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -2036,12 +2593,10 @@
                 }
             };
 
-            // Activar contadores al hacer scroll
             window.addEventListener('scroll', animateCounters);
-            // También al cargar si ya está visible
             setTimeout(animateCounters, 300);
 
-            // ---- RIPPLE EFECT ----
+            // ---- RIPPLE ----
             document.querySelectorAll('.ripple').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     const rect = this.getBoundingClientRect();
@@ -2068,21 +2623,12 @@
                 });
             });
 
-            // Añadir keyframes para ripple (dinámicamente)
-            const styleSheet = document.createElement('style');
-            styleSheet.textContent = `
-                        @keyframes rippleAnim {
-                            to { transform: scale(4); opacity: 0; }
-                        }
-                    `;
-            document.head.appendChild(styleSheet);
-
-            // ---- TOAST DE BIENVENIDA (opcional) ----
+            // ---- TOAST DE BIENVENIDA ----
             setTimeout(() => {
                 showToast('👋 ¡Bienvenido! Descarga la app y empieza a gestionar tu negocio.', 'info', 5000);
             }, 1500);
 
-        }); // DOMContentLoaded
+        });
     </script>
 
 </body>
