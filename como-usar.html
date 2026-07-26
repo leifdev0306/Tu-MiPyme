@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guía de uso – Tu MiPyme</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== ESTILOS SIMILARES A INDEX ===== */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin:0 auto; padding: 0 24px; }
+        .header {
+            background: #0d1b4a;
+            padding: 14px 0;
+            color: white;
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        .logo span { color: #fbbf24; }
+        .logo i { font-size: 1.8rem; }
+        .header a { color: white; text-decoration: none; font-weight: 500; }
+        .header a:hover { text-decoration: underline; }
+        .btn-volver {
+            background: #2563eb;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-volver:hover { background: #1d4ed8; transform: scale(1.03); text-decoration: none; }
+        main { padding: 40px 0; }
+        h1 { font-size: 2.5rem; margin-bottom: 12px; color: #0d1b4a; }
+        .intro { font-size: 1.2rem; color: #64748b; margin-bottom: 40px; }
+        .step-guide {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border-left: 6px solid #2563eb;
+        }
+        .step-guide h2 {
+            font-size: 1.6rem;
+            color: #0d1b4a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .step-guide h2 i { color: #2563eb; }
+        .step-guide p { margin: 12px 0; color: #475569; }
+        .step-guide ul { margin: 12px 0 0 20px; color: #475569; }
+        .step-guide ul li { margin-bottom: 6px; }
+        .step-guide .img-placeholder {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin: 16px 0;
+            border: 2px dashed #cbd5e1;
+        }
+        .step-guide .img-placeholder i { font-size: 2rem; display: block; margin-bottom: 8px; color: #94a3b8; }
+        .footer {
+            background: #0d1b4a;
+            color: rgba(255,255,255,0.7);
+            padding: 24px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .step-guide { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo"><i class="fas fa-arrow-left"></i> <span>Tu</span>MiPyme</a>
+            <a href="index.html#download" class="btn-volver"><i class="fas fa-download"></i> Descargar App</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>📖 Guía completa de uso</h1>
+        <p class="intro">Aprende a sacar el máximo partido a Tu MiPyme con estos pasos detallados.</p>
+
+        <!-- Paso 1 -->
+        <div class="step-guide">
+            <h2><i class="fas fa-download"></i> 1. Descarga e instalación</h2>
+            <p>Descarga el archivo APK desde nuestra página web y permite la instalación desde orígenes desconocidos en tu dispositivo.</p>
+            <div class="img-placeholder">
+                <i class="fas fa-mobile-alt"></i>
+                Captura: Pantalla de descarga / Instalación
+            </div>
+            <ul>
+                <li>Haz clic en "Descargar APK" en la página principal.</li>
+                <li>Abre el archivo descargado y pulsa "Instalar".</li>
+                <li>Si tu dispositivo lo bloquea, ve a Ajustes → Seguridad y activa "Orígenes desconocidos".</li>
+            </ul>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="step-guide">
+            <h2><i class="fas fa-user-plus"></i> 2. Registro y creación de empresa</h2>
+            <p>Al abrir la app por primera vez, deberás registrarte con tu correo y contraseña.</p>
+            <div class="img-placeholder">
+                <i class="fas fa-user-circle"></i>
+                Captura: Pantalla de registro
+            </div>
+            <ul>
+                <li>Introduce un correo electrónico válido.</li>
+                <li>Crea una contraseña segura (mínimo 6 caracteres).</li>
+                <li>Escribe el nombre de tu empresa.</li>
+                <li>Recibirás 7 días de prueba gratuita automáticamente.</li>
+            </ul>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="step-guide">
+            <h2><i class="fas fa-boxes"></i> 3. Agregar productos</h2>
+            <p>Una vez dentro, ve a la sección "Inventario" y pulsa el botón "+" para añadir productos.</p>
+            <div class="img-placeholder">
+                <i class="fas fa-plus-circle"></i>
+                Captura: Formulario de nuevo producto
+            </div>
+            <ul>
+                <li>Nombre del producto, precio de compra, precio de venta y stock inicial.</li>
+                <li>Puedes asignar una categoría (opcional).</li>
+                <li>El producto quedará guardado y listo para vender.</li>
+            </ul>
+        </div>
+
+        <!-- Paso 4 -->
+        <div class="step-guide">
+            <h2><i class="fas fa-shopping-cart"></i> 4. Registrar una venta</h2>
+            <p>Desde la pantalla principal, pulsa "Venta" o el botón flotante para iniciar una nueva venta.</p>
+            <div class="img-placeholder">
+                <i class="fas fa-cart-plus"></i>
+                Captura: Pantalla de nueva venta
+            </div>
+            <ul>
+                <li>Busca y selecciona los productos que el cliente lleva.</li>
+                <li>Indica la cantidad y el precio unitario (se ajusta automáticamente).</li>
+                <li>Selecciona el método de pago (Efectivo, Transfermóvil, etc.)</li>
+                <li>Puedes asociar la venta a un cliente existente (opcional).</li>
+                <li>Al confirmar, el stock se reduce y se genera un registro de ganancia.</li>
+            </ul>
+        </div>
+
+        <!-- Paso 5 -->
+        <div class="step-guide">
+            <h2><i class="fas fa-chart-bar"></i> 5. Reportes y análisis</h2>
+            <p>Accede a la sección "Reportes" para visualizar el rendimiento de tu negocio.</p>
+            <div class="img-placeholder">
+                <i class="fas fa-chart-line"></i>
+                Captura: Pantalla de reportes
+            </div>
+            <ul>
+                <li>Filtra por día, semana o mes.</li>
+                <li>Consulta ventas totales, costos, gastos y ganancia neta.</li>
+                <li>Gráfico de evolución de los últimos 7 días.</li>
+                <li>Lista de productos más vendidos y su rentabilidad.</li>
+            </ul>
+        </div>
+
+        <!-- Paso 6 -->
+        <div class="step-guide">
+            <h2><i class="fas fa-credit-card"></i> 6. Gestión de pagos y planes</h2>
+            <p>Después del período de prueba, deberás pagar para continuar usando la app.</p>
+            <div class="img-placeholder">
+                <i class="fas fa-hand-holding-usd"></i>
+                Captura: Pantalla de pago
+            </div>
+            <ul>
+                <li>Ve a la sección "Realizar Pago" desde el menú principal.</li>
+                <li>Elige el plan (Normal $1000 CUP/mes o Premium $2000 CUP/mes).</li>
+                <li>Realiza la transferencia a la tarjeta indicada (Metropolitana 9227 9598 7522 7600).</li>
+                <li>Introduce el número de transacción en el formulario y envía la solicitud.</li>
+                <li>El administrador verificará y activará tu plan antes del día 6 del mes.</li>
+            </ul>
+        </div>
+
+        <!-- Paso 7 -->
+        <div class="step-guide">
+            <h2><i class="fas fa-users"></i> 7. Vendedores (solo Premium)</h2>
+            <p>Si tienes el plan Premium, puedes agregar hasta 5 vendedores.</p>
+            <div class="img-placeholder">
+                <i class="fas fa-user-tie"></i>
+                Captura: Gestión de vendedores
+            </div>
+            <ul>
+                <li>Desde el menú principal, accede a "Vendedores".</li>
+                <li>Pulsa "+" para añadir un nuevo vendedor (email y contraseña).</li>
+                <li>Cada vendedor tendrá su propio registro de ventas y estadísticas.</li>
+                <li>El administrador de la empresa puede ver el rendimiento de cada vendedor.</li>
+            </ul>
+        </div>
+
+        <!-- Paso 8 -->
+        <div class="step-guide">
+            <h2><i class="fas fa-sync-alt"></i> 8. Sincronización y modo offline</h2>
+            <p>La app funciona sin conexión y sincroniza cuando hay internet.</p>
+            <div class="img-placeholder">
+                <i class="fas fa-cloud-upload-alt"></i>
+                Captura: Indicador de sincronización
+            </div>
+            <ul>
+                <li>Todas las operaciones se guardan localmente (Hive).</li>
+                <li>Cuando te conectes, pulsa el botón de sincronización en la barra superior.</li>
+                <li>Los datos se envían a la nube (Supabase) y se descargan cambios de otros dispositivos.</li>
+                <li>Verás un indicador de progreso durante la sincronización.</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Leifdev Software Developer — <a href="index.html" style="color:#fbbf24;">Volver a la página principal</a></p>
+        </div>
+    </footer>
+</body>
+</html>
