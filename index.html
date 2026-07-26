@@ -4,29 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tu MiPyme – Gestión inteligente para tu negocio</title>
+    <!-- Meta tags SEO -->
+    <meta name="description" content="Gestiona tu negocio con Tu MiPyme: inventario, ventas, clientes y reportes, todo offline y sincronizado." />
+    <meta name="keywords" content="gestión, negocio, inventario, ventas, clientes, app, offline" />
+    <link rel="canonical" href="https://tumipyme.com" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Tu MiPyme – Gestión inteligente para tu negocio" />
+    <meta property="og:description" content="Administra inventario, ventas, gastos y clientes desde una app móvil que funciona sin internet." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tumipyme.com" />
+    <meta property="og:image" content="https://tumipyme.com/og-image.jpg" />
+    <meta name="theme-color" content="#0d1b4a" />
 
-    <!-- Google Fonts (Inter) -->
+    <!-- Google Fonts (Inter + display swap) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
 
-    <!-- Font Awesome 6 -->
+    <!-- Font Awesome 6 (versión optimizada) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
         /* ============================================
-                   RESET Y BASE
+                   RESET Y VARIABLES (mejoradas)
                    ============================================ */
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         :root {
-            --primary: #0d1b4a;
+            --primary: #0b1a3a;
             --primary-light: #1a2d6b;
             --secondary: #2563eb;
+            --secondary-dark: #1d4ed8;
             --accent: #fbbf24;
             --accent-dark: #f59e0b;
             --white: #ffffff;
@@ -34,13 +48,40 @@
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
-            --gray-600: #64748b;
+            --gray-600: #475569;
             --gray-800: #1e293b;
-            --shadow: 0 10px 40px rgba(13, 27, 74, 0.08);
-            --shadow-hover: 0 20px 60px rgba(13, 27, 74, 0.15);
-            --radius: 24px;
-            --radius-sm: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 4px 20px rgba(11, 26, 58, 0.06);
+            --shadow-md: 0 10px 40px rgba(11, 26, 58, 0.10);
+            --shadow-lg: 0 20px 60px rgba(11, 26, 58, 0.15);
+            --shadow-xl: 0 30px 80px rgba(11, 26, 58, 0.20);
+            --radius: 28px;
+            --radius-sm: 14px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Inter', sans-serif;
+            --bg-body: var(--gray-50);
+            --text-body: var(--gray-800);
+            --card-bg: var(--white);
+            --header-bg: rgba(11, 26, 58, 0.92);
+            --border-color: var(--gray-200);
+        }
+
+        /* Modo oscuro */
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --text-body: #e2e8f0;
+            --card-bg: #1e293b;
+            --gray-50: #1e293b;
+            --gray-100: #334155;
+            --gray-200: #475569;
+            --gray-300: #64748b;
+            --gray-600: #94a3b8;
+            --gray-800: #f1f5f9;
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.6);
+            --border-color: #334155;
+            --header-bg: rgba(15, 23, 42, 0.95);
         }
 
         html {
@@ -48,10 +89,11 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-800);
-            line-height: 1.6;
+            font-family: var(--font);
+            background: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.7;
+            transition: background 0.3s, color 0.3s;
             overflow-x: hidden;
         }
 
@@ -62,33 +104,50 @@
         }
 
         /* ============================================
-                   BOTONES
+                   BOTONES MEJORADOS
                    ============================================ */
         .btn-primary {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 12px;
             background: var(--secondary);
             color: var(--white);
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 16px 40px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 18px 44px;
             border-radius: 60px;
             text-decoration: none;
-            transition: var(--transition);
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
+            transition: var(--transition);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.35);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover::after {
+            opacity: 1;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.4);
-            background: #1d4ed8;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 45px rgba(37, 99, 235, 0.45);
+            background: var(--secondary-dark);
         }
 
-        .btn-primary i {
-            font-size: 1.2rem;
+        .btn-primary:active {
+            transform: scale(0.97);
         }
 
         .btn-outline {
@@ -104,23 +163,35 @@
             text-decoration: none;
             border: 2px solid var(--primary);
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .btn-outline:hover {
             background: var(--primary);
             color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
         }
 
         /* ============================================
-                   HEADER (estilo app)
+                   HEADER (con vidrio esmerilado)
                    ============================================ */
         .header {
-            background: var(--primary);
-            padding: 14px 0;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(13, 27, 74, 0.2);
+            padding: 12px 0;
+            background: var(--header-bg);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
 
         .header .container {
@@ -139,22 +210,27 @@
         }
 
         .logo-icon {
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             background: var(--accent);
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 800;
             color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(-6deg) scale(1.05);
         }
 
         .logo-text {
             color: var(--white);
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.55rem;
+            font-weight: 800;
             letter-spacing: -0.5px;
         }
 
@@ -166,7 +242,7 @@
         .nav {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 32px;
         }
 
         .nav a {
@@ -176,21 +252,23 @@
             font-size: 0.95rem;
             transition: var(--transition);
             position: relative;
-        }
-
-        .nav a:hover {
-            color: var(--white);
+            padding: 4px 0;
         }
 
         .nav a::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -2px;
             left: 0;
             width: 0;
             height: 2px;
             background: var(--accent);
             transition: var(--transition);
+            border-radius: 4px;
+        }
+
+        .nav a:hover {
+            color: var(--white);
         }
 
         .nav a:hover::after {
@@ -200,9 +278,11 @@
         .nav .btn-download-nav {
             background: var(--accent);
             color: var(--primary) !important;
-            padding: 8px 24px;
+            padding: 8px 26px;
             border-radius: 40px;
             font-weight: 700;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+            transition: var(--transition);
         }
 
         .nav .btn-download-nav::after {
@@ -212,6 +292,29 @@
         .nav .btn-download-nav:hover {
             background: var(--accent-dark);
             transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(251, 191, 36, 0.4);
+            color: var(--primary) !important;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.16);
+            transform: rotate(20deg);
         }
 
         .menu-toggle {
@@ -221,6 +324,13 @@
             color: var(--white);
             font-size: 1.8rem;
             cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.06);
         }
 
         @media (max-width: 820px) {
@@ -232,39 +342,61 @@
                 width: 100%;
                 flex-direction: column;
                 align-items: stretch;
-                gap: 12px;
-                padding: 16px 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                gap: 8px;
+                padding: 20px 0 12px;
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
             }
             .nav.open {
                 display: flex;
             }
             .nav a {
-                padding: 8px 0;
+                padding: 10px 0;
+                font-size: 1rem;
             }
             .nav .btn-download-nav {
                 text-align: center;
+                padding: 12px;
+            }
+            .theme-toggle {
+                align-self: flex-end;
             }
         }
 
         /* ============================================
-                   HERO (con mockup estilo app)
+                   HERO (mejorado con gradiente y glassmorphism)
                    ============================================ */
         .hero {
-            padding: 80px 0 60px;
-            background: linear-gradient(160deg, var(--gray-50) 0%, #eef2ff 100%);
+            padding: 140px 0 80px;
+            background: linear-gradient(165deg, var(--bg-body) 0%, #eef2ff 100%);
             position: relative;
             overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        [data-theme="dark"] .hero {
+            background: linear-gradient(165deg, #0f172a 0%, #1e293b 100%);
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -40%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
+            top: -30%;
+            right: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.06) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
@@ -279,67 +411,98 @@
         }
 
         .hero-content h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -1px;
+            font-size: 3.6rem;
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: -1.5px;
             color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .hero-content h1 {
+            color: var(--white);
         }
 
         .hero-content h1 span {
-            color: var(--secondary);
+            background: linear-gradient(135deg, var(--secondary), #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--gray-600);
-            margin: 20px 0 32px;
+            margin: 24px 0 36px;
             max-width: 520px;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .hero-content p {
+            color: #94a3b8;
         }
 
         .hero-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin: 24px 0 16px;
+            gap: 10px;
+            margin: 16px 0 28px;
         }
 
         .hero-badge {
-            background: var(--white);
+            background: var(--card-bg);
             padding: 6px 18px;
             border-radius: 40px;
             font-size: 0.85rem;
             font-weight: 500;
             color: var(--primary);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            display: flex;
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
             align-items: center;
             gap: 6px;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
         }
 
         .hero-badge i {
             color: var(--secondary);
         }
 
-        /* Mockup de la app (más realista) */
+        .hero-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Mockup del teléfono mejorado */
         .hero-mockup {
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
+            margin: 0 auto;
             background: var(--primary);
-            border-radius: 40px;
+            border-radius: 44px;
             padding: 20px 16px 16px;
-            box-shadow: 0 30px 80px rgba(13, 27, 74, 0.2);
+            box-shadow: var(--shadow-xl);
             position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-mockup:hover {
+            transform: translateY(-8px) scale(1.01);
         }
 
         .hero-mockup .screen {
             background: var(--gray-50);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 20px 16px;
-            min-height: 400px;
+            min-height: 420px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
+            transition: background 0.3s;
+        }
+
+        [data-theme="dark"] .hero-mockup .screen {
+            background: #1e293b;
         }
 
         .mockup-header {
@@ -347,7 +510,13 @@
             justify-content: space-between;
             align-items: center;
             color: var(--primary);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .mockup-header {
+            color: var(--white);
         }
 
         .mockup-header i {
@@ -356,48 +525,66 @@
 
         .mockup-stats {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
         }
 
         .mockup-stat {
-            background: var(--white);
+            background: var(--card-bg);
             border-radius: var(--radius-sm);
-            padding: 10px 8px;
+            padding: 12px 8px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
         }
 
         .mockup-stat .num {
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-weight: 800;
+            font-size: 1.3rem;
             color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .mockup-stat .num {
+            color: var(--white);
         }
 
         .mockup-stat .label {
             font-size: 0.7rem;
             color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .mockup-row {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             align-items: center;
-            background: var(--white);
-            padding: 10px 12px;
+            background: var(--card-bg);
+            padding: 12px 16px;
             border-radius: var(--radius-sm);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
         }
 
         .mockup-row .icon {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: var(--gray-200);
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
+            flex-shrink: 0;
+            transition: background 0.3s;
+        }
+
+        [data-theme="dark"] .mockup-row .icon {
+            background: #334155;
+            color: var(--white);
         }
 
         .mockup-row .info {
@@ -406,8 +593,13 @@
         }
 
         .mockup-row .info .title {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .mockup-row .info .title {
+            color: var(--white);
         }
 
         .mockup-row .info .sub {
@@ -423,13 +615,21 @@
         .mockup-row.highlight {
             background: var(--accent);
             color: var(--primary);
+            border-color: var(--accent);
         }
 
         .mockup-row.highlight .icon {
             background: rgba(255, 255, 255, 0.3);
         }
 
+        .mockup-row.highlight .amount {
+            color: var(--primary);
+        }
+
         @media (max-width: 900px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
             .hero .container {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -442,57 +642,78 @@
                 justify-content: center;
             }
             .hero-content h1 {
-                font-size: 2.4rem;
+                font-size: 2.6rem;
             }
             .hero-mockup {
-                max-width: 340px;
-                margin: 0 auto;
+                max-width: 320px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
             }
         }
 
         /* ============================================
-                   TUTORIAL (pasos interactivos)
+                   SECCIÓN TUTORIAL (con tarjetas mejoradas)
                    ============================================ */
         .tutorial {
-            padding: 80px 0;
-            background: var(--white);
+            padding: 90px 0;
+            background: var(--card-bg);
+            transition: background 0.3s;
         }
 
-        .tutorial .section-title {
+        .section-title {
             text-align: center;
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--primary);
             margin-bottom: 12px;
+            transition: color 0.3s;
+            letter-spacing: -0.5px;
         }
 
-        .tutorial .section-sub {
+        [data-theme="dark"] .section-title {
+            color: var(--white);
+        }
+
+        .section-sub {
             text-align: center;
             color: var(--gray-600);
-            margin-bottom: 48px;
-            font-size: 1.1rem;
+            margin-bottom: 56px;
+            font-size: 1.15rem;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .section-sub {
+            color: #94a3b8;
         }
 
         .steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 30px;
             counter-reset: step;
         }
 
         .step {
             text-align: center;
-            padding: 24px 16px;
+            padding: 30px 20px;
             border-radius: var(--radius);
-            background: var(--gray-50);
+            background: var(--bg-body);
             transition: var(--transition);
             position: relative;
-            border: 1px solid transparent;
+            border: 1px solid var(--border-color);
+            cursor: default;
         }
 
         .step:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
             border-color: var(--secondary);
         }
 
@@ -500,121 +721,140 @@
             counter-increment: step;
             content: counter(step);
             position: absolute;
-            top: -14px;
+            top: -16px;
             left: 50%;
             transform: translateX(-50%);
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             background: var(--secondary);
             color: var(--white);
-            font-weight: 700;
+            font-weight: 800;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         }
 
         .step .icon {
             font-size: 2.8rem;
-            margin: 16px 0 12px;
+            margin: 12px 0 10px;
+            display: block;
         }
 
         .step h4 {
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 6px;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .step h4 {
+            color: var(--white);
         }
 
         .step p {
             font-size: 0.95rem;
             color: var(--gray-600);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .step p {
+            color: #94a3b8;
         }
 
         /* ============================================
-                   CARACTERÍSTICAS (estilo app)
+                   CARACTERÍSTICAS (con iconos animados)
                    ============================================ */
         .features {
-            padding: 80px 0;
-            background: var(--gray-50);
-        }
-
-        .features .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .features .section-sub {
-            text-align: center;
-            color: var(--gray-600);
-            margin-bottom: 48px;
-            font-size: 1.1rem;
+            padding: 90px 0;
+            background: var(--bg-body);
+            transition: background 0.3s;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
+            gap: 32px;
         }
 
         .feature-card {
-            background: var(--white);
-            padding: 32px 24px;
+            background: var(--card-bg);
+            padding: 36px 28px;
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
-            border: 1px solid transparent;
+            border: 1px solid var(--border-color);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
         }
 
         .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
             border-color: var(--secondary);
         }
 
         .feature-card .icon {
-            font-size: 2.4rem;
-            margin-bottom: 16px;
+            font-size: 2.6rem;
+            margin-bottom: 18px;
             color: var(--secondary);
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .icon {
+            transform: scale(1.1) rotate(-4deg);
         }
 
         .feature-card h4 {
             font-weight: 700;
             font-size: 1.2rem;
             color: var(--primary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .feature-card h4 {
+            color: var(--white);
         }
 
         .feature-card p {
             color: var(--gray-600);
             font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .feature-card p {
+            color: #94a3b8;
         }
 
         /* ============================================
-                   PLANES (como en la app)
+                   PLANES (con mejor jerarquía)
                    ============================================ */
         .plans {
-            padding: 80px 0;
-            background: var(--white);
-        }
-
-        .plans .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .plans .section-sub {
-            text-align: center;
-            color: var(--gray-600);
-            margin-bottom: 48px;
-            font-size: 1.1rem;
+            padding: 90px 0;
+            background: var(--card-bg);
+            transition: background 0.3s;
         }
 
         .plans-grid {
@@ -625,30 +865,31 @@
         }
 
         .plan-card {
-            background: var(--gray-50);
+            background: var(--bg-body);
             border-radius: var(--radius);
-            padding: 36px 28px;
+            padding: 40px 32px;
             text-align: center;
             transition: var(--transition);
-            border: 2px solid transparent;
+            border: 2px solid var(--border-color);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
         .plan-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
 
         .plan-card.popular {
             border-color: var(--secondary);
-            background: linear-gradient(160deg, var(--gray-50), #eef2ff);
+            background: linear-gradient(160deg, var(--bg-body), rgba(37, 99, 235, 0.04));
             position: relative;
         }
 
         .plan-card.popular::before {
-            content: 'MÁS POPULAR';
+            content: '⭐ MÁS POPULAR';
             position: absolute;
             top: -12px;
             left: 50%;
@@ -657,44 +898,57 @@
             color: var(--white);
             font-size: 0.7rem;
             font-weight: 700;
-            padding: 4px 18px;
+            padding: 4px 20px;
             border-radius: 40px;
             letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         }
 
         .plan-card .name {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 800;
             color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .plan-card .name {
+            color: var(--white);
         }
 
         .plan-card .price {
-            font-size: 2.6rem;
-            font-weight: 800;
+            font-size: 2.8rem;
+            font-weight: 900;
             color: var(--primary);
             margin: 12px 0 4px;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .plan-card .price {
+            color: var(--white);
         }
 
         .plan-card .price small {
             font-size: 1rem;
-            font-weight: 400;
+            font-weight: 500;
             color: var(--gray-600);
         }
 
         .plan-card .features-list {
             list-style: none;
             padding: 0;
-            margin: 24px 0 32px;
+            margin: 28px 0 36px;
             text-align: left;
         }
 
         .plan-card .features-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--gray-200);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-size: 0.95rem;
+            color: var(--text-body);
+            transition: border-color 0.3s, color 0.3s;
         }
 
         .plan-card .features-list li:last-child {
@@ -704,23 +958,28 @@
         .plan-card .features-list li i {
             color: #16a34a;
             width: 20px;
+            flex-shrink: 0;
         }
 
         .plan-card .btn-plan {
             display: inline-block;
             background: var(--primary);
             color: var(--white);
-            font-weight: 600;
-            padding: 14px 32px;
+            font-weight: 700;
+            padding: 16px 36px;
             border-radius: 60px;
             text-decoration: none;
             transition: var(--transition);
             margin-top: auto;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .plan-card .btn-plan:hover {
             background: var(--secondary);
             transform: scale(1.03);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
         }
 
         .plan-card.popular .btn-plan {
@@ -728,47 +987,108 @@
         }
 
         .plan-card.popular .btn-plan:hover {
-            background: #1d4ed8;
+            background: var(--secondary-dark);
         }
 
         /* ============================================
-                   PAGO
+                   TESTIMONIOS (nuevo)
                    ============================================ */
-        .payment {
-            padding: 80px 0;
-            background: var(--gray-50);
+        .testimonials {
+            padding: 90px 0;
+            background: var(--bg-body);
+            transition: background 0.3s;
         }
 
-        .payment .section-title {
-            text-align: center;
-            font-size: 2.2rem;
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 32px 24px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-align: left;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .testimonial-card .quote {
+            font-size: 1rem;
+            color: var(--text-body);
+            font-style: italic;
+            margin-bottom: 16px;
+            transition: color 0.3s;
+        }
+
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-card .author .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .payment .section-sub {
-            text-align: center;
-            color: var(--gray-600);
-            margin-bottom: 48px;
             font-size: 1.1rem;
         }
 
+        .testimonial-card .author .name {
+            font-weight: 700;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .testimonial-card .author .name {
+            color: var(--white);
+        }
+
+        .testimonial-card .author .role {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* ============================================
+                   PAGO (mejorado con copiar)
+                   ============================================ */
+        .payment {
+            padding: 90px 0;
+            background: var(--card-bg);
+            transition: background 0.3s;
+        }
+
         .payment-card {
-            max-width: 720px;
+            max-width: 760px;
             margin: 0 auto;
-            background: var(--white);
+            background: var(--bg-body);
             border-radius: var(--radius);
-            padding: 40px;
-            box-shadow: var(--shadow);
+            padding: 48px 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .payment-card .row {
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--gray-200);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
         }
 
         .payment-card .row:last-child {
@@ -776,22 +1096,52 @@
         }
 
         .payment-card .row .label {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary);
-            min-width: 100px;
+            min-width: 120px;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .payment-card .row .label {
+            color: var(--white);
         }
 
         .payment-card .row .value {
-            color: var(--gray-800);
+            color: var(--text-body);
+            font-size: 1.05rem;
+            flex: 1;
+            transition: color 0.3s;
+        }
+
+        .payment-card .row .value strong {
+            color: var(--primary);
+        }
+
+        .btn-copy {
+            background: none;
+            border: none;
+            color: var(--secondary);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-copy:hover {
+            background: rgba(37, 99, 235, 0.08);
+            transform: scale(1.1);
         }
 
         .payment-card .highlight {
-            background: #fef9e7;
-            padding: 16px 20px;
+            background: rgba(251, 191, 36, 0.12);
+            padding: 18px 24px;
             border-radius: var(--radius-sm);
-            border-left: 4px solid var(--accent);
-            margin-top: 20px;
+            border-left: 5px solid var(--accent);
+            margin-top: 24px;
             font-size: 0.95rem;
+            color: var(--text-body);
+            transition: background 0.3s, color 0.3s;
         }
 
         .payment-card .highlight strong {
@@ -799,12 +1149,17 @@
         }
 
         /* ============================================
-                   ESTADÍSTICAS
+                   ESTADÍSTICAS (con contador animado)
                    ============================================ */
         .stats {
-            padding: 60px 0;
+            padding: 70px 0;
             background: var(--primary);
             color: var(--white);
+            transition: background 0.3s;
+        }
+
+        [data-theme="dark"] .stats {
+            background: #0b1a3a;
         }
 
         .stats-grid {
@@ -815,30 +1170,118 @@
         }
 
         .stats-grid .stat-number {
-            font-size: 2.8rem;
-            font-weight: 800;
+            font-size: 3rem;
+            font-weight: 900;
             color: var(--accent);
+            letter-spacing: -1px;
         }
 
         .stats-grid .stat-label {
             font-size: 1rem;
-            opacity: 0.8;
+            opacity: 0.85;
+            font-weight: 400;
         }
 
         /* ============================================
-                   FOOTER
+                   NEWSLETTER (nuevo)
+                   ============================================ */
+        .newsletter {
+            padding: 70px 0;
+            background: var(--bg-body);
+            transition: background 0.3s;
+        }
+
+        .newsletter-box {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--card-bg);
+            padding: 48px 40px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .newsletter-box h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] .newsletter-box h3 {
+            color: var(--white);
+        }
+
+        .newsletter-box p {
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            transition: color 0.3s;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-body);
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        .newsletter-form button {
+            padding: 14px 32px;
+            border-radius: 60px;
+            border: none;
+            background: var(--secondary);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ============================================
+                   FOOTER (mejorado)
                    ============================================ */
         .footer {
             background: var(--primary);
-            padding: 40px 0 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 48px 0 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.3s;
         }
 
         .footer .container {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 24px;
             align-items: center;
         }
 
@@ -867,6 +1310,15 @@
             font-size: 0.9rem;
         }
 
+        .footer .social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer .social a {
+            font-size: 1.2rem;
+        }
+
         @media (max-width: 600px) {
             .footer .container {
                 flex-direction: column;
@@ -875,46 +1327,97 @@
         }
 
         /* ============================================
-                   ANIMACIONES
+                   TOAST NOTIFICATIONS
                    ============================================ */
-        .fade-up {
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 360px;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: var(--card-bg);
+            color: var(--text-body);
+            padding: 16px 24px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            border-left: 5px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(120%);
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.8s ease forwards;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s;
+            pointer-events: auto;
+            border: 1px solid var(--border-color);
         }
 
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
         }
 
-        .delay-1 {
-            animation-delay: 0.1s;
+        .toast i {
+            font-size: 1.4rem;
+            color: var(--secondary);
         }
-        .delay-2 {
-            animation-delay: 0.2s;
+
+        .toast.success i {
+            color: #16a34a;
         }
-        .delay-3 {
-            animation-delay: 0.3s;
+        .toast.error i {
+            color: #dc2626;
         }
-        .delay-4 {
-            animation-delay: 0.4s;
+
+        /* ============================================
+                   SCROLL REVEAL (mejorado)
+                   ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal.delay-1 {
+            transition-delay: 0.1s;
+        }
+        .reveal.delay-2 {
+            transition-delay: 0.2s;
+        }
+        .reveal.delay-3 {
+            transition-delay: 0.3s;
+        }
+        .reveal.delay-4 {
+            transition-delay: 0.4s;
         }
 
         /* ============================================
                    RESPONSIVE FINO
                    ============================================ */
         @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
             .hero-content h1 {
-                font-size: 1.8rem;
+                font-size: 1.9rem;
             }
             .hero-content p {
                 font-size: 1rem;
             }
             .btn-primary {
-                font-size: 1rem;
+                font-size: 0.95rem;
                 padding: 14px 28px;
             }
             .plan-card {
@@ -923,33 +1426,85 @@
             .payment-card {
                 padding: 24px 16px;
             }
-            .payment-card .row {
-                flex-wrap: wrap;
-                gap: 6px;
-            }
             .payment-card .row .label {
                 min-width: auto;
             }
+            .newsletter-box {
+                padding: 32px 20px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* ============================================
+                   MODO OSCURO PARA SELECTORES ESPECÍFICOS
+                   ============================================ */
+        [data-theme="dark"] .hero-mockup {
+            background: #1e293b;
+        }
+
+        [data-theme="dark"] .hero-mockup .screen {
+            background: #0f172a;
+        }
+
+        [data-theme="dark"] .mockup-row.highlight {
+            background: var(--accent-dark);
+        }
+
+        [data-theme="dark"] .payment-card .highlight {
+            background: rgba(251, 191, 36, 0.08);
+        }
+
+        /* Ripple effect en botones */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            width: 0;
+            height: 0;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s, opacity 0.6s;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .ripple:active::after {
+            width: 300px;
+            height: 300px;
+            opacity: 1;
+            transition: 0s;
         }
     </style>
 </head>
 <body>
 
     <!-- ========================================
-    HEADER
+    HEADER (con modo oscuro y scroll)
     ======================================== -->
     <header class="header" id="header">
         <div class="container">
-            <a href="#" class="logo">
+            <a href="#" class="logo" aria-label="Inicio Tu MiPyme">
                 <span class="logo-icon">📊</span>
                 <span class="logo-text">Tu <span>MiPyme</span></span>
             </a>
 
-            <button class="menu-toggle" id="menuToggle" aria-label="Menú">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
 
-            <nav class="nav" id="mainNav">
+            <nav class="nav" id="mainNav" role="navigation" aria-label="Navegación principal">
                 <a href="#features">Características</a>
                 <a href="#tutorial">Cómo usar</a>
                 <a href="#plans">Planes</a>
@@ -962,7 +1517,7 @@
     </header>
 
     <!-- ========================================
-    HERO (con enlace de descarga REAL)
+    HERO
     ======================================== -->
     <section class="hero" id="download">
         <div class="container">
@@ -978,12 +1533,11 @@
                     <span class="hero-badge"><i class="fas fa-lock"></i> Segura</span>
                     <span class="hero-badge"><i class="fas fa-chart-bar"></i> Reportes</span>
                 </div>
-                <!-- ✅ ENLACE DE DESCARGA REAL (el que me diste) -->
-                <a href="https://github.com/leifdev0306/Tu-MiPyme/releases/download/v1.0.0/TuMiPyme.apk" class="btn-primary">
+                <a href="https://github.com/leifdev0306/Tu-MiPyme/releases/download/v1.0.0/TuMiPyme.apk" class="btn-primary ripple" id="downloadBtn">
                     <i class="fas fa-download"></i> Descargar APK
                 </a>
-                <p style="margin-top:12px; font-size:0.85rem; color:var(--gray-600);">
-                    Versión 1.0.0 · Android 5.0+
+                <p style="margin-top:16px; font-size:0.85rem; color:var(--gray-600);">
+                    Versión 1.0.0 · Android 5.0+ · <i class="fas fa-shield-alt"></i> Libre de virus
                 </p>
             </div>
             <div class="hero-image">
@@ -1042,38 +1596,38 @@
     ======================================== -->
     <section class="tutorial" id="tutorial">
         <div class="container">
-            <h2 class="section-title fade-up">📖 Cómo usar Tu MiPyme</h2>
-            <p class="section-sub fade-up delay-1">
+            <h2 class="section-title reveal">📖 Cómo usar Tu MiPyme</h2>
+            <p class="section-sub reveal delay-1">
                 Sigue estos pasos y empieza a gestionar tu negocio en minutos.
             </p>
             <div class="steps">
-                <div class="step fade-up delay-1">
-                    <div class="icon">📲</div>
+                <div class="step reveal delay-1">
+                    <span class="icon">📲</span>
                     <h4>1. Descarga la app</h4>
                     <p>Descarga el APK desde esta página e instálala en tu dispositivo Android.</p>
                 </div>
-                <div class="step fade-up delay-2">
-                    <div class="icon">📝</div>
+                <div class="step reveal delay-2">
+                    <span class="icon">📝</span>
                     <h4>2. Regístrate</h4>
                     <p>Crea tu cuenta y registra el nombre de tu empresa. Recibirás 7 días de prueba.</p>
                 </div>
-                <div class="step fade-up delay-3">
-                    <div class="icon">📦</div>
+                <div class="step reveal delay-3">
+                    <span class="icon">📦</span>
                     <h4>3. Agrega productos</h4>
                     <p>Registra tu inventario con precios, categorías y cantidades iniciales.</p>
                 </div>
-                <div class="step fade-up delay-4">
-                    <div class="icon">🛒</div>
+                <div class="step reveal delay-4">
+                    <span class="icon">🛒</span>
                     <h4>4. Registra ventas</h4>
                     <p>Vende tus productos, el stock se actualiza automáticamente y genera ganancias.</p>
                 </div>
-                <div class="step fade-up delay-1">
-                    <div class="icon">📊</div>
+                <div class="step reveal delay-1">
+                    <span class="icon">📊</span>
                     <h4>5. Analiza reportes</h4>
                     <p>Consulta tus ventas, gastos y ganancias en gráficos y reportes detallados.</p>
                 </div>
-                <div class="step fade-up delay-2">
-                    <div class="icon">💳</div>
+                <div class="step reveal delay-2">
+                    <span class="icon">💳</span>
                     <h4>6. Paga tu plan</h4>
                     <p>Después de la prueba, paga mensualmente para seguir usando todas las funciones.</p>
                 </div>
@@ -1086,37 +1640,37 @@
     ======================================== -->
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title fade-up">✨ Características principales</h2>
-            <p class="section-sub fade-up delay-1">
+            <h2 class="section-title reveal">✨ Características principales</h2>
+            <p class="section-sub reveal delay-1">
                 Todo lo que necesitas para llevar tu negocio al siguiente nivel.
             </p>
             <div class="features-grid">
-                <div class="feature-card fade-up delay-1">
+                <div class="feature-card reveal delay-1">
                     <div class="icon"><i class="fas fa-cart-plus"></i></div>
                     <h4>Ventas rápidas</h4>
                     <p>Registra ventas en segundos con múltiples productos, precios y métodos de pago.</p>
                 </div>
-                <div class="feature-card fade-up delay-2">
+                <div class="feature-card reveal delay-2">
                     <div class="icon"><i class="fas fa-boxes"></i></div>
                     <h4>Inventario inteligente</h4>
                     <p>Control de stock, alertas de productos agotados y reabastecimiento con historial de precios.</p>
                 </div>
-                <div class="feature-card fade-up delay-3">
+                <div class="feature-card reveal delay-3">
                     <div class="icon"><i class="fas fa-chart-line"></i></div>
                     <h4>Reportes y análisis</h4>
                     <p>Gráficos de evolución, productos más vendidos, ganancias brutas y netas.</p>
                 </div>
-                <div class="feature-card fade-up delay-1">
+                <div class="feature-card reveal delay-1">
                     <div class="icon"><i class="fas fa-users"></i></div>
                     <h4>Gestión de clientes</h4>
                     <p>Registro de clientes con saldos pendientes, historial de compras y más.</p>
                 </div>
-                <div class="feature-card fade-up delay-2">
+                <div class="feature-card reveal delay-2">
                     <div class="icon"><i class="fas fa-user-tie"></i></div>
                     <h4>Vendedores</h4>
                     <p>Hasta 5 vendedores en el plan Premium, cada uno con sus propias ventas y estadísticas.</p>
                 </div>
-                <div class="feature-card fade-up delay-3">
+                <div class="feature-card reveal delay-3">
                     <div class="icon"><i class="fas fa-sync-alt"></i></div>
                     <h4>Offline + Sincronización</h4>
                     <p>Trabaja sin internet y sincroniza automáticamente tus datos al recuperar conexión.</p>
@@ -1130,12 +1684,12 @@
     ======================================== -->
     <section class="plans" id="plans">
         <div class="container">
-            <h2 class="section-title fade-up">📋 Elige tu plan</h2>
-            <p class="section-sub fade-up delay-1">
+            <h2 class="section-title reveal">📋 Elige tu plan</h2>
+            <p class="section-sub reveal delay-1">
                 Paga mensualmente y disfruta de todas las ventajas.
             </p>
             <div class="plans-grid">
-                <div class="plan-card fade-up delay-1">
+                <div class="plan-card reveal delay-1">
                     <div>
                         <div class="name">Normal</div>
                         <div class="price">$1,000 <small>CUP/mes</small></div>
@@ -1148,9 +1702,9 @@
                         <li><i class="fas fa-check"></i> Clientes y categorías</li>
                         <li><i class="fas fa-check"></i> Sincronización</li>
                     </ul>
-                    <a href="#payment" class="btn-plan">Elegir plan</a>
+                    <a href="#payment" class="btn-plan ripple">Elegir plan</a>
                 </div>
-                <div class="plan-card popular fade-up delay-2">
+                <div class="plan-card popular reveal delay-2">
                     <div>
                         <div class="name">Premium</div>
                         <div class="price">$2,000 <small>CUP/mes</small></div>
@@ -1162,7 +1716,49 @@
                         <li><i class="fas fa-check"></i> Soporte prioritario</li>
                         <li><i class="fas fa-check"></i> Próximas funcionalidades</li>
                     </ul>
-                    <a href="#payment" class="btn-plan">Elegir plan</a>
+                    <a href="#payment" class="btn-plan ripple">Elegir plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    TESTIMONIOS (nuevo)
+    ======================================== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title reveal">💬 Lo que dicen nuestros usuarios</h2>
+            <p class="section-sub reveal delay-1">Más de 500 empresas ya confían en Tu MiPyme.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal delay-1">
+                    <div class="quote">“Tu MiPyme transformó la gestión de mi tienda. El modo offline me salva cuando no hay internet.”</div>
+                    <div class="author">
+                        <div class="avatar">MR</div>
+                        <div>
+                            <div class="name">María Rodríguez</div>
+                            <div class="role">Dueña de Tienda “El Rincón”</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal delay-2">
+                    <div class="quote">“Los reportes son claros y me ayudan a tomar mejores decisiones. ¡Súper recomendable!”</div>
+                    <div class="author">
+                        <div class="avatar">JL</div>
+                        <div>
+                            <div class="name">Juan López</div>
+                            <div class="role">Gerente de “Distribuciones López”</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal delay-3">
+                    <div class="quote">“La sincronización es impecable y el soporte es rápido. Llevo 6 meses usándola.”</div>
+                    <div class="author">
+                        <div class="avatar">AG</div>
+                        <div>
+                            <div class="name">Ana García</div>
+                            <div class="role">Emprendedora</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1173,18 +1769,24 @@
     ======================================== -->
     <section class="payment" id="payment">
         <div class="container">
-            <h2 class="section-title fade-up">💰 Instrucciones de pago</h2>
-            <p class="section-sub fade-up delay-1">
+            <h2 class="section-title reveal">💰 Instrucciones de pago</h2>
+            <p class="section-sub reveal delay-1">
                 Realiza tu pago mensual de forma sencilla y segura.
             </p>
-            <div class="payment-card fade-up delay-2">
+            <div class="payment-card reveal delay-2">
                 <div class="row">
                     <span class="label"><i class="fas fa-credit-card"></i> Tarjeta</span>
-                    <span class="value"><strong>Metropolitana</strong> 9227 9598 7522 7600</span>
+                    <span class="value" id="cardNumber"><strong>Metropolitana</strong> 9227 9598 7522 7600</span>
+                    <button class="btn-copy" aria-label="Copiar número de tarjeta" data-copy="cardNumber">
+                        <i class="fas fa-copy"></i>
+                    </button>
                 </div>
                 <div class="row">
                     <span class="label"><i class="fas fa-phone"></i> Confirmación</span>
                     <span class="value"><strong>Teléfono:</strong> 59721408</span>
+                    <button class="btn-copy" aria-label="Copiar teléfono" data-copy="phoneNumber">
+                        <i class="fas fa-copy"></i>
+                    </button>
                 </div>
                 <div class="row">
                     <span class="label"><i class="fas fa-calendar-alt"></i> Plazo</span>
@@ -1195,7 +1797,7 @@
                     <strong>número de transacción</strong> desde la aplicación en la sección
                     "Realizar Pago". Tu solicitud será atendida antes del <strong>día 6 del mes</strong>.
                 </div>
-                <p style="margin-top:16px; font-size:0.9rem; color:var(--gray-600);">
+                <p style="margin-top:20px; font-size:0.9rem; color:var(--gray-600);">
                     Al aprobar tu pago, tu plan se activa automáticamente.
                 </p>
             </div>
@@ -1203,27 +1805,48 @@
     </section>
 
     <!-- ========================================
-    ESTADÍSTICAS
+    ESTADÍSTICAS (con contador)
     ======================================== -->
-    <section class="stats">
+    <section class="stats" id="stats">
         <div class="container">
             <div class="stats-grid">
                 <div>
-                    <div class="stat-number">500+</div>
+                    <div class="stat-number" data-count="500">0+</div>
                     <div class="stat-label">Empresas confían</div>
                 </div>
                 <div>
-                    <div class="stat-number">10K+</div>
+                    <div class="stat-number" data-count="10000">0+</div>
                     <div class="stat-label">Ventas registradas</div>
                 </div>
                 <div>
-                    <div class="stat-number">98%</div>
+                    <div class="stat-number" data-count="98">0%</div>
                     <div class="stat-label">Satisfacción</div>
                 </div>
                 <div>
-                    <div class="stat-number">24/7</div>
+                    <div class="stat-number" data-count="24">0/7</div>
                     <div class="stat-label">Soporte</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    NEWSLETTER (nuevo)
+    ======================================== -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-box reveal">
+                <h3>📬 Suscríbete a novedades</h3>
+                <p>Recibe actualizaciones, consejos y ofertas exclusivas para tu negocio.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Tu correo electrónico" required aria-label="Correo electrónico" />
+                    <button type="submit" class="ripple">
+                        <i class="fas fa-paper-plane"></i> Suscribirme
+                    </button>
+                </form>
+                <p style="margin-top:14px; font-size:0.8rem; color:var(--gray-600);">
+                    Sin spam, solo contenido útil. Puedes darte de baja en cualquier momento.
+                </p>
             </div>
         </div>
     </section>
@@ -1236,13 +1859,18 @@
             <div class="brand">
                 Tu <span>MiPyme</span> — Gestión inteligente
             </div>
-            <div>
-                <a href="https://github.com/leifdev0306/Tu-MiPyme" target="_blank">
-                    <i class="fab fa-github"></i> GitHub
+            <div class="social">
+                <a href="https://github.com/leifdev0306/Tu-MiPyme" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
                 </a>
-                &nbsp;·&nbsp;
-                <a href="mailto:Leifdev0306@gmail.com">
-                    <i class="fas fa-envelope"></i> Contacto
+                <a href="mailto:Leifdev0306@gmail.com" aria-label="Correo">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="#" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
                 </a>
             </div>
             <div class="copy">
@@ -1252,47 +1880,209 @@
     </footer>
 
     <!-- ========================================
-    SCRIPTS
+    TOAST CONTAINER
+    ======================================== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ========================================
+    SCRIPTS (mejorados)
     ======================================== -->
     <script>
-        // Menú móvil
-        const toggle = document.getElementById('menuToggle');
-        const nav = document.getElementById('mainNav');
+        document.addEventListener('DOMContentLoaded', () => {
 
-        toggle.addEventListener('click', () => {
-            nav.classList.toggle('open');
-        });
-
-        nav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('open');
+            // ---- MENÚ MÓVIL ----
+            const toggle = document.getElementById('menuToggle');
+            const nav = document.getElementById('mainNav');
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('open');
             });
-        });
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('open');
+                });
+            });
 
-        // Animaciones al hacer scroll
-        const fadeElements = document.querySelectorAll('.fade-up');
+            // ---- TEMA OSCURO ----
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = themeToggle.querySelector('i');
+            let darkMode = localStorage.getItem('theme') === 'dark';
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
+            const setTheme = (dark) => {
+                document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+                icon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+                localStorage.setItem('theme', dark ? 'dark' : 'light');
+                darkMode = dark;
+            };
+
+            setTheme(darkMode);
+            themeToggle.addEventListener('click', () => setTheme(!darkMode));
+
+            // ---- HEADER SCROLL ----
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 40);
+            });
+
+            // ---- TOAST SYSTEM ----
+            const toastContainer = document.getElementById('toastContainer');
+
+            function showToast(message, type = 'info', duration = 4000) {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                const iconMap = {
+                    info: 'fa-info-circle',
+                    success: 'fa-check-circle',
+                    error: 'fa-exclamation-circle'
+                };
+                toast.innerHTML = `
+                            <i class="fas ${iconMap[type] || iconMap.info}"></i>
+                            <span>${message}</span>
+                        `;
+                toastContainer.appendChild(toast);
+                // Forzar reflow para activar transición
+                toast.getBoundingClientRect();
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 400);
+                }, duration);
+            }
+
+            // ---- DESCARGAR ----
+            document.getElementById('downloadBtn').addEventListener('click', (e) => {
+                showToast('⬇️ Descarga iniciada. ¡Gracias por elegir Tu MiPyme!', 'success');
+            });
+
+            // ---- COPIAR AL PORTAPAPELES ----
+            document.querySelectorAll('[data-copy]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.getAttribute('data-copy');
+                    let text = '';
+                    if (targetId === 'cardNumber') {
+                        text = document.getElementById('cardNumber').textContent.trim();
+                    } else if (targetId === 'phoneNumber') {
+                        text = '59721408';
+                    }
+                    if (text) {
+                        navigator.clipboard.writeText(text).then(() => {
+                            showToast('✅ Copiado al portapapeles', 'success');
+                        }).catch(() => {
+                            // Fallback
+                            const temp = document.createElement('input');
+                            temp.value = text;
+                            document.body.appendChild(temp);
+                            temp.select();
+                            document.execCommand('copy');
+                            temp.remove();
+                            showToast('✅ Copiado al portapapeles', 'success');
+                        });
+                    }
+                });
+            });
+
+            // ---- NEWSLETTER ----
+            document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const input = e.target.querySelector('input[type="email"]');
+                if (input.value && input.value.includes('@')) {
+                    showToast('📬 ¡Suscripción exitosa! Revisa tu correo.', 'success');
+                    input.value = '';
+                } else {
+                    showToast('⚠️ Ingresa un correo válido.', 'error');
                 }
             });
-        }, { threshold: 0.15 });
 
-        fadeElements.forEach(el => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
-        });
+            // ---- SCROLL REVEAL (Intersection Observer) ----
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+            revealElements.forEach(el => observer.observe(el));
 
-        window.addEventListener('load', () => {
-            fadeElements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight) {
-                    el.style.animationPlayState = 'running';
+            // ---- CONTADORES ANIMADOS ----
+            const statNumbers = document.querySelectorAll('.stat-number');
+            let countersAnimated = false;
+
+            const animateCounters = () => {
+                if (countersAnimated) return;
+                const statsSection = document.getElementById('stats');
+                const rect = statsSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 80 && rect.bottom > 0) {
+                    countersAnimated = true;
+                    statNumbers.forEach(el => {
+                        const target = parseInt(el.getAttribute('data-count'), 10);
+                        if (isNaN(target)) return;
+                        let current = 0;
+                        const increment = Math.ceil(target / 60);
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            if (target >= 1000) {
+                                el.textContent = current + '+';
+                            } else if (target === 24) {
+                                el.textContent = current + '/7';
+                            } else {
+                                el.textContent = current + '%';
+                            }
+                        }, 25);
+                    });
                 }
+            };
+
+            // Activar contadores al hacer scroll
+            window.addEventListener('scroll', animateCounters);
+            // También al cargar si ya está visible
+            setTimeout(animateCounters, 300);
+
+            // ---- RIPPLE EFECT ----
+            document.querySelectorAll('.ripple').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    const ripple = document.createElement('span');
+                    ripple.style.cssText = `
+                                position: absolute;
+                                width: ${size}px;
+                                height: ${size}px;
+                                left: ${x}px;
+                                top: ${y}px;
+                                background: rgba(255,255,255,0.3);
+                                border-radius: 50%;
+                                pointer-events: none;
+                                transform: scale(0);
+                                animation: rippleAnim 0.6s ease-out;
+                            `;
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 700);
+                });
             });
-        });
+
+            // Añadir keyframes para ripple (dinámicamente)
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = `
+                        @keyframes rippleAnim {
+                            to { transform: scale(4); opacity: 0; }
+                        }
+                    `;
+            document.head.appendChild(styleSheet);
+
+            // ---- TOAST DE BIENVENIDA (opcional) ----
+            setTimeout(() => {
+                showToast('👋 ¡Bienvenido! Descarga la app y empieza a gestionar tu negocio.', 'info', 5000);
+            }, 1500);
+
+        }); // DOMContentLoaded
     </script>
 
 </body>
