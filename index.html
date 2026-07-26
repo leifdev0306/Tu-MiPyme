@@ -3,35 +3,124 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tu MiPyme - Gestión para tu negocio</title>
+    <title>Tu MiPyme – Gestión inteligente para tu negocio</title>
+
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6 (iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
     <style>
-        /* ===== ESTILOS COMPLETOS ===== */
+        /* ============================================
+                   RESET Y BASE
+                   ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #0d1b4a;
+            --primary-light: #1a2d6b;
+            --secondary: #2563eb;
+            --accent: #fbbf24;
+            --accent-dark: #f59e0b;
+            --white: #ffffff;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #64748b;
+            --gray-800: #1e293b;
+            --shadow: 0 10px 40px rgba(13, 27, 74, 0.08);
+            --shadow-hover: 0 20px 60px rgba(13, 27, 74, 0.15);
+            --radius: 24px;
+            --radius-sm: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf5 100%);
-            min-height: 100vh;
-            color: #1e293b;
+            font-family: 'Inter', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
-        /* ===== HEADER ===== */
+        /* ============================================
+                   BOTÓN PRINCIPAL
+                   ============================================ */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--secondary);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 16px 40px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.4);
+            background: #1d4ed8;
+        }
+
+        .btn-primary i {
+            font-size: 1.2rem;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 14px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            border: 2px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ============================================
+                   HEADER
+                   ============================================ */
         .header {
-            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            background: var(--primary);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(13, 27, 74, 0.2);
         }
 
         .header .container {
@@ -39,324 +128,704 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
+            gap: 16px;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
+            text-decoration: none;
         }
 
-        .logo img {
-            height: 50px;
-            width: auto;
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
         }
 
-        .logo h1 {
-            font-size: 1.8rem;
+        .logo-text {
+            color: var(--white);
+            font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
 
-        .logo span {
+        .logo-text span {
+            color: var(--accent);
             font-weight: 300;
-            color: #90caf9;
         }
 
         .nav {
             display: flex;
-            gap: 24px;
             align-items: center;
+            gap: 28px;
         }
 
         .nav a {
-            color: white;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
         }
 
         .nav a:hover {
-            color: #90caf9;
+            color: var(--white);
         }
 
-        .btn-download-nav {
-            background: #ffc107;
-            color: #1a237e !important;
-            padding: 10px 24px;
-            border-radius: 30px;
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav .btn-download-nav {
+            background: var(--accent);
+            color: var(--primary) !important;
+            padding: 8px 24px;
+            border-radius: 40px;
             font-weight: 700;
-            transition: all 0.3s;
         }
 
-        .btn-download-nav:hover {
-            background: #ffb300;
+        .nav .btn-download-nav::after {
+            display: none;
+        }
+
+        .nav .btn-download-nav:hover {
+            background: var(--accent-dark);
             transform: scale(1.05);
-            color: #1a237e !important;
         }
 
-        /* ===== HERO ===== */
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 820px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                padding: 16px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .nav.open {
+                display: flex;
+            }
+            .nav a {
+                padding: 8px 0;
+            }
+            .nav .btn-download-nav {
+                text-align: center;
+            }
+        }
+
+        /* ============================================
+                   HERO
+                   ============================================ */
         .hero {
-            padding: 60px 0 40px;
-            text-align: center;
+            padding: 80px 0 60px;
+            background: linear-gradient(160deg, var(--gray-50) 0%, #eef2ff 100%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h2 {
-            font-size: 2.8rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
             font-weight: 800;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #1a237e, #42a5f5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: var(--primary);
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: #475569;
-            max-width: 700px;
-            margin: 0 auto 30px;
+        .hero-content h1 span {
+            color: var(--secondary);
         }
 
-        .hero .badges {
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            margin: 20px 0 32px;
+            max-width: 520px;
+        }
+
+        .hero-badges {
             display: flex;
-            justify-content: center;
-            gap: 20px;
             flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px 0 16px;
         }
 
-        .badge {
-            background: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        .hero-badge {
+            background: var(--white);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
             font-weight: 500;
-            color: #1a237e;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             display: flex;
             align-items: center;
+            gap: 6px;
+        }
+
+        .hero-badge i {
+            color: var(--secondary);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-mockup {
+            width: 100%;
+            max-width: 420px;
+            background: var(--primary);
+            border-radius: 40px;
+            padding: 20px 16px 16px;
+            box-shadow: 0 30px 80px rgba(13, 27, 74, 0.2);
+            position: relative;
+        }
+
+        .hero-mockup .screen {
+            background: var(--gray-50);
+            border-radius: 24px;
+            padding: 20px 16px;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mockup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .mockup-header i {
+            color: var(--secondary);
+        }
+
+        .mockup-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 8px;
         }
 
-        .badge i {
-            font-size: 1.2rem;
-        }
-
-        /* ===== BOTÓN PRINCIPAL ===== */
-        .btn-download {
-            display: inline-block;
-            background: linear-gradient(135deg, #1a237e, #0d47a1);
-            color: white;
-            font-size: 1.4rem;
-            font-weight: 700;
-            padding: 18px 48px;
-            border-radius: 60px;
-            text-decoration: none;
-            box-shadow: 0 8px 30px rgba(26, 35, 126, 0.3);
-            transition: all 0.3s ease;
-            margin: 20px 0 10px;
-        }
-
-        .btn-download:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(26, 35, 126, 0.4);
-            background: linear-gradient(135deg, #0d47a1, #1a237e);
-        }
-
-        .btn-download i {
-            margin-right: 12px;
-        }
-
-        .version {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            margin-top: 8px;
-        }
-
-        /* ===== CARACTERÍSTICAS ===== */
-        .features {
-            padding: 60px 0;
-        }
-
-        .features h3 {
+        .mockup-stat {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 10px 8px;
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #1a237e;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
-        .grid {
+        .mockup-stat .num {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .mockup-stat .label {
+            font-size: 0.7rem;
+            color: var(--gray-600);
+        }
+
+        .mockup-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: var(--white);
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .mockup-row .icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gray-200);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .mockup-row .info {
+            flex: 1;
+            font-size: 0.85rem;
+        }
+
+        .mockup-row .info .title {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .mockup-row .info .sub {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+
+        .mockup-row .amount {
+            font-weight: 700;
+            color: #16a34a;
+        }
+
+        @media (max-width: 900px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-badges {
+                justify-content: center;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .hero-mockup {
+                max-width: 340px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ============================================
+                   SECCIÓN "CÓMO USAR" (TUTORIAL)
+                   ============================================ */
+        .tutorial {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .tutorial .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .tutorial .section-sub {
+            text-align: center;
+            color: var(--gray-600);
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        .steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            counter-reset: step;
+        }
+
+        .step {
+            text-align: center;
+            padding: 24px 16px;
+            border-radius: var(--radius);
+            background: var(--gray-50);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .step:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            height: 36px;
+            background: var(--secondary);
+            color: var(--white);
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .step .icon {
+            font-size: 2.8rem;
+            margin: 16px 0 12px;
+        }
+
+        .step h4 {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+        }
+
+        /* ============================================
+                   CARACTERÍSTICAS
+                   ============================================ */
+        .features {
+            padding: 80px 0;
+            background: var(--gray-50);
+        }
+
+        .features .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .features .section-sub {
+            text-align: center;
+            color: var(--gray-600);
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 30px;
         }
 
         .feature-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s;
-            text-align: center;
+            background: var(--white);
+            padding: 32px 24px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid transparent;
         }
 
         .feature-card:hover {
             transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--secondary);
         }
 
         .feature-card .icon {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             margin-bottom: 16px;
+            color: var(--secondary);
         }
 
         .feature-card h4 {
+            font-weight: 700;
             font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #1a237e;
+            color: var(--primary);
+            margin-bottom: 8px;
         }
 
         .feature-card p {
-            color: #64748b;
+            color: var(--gray-600);
             font-size: 0.95rem;
         }
 
-        /* ===== PLANES ===== */
+        /* ============================================
+                   PLANES
+                   ============================================ */
         .plans {
-            padding: 60px 0;
-            background: white;
-            border-radius: 40px 40px 0 0;
+            padding: 80px 0;
+            background: var(--white);
         }
 
-        .plans h3 {
+        .plans .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 16px;
-            color: #1a237e;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
         }
 
-        .plans .sub {
+        .plans .section-sub {
             text-align: center;
-            color: #64748b;
-            margin-bottom: 40px;
+            color: var(--gray-600);
+            margin-bottom: 48px;
+            font-size: 1.1rem;
         }
 
         .plans-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 40px;
+            align-items: stretch;
         }
 
         .plan-card {
-            background: #f8fafc;
-            border-radius: 24px;
-            padding: 30px;
-            border: 2px solid transparent;
-            transition: all 0.3s;
+            background: var(--gray-50);
+            border-radius: var(--radius);
+            padding: 36px 28px;
             text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .plan-card:hover {
-            border-color: #1a237e;
-            box-shadow: 0 8px 30px rgba(26, 35, 126, 0.08);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
         }
 
-        .plan-card.premium {
-            background: linear-gradient(135deg, #f8fafc, #e8eaf6);
-            border-color: #1a237e;
+        .plan-card.popular {
+            border-color: var(--secondary);
+            background: linear-gradient(160deg, var(--gray-50), #eef2ff);
+            position: relative;
         }
 
-        .plan-card .plan-name {
-            font-size: 1.5rem;
+        .plan-card.popular::before {
+            content: 'MÁS POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: var(--white);
+            font-size: 0.7rem;
             font-weight: 700;
-            color: #1a237e;
+            padding: 4px 18px;
+            border-radius: 40px;
+            letter-spacing: 1px;
+        }
+
+        .plan-card .name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
         }
 
         .plan-card .price {
-            font-size: 2.2rem;
+            font-size: 2.6rem;
             font-weight: 800;
-            color: #1a237e;
-            margin: 12px 0;
+            color: var(--primary);
+            margin: 12px 0 4px;
         }
 
         .plan-card .price small {
             font-size: 1rem;
             font-weight: 400;
-            color: #64748b;
+            color: var(--gray-600);
         }
 
-        .plan-card ul {
+        .plan-card .features-list {
             list-style: none;
             padding: 0;
-            margin: 20px 0;
+            margin: 24px 0 32px;
+            text-align: left;
         }
 
-        .plan-card ul li {
-            padding: 6px 0;
-            border-bottom: 1px solid #e2e8f0;
+        .plan-card .features-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
         }
 
-        .plan-card ul li:last-child {
+        .plan-card .features-list li:last-child {
             border-bottom: none;
         }
 
-        .plan-card .badge-premium {
-            background: #1a237e;
-            color: white;
-            padding: 4px 16px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 600;
+        .plan-card .features-list li i {
+            color: #16a34a;
+            width: 20px;
+        }
+
+        .plan-card .btn-plan {
             display: inline-block;
-            margin-bottom: 12px;
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: auto;
         }
 
-        /* ===== PAGO ===== */
-        .pago-info {
-            padding: 60px 0;
+        .plan-card .btn-plan:hover {
+            background: var(--secondary);
+            transform: scale(1.03);
         }
 
-        .pago-info h3 {
+        .plan-card.popular .btn-plan {
+            background: var(--secondary);
+        }
+
+        .plan-card.popular .btn-plan:hover {
+            background: #1d4ed8;
+        }
+
+        /* ============================================
+                   PAGO / INSTRUCCIONES
+                   ============================================ */
+        .payment {
+            padding: 80px 0;
+            background: var(--gray-50);
+        }
+
+        .payment .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #1a237e;
-        }
-
-        .pago-card {
-            background: white;
-            border-radius: 24px;
-            padding: 30px;
-            max-width: 700px;
-            margin: 0 auto;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-        }
-
-        .pago-card p {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
             margin-bottom: 12px;
+        }
+
+        .payment .section-sub {
+            text-align: center;
+            color: var(--gray-600);
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        .payment-card {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .payment-card .row {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-200);
         }
 
-        .pago-card .label {
+        .payment-card .row:last-child {
+            border-bottom: none;
+        }
+
+        .payment-card .row .label {
             font-weight: 600;
-            color: #1a237e;
+            color: var(--primary);
             min-width: 100px;
         }
 
-        .pago-card .highlight {
-            background: #fff3cd;
-            padding: 12px 16px;
-            border-radius: 12px;
-            border-left: 4px solid #ffc107;
-            margin-top: 16px;
+        .payment-card .row .value {
+            color: var(--gray-800);
         }
 
-        /* ===== FOOTER ===== */
+        .payment-card .highlight {
+            background: #fef9e7;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--accent);
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        .payment-card .highlight strong {
+            color: var(--primary);
+        }
+
+        /* ============================================
+                   TESTIMONIOS / ESTADÍSTICAS
+                   ============================================ */
+        .stats {
+            padding: 60px 0;
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stats-grid .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stats-grid .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ============================================
+                   FOOTER
+                   ============================================ */
         .footer {
-            background: #1a237e;
-            color: white;
-            padding: 40px 0 20px;
-            margin-top: 40px;
-            border-radius: 40px 40px 0 0;
+            background: var(--primary);
+            padding: 40px 0 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .footer .container {
@@ -364,210 +833,462 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
+            align-items: center;
+        }
+
+        .footer .brand {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .footer .brand span {
+            color: var(--accent);
         }
 
         .footer a {
-            color: #90caf9;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
+            transition: var(--transition);
         }
 
         .footer a:hover {
-            text-decoration: underline;
+            color: var(--white);
         }
 
         .footer .copy {
-            opacity: 0.7;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .header .container {
-                flex-direction: column;
-                gap: 12px;
-            }
-            .nav {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .hero h2 {
-                font-size: 2rem;
-            }
-            .btn-download {
-                font-size: 1.1rem;
-                padding: 14px 32px;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            .plans-grid {
-                grid-template-columns: 1fr;
-            }
-            .pago-card p {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .pago-card .label {
-                min-width: auto;
-            }
+        @media (max-width: 600px) {
             .footer .container {
                 flex-direction: column;
                 text-align: center;
+            }
+        }
+
+        /* ============================================
+                   ANIMACIONES
+                   ============================================ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        /* ============================================
+                   RESPONSIVE AJUSTES FINOS
+                   ============================================ */
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .btn-primary {
+                font-size: 1rem;
+                padding: 14px 28px;
+            }
+            .plan-card {
+                padding: 24px 16px;
+            }
+            .payment-card {
+                padding: 24px 16px;
+            }
+            .payment-card .row {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .payment-card .row .label {
+                min-width: auto;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
-    <header class="header">
+    <!-- ========================================
+    HEADER
+    ======================================== -->
+    <header class="header" id="header">
         <div class="container">
-            <div class="logo">
-                <!-- Cambia "logo.png" por tu imagen o elimina la línea -->
-                <img src="images/logo.png" alt="Tu MiPyme Logo" onerror="this.style.display='none'" />
-                <h1>Tu <span>MiPyme</span></h1>
-            </div>
-            <nav class="nav">
-                <a href="#caracteristicas">Características</a>
-                <a href="#planes">Planes</a>
-                <a href="#pago">Pago</a>
-                <a href="#descargar" class="btn-download-nav">Descargar</a>
+            <a href="#" class="logo">
+                <span class="logo-icon">📊</span>
+                <span class="logo-text">Tu <span>MiPyme</span></span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav" id="mainNav">
+                <a href="#features">Características</a>
+                <a href="#tutorial">Cómo usar</a>
+                <a href="#plans">Planes</a>
+                <a href="#payment">Pago</a>
+                <a href="#download" class="btn-download-nav">
+                    <i class="fas fa-download"></i> Descargar
+                </a>
             </nav>
         </div>
     </header>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero container">
-        <h2>Gestiona tu negocio con <br />la mejor herramienta</h2>
-        <p>
-            Administra inventario, ventas, gastos, clientes y más, todo desde una
-            aplicación fácil de usar. <strong>¡Y funciona sin internet!</strong>
-        </p>
-        <div class="badges">
-            <span class="badge">📱 Android</span>
-            <span class="badge">☁️ Sincronización</span>
-            <span class="badge">🔐 Segura</span>
-            <span class="badge">📊 Reportes</span>
-        </div>
-        <a id="descargar" href="https://github.com/TU_USUARIO/TuMiPyme/releases/latest/download/TuMiPyme.apk" class="btn-download">
-            ⬇️ Descargar APK
-        </a>
-        <div class="version">Última versión disponible</div>
-    </section>
-
-    <!-- ===== CARACTERÍSTICAS ===== -->
-    <section id="caracteristicas" class="features container">
-        <h3>✨ ¿Qué puedes hacer con Tu MiPyme?</h3>
-        <div class="grid">
-            <div class="feature-card">
-                <div class="icon">🛒</div>
-                <h4>Ventas rápidas</h4>
-                <p>Registra ventas en segundos, con múltiples productos y métodos de pago.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📦</div>
-                <h4>Inventario inteligente</h4>
-                <p>Controla tu stock, recibe alertas de productos agotados y reabastece fácilmente.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">📊</div>
-                <h4>Reportes y análisis</h4>
-                <p>Visualiza tus ganancias, gastos y productos más vendidos en gráficos claros.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">👥</div>
-                <h4>Gestión de clientes</h4>
-                <p>Lleva el registro de tus clientes, sus compras y saldos pendientes.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">👤</div>
-                <h4>Vendedores</h4>
-                <p>Hasta 5 vendedores en el plan Premium. Cada uno con su propio registro.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🌐</div>
-                <h4>Offline + Sincronización</h4>
-                <p>Funciona sin internet y sincroniza tus datos automáticamente cuando vuelves a conectarte.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== PLANES ===== -->
-    <section id="planes" class="plans">
+    <!-- ========================================
+    HERO
+    ======================================== -->
+    <section class="hero" id="download">
         <div class="container">
-            <h3>📋 Elige tu plan</h3>
-            <p class="sub">Paga mensualmente y disfruta de todas las ventajas.</p>
+            <div class="hero-content">
+                <h1>Gestiona tu negocio <br /><span>de forma inteligente</span></h1>
+                <p>
+                    Administra inventario, ventas, gastos, clientes y más, todo desde
+                    una aplicación móvil que funciona <strong>sin internet</strong>.
+                </p>
+                <div class="hero-badges">
+                    <span class="hero-badge"><i class="fas fa-check-circle"></i> Offline</span>
+                    <span class="hero-badge"><i class="fas fa-cloud-upload-alt"></i> Sincronización</span>
+                    <span class="hero-badge"><i class="fas fa-lock"></i> Segura</span>
+                    <span class="hero-badge"><i class="fas fa-chart-bar"></i> Reportes</span>
+                </div>
+                <a href="https://github.com/TU_USUARIO/TuMiPyme/releases/latest/download/TuMiPyme.apk" class="btn-primary">
+                    <i class="fas fa-download"></i> Descargar APK
+                </a>
+                <p style="margin-top:12px; font-size:0.85rem; color:var(--gray-600);">
+                    Última versión · Android 5.0+
+                </p>
+            </div>
+            <div class="hero-image">
+                <div class="hero-mockup">
+                    <div class="screen">
+                        <div class="mockup-header">
+                            <span>📊 Tu MiPyme</span>
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="mockup-stats">
+                            <div class="mockup-stat">
+                                <div class="num">$1,240</div>
+                                <div class="label">Ventas hoy</div>
+                            </div>
+                            <div class="mockup-stat">
+                                <div class="num">12</div>
+                                <div class="label">Productos</div>
+                            </div>
+                            <div class="mockup-stat">
+                                <div class="num">8</div>
+                                <div class="label">Clientes</div>
+                            </div>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="icon"><i class="fas fa-tag"></i></div>
+                            <div class="info">
+                                <div class="title">Café molido 500g</div>
+                                <div class="sub">Stock: 24 unidades</div>
+                            </div>
+                            <div class="amount">$8.50</div>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="icon"><i class="fas fa-tag"></i></div>
+                            <div class="info">
+                                <div class="title">Pan integral</div>
+                                <div class="sub">Stock: 12 unidades</div>
+                            </div>
+                            <div class="amount">$2.30</div>
+                        </div>
+                        <div class="mockup-row" style="background:var(--accent); color:var(--primary);">
+                            <div class="icon"><i class="fas fa-plus-circle"></i></div>
+                            <div class="info">
+                                <div class="title">Nueva venta</div>
+                                <div class="sub">Toca para registrar</div>
+                            </div>
+                            <div class="amount">→</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    TUTORIAL (CÓMO USAR)
+    ======================================== -->
+    <section class="tutorial" id="tutorial">
+        <div class="container">
+            <h2 class="section-title fade-up">📖 Cómo usar Tu MiPyme</h2>
+            <p class="section-sub fade-up delay-1">
+                Sigue estos pasos y empieza a gestionar tu negocio en minutos.
+            </p>
+            <div class="steps">
+                <div class="step fade-up delay-1">
+                    <div class="icon">📲</div>
+                    <h4>1. Descarga la app</h4>
+                    <p>Descarga el APK desde esta página e instálala en tu dispositivo Android.</p>
+                </div>
+                <div class="step fade-up delay-2">
+                    <div class="icon">📝</div>
+                    <h4>2. Regístrate</h4>
+                    <p>Crea tu cuenta y registra el nombre de tu empresa. Recibirás 7 días de prueba.</p>
+                </div>
+                <div class="step fade-up delay-3">
+                    <div class="icon">📦</div>
+                    <h4>3. Agrega productos</h4>
+                    <p>Registra tu inventario con precios, categorías y cantidades iniciales.</p>
+                </div>
+                <div class="step fade-up delay-4">
+                    <div class="icon">🛒</div>
+                    <h4>4. Registra ventas</h4>
+                    <p>Vende tus productos, el stock se actualiza automáticamente y genera ganancias.</p>
+                </div>
+                <div class="step fade-up delay-1">
+                    <div class="icon">📊</div>
+                    <h4>5. Analiza reportes</h4>
+                    <p>Consulta tus ventas, gastos y ganancias en gráficos y reportes detallados.</p>
+                </div>
+                <div class="step fade-up delay-2">
+                    <div class="icon">💳</div>
+                    <h4>6. Paga tu plan</h4>
+                    <p>Después de la prueba, paga mensualmente para seguir usando todas las funciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    CARACTERÍSTICAS
+    ======================================== -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title fade-up">✨ Características principales</h2>
+            <p class="section-sub fade-up delay-1">
+                Todo lo que necesitas para llevar tu negocio al siguiente nivel.
+            </p>
+            <div class="features-grid">
+                <div class="feature-card fade-up delay-1">
+                    <div class="icon"><i class="fas fa-cart-plus"></i></div>
+                    <h4>Ventas rápidas</h4>
+                    <p>Registra ventas en segundos con múltiples productos, precios y métodos de pago.</p>
+                </div>
+                <div class="feature-card fade-up delay-2">
+                    <div class="icon"><i class="fas fa-boxes"></i></div>
+                    <h4>Inventario inteligente</h4>
+                    <p>Control de stock, alertas de productos agotados y reabastecimiento con historial de precios.</p>
+                </div>
+                <div class="feature-card fade-up delay-3">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>Reportes y análisis</h4>
+                    <p>Gráficos de evolución, productos más vendidos, ganancias brutas y netas.</p>
+                </div>
+                <div class="feature-card fade-up delay-1">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h4>Gestión de clientes</h4>
+                    <p>Registro de clientes con saldos pendientes, historial de compras y más.</p>
+                </div>
+                <div class="feature-card fade-up delay-2">
+                    <div class="icon"><i class="fas fa-user-tie"></i></div>
+                    <h4>Vendedores</h4>
+                    <p>Hasta 5 vendedores en el plan Premium, cada uno con sus propias ventas y estadísticas.</p>
+                </div>
+                <div class="feature-card fade-up delay-3">
+                    <div class="icon"><i class="fas fa-sync-alt"></i></div>
+                    <h4>Offline + Sincronización</h4>
+                    <p>Trabaja sin internet y sincroniza automáticamente tus datos al recuperar conexión.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    PLANES
+    ======================================== -->
+    <section class="plans" id="plans">
+        <div class="container">
+            <h2 class="section-title fade-up">📋 Elige tu plan</h2>
+            <p class="section-sub fade-up delay-1">
+                Paga mensualmente y disfruta de todas las ventajas.
+            </p>
             <div class="plans-grid">
-                <div class="plan-card">
-                    <div class="plan-name">Normal</div>
-                    <div class="price">$1,000 <small>CUP/mes</small></div>
-                    <ul>
-                        <li>✅ 1 vendedor</li>
-                        <li>✅ Inventario completo</li>
-                        <li>✅ Ventas y gastos</li>
-                        <li>✅ Reportes básicos</li>
-                        <li>✅ Clientes y categorías</li>
-                        <li>✅ Sincronización</li>
+                <div class="plan-card fade-up delay-1">
+                    <div>
+                        <div class="name">Normal</div>
+                        <div class="price">$1,000 <small>CUP/mes</small></div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> 1 vendedor</li>
+                        <li><i class="fas fa-check"></i> Inventario completo</li>
+                        <li><i class="fas fa-check"></i> Ventas y gastos</li>
+                        <li><i class="fas fa-check"></i> Reportes básicos</li>
+                        <li><i class="fas fa-check"></i> Clientes y categorías</li>
+                        <li><i class="fas fa-check"></i> Sincronización</li>
                     </ul>
+                    <a href="#payment" class="btn-plan">Elegir plan</a>
                 </div>
-                <div class="plan-card premium">
-                    <div class="badge-premium">🌟 RECOMENDADO</div>
-                    <div class="plan-name">Premium</div>
-                    <div class="price">$2,000 <small>CUP/mes</small></div>
-                    <ul>
-                        <li>✅ Hasta 5 vendedores</li>
-                        <li>✅ Todo lo del plan Normal</li>
-                        <li>✅ Estadísticas por vendedor</li>
-                        <li>✅ Soporte prioritario</li>
-                        <li>✅ Próximas funcionalidades</li>
+                <div class="plan-card popular fade-up delay-2">
+                    <div>
+                        <div class="name">Premium</div>
+                        <div class="price">$2,000 <small>CUP/mes</small></div>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> <strong>Hasta 5 vendedores</strong></li>
+                        <li><i class="fas fa-check"></i> Todo lo del plan Normal</li>
+                        <li><i class="fas fa-check"></i> Estadísticas por vendedor</li>
+                        <li><i class="fas fa-check"></i> Soporte prioritario</li>
+                        <li><i class="fas fa-check"></i> Próximas funcionalidades</li>
                     </ul>
+                    <a href="#payment" class="btn-plan">Elegir plan</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== INSTRUCCIONES DE PAGO ===== -->
-    <section id="pago" class="pago-info container">
-        <h3>💰 ¿Cómo pagar?</h3>
-        <div class="pago-card">
-            <p>
-                <span class="label">🏦 Tarjeta:</span>
-                <span><strong>Metropolitana</strong> 9227 9598 7522 7600</span>
+    <!-- ========================================
+    PAGO
+    ======================================== -->
+    <section class="payment" id="payment">
+        <div class="container">
+            <h2 class="section-title fade-up">💰 Instrucciones de pago</h2>
+            <p class="section-sub fade-up delay-1">
+                Realiza tu pago mensual de forma sencilla y segura.
             </p>
-            <p>
-                <span class="label">📞 Confirmación:</span>
-                <span><strong>Teléfono:</strong> 59721408</span>
-            </p>
-            <p>
-                <span class="label">📅 Plazo:</span>
-                <span>Realiza tu pago entre el <strong>día 1 y 5 de cada mes</strong>.</span>
-            </p>
-            <div class="highlight">
-                <strong>📌 Importante:</strong> Después de realizar el pago, envía el
-                <strong>número de transacción</strong> desde la aplicación en la sección
-                "Realizar Pago". Tu solicitud será atendida antes del día 6 del mes.
+            <div class="payment-card fade-up delay-2">
+                <div class="row">
+                    <span class="label"><i class="fas fa-credit-card"></i> Tarjeta</span>
+                    <span class="value"><strong>Metropolitana</strong> 9227 9598 7522 7600</span>
+                </div>
+                <div class="row">
+                    <span class="label"><i class="fas fa-phone"></i> Confirmación</span>
+                    <span class="value"><strong>Teléfono:</strong> 59721408</span>
+                </div>
+                <div class="row">
+                    <span class="label"><i class="fas fa-calendar-alt"></i> Plazo</span>
+                    <span class="value">Realiza tu pago entre el <strong>día 1 y 5 de cada mes</strong>.</span>
+                </div>
+                <div class="highlight">
+                    <strong>📌 Importante:</strong> Después de realizar el pago, envía el
+                    <strong>número de transacción</strong> desde la aplicación en la sección
+                    "Realizar Pago". Tu solicitud será atendida antes del <strong>día 6 del mes</strong>.
+                </div>
+                <p style="margin-top:16px; font-size:0.9rem; color:var(--gray-600);">
+                    Al aprobar tu pago, tu plan se activa automáticamente.
+                </p>
             </div>
-            <p style="margin-top:16px; font-size:0.95rem; color:#64748b;">
-                Al aprobar tu pago, tu plan se activa automáticamente.
-            </p>
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- ========================================
+    ESTADÍSTICAS
+    ======================================== -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div>
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Empresas confían</div>
+                </div>
+                <div>
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Ventas registradas</div>
+                </div>
+                <div>
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfacción</div>
+                </div>
+                <div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Soporte</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    FOOTER
+    ======================================== -->
     <footer class="footer">
         <div class="container">
-            <div>
-                <strong>Tu MiPyme</strong> — Gestión inteligente para tu negocio
+            <div class="brand">
+                Tu <span>MiPyme</span> — Gestión inteligente
             </div>
             <div>
-                <a href="https://github.com/TU_USUARIO/TuMiPyme" target="_blank">GitHub</a>
+                <a href="https://github.com/TU_USUARIO/TuMiPyme" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
                 &nbsp;·&nbsp;
-                <a href="mailto:Leifdev0306@gmail.com">Contacto</a>
-                &nbsp;·&nbsp;
-                <span class="copy">© 2026 Leifdev Software Developer</span>
+                <a href="mailto:Leifdev0306@gmail.com">
+                    <i class="fas fa-envelope"></i> Contacto
+                </a>
+            </div>
+            <div class="copy">
+                &copy; 2026 Leifdev Software Developer
             </div>
         </div>
     </footer>
+
+    <!-- ========================================
+    SCRIPTS (menú móvil, animaciones)
+    ======================================== -->
+    <script>
+        // Menú móvil toggle
+        const toggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('mainNav');
+
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('open');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+
+        // Animación de aparición al hacer scroll (Intersection Observer)
+        const fadeElements = document.querySelectorAll('.fade-up');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.15 });
+
+        fadeElements.forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Forzar que los elementos visibles al cargar se animen
+        window.addEventListener('load', () => {
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.style.animationPlayState = 'running';
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
