@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tu MiPyme - Gestión para tu negocio</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏪</text></svg>" />
+    <!-- Font Awesome (opcional, para iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-store"></i> Tu MiPyme
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Características</a></li>
+                <li><a href="#plans">Planes</a></li>
+                <li><a href="#download">Descargar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Administra tu negocio <br>de forma inteligente</h1>
+            <p>
+                Controla inventario, ventas, gastos y clientes desde una sola app.
+                Sincronización en la nube, disponible offline y con reportes en tiempo real.
+            </p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Descargar ahora
+                </a>
+                <a href="#features" class="btn btn-outline">
+                    Saber más
+                </a>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/600x400/1A237E/FFFFFF?text=Tu+MiPyme+App" alt="App screenshot" />
+            </div>
+        </div>
+    </header>
+
+    <!-- Características -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>¿Por qué Tu MiPyme?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-boxes"></i>
+                    <h3>Inventario</h3>
+                    <p>Controla tu stock con gestión de lotes y precios de compra/venta.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cash-register"></i>
+                    <h3>Ventas</h3>
+                    <p>Registra ventas con múltiples métodos de pago y clientes.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Reportes</h3>
+                    <p>Obtén ganancias netas, gastos y análisis de productos más vendidos.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Vendedores</h3>
+                    <p>Gestiona varios vendedores con límites según tu plan.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Sincronización</h3>
+                    <p>Trabaja sin conexión y sincroniza automáticamente al recuperar internet.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Seguro</h3>
+                    <p>Tus datos están protegidos con autenticación y políticas de acceso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planes -->
+    <section id="plans" class="plans">
+        <div class="container">
+            <h2>Elige tu plan</h2>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-header normal">
+                        <h3>Normal</h3>
+                        <p class="price">1,000 CUP<span>/mes</span></p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 1 vendedor</li>
+                        <li><i class="fas fa-check"></i> Gestión completa de inventario</li>
+                        <li><i class="fas fa-check"></i> Ventas y gastos ilimitados</li>
+                        <li><i class="fas fa-check"></i> Reportes básicos</li>
+                        <li><i class="fas fa-times"></i> Múltiples vendedores</li>
+                        <li><i class="fas fa-times"></i> Soporte prioritario</li>
+                    </ul>
+                    <a href="#download" class="btn btn-plan">Elegir</a>
+                </div>
+                <div class="plan-card premium">
+                    <div class="plan-header premium">
+                        <h3>Premium</h3>
+                        <p class="price">2,000 CUP<span>/mes</span></p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 5 vendedores</li>
+                        <li><i class="fas fa-check"></i> Todo lo del plan Normal</li>
+                        <li><i class="fas fa-check"></i> Reportes avanzados</li>
+                        <li><i class="fas fa-check"></i> Exportación a Excel</li>
+                        <li><i class="fas fa-check"></i> Soporte prioritario</li>
+                        <li><i class="fas fa-check"></i> Personalización de marca</li>
+                    </ul>
+                    <a href="#download" class="btn btn-plan">Elegir</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Descarga -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2>Descarga Tu MiPyme</h2>
+            <p>Obtén la aplicación en tu dispositivo Android. La versión más reciente siempre disponible.</p>
+            <a href="https://github.com/TU_USUARIO/TuMiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-download">
+                <i class="fas fa-download"></i> Descargar APK
+            </a>
+            <p class="version-info">Versión estable v2.0.0</p>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tu MiPyme. Desarrollado por Leifdev Software Developer.</p>
+            <div class="footer-links">
+                <a href="mailto:Leifdev0306@gmail.com">Contacto</a>
+                <a href="#">Términos</a>
+                <a href="#">Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
