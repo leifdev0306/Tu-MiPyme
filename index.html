@@ -10,13 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
 
-  <!-- Google Analytics -->
+  <!-- Google Analytics (opcional, reemplaza G-XXXXXXXXXX) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX'); // Reemplaza con tu ID de medición
+    gtag('config', 'G-XXXXXXXXXX');
   </script>
 
   <style>
@@ -512,6 +512,70 @@
       color: #6b6b80;
     }
 
+    /* ===== INSTRUCCIONES DE INSTALACIÓN ===== */
+    .install-guide {
+      background: #faf9f6;
+    }
+
+    .install-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step {
+      text-align: center;
+      padding: 24px 16px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .step .number {
+      display: inline-block;
+      background: #f59e0b;
+      color: #1a1a2e;
+      font-weight: 800;
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      margin-bottom: 12px;
+    }
+
+    .step h4 {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: #6b6b80;
+    }
+
+    .security-note {
+      max-width: 700px;
+      margin: 32px auto 0;
+      padding: 20px 24px;
+      background: #fef9e7;
+      border-left: 4px solid #f59e0b;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .security-note strong {
+      color: #1a1a2e;
+    }
+
+    .security-note .icon {
+      font-size: 24px;
+      margin-right: 8px;
+    }
+
     /* ===== CHANGELOG ===== */
     .changelog {
       background: #fff;
@@ -561,7 +625,7 @@
       margin-bottom: 2px;
     }
 
-    /* ===== TESTIMONIOS / BENEFICIOS ===== */
+    /* ===== BENEFICIOS ===== */
     .benefits {
       background: #faf9f6;
     }
@@ -750,6 +814,10 @@
       .plan-card {
         padding: 28px 20px;
       }
+
+      .install-steps {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -767,6 +835,7 @@
       <nav id="mainNav">
         <a href="#features">Características</a>
         <a href="#plans">Planes</a>
+        <a href="#install">Instalación</a>
         <a href="#changelog">Historial</a>
         <a href="#benefits">Beneficios</a>
         <a href="#cta" class="nav-download">Descargar</a>
@@ -952,6 +1021,54 @@
     </div>
   </section>
 
+  <!-- ===== GUÍA DE INSTALACIÓN ===== -->
+  <section id="install" class="install-guide">
+    <div class="container">
+      <h2 class="section-title">¿Cómo instalar <span>Tu MiPyme</span>?</h2>
+      <p class="section-subtitle">Sigue estos pasos para instalar la app en tu teléfono Android.</p>
+
+      <div class="install-steps">
+        <div class="step">
+          <div class="number">1</div>
+          <h4>Descarga el APK</h4>
+          <p>Haz clic en el botón "Descargar" y espera a que termine la descarga.</p>
+        </div>
+        <div class="step">
+          <div class="number">2</div>
+          <h4>Abre el archivo</h4>
+          <p>Ve a la carpeta de descargas y toca el archivo <strong>TuMiPyme.apk</strong>.</p>
+        </div>
+        <div class="step">
+          <div class="number">3</div>
+          <h4>Permite la instalación</h4>
+          <p>Android te pedirá permiso para instalar desde fuentes desconocidas. <strong>Activa la opción</strong>.</p>
+        </div>
+        <div class="step">
+          <div class="number">4</div>
+          <h4>Instala y disfruta</h4>
+          <p>Haz clic en "Instalar" y en unos segundos tendrás Tu MiPyme lista para usar.</p>
+        </div>
+      </div>
+
+      <div class="security-note">
+        <p>
+          <span class="icon">🛡️</span>
+          <strong>¿Por qué aparece "Esta aplicación puede dañar tu dispositivo"?</strong>
+        </p>
+        <p style="margin-top:8px;">
+          Este mensaje es <strong>normal</strong> al instalar APKs descargados fuera de Google Play Store.
+          No significa que la app sea dañina. Tu MiPyme está <strong>firmada y verificada</strong> por
+          Leifdev Software Developer. Puedes instalar con total confianza.
+        </p>
+        <p style="margin-top:8px; font-size:14px;">
+          Para evitar que aparezca en futuras instalaciones, puedes ir a:
+          <strong>Ajustes → Seguridad → Instalar desde fuentes desconocidas</strong>
+          y habilitar la opción para tu navegador o gestor de archivos.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CHANGELOG ===== -->
   <section id="changelog" class="changelog">
     <div class="container">
@@ -1073,7 +1190,9 @@
       <div class="footer-links">
         <a href="#features">Características</a>
         <a href="#plans">Planes</a>
+        <a href="#install">Instalación</a>
         <a href="#changelog">Historial</a>
+        <a href="#benefits">Beneficios</a>
         <a href="https://github.com/Leifdev0306/Tu-MiPyme" target="_blank">GitHub</a>
         <a href="mailto:Leifdev0306@gmail.com">Contacto</a>
       </div>
@@ -1125,12 +1244,10 @@
           throw new Error(`API error: ${response.status}`);
         }
         const data = await response.json();
-        // Buscar el asset con el nombre exacto
         const asset = data.assets.find(a => a.name === assetName);
         if (asset) {
           return asset.browser_download_url;
         } else {
-          // Fallback: usar la URL genérica de latest
           return `https://github.com/${repoOwner}/${repoName}/releases/latest/download/${assetName}`;
         }
       } catch (error) {
@@ -1139,13 +1256,11 @@
       }
     }
 
-    // Actualizar todos los enlaces de descarga
     async function updateDownloadLinks() {
       const downloadUrl = await getLatestDownloadUrl();
       const downloadElements = document.querySelectorAll('.download-link, #downloadBtn, #ctaDownloadBtn');
       downloadElements.forEach(el => {
         el.href = downloadUrl;
-        // Registrar evento de descarga en GA (si existe)
         if (typeof gtag !== 'undefined') {
           el.addEventListener('click', () => {
             gtag('event', 'download', {
@@ -1155,8 +1270,8 @@
           });
         }
       });
-      // Actualizar también el contador de descargas (simulado)
-      // Podrías usar la API de GitHub para obtener el número de descargas totales
+
+      // Contador de descargas
       try {
         const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases`;
         const response = await fetch(apiUrl);
@@ -1175,7 +1290,7 @@
             if (totalDownloads > 0) {
               downloadCountEl.textContent = totalDownloads.toLocaleString();
             } else {
-              downloadCountEl.textContent = '+1.000'; // fallback
+              downloadCountEl.textContent = '+1.000';
             }
           }
         }
@@ -1184,14 +1299,12 @@
       }
     }
 
-    // Ejecutar al cargar la página
     updateDownloadLinks();
 
-    // ========== 3. SISTEMA DE RATING (estrellas) ==========
+    // ========== 3. RATING ==========
     const stars = document.querySelectorAll('#starsContainer span');
     const ratingMessage = document.getElementById('ratingMessage');
 
-    // Cargar rating guardado en localStorage
     const savedRating = localStorage.getItem('tu_mipyme_rating');
     if (savedRating) {
       const value = parseInt(savedRating);
@@ -1211,7 +1324,6 @@
     stars.forEach(star => {
       star.addEventListener('click', function() {
         const value = parseInt(this.dataset.value);
-        // Actualizar visualmente
         stars.forEach(s => {
           const sv = parseInt(s.dataset.value);
           if (sv <= value) {
@@ -1222,7 +1334,6 @@
             s.textContent = '☆';
           }
         });
-        // Guardar en localStorage
         localStorage.setItem('tu_mipyme_rating', value);
         ratingMessage.textContent = `¡Gracias por tu valoración! (${value} ⭐)`;
       });
