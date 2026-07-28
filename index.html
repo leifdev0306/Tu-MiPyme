@@ -84,6 +84,16 @@
       font-size: 14px;
     }
 
+    .btn-gold {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: #1a1a2e;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6);
+    }
+
     /* ===== HEADER ===== */
     header {
       padding: 16px 0;
@@ -339,6 +349,17 @@
       margin-top: 8px;
     }
 
+    .feature-card .tag-free {
+      display: inline-block;
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 12px;
+      border-radius: 50px;
+      margin-top: 8px;
+    }
+
     /* ===== PLANES ===== */
     .plans {
       background: #f1f0ee;
@@ -384,6 +405,18 @@
       padding: 4px 16px;
       border-radius: 50px;
       text-transform: uppercase;
+    }
+
+    .plan-card .trial-badge {
+      display: inline-block;
+      background: #10b981;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 4px 16px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
     .plan-card .name {
@@ -711,7 +744,7 @@
           <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-primary" id="downloadBtn">
             📲 Descargar última versión
           </a>
-          <a href="#features" class="btn btn-outline">Ver más</a>
+          <a href="#plans" class="btn btn-outline">Ver planes</a>
         </div>
         <div class="hero-stats">
           <div class="stat">
@@ -757,6 +790,7 @@
           <div class="icon">🛒</div>
           <h3>Ventas rápidas</h3>
           <p>Registra ventas con múltiples productos, clientes y métodos de pago. Funciona sin internet.</p>
+          <span class="tag-free">✓ Todos los planes</span>
         </div>
         <div class="feature-card">
           <div class="icon">📦</div>
@@ -768,6 +802,7 @@
           <div class="icon">👥</div>
           <h3>Clientes + Proveedores</h3>
           <p>Gestiona tu cartera de clientes y marca a tus proveedores. Control de saldos pendientes.</p>
+          <span class="tag-free">✓ Todos los planes</span>
         </div>
         <div class="feature-card">
           <div class="icon">📊</div>
@@ -791,11 +826,13 @@
           <div class="icon">☁️</div>
           <h3>Offline + Sincronización</h3>
           <p>Trabaja sin conexión y sincroniza automáticamente cuando tengas internet. Tus datos siempre seguros.</p>
+          <span class="tag-free">✓ Todos los planes</span>
         </div>
         <div class="feature-card">
           <div class="icon">🎯</div>
           <h3>Metas de ventas</h3>
           <p>Define metas diarias, semanales y mensuales. Visualiza el progreso en tiempo real.</p>
+          <span class="tag-free">✓ Todos los planes</span>
         </div>
       </div>
     </div>
@@ -805,14 +842,15 @@
   <section id="plans" class="plans">
     <div class="container">
       <h2 class="section-title">Elige el plan <span>para tu negocio</span></h2>
-      <p class="section-subtitle">Comienza gratis y actualiza cuando necesites más poder. Sin compromisos.</p>
+      <p class="section-subtitle">Comienza con 7 días de prueba gratuita del plan Normal. Sin compromisos, sin tarjeta de crédito.</p>
 
       <div class="plans-grid">
         <!-- Plan Normal -->
         <div class="plan-card">
+          <div class="trial-badge">🎁 7 días de prueba gratis</div>
           <div class="name">Normal</div>
-          <div class="price">Gratis</div>
-          <div class="period">Siempre gratis</div>
+          <div class="price">$1,000 <small>CUP</small></div>
+          <div class="period">por mes</div>
           <ul>
             <li><span class="check">✅</span> Inventario básico (CRUD)</li>
             <li><span class="check">✅</span> Ventas con clientes</li>
@@ -823,9 +861,13 @@
             <li><span class="cross">❌</span> Exportación de reportes</li>
             <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
             <li><span class="cross">❌</span> Gestión de proveedores</li>
+            <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
             <li><span>👤 1 vendedor</span></li>
           </ul>
-          <a href="#cta" class="btn btn-secondary btn-sm">Empezar gratis</a>
+          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-secondary btn-sm">
+            Probar 7 días gratis
+          </a>
+          <p style="font-size:12px; color:#6b6b80; margin-top:8px;">Luego $1,000 CUP/mes</p>
         </div>
 
         <!-- Plan Premium -->
@@ -846,7 +888,10 @@
             <li><span>👥 Hasta 5 vendedores</span></li>
             <li><span>📞 Soporte prioritario</span></li>
           </ul>
-          <a href="#cta" class="btn btn-primary btn-sm">Actualizar a Premium</a>
+          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-primary btn-sm">
+            Descargar ahora
+          </a>
+          <p style="font-size:12px; color:#6b6b80; margin-top:8px;">Sin período de prueba</p>
         </div>
       </div>
     </div>
@@ -949,7 +994,7 @@
     <div class="container">
       <h2>📲 Descarga Tu MiPyme ahora</h2>
       <p>
-        Gratis, sin anuncios y con todas las funcionalidades básicas.
+        Prueba 7 días gratis el plan Normal. Sin compromisos, sin tarjeta de crédito.
         <br />
         <span style="font-size:14px; color:#b0b0c8;">
           ⚡ Siempre descargarás la <strong>última versión</strong> disponible.
