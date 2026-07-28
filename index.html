@@ -9,6 +9,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX'); // Reemplaza con tu ID de medición
+  </script>
+
   <style>
     /* ===== RESET ===== */
     * {
@@ -469,6 +479,39 @@
       font-weight: 700;
     }
 
+    /* ===== RATING ===== */
+    .rating-section {
+      background: #fff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .stars {
+      display: inline-flex;
+      gap: 8px;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .stars span {
+      transition: color 0.2s;
+      color: #d1d5db;
+    }
+
+    .stars span.active {
+      color: #f59e0b;
+    }
+
+    .stars span:hover {
+      color: #fbbf24;
+    }
+
+    .rating-message {
+      margin-top: 12px;
+      font-size: 16px;
+      color: #6b6b80;
+    }
+
     /* ===== CHANGELOG ===== */
     .changelog {
       background: #fff;
@@ -741,15 +784,15 @@
           Sin internet, con sincronización automática y reportes profesionales.
         </p>
         <div class="hero-buttons">
-          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-primary" id="downloadBtn">
+          <a href="#" class="btn btn-primary" id="downloadBtn">
             📲 Descargar última versión
           </a>
           <a href="#plans" class="btn btn-outline">Ver planes</a>
         </div>
         <div class="hero-stats">
           <div class="stat">
-            <h3>+1.000</h3>
-            <span>Descargas en GitHub</span>
+            <h3 id="downloadCount">+1.000</h3>
+            <span>Descargas estimadas</span>
           </div>
           <div class="stat">
             <h3>4.8 ⭐</h3>
@@ -864,9 +907,7 @@
             <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
             <li><span>👤 1 vendedor</span></li>
           </ul>
-          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-secondary btn-sm">
-            Probar 7 días gratis
-          </a>
+          <a href="#" class="btn btn-secondary btn-sm download-link">Probar 7 días gratis</a>
           <p style="font-size:12px; color:#6b6b80; margin-top:8px;">Luego $1,000 CUP/mes</p>
         </div>
 
@@ -888,12 +929,26 @@
             <li><span>👥 Hasta 5 vendedores</span></li>
             <li><span>📞 Soporte prioritario</span></li>
           </ul>
-          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-primary btn-sm">
-            Descargar ahora
-          </a>
+          <a href="#" class="btn btn-primary btn-sm download-link">Descargar ahora</a>
           <p style="font-size:12px; color:#6b6b80; margin-top:8px;">Sin período de prueba</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== RATING ===== -->
+  <section id="rating" class="rating-section">
+    <div class="container">
+      <h2 class="section-title">¿Qué opinas de <span>Tu MiPyme</span>?</h2>
+      <p class="section-subtitle">Tu valoración nos ayuda a mejorar. ¡Déjanos tu puntuación!</p>
+      <div class="stars" id="starsContainer">
+        <span data-value="1">☆</span>
+        <span data-value="2">☆</span>
+        <span data-value="3">☆</span>
+        <span data-value="4">☆</span>
+        <span data-value="5">☆</span>
+      </div>
+      <div id="ratingMessage" class="rating-message">Selecciona una estrella</div>
     </div>
   </section>
 
@@ -1000,7 +1055,7 @@
           ⚡ Siempre descargarás la <strong>última versión</strong> disponible.
         </span>
       </p>
-      <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-primary" style="font-size:20px; padding:18px 48px;">
+      <a href="#" class="btn btn-primary" style="font-size:20px; padding:18px 48px;" id="ctaDownloadBtn">
         ⬇️ Descargar última versión
       </a>
       <p style="margin-top:16px; font-size:14px; color:#b0b0c8;">
@@ -1033,7 +1088,7 @@
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
-    // Menú móvil
+    // ========== 1. MENÚ MÓVIL ==========
     const toggle = document.getElementById('menuToggle');
     const nav = document.getElementById('mainNav');
 
@@ -1041,27 +1096,159 @@
       nav.classList.toggle('open');
     });
 
-    // Cerrar menú al hacer clic en un enlace
     document.querySelectorAll('#mainNav a').forEach(link => {
       link.addEventListener('click', () => {
         nav.classList.remove('open');
       });
     });
 
-    // Smooth scroll para los enlaces internos
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
-  </script>
 
+    // ========== 2. DESCARGA DINÁMICA (API de GitHub) ==========
+    const repoOwner = 'Leifdev0306';
+    const repoName = 'Tu-MiPyme';
+    const assetName = 'TuMiPyme.apk';
+
+    async function getLatestDownloadUrl() {
+      try {
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`;
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
+        const data = await response.json();
+        // Buscar el asset con el nombre exacto
+        const asset = data.assets.find(a => a.name === assetName);
+        if (asset) {
+          return asset.browser_download_url;
+        } else {
+          // Fallback: usar la URL genérica de latest
+          return `https://github.com/${repoOwner}/${repoName}/releases/latest/download/${assetName}`;
+        }
+      } catch (error) {
+        console.warn('Error fetching latest release, using fallback URL', error);
+        return `https://github.com/${repoOwner}/${repoName}/releases/latest/download/${assetName}`;
+      }
+    }
+
+    // Actualizar todos los enlaces de descarga
+    async function updateDownloadLinks() {
+      const downloadUrl = await getLatestDownloadUrl();
+      const downloadElements = document.querySelectorAll('.download-link, #downloadBtn, #ctaDownloadBtn');
+      downloadElements.forEach(el => {
+        el.href = downloadUrl;
+        // Registrar evento de descarga en GA (si existe)
+        if (typeof gtag !== 'undefined') {
+          el.addEventListener('click', () => {
+            gtag('event', 'download', {
+              'event_category': 'engagement',
+              'event_label': 'TuMiPyme_apk'
+            });
+          });
+        }
+      });
+      // Actualizar también el contador de descargas (simulado)
+      // Podrías usar la API de GitHub para obtener el número de descargas totales
+      try {
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases`;
+        const response = await fetch(apiUrl);
+        if (response.ok) {
+          const releases = await response.json();
+          let totalDownloads = 0;
+          releases.forEach(r => {
+            r.assets.forEach(a => {
+              if (a.name === assetName) {
+                totalDownloads += a.download_count || 0;
+              }
+            });
+          });
+          const downloadCountEl = document.getElementById('downloadCount');
+          if (downloadCountEl) {
+            if (totalDownloads > 0) {
+              downloadCountEl.textContent = totalDownloads.toLocaleString();
+            } else {
+              downloadCountEl.textContent = '+1.000'; // fallback
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Could not fetch download count');
+      }
+    }
+
+    // Ejecutar al cargar la página
+    updateDownloadLinks();
+
+    // ========== 3. SISTEMA DE RATING (estrellas) ==========
+    const stars = document.querySelectorAll('#starsContainer span');
+    const ratingMessage = document.getElementById('ratingMessage');
+
+    // Cargar rating guardado en localStorage
+    const savedRating = localStorage.getItem('tu_mipyme_rating');
+    if (savedRating) {
+      const value = parseInt(savedRating);
+      stars.forEach(star => {
+        const starValue = parseInt(star.dataset.value);
+        if (starValue <= value) {
+          star.classList.add('active');
+          star.textContent = '★';
+        } else {
+          star.classList.remove('active');
+          star.textContent = '☆';
+        }
+      });
+      ratingMessage.textContent = `¡Gracias! Tu valoración: ${value} estrellas ⭐`;
+    }
+
+    stars.forEach(star => {
+      star.addEventListener('click', function() {
+        const value = parseInt(this.dataset.value);
+        // Actualizar visualmente
+        stars.forEach(s => {
+          const sv = parseInt(s.dataset.value);
+          if (sv <= value) {
+            s.classList.add('active');
+            s.textContent = '★';
+          } else {
+            s.classList.remove('active');
+            s.textContent = '☆';
+          }
+        });
+        // Guardar en localStorage
+        localStorage.setItem('tu_mipyme_rating', value);
+        ratingMessage.textContent = `¡Gracias por tu valoración! (${value} ⭐)`;
+      });
+
+      star.addEventListener('mouseenter', function() {
+        const value = parseInt(this.dataset.value);
+        stars.forEach(s => {
+          const sv = parseInt(s.dataset.value);
+          if (sv <= value) {
+            s.style.color = '#fbbf24';
+          } else {
+            s.style.color = '#d1d5db';
+          }
+        });
+      });
+
+      star.addEventListener('mouseleave', function() {
+        stars.forEach(s => {
+          if (s.classList.contains('active')) {
+            s.style.color = '#f59e0b';
+          } else {
+            s.style.color = '#d1d5db';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
