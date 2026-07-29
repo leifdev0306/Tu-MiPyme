@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tu MiPyme – La app de gestión más poderosa para tu negocio</title>
-  <meta name="description" content="Administra ventas, inventario, clientes, proveedores y reportes desde tu celular. Offline-first, sincronización automática y sin complicaciones." />
+  <title>Tu MiPyme – Gestión inteligente para tu negocio</title>
+  <meta name="description" content="Administra ventas, inventario, clientes y finanzas desde una sola app. Offline-first, sincronización en la nube y sin complicaciones." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
 
-  <!-- Google Analytics (reemplaza G-XXXXXXXXXX con tu ID) -->
+  <!-- Google Analytics (opcional, reemplazar G-XXXXXXXXXX) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,9 +20,7 @@
   </script>
 
   <style>
-    /* ============================================================
-       RESET Y VARIABLES
-       ============================================================ */
+    /* ===== RESET Y VARIABLES ===== */
     * {
       margin: 0;
       padding: 0;
@@ -30,28 +28,28 @@
     }
 
     :root {
-      --primary: #f59e0b;
-      --primary-dark: #d97706;
-      --secondary: #1a1a2e;
-      --secondary-light: #2d2d4a;
-      --gray-50: #faf9f6;
-      --gray-100: #f1f0ee;
-      --gray-200: #e5e4e2;
-      --gray-300: #d1d0ce;
-      --gray-400: #a8a7a5;
-      --gray-500: #8a8987;
-      --gray-600: #6b6b80;
-      --gray-700: #4a4a5e;
-      --gray-800: #2d2d3a;
-      --gray-900: #1a1a2e;
-      --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.12);
-      --shadow-xl: 0 24px 80px rgba(0, 0, 0, 0.16);
-      --radius: 16px;
-      --radius-lg: 24px;
-      --radius-xl: 32px;
-      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --primary: #0a2463;
+      --primary-light: #1e3a8a;
+      --primary-lighter: #3b82f6;
+      --primary-lightest: #93c5fd;
+      --secondary: #1e293b;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --shadow-sm: 0 1px 3px rgba(10, 36, 99, 0.06);
+      --shadow-md: 0 4px 16px rgba(10, 36, 99, 0.08);
+      --shadow-lg: 0 12px 48px rgba(10, 36, 99, 0.10);
+      --shadow-xl: 0 24px 80px rgba(10, 36, 99, 0.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     html {
@@ -60,10 +58,10 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--gray-50);
+      background: #ffffff;
       color: var(--gray-900);
       line-height: 1.6;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     a {
@@ -81,55 +79,29 @@
       padding: 0 24px;
     }
 
-    /* ============================================================
-       ANIMACIONES
-       ============================================================ */
+    /* ===== ANIMACIONES ===== */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-16px); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    @keyframes slideIn {
-      from { transform: translateX(60px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.95) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    @keyframes overlayFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      50% { transform: translateY(-12px); }
     }
 
     .animate-on-scroll {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
+
     .animate-on-scroll.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* ============================================================
-       BOTONES
-       ============================================================ */
+    /* ===== BOTONES ===== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -141,103 +113,100 @@
       border: none;
       cursor: pointer;
       transition: all var(--transition);
-      position: relative;
-      overflow: hidden;
+      background: transparent;
     }
+
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #1a1a2e;
-      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35);
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(10, 36, 99, 0.25);
     }
     .btn-primary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(10, 36, 99, 0.30);
+      background: var(--primary-light);
     }
-    .btn-secondary {
-      background: var(--secondary);
-      color: #fff;
-      box-shadow: 0 4px 20px rgba(26, 26, 46, 0.25);
-    }
-    .btn-secondary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 32px rgba(26, 26, 46, 0.35);
-    }
+
     .btn-outline {
-      background: transparent;
-      color: var(--secondary);
-      border: 2px solid var(--secondary);
+      border: 2px solid var(--primary);
+      color: var(--primary);
     }
     .btn-outline:hover {
-      background: var(--secondary);
+      background: var(--primary);
       color: #fff;
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
+
     .btn-white {
       background: #fff;
-      color: var(--secondary);
-      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
+      color: var(--primary);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
     .btn-white:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 32px rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     }
+
     .btn-lg {
       padding: 18px 44px;
       font-size: 18px;
     }
 
-    /* ============================================================
-       HEADER
-       ============================================================ */
+    /* ===== HEADER ===== */
     header {
       padding: 16px 0;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(16px) saturate(180%);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid var(--gray-200);
       transition: all var(--transition);
     }
+
     header.scrolled {
-      background: rgba(255, 255, 255, 0.95);
       box-shadow: var(--shadow-sm);
     }
+
     header .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
       font-size: 22px;
       font-weight: 800;
-      color: var(--secondary);
+      color: var(--primary);
     }
+
     .logo-icon {
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      color: #1a1a2e;
-      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
     }
+
     nav {
       display: flex;
       align-items: center;
       gap: 32px;
     }
+
     nav a {
       font-size: 15px;
       font-weight: 500;
-      color: var(--gray-700);
+      color: var(--gray-600);
       transition: color var(--transition);
       position: relative;
     }
@@ -257,64 +226,55 @@
     nav a:hover::after {
       width: 100%;
     }
+
     .nav-download {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #1a1a2e;
+      background: var(--primary);
+      color: #fff;
       padding: 8px 20px;
       border-radius: 50px;
       font-weight: 600;
       font-size: 14px;
-      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 2px 12px rgba(10, 36, 99, 0.20);
     }
     .nav-download:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+      box-shadow: 0 4px 20px rgba(10, 36, 99, 0.30);
     }
     .nav-download::after { display: none; }
+
     .menu-toggle {
       display: none;
       font-size: 28px;
       background: none;
       border: none;
       cursor: pointer;
-      color: var(--secondary);
+      color: var(--gray-800);
       padding: 4px;
     }
 
-    /* ============================================================
-       HERO
-       ============================================================ */
+    /* ===== HERO ===== */
     .hero {
       padding: 140px 0 80px;
-      background: linear-gradient(160deg, #fef9e7 0%, #faf9f6 50%, #f1f0ee 100%);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(160deg, #f0f7ff 0%, #ffffff 50%, #f8fafc 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
+      position: relative;
+      overflow: hidden;
     }
+
     .hero::before {
       content: '';
       position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
+      top: -30%;
+      right: -10%;
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(26, 26, 46, 0.04) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
+
     .hero .container {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -323,100 +283,70 @@
       position: relative;
       z-index: 1;
     }
+
     .hero-content {
-      animation: fadeInUp 1s ease;
+      animation: fadeInUp 0.8s ease;
     }
+
     .hero-badge {
       display: inline-block;
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--primary-dark);
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--primary);
       font-size: 13px;
       font-weight: 600;
       padding: 4px 16px;
       border-radius: 50px;
       margin-bottom: 16px;
-      letter-spacing: 0.5px;
-      border: 1px solid rgba(245, 158, 11, 0.2);
+      letter-spacing: 0.3px;
+      border: 1px solid rgba(59, 130, 246, 0.15);
     }
+
     .hero-content h1 {
-      font-size: 56px;
+      font-size: 52px;
       font-weight: 900;
       line-height: 1.08;
       letter-spacing: -1.5px;
-      color: var(--secondary);
+      color: var(--gray-900);
       margin-bottom: 16px;
     }
+
     .hero-content h1 span {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--primary);
     }
+
     .hero-content p {
       font-size: 20px;
-      color: var(--gray-600);
+      color: var(--gray-500);
       max-width: 480px;
       margin-bottom: 32px;
       line-height: 1.7;
     }
+
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      margin-bottom: 48px;
-    }
-    .hero-stats {
-      display: flex;
-      gap: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--gray-200);
-    }
-    .hero-stats .stat {
-      text-align: left;
-    }
-    .hero-stats .stat h3 {
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--secondary);
-    }
-    .hero-stats .stat h3 span {
-      color: var(--primary);
-    }
-    .hero-stats .stat p {
-      font-size: 14px;
-      color: var(--gray-500);
-      margin-top: 2px;
     }
 
-    /* ===== HERO IMAGE (Mockup) ===== */
+    /* ===== MOCKUP ===== */
     .hero-image {
       display: flex;
       justify-content: center;
       align-items: center;
       animation: float 6s ease-in-out infinite;
     }
+
     .phone-mockup {
       width: 100%;
       max-width: 320px;
-      border-radius: 36px;
-      background: var(--secondary);
+      border-radius: 32px;
+      background: var(--gray-900);
       padding: 14px;
       box-shadow: var(--shadow-xl);
-      position: relative;
     }
-    .phone-mockup::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      border-radius: 40px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark), var(--secondary));
-      z-index: -1;
-      opacity: 0.3;
-    }
+
     .phone-mockup .screen {
-      border-radius: 24px;
+      border-radius: 20px;
       overflow: hidden;
       background: #fff;
       aspect-ratio: 9 / 19;
@@ -424,6 +354,7 @@
       display: flex;
       flex-direction: column;
     }
+
     .screen-header {
       display: flex;
       justify-content: space-between;
@@ -440,14 +371,16 @@
       background: var(--gray-300);
     }
     .screen-header .dot.active {
-      background: var(--primary);
+      background: var(--primary-light);
     }
+
     .screen-body {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
+
     .screen-row {
       display: flex;
       justify-content: space-between;
@@ -458,19 +391,21 @@
     }
     .screen-row .label {
       font-weight: 500;
-      color: var(--gray-500);
+      color: var(--gray-400);
     }
     .screen-row .value {
       font-weight: 600;
+      color: var(--gray-800);
     }
-    .screen-row .value.green { color: #10b981; }
-    .screen-row .value.orange { color: #f59e0b; }
-    .screen-row .value.blue { color: #3b82f6; }
+    .screen-row .value.green { color: #0b9e6a; }
+    .screen-row .value.blue { color: var(--primary-light); }
+    .screen-row .value.orange { color: #d97706; }
+
     .screen-chart {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      height: 40px;
+      height: 36px;
       padding: 4px 0;
       gap: 2px;
     }
@@ -479,11 +414,11 @@
       background: var(--gray-200);
       border-radius: 2px 2px 0 0;
       min-height: 4px;
-      transition: height 0.3s;
     }
-    .screen-chart .bar.green { background: #10b981; }
-    .screen-chart .bar.orange { background: #f59e0b; }
-    .screen-chart .bar.blue { background: #3b82f6; }
+    .screen-chart .bar.primary { background: var(--primary-light); }
+    .screen-chart .bar.green { background: #0b9e6a; }
+    .screen-chart .bar.orange { background: #d97706; }
+
     .screen-footer {
       display: flex;
       justify-content: space-around;
@@ -493,112 +428,101 @@
     }
     .screen-footer .tab {
       font-size: 10px;
-      color: var(--gray-500);
+      color: var(--gray-400);
       padding: 2px 8px;
       border-radius: 8px;
       transition: all 0.2s;
     }
     .screen-footer .tab.active {
       background: var(--primary);
-      color: #1a1a2e;
+      color: #fff;
       font-weight: 600;
     }
 
-    /* ============================================================
-       SECCIONES
-       ============================================================ */
+    /* ===== SECCIONES ===== */
     section {
       padding: 80px 0;
     }
+
     .section-title {
       text-align: center;
-      font-size: 40px;
+      font-size: 38px;
       font-weight: 800;
       letter-spacing: -0.5px;
-      color: var(--secondary);
+      color: var(--gray-900);
       margin-bottom: 12px;
     }
+
     .section-title span {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--primary);
     }
+
     .section-subtitle {
       text-align: center;
       font-size: 18px;
-      color: var(--gray-600);
+      color: var(--gray-500);
       max-width: 600px;
       margin: 0 auto 48px;
     }
 
-    /* ============================================================
-       CARACTERÍSTICAS
-       ============================================================ */
+    /* ===== FEATURES ===== */
     .features {
-      background: #fff;
+      background: #ffffff;
     }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
     }
+
     .feature-card {
       background: var(--gray-50);
       padding: 32px 24px;
       border-radius: var(--radius);
       transition: all var(--transition);
       border: 1px solid transparent;
-      position: relative;
-      overflow: hidden;
     }
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
+
     .feature-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-md);
       border-color: var(--gray-200);
     }
-    .feature-card:hover::before {
-      opacity: 1;
-    }
+
     .feature-card .icon {
-      font-size: 36px;
+      font-size: 32px;
       margin-bottom: 12px;
       display: inline-block;
     }
+
     .feature-card h3 {
       font-size: 18px;
       font-weight: 700;
       margin-bottom: 6px;
-      color: var(--secondary);
+      color: var(--gray-900);
     }
+
     .feature-card p {
       font-size: 15px;
-      color: var(--gray-600);
+      color: var(--gray-500);
       line-height: 1.6;
     }
+
     .feature-card .tag {
       display: inline-block;
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--primary-dark);
+      background: rgba(59, 130, 246, 0.10);
+      color: var(--primary);
       font-size: 11px;
       font-weight: 600;
       padding: 2px 12px;
       border-radius: 50px;
       margin-top: 10px;
     }
+
     .feature-card .tag-free {
-      background: #d1fae5;
-      color: #065f46;
+      background: var(--gray-200);
+      color: var(--gray-600);
       font-size: 11px;
       font-weight: 600;
       padding: 2px 12px;
@@ -607,19 +531,19 @@
       display: inline-block;
     }
 
-    /* ============================================================
-       CÓMO FUNCIONA
-       ============================================================ */
+    /* ===== HOW IT WORKS ===== */
     .how-it-works {
       background: var(--gray-50);
     }
+
     .steps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 32px;
       max-width: 900px;
       margin: 0 auto;
     }
+
     .step {
       text-align: center;
       padding: 24px 16px;
@@ -627,42 +551,43 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
       transition: all var(--transition);
-      position: relative;
     }
     .step:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-md);
     }
+
     .step .number {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #1a1a2e;
+      background: var(--primary);
+      color: #fff;
       font-weight: 800;
       font-size: 20px;
       border-radius: 50%;
       margin-bottom: 12px;
     }
+
     .step h4 {
       font-weight: 700;
       font-size: 18px;
-      color: var(--secondary);
+      color: var(--gray-900);
       margin-bottom: 4px;
     }
+
     .step p {
       font-size: 14px;
-      color: var(--gray-600);
+      color: var(--gray-500);
     }
 
-    /* ============================================================
-       PLANES
-       ============================================================ */
+    /* ===== PLANS ===== */
     .plans {
-      background: #fff;
+      background: #ffffff;
     }
+
     .plans-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -670,6 +595,7 @@
       max-width: 900px;
       margin: 0 auto;
     }
+
     .plan-card {
       background: var(--gray-50);
       padding: 40px 32px;
@@ -680,20 +606,24 @@
       border: 2px solid transparent;
       position: relative;
     }
+
     .plan-card:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-md);
     }
+
     .plan-card.popular {
       border-color: var(--primary);
-      background: linear-gradient(180deg, #fff, #fef9e7);
+      background: #ffffff;
+      box-shadow: var(--shadow-md);
     }
+
     .plan-card.popular .badge {
       position: absolute;
       top: -12px;
       right: 24px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #1a1a2e;
+      background: var(--primary);
+      color: #fff;
       font-weight: 700;
       font-size: 12px;
       padding: 4px 16px;
@@ -701,9 +631,10 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+
     .plan-card .trial-badge {
       display: inline-block;
-      background: #10b981;
+      background: #0b9e6a;
       color: #fff;
       font-weight: 700;
       font-size: 12px;
@@ -712,34 +643,39 @@
       text-transform: uppercase;
       margin-bottom: 12px;
     }
+
     .plan-card .name {
       font-size: 24px;
       font-weight: 700;
       margin-bottom: 4px;
-      color: var(--secondary);
+      color: var(--gray-900);
     }
+
     .plan-card .price {
       font-size: 40px;
       font-weight: 800;
-      color: var(--secondary);
+      color: var(--gray-900);
       margin-bottom: 2px;
     }
     .plan-card .price small {
       font-size: 16px;
       font-weight: 400;
-      color: var(--gray-500);
+      color: var(--gray-400);
     }
+
     .plan-card .period {
       font-size: 14px;
-      color: var(--gray-500);
+      color: var(--gray-400);
       margin-bottom: 20px;
     }
+
     .plan-card ul {
       text-align: left;
       list-style: none;
       padding: 0;
       margin-bottom: 24px;
     }
+
     .plan-card ul li {
       padding: 6px 0;
       display: flex;
@@ -748,8 +684,9 @@
       font-size: 14px;
       color: var(--gray-700);
     }
+
     .plan-card ul li .check {
-      color: #10b981;
+      color: #0b9e6a;
       font-weight: 700;
       font-size: 18px;
     }
@@ -759,43 +696,46 @@
       font-size: 18px;
     }
 
-    /* ============================================================
-       CHANGELOG
-       ============================================================ */
+    /* ===== CHANGELOG ===== */
     .changelog {
       background: var(--gray-50);
     }
+
     .changelog-list {
       max-width: 800px;
       margin: 0 auto;
     }
+
     .changelog-item {
       display: flex;
       gap: 24px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--gray-200);
-      background: #fff;
       padding: 20px 24px;
+      background: #fff;
       border-radius: var(--radius);
       margin-bottom: 12px;
       box-shadow: var(--shadow-sm);
       transition: all var(--transition);
+      align-items: flex-start;
     }
+
     .changelog-item:hover {
       box-shadow: var(--shadow-md);
       transform: translateX(4px);
     }
+
     .changelog-item .version {
       font-weight: 800;
       font-size: 18px;
       color: var(--primary);
       min-width: 80px;
     }
+
     .changelog-item .date {
       font-size: 14px;
-      color: var(--gray-500);
+      color: var(--gray-400);
       min-width: 100px;
     }
+
     .changelog-item .desc {
       font-size: 15px;
       color: var(--gray-700);
@@ -817,22 +757,22 @@
       font-weight: 700;
     }
     .changelog-item .desc strong {
-      color: var(--secondary);
+      color: var(--gray-900);
     }
 
-    /* ============================================================
-       BENEFICIOS / CONFIANZA
-       ============================================================ */
+    /* ===== TRUST ===== */
     .trust {
-      background: #fff;
+      background: #ffffff;
     }
+
     .trust-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 24px;
       max-width: 800px;
       margin: 0 auto;
     }
+
     .trust-item {
       text-align: center;
       padding: 24px 16px;
@@ -844,233 +784,174 @@
       transform: translateY(-4px);
       box-shadow: var(--shadow-sm);
     }
+
     .trust-item .icon {
-      font-size: 32px;
+      font-size: 28px;
       margin-bottom: 8px;
     }
+
     .trust-item h4 {
       font-weight: 700;
       font-size: 16px;
-      color: var(--secondary);
+      color: var(--gray-900);
     }
+
     .trust-item p {
       font-size: 14px;
       color: var(--gray-500);
     }
 
-    /* ============================================================
-       CTA
-       ============================================================ */
+    /* ===== CTA ===== */
     .cta {
-      background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+      background: var(--primary);
       color: #fff;
       text-align: center;
       padding: 100px 0;
-      position: relative;
-      overflow: hidden;
     }
-    .cta::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
+
     .cta h2 {
-      font-size: 44px;
+      font-size: 42px;
       font-weight: 800;
       margin-bottom: 12px;
-      position: relative;
     }
+
     .cta p {
       font-size: 18px;
-      color: #b0b0c8;
+      color: rgba(255, 255, 255, 0.80);
       max-width: 500px;
       margin: 0 auto 32px;
-      position: relative;
     }
-    .cta .btn {
-      position: relative;
+
+    .cta .btn-white {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
-    .cta .btn .download-icon {
-      animation: pulse 2s ease-in-out infinite;
+    .cta .btn-white:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20);
     }
+
     .cta .version-info {
       margin-top: 16px;
       font-size: 14px;
-      color: #8a8aa8;
-      position: relative;
+      color: rgba(255, 255, 255, 0.60);
     }
+
     .cta .version-info a {
-      color: var(--primary);
+      color: #fff;
       text-decoration: underline;
     }
 
-    /* ============================================================
-       FOOTER
-       ============================================================ */
+    /* ===== FOOTER ===== */
     footer {
-      background: var(--secondary);
-      color: #b0b0c8;
-      padding: 48px 0 32px;
+      background: var(--gray-900);
+      color: #94a3b8;
+      padding: 32px 0;
       text-align: center;
     }
-    footer .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-    footer .footer-links a {
-      font-size: 14px;
-      transition: color var(--transition);
-    }
-    footer .footer-links a:hover {
-      color: var(--primary);
-    }
-    footer .social {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    footer .social a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      transition: all var(--transition);
-      font-size: 18px;
-    }
-    footer .social a:hover {
-      background: var(--primary);
-      color: var(--secondary);
-      transform: translateY(-2px);
-    }
+
     footer p {
       font-size: 14px;
-      color: #6b6b8a;
-    }
-    footer p strong {
-      color: #b0b0c8;
     }
 
-    /* ============================================================
-       MODAL DE ADVERTENCIA DE SEGURIDAD
-       ============================================================ */
+    footer strong {
+      color: #fff;
+    }
+
+    /* ===== MODAL DE DESCARGA ===== */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(15, 23, 42, 0.60);
       backdrop-filter: blur(6px);
       z-index: 2000;
       display: none;
       align-items: center;
       justify-content: center;
-      animation: overlayFadeIn 0.3s ease;
+      padding: 24px;
     }
+
     .modal-overlay.active {
       display: flex;
     }
-    .modal {
-      background: #fff;
-      max-width: 520px;
-      width: 90%;
-      padding: 32px 28px;
+
+    .modal-dialog {
+      background: #ffffff;
+      max-width: 480px;
+      width: 100%;
       border-radius: var(--radius-lg);
+      padding: 40px 32px;
       box-shadow: var(--shadow-xl);
-      animation: modalFadeIn 0.4s ease;
-      text-align: center;
+      animation: fadeInUp 0.3s ease;
       position: relative;
     }
-    .modal .icon-warning {
-      font-size: 64px;
+
+    .modal-dialog .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .modal-dialog h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gray-900);
+      text-align: center;
       margin-bottom: 12px;
     }
-    .modal h2 {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--secondary);
+
+    .modal-dialog p {
+      font-size: 16px;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.6;
       margin-bottom: 8px;
     }
-    .modal p {
-      font-size: 16px;
-      color: var(--gray-700);
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-    .modal .note {
-      background: #fef9e7;
-      padding: 16px;
+
+    .modal-dialog .highlight {
+      background: var(--gray-50);
+      padding: 12px 16px;
       border-radius: var(--radius);
-      border-left: 4px solid var(--primary);
-      text-align: left;
-      margin: 16px 0 24px;
-    }
-    .modal .note strong {
-      color: var(--secondary);
-    }
-    .modal .note p {
+      border-left: 4px solid var(--primary-light);
+      margin: 16px 0 20px;
       font-size: 14px;
-      color: var(--gray-600);
-      margin-bottom: 4px;
+      color: var(--gray-700);
     }
-    .modal .buttons {
+
+    .modal-dialog .highlight strong {
+      color: var(--gray-900);
+    }
+
+    .modal-actions {
       display: flex;
       gap: 12px;
       justify-content: center;
-      flex-wrap: wrap;
+      margin-top: 8px;
     }
-    .modal .buttons .btn {
-      min-width: 140px;
+
+    .modal-actions .btn {
+      flex: 1;
       justify-content: center;
     }
-    .modal .btn-secondary {
+
+    .modal-actions .btn-secondary {
       background: var(--gray-200);
-      color: var(--secondary);
-      box-shadow: none;
+      color: var(--gray-700);
     }
-    .modal .btn-secondary:hover {
+    .modal-actions .btn-secondary:hover {
       background: var(--gray-300);
-      transform: translateY(-2px);
     }
-    /* Dark mode para el modal (opcional) */
-    @media (prefers-color-scheme: dark) {
-      .modal {
-        background: var(--secondary);
-        color: var(--gray-50);
-      }
-      .modal h2 {
-        color: #fff;
-      }
-      .modal p {
-        color: var(--gray-300);
-      }
-      .modal .note {
-        background: rgba(245, 158, 11, 0.15);
-        border-left-color: var(--primary);
-      }
-      .modal .note p {
-        color: var(--gray-300);
-      }
-      .modal .btn-secondary {
-        background: var(--gray-700);
-        color: #fff;
-      }
-      .modal .btn-secondary:hover {
-        background: var(--gray-600);
-      }
+
+    .modal-actions .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .modal-actions .btn-primary:hover {
+      background: var(--primary-light);
     }
 
     /* ============================================================
@@ -1082,33 +963,38 @@
         text-align: center;
         gap: 40px;
       }
+
       .hero-content p {
         margin: 0 auto 32px;
       }
+
       .hero-buttons {
         justify-content: center;
       }
-      .hero-stats {
-        justify-content: center;
-      }
+
       .hero-image {
         order: -1;
       }
+
       .phone-mockup {
         max-width: 260px;
       }
+
       .plans-grid {
         grid-template-columns: 1fr;
         max-width: 480px;
       }
     }
+
     @media (max-width: 768px) {
       .hero-content h1 {
         font-size: 36px;
       }
+
       .section-title {
         font-size: 28px;
       }
+
       nav {
         display: none;
         flex-direction: column;
@@ -1121,14 +1007,16 @@
         box-shadow: var(--shadow-lg);
         border-radius: 0 0 var(--radius) var(--radius);
         gap: 16px;
-        backdrop-filter: blur(16px);
       }
+
       nav.open {
         display: flex;
       }
+
       .menu-toggle {
         display: block;
       }
+
       .changelog-item {
         flex-wrap: wrap;
         gap: 8px;
@@ -1138,49 +1026,48 @@
       .changelog-item .date {
         min-width: auto;
       }
-      .hero-stats {
-        gap: 24px;
-        flex-wrap: wrap;
+
+      .hero {
+        padding: 120px 0 60px;
+        min-height: auto;
       }
-      .hero-stats .stat h3 {
-        font-size: 24px;
-      }
+
       .cta h2 {
         font-size: 32px;
       }
-      .btn-lg {
-        padding: 14px 32px;
-        font-size: 16px;
+
+      .modal-dialog {
+        padding: 32px 20px;
+      }
+
+      .modal-actions {
+        flex-direction: column;
       }
     }
+
     @media (max-width: 480px) {
-      .hero {
-        padding: 120px 0 40px;
-        min-height: auto;
-      }
       .hero-content h1 {
         font-size: 28px;
       }
+
       .hero-content p {
         font-size: 16px;
       }
+
       .phone-mockup {
         max-width: 200px;
       }
+
       .plan-card {
         padding: 24px 16px;
       }
+
       .feature-card {
         padding: 24px 16px;
       }
+
       .trust-grid {
         grid-template-columns: 1fr 1fr;
-      }
-      .modal {
-        padding: 24px 16px;
-      }
-      .modal .buttons .btn {
-        min-width: 100%;
       }
     }
   </style>
@@ -1193,9 +1080,10 @@
   <header id="header">
     <div class="container">
       <a href="#" class="logo">
-        <span class="logo-icon">🏪</span>
+        <span class="logo-icon">TM</span>
         Tu MiPyme
       </a>
+
       <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
       <nav id="mainNav">
         <a href="#features">Características</a>
@@ -1213,31 +1101,15 @@
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge">🚀 Nueva versión 2.0.0</div>
-        <h1>Tu negocio <br /><span>al alcance de tu mano</span></h1>
+        <div class="hero-badge">Nueva versión 2.0.0</div>
+        <h1>Gestión inteligente <br /><span>para tu negocio</span></h1>
         <p>
-          Administra ventas, inventario, clientes, proveedores y reportes desde tu celular.
-          Offline-first, sincronización automática y sin complicaciones.
+          Administra ventas, inventario, clientes y finanzas desde una sola app.
+          Offline-first, sincronización en la nube y sin complicaciones.
         </p>
         <div class="hero-buttons">
-          <a href="#" class="btn btn-primary btn-lg download-trigger" id="heroDownloadBtn">
-            📲 Descargar ahora
-          </a>
+          <button class="btn btn-primary btn-lg download-trigger">📲 Descargar ahora</button>
           <a href="#features" class="btn btn-outline">Explorar</a>
-        </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <h3>+<span id="downloadCount">1.500</span></h3>
-            <p>Descargas totales</p>
-          </div>
-          <div class="stat">
-            <h3>4.9 ⭐</h3>
-            <p>Valoración media</p>
-          </div>
-          <div class="stat">
-            <h3>100%</h3>
-            <p>Offline-first</p>
-          </div>
         </div>
       </div>
       <div class="hero-image">
@@ -1251,22 +1123,22 @@
             <div class="screen-body">
               <div class="screen-row">
                 <span class="label">Ventas hoy</span>
-                <span class="value green">+$12,450.00</span>
+                <span class="value green">+$12,450</span>
               </div>
               <div class="screen-row">
                 <span class="label">Ganancia neta</span>
-                <span class="value orange">+$3,280.00</span>
+                <span class="value orange">+$3,280</span>
               </div>
               <div class="screen-row">
-                <span class="label">Productos</span>
+                <span class="label">Productos activos</span>
                 <span class="value blue">156</span>
               </div>
               <div class="screen-chart">
-                <div class="bar green" style="height:28px"></div>
-                <div class="bar green" style="height:18px"></div>
+                <div class="bar primary" style="height:28px"></div>
+                <div class="bar primary" style="height:18px"></div>
                 <div class="bar green" style="height:32px"></div>
                 <div class="bar orange" style="height:12px"></div>
-                <div class="bar green" style="height:40px"></div>
+                <div class="bar primary" style="height:40px"></div>
                 <div class="bar green" style="height:24px"></div>
                 <div class="bar blue" style="height:16px"></div>
               </div>
@@ -1283,81 +1155,86 @@
   </section>
 
   <!-- ============================================================
-  CARACTERÍSTICAS
+  FEATURES
   ============================================================ -->
   <section id="features" class="features">
     <div class="container">
       <h2 class="section-title animate-on-scroll">Todo lo que necesitas <span>para gestionar</span></h2>
-      <p class="section-subtitle animate-on-scroll">
-        Tu MiPyme incluye todas las herramientas que tu negocio requiere, diseñadas para el emprendedor cubano.
-      </p>
+      <p class="section-subtitle animate-on-scroll">Herramientas diseñadas para que tomes el control total de tu negocio.</p>
+
       <div class="features-grid">
         <div class="feature-card animate-on-scroll">
           <div class="icon">🛒</div>
           <h3>Ventas rápidas</h3>
           <p>Registra ventas con múltiples productos, clientes y métodos de pago. Funciona sin internet.</p>
-          <span class="tag-free">✓ Todos los planes</span>
+          <span class="tag-free">Todos los planes</span>
         </div>
+
         <div class="feature-card animate-on-scroll">
           <div class="icon">📦</div>
           <h3>Inventario inteligente</h3>
           <p>Control de stock, reabastecimiento FIFO, lotes y alertas de productos agotados o con bajo stock.</p>
           <span class="tag">Premium</span>
         </div>
+
         <div class="feature-card animate-on-scroll">
           <div class="icon">👥</div>
-          <h3>Clientes + Proveedores</h3>
-          <p>Gestiona tu cartera de clientes y marca a tus proveedores. Control de saldos pendientes automático.</p>
-          <span class="tag-free">✓ Todos los planes</span>
+          <h3>Clientes y proveedores</h3>
+          <p>Gestiona tu cartera de clientes y marca a tus proveedores. Control de saldos pendientes.</p>
+          <span class="tag-free">Todos los planes</span>
         </div>
+
         <div class="feature-card animate-on-scroll">
           <div class="icon">📊</div>
-          <h3>Panel de Control</h3>
-          <p>Gráficos, KPIs, ranking de productos, rendimiento de vendedores y alertas inteligentes.</p>
+          <h3>Panel de control</h3>
+          <p>KPIs, gráficos, ranking de productos, rendimiento de vendedores y alertas inteligentes.</p>
           <span class="tag">Premium</span>
         </div>
+
         <div class="feature-card animate-on-scroll">
           <div class="icon">📤</div>
           <h3>Exporta reportes</h3>
           <p>Genera y comparte reportes en PDF, Excel o CSV. Ideal para tu contador o auditoría.</p>
           <span class="tag">Premium</span>
         </div>
+
         <div class="feature-card animate-on-scroll">
           <div class="icon">🔒</div>
           <h3>Seguridad total</h3>
-          <p>Oculta costos y márgenes a tus vendedores. Datos cifrados y sincronización segura con Supabase.</p>
+          <p>Oculta costos y márgenes a tus vendedores. Datos cifrados y sincronización segura.</p>
           <span class="tag">Premium</span>
         </div>
+
         <div class="feature-card animate-on-scroll">
           <div class="icon">☁️</div>
-          <h3>Offline + Sincronización</h3>
+          <h3>Offline + sincronización</h3>
           <p>Trabaja sin conexión y sincroniza automáticamente cuando tengas internet. Tus datos siempre seguros.</p>
-          <span class="tag-free">✓ Todos los planes</span>
+          <span class="tag-free">Todos los planes</span>
         </div>
+
         <div class="feature-card animate-on-scroll">
           <div class="icon">🎯</div>
           <h3>Metas de ventas</h3>
           <p>Define metas diarias, semanales y mensuales. Visualiza el progreso en tiempo real.</p>
-          <span class="tag-free">✓ Todos los planes</span>
+          <span class="tag-free">Todos los planes</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-  CÓMO FUNCIONA
+  HOW IT WORKS
   ============================================================ -->
   <section id="how-it-works" class="how-it-works">
     <div class="container">
       <h2 class="section-title animate-on-scroll">Cómo <span>empezar</span></h2>
-      <p class="section-subtitle animate-on-scroll">
-        En 4 pasos simples, tendrás tu negocio gestionado desde tu celular.
-      </p>
+      <p class="section-subtitle animate-on-scroll">En 4 pasos simples, tendrás tu negocio gestionado desde tu celular.</p>
+
       <div class="steps-grid">
         <div class="step animate-on-scroll">
           <div class="number">1</div>
           <h4>Descarga la app</h4>
-          <p>Obtén la última versión desde GitHub. Es gratis y ligera.</p>
+          <p>Obtén la última versión desde nuestro sitio. Es ligera y rápida.</p>
         </div>
         <div class="step animate-on-scroll">
           <div class="number">2</div>
@@ -1379,18 +1256,17 @@
   </section>
 
   <!-- ============================================================
-  PLANES
+  PLANS
   ============================================================ -->
   <section id="plans" class="plans">
     <div class="container">
       <h2 class="section-title animate-on-scroll">Elige el plan <span>para tu negocio</span></h2>
-      <p class="section-subtitle animate-on-scroll">
-        Comienza con 7 días de prueba gratuita del plan Normal. Sin compromisos, sin tarjeta de crédito.
-      </p>
+      <p class="section-subtitle animate-on-scroll">Comienza con 7 días de prueba gratuita del plan Normal. Sin compromisos, sin tarjeta de crédito.</p>
+
       <div class="plans-grid">
         <!-- Plan Normal -->
         <div class="plan-card animate-on-scroll">
-          <div class="trial-badge">🎁 7 días de prueba gratis</div>
+          <div class="trial-badge">🎁 7 días gratis</div>
           <div class="name">Normal</div>
           <div class="price">$1,000 <small>CUP</small></div>
           <div class="period">por mes</div>
@@ -1400,16 +1276,17 @@
             <li><span class="check">✅</span> Gestión de gastos</li>
             <li><span class="check">✅</span> Metas de ventas</li>
             <li><span class="check">✅</span> Sincronización offline</li>
-            <li><span class="cross">❌</span> Panel de Control avanzado</li>
+            <li><span class="cross">❌</span> Panel de control avanzado</li>
             <li><span class="cross">❌</span> Exportación de reportes</li>
             <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
             <li><span class="cross">❌</span> Gestión de proveedores</li>
             <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
             <li><span>👤 1 vendedor</span></li>
           </ul>
-          <a href="#" class="btn btn-secondary download-trigger">Probar 7 días gratis</a>
-          <p style="font-size:12px; color:var(--gray-500); margin-top:8px;">Luego $1,000 CUP/mes</p>
+          <button class="btn btn-outline download-trigger">Probar 7 días gratis</button>
+          <p style="font-size:12px; color:var(--gray-400); margin-top:8px;">Luego $1,000 CUP/mes</p>
         </div>
+
         <!-- Plan Premium -->
         <div class="plan-card popular animate-on-scroll">
           <div class="badge">🔥 Más popular</div>
@@ -1418,7 +1295,7 @@
           <div class="period">por mes</div>
           <ul>
             <li><span class="check">✅</span> Todo lo del plan Normal</li>
-            <li><span class="check">✅</span> Panel de Control con gráficos y KPIs</li>
+            <li><span class="check">✅</span> Panel de control con gráficos y KPIs</li>
             <li><span class="check">✅</span> Exportación PDF, Excel y CSV</li>
             <li><span class="check">✅</span> Ocultar costos a vendedores</li>
             <li><span class="check">✅</span> Gestión de proveedores</li>
@@ -1428,8 +1305,8 @@
             <li><span>👥 Hasta 5 vendedores</span></li>
             <li><span>📞 Soporte prioritario</span></li>
           </ul>
-          <a href="#" class="btn btn-primary download-trigger">Descargar ahora</a>
-          <p style="font-size:12px; color:var(--gray-500); margin-top:8px;">Sin período de prueba</p>
+          <button class="btn btn-primary download-trigger">Descargar ahora</button>
+          <p style="font-size:12px; color:var(--gray-400); margin-top:8px;">Sin período de prueba</p>
         </div>
       </div>
     </div>
@@ -1441,9 +1318,8 @@
   <section id="changelog" class="changelog">
     <div class="container">
       <h2 class="section-title animate-on-scroll">Historial de <span>cambios</span></h2>
-      <p class="section-subtitle animate-on-scroll">
-        Siempre mejorando para ti. Estas son las novedades de la última versión.
-      </p>
+      <p class="section-subtitle animate-on-scroll">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
+
       <div class="changelog-list">
         <div class="changelog-item animate-on-scroll">
           <div class="version">v2.0.0</div>
@@ -1451,7 +1327,7 @@
           <div class="desc">
             <strong>¡Gran actualización!</strong>
             <ul>
-              <li><strong>Nuevo Panel de Control:</strong> KPIs, gráfico de evolución, alertas inteligentes, ranking de productos, clientes y rendimiento de vendedores.</li>
+              <li><strong>Nuevo panel de control:</strong> KPIs, gráfico de evolución, alertas inteligentes, ranking de productos, clientes y rendimiento de vendedores.</li>
               <li><strong>Exportación Premium:</strong> Genera y comparte reportes en PDF, Excel y CSV.</li>
               <li><strong>Gestión de proveedores:</strong> Marca clientes como proveedores y controla sus saldos.</li>
               <li><strong>Ocultar costos a vendedores:</strong> Protege la información sensible de tu negocio.</li>
@@ -1461,6 +1337,7 @@
             </ul>
           </div>
         </div>
+
         <div class="changelog-item animate-on-scroll">
           <div class="version">v1.5.0</div>
           <div class="date">15 jun 2026</div>
@@ -1472,6 +1349,7 @@
             </ul>
           </div>
         </div>
+
         <div class="changelog-item animate-on-scroll">
           <div class="version">v1.0.0</div>
           <div class="date">1 mar 2026</div>
@@ -1488,51 +1366,50 @@
   </section>
 
   <!-- ============================================================
-  CONFIANZA / BENEFICIOS
+  TRUST
   ============================================================ -->
   <section id="trust" class="trust">
     <div class="container">
       <h2 class="section-title animate-on-scroll">¿Por qué <span>Tu MiPyme</span>?</h2>
-      <p class="section-subtitle animate-on-scroll">
-        Miles de emprendedores cubanos ya confían en nosotros para administrar sus negocios.
-      </p>
+      <p class="section-subtitle animate-on-scroll">Razones para confiar en nuestra plataforma.</p>
+
       <div class="trust-grid">
         <div class="trust-item animate-on-scroll">
           <div class="icon">📱</div>
           <h4>100% offline</h4>
-          <p>Trabaja sin internet en cualquier lugar de Cuba.</p>
+          <p>Trabaja sin conexión a internet.</p>
         </div>
         <div class="trust-item animate-on-scroll">
           <div class="icon">🔐</div>
           <h4>Datos seguros</h4>
-          <p>Tus datos están cifrados y sincronizados en la nube.</p>
+          <p>Cifrados y sincronizados en la nube.</p>
         </div>
         <div class="trust-item animate-on-scroll">
           <div class="icon">⚡</div>
           <h4>Rápida y ligera</h4>
-          <p>Funciona en cualquier teléfono Android, sin consumir muchos recursos.</p>
+          <p>Funciona en cualquier teléfono moderno.</p>
         </div>
         <div class="trust-item animate-on-scroll">
           <div class="icon">📊</div>
           <h4>Decisiones con datos</h4>
-          <p>Gráficos y KPIs para que tomes las mejores decisiones.</p>
+          <p>Gráficos y KPIs para tomar mejores decisiones.</p>
         </div>
         <div class="trust-item animate-on-scroll">
           <div class="icon">🔄</div>
           <h4>Sincronización automática</h4>
-          <p>Olvídate de perder información. Todo se sincroniza solo.</p>
+          <p>Olvídate de perder información.</p>
         </div>
         <div class="trust-item animate-on-scroll">
           <div class="icon">❤️</div>
-          <h4>Hecha para Cuba</h4>
-          <p>Diseñada pensando en las necesidades reales del emprendedor cubano.</p>
+          <h4>Pensada para ti</h4>
+          <p>Una herramienta que se adapta a tu negocio.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-  CTA FINAL
+  CTA
   ============================================================ -->
   <section id="cta" class="cta">
     <div class="container">
@@ -1540,76 +1417,52 @@
       <p>
         Prueba 7 días gratis el plan Normal. Sin compromisos, sin tarjeta de crédito.
         <br />
-        <span style="font-size:14px; color:#8a8aa8;">
-          ⚡ Siempre descargarás la <strong style="color:#fff;">última versión</strong> disponible.
-        </span>
+        <span style="font-size:14px; opacity:0.7;">Siempre descargarás la última versión disponible.</span>
       </p>
-      <a href="#" class="btn btn-primary btn-lg download-trigger" id="ctaDownloadBtn">
-        <span class="download-icon">⬇️</span> Descargar última versión
-      </a>
+      <button class="btn btn-white btn-lg download-trigger">
+        ⬇️ Descargar última versión
+      </button>
       <p class="version-info">
-        Disponible en GitHub Releases · Android 5.0+ · ~15 MB
-        <br />
-        Si la descarga no comienza,
-        <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest">visita la página de lanzamientos</a>
+        Android 5.0+ · ~15 MB
       </p>
     </div>
   </section>
-
-  <!-- ============================================================
-  MODAL DE ADVERTENCIA DE SEGURIDAD
-  ============================================================ -->
-  <div class="modal-overlay" id="securityModal">
-    <div class="modal">
-      <div class="icon-warning">🛡️</div>
-      <h2>Antes de descargar...</h2>
-      <p>
-        Es posible que tu dispositivo te muestre un mensaje diciendo que esta aplicación <strong>“puede dañar tu dispositivo”</strong>.
-      </p>
-      <div class="note">
-        <p><strong>📌 ¿Por qué ocurre esto?</strong></p>
-        <p>
-          Android muestra esta advertencia porque la app se descarga fuera de la Google Play Store,
-          no porque la app sea dañina. <strong>Tu MiPyme está firmada y verificada</strong> por
-          Leifdev Software Developer, y ha sido descargada por más de 1.500 usuarios sin incidentes.
-        </p>
-        <p style="margin-top:4px;">
-          Puedes instalar con total confianza. Para continuar, haz clic en <strong>“Continuar descarga”</strong>.
-        </p>
-      </div>
-      <div class="buttons">
-        <a href="#" class="btn btn-secondary" id="cancelDownloadBtn">Cancelar</a>
-        <a href="#" class="btn btn-primary" id="confirmDownloadBtn">Continuar descarga</a>
-      </div>
-    </div>
-  </div>
 
   <!-- ============================================================
   FOOTER
   ============================================================ -->
   <footer>
     <div class="container">
-      <div class="social">
-        <a href="#" aria-label="Facebook">📘</a>
-        <a href="#" aria-label="Telegram">✈️</a>
-        <a href="https://github.com/Leifdev0306/Tu-MiPyme" target="_blank" aria-label="GitHub">🐙</a>
-        <a href="mailto:Leifdev0306@gmail.com" aria-label="Email">📧</a>
-      </div>
-      <div class="footer-links">
-        <a href="#features">Características</a>
-        <a href="#plans">Planes</a>
-        <a href="#changelog">Historial</a>
-        <a href="#trust">Confianza</a>
-        <a href="https://github.com/Leifdev0306/Tu-MiPyme" target="_blank">GitHub</a>
-        <a href="mailto:Leifdev0306@gmail.com">Contacto</a>
-      </div>
-      <p>
-        &copy; 2026 <strong>Leifdev Software Developer</strong> — Todos los derechos reservados.
-        <br />
-        <span style="font-size:13px; color:#6b6b8a;">Hecho con ❤️ para los emprendedores de Cuba.</span>
-      </p>
+      <p>&copy; 2026 <strong>Leifdev</strong></p>
     </div>
   </footer>
+
+  <!-- ============================================================
+  MODAL DE AVISO DE DESCARGA
+  ============================================================ -->
+  <div class="modal-overlay" id="downloadModal">
+    <div class="modal-dialog">
+      <div class="icon">🛡️</div>
+      <h3>Antes de descargar</h3>
+      <p>
+        Es posible que tu dispositivo muestre un mensaje de advertencia como
+        <strong>"Esta aplicación puede dañar tu dispositivo"</strong>.
+      </p>
+      <div class="highlight">
+        <strong>¿Por qué aparece esto?</strong><br />
+        Es un aviso estándar de Android para apps que no se descargan desde Google Play.
+        <strong>Tu MiPyme</strong> está firmada y verificada, no contiene virus ni malware.
+        Puedes instalarla con total tranquilidad.
+      </div>
+      <p style="font-size:14px; color:var(--gray-500);">
+        Si confías en esta app, pulsa "Continuar descarga". En caso contrario, cancela.
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
+        <button class="btn btn-primary" id="modalContinue">Continuar descarga</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ============================================================
   JAVASCRIPT
@@ -1620,9 +1473,11 @@
     // ============================================================
     const toggle = document.getElementById('menuToggle');
     const nav = document.getElementById('mainNav');
+
     toggle.addEventListener('click', () => {
       nav.classList.toggle('open');
     });
+
     document.querySelectorAll('#mainNav a').forEach(link => {
       link.addEventListener('click', () => {
         nav.classList.remove('open');
@@ -1630,7 +1485,7 @@
     });
 
     // ============================================================
-    // 2. HEADER SCROLL EFFECT
+    // 2. HEADER SCROLL
     // ============================================================
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
@@ -1655,7 +1510,7 @@
     });
 
     // ============================================================
-    // 4. ANIMACIONES AL SCROLL
+    // 4. ANIMACIONES AL SCROLL (Intersection Observer)
     // ============================================================
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
     const observer = new IntersectionObserver((entries) => {
@@ -1665,127 +1520,89 @@
         }
       });
     }, observerOptions);
+
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
       observer.observe(el);
     });
 
     // ============================================================
-    // 5. CONTADOR DE DESCARGAS
+    // 5. MODAL DE DESCARGA
     // ============================================================
-    async function fetchDownloadCount() {
-      try {
-        const response = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases');
-        if (!response.ok) throw new Error('API error');
-        const releases = await response.json();
-        let total = 0;
-        releases.forEach(r => {
-          r.assets.forEach(a => {
-            if (a.name === 'TuMiPyme.apk') {
-              total += a.download_count || 0;
-            }
-          });
-        });
-        const el = document.getElementById('downloadCount');
-        if (el) {
-          el.textContent = total > 0 ? total.toLocaleString() : '1.500';
-        }
-      } catch (e) {
-        console.warn('No se pudo obtener el contador de descargas');
-      }
-    }
-    fetchDownloadCount();
-
-    // ============================================================
-    // 6. MODAL DE SEGURIDAD
-    // ============================================================
-    const modal = document.getElementById('securityModal');
-    const confirmBtn = document.getElementById('confirmDownloadBtn');
-    const cancelBtn = document.getElementById('cancelDownloadBtn');
+    const modal = document.getElementById('downloadModal');
+    const modalCancel = document.getElementById('modalCancel');
+    const modalContinue = document.getElementById('modalContinue');
     let pendingDownloadUrl = '';
 
-    // Función para abrir el modal con la URL de descarga
-    function openModal(downloadUrl) {
-      pendingDownloadUrl = downloadUrl;
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Evita scroll
-    }
-
-    // Función para cerrar el modal
-    function closeModal() {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-      pendingDownloadUrl = '';
-    }
-
-    // Al hacer clic en "Continuar descarga"
-    confirmBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (pendingDownloadUrl) {
-        // Iniciar la descarga
-        window.location.href = pendingDownloadUrl;
-        // Registrar evento en GA
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'download', {
-            'event_category': 'engagement',
-            'event_label': 'TuMiPyme_apk'
-          });
-        }
-      }
-      closeModal();
-    });
-
-    // Al hacer clic en "Cancelar"
-    cancelBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      closeModal();
-    });
-
-    // Cerrar modal si se hace clic fuera del contenido
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-
-    // ============================================================
-    // 7. MANEJAR TODOS LOS BOTONES DE DESCARGA
-    // ============================================================
-    async function updateDownloadLinks() {
-      const fallbackUrl = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk';
-      let downloadUrl = fallbackUrl;
+    // Función para obtener la URL del último release desde GitHub
+    async function getLatestDownloadUrl() {
+      const fallback = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk';
       try {
         const response = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases/latest');
-        if (response.ok) {
-          const data = await response.json();
-          const asset = data.assets.find(a => a.name === 'TuMiPyme.apk');
-          if (asset) {
-            downloadUrl = asset.browser_download_url;
-          }
-        }
+        if (!response.ok) throw new Error('API error');
+        const data = await response.json();
+        const asset = data.assets.find(a => a.name === 'TuMiPyme.apk');
+        return asset ? asset.browser_download_url : fallback;
       } catch (e) {
-        console.warn('Usando URL de descarga por defecto');
+        console.warn('Usando URL por defecto');
+        return fallback;
       }
-
-      // Asignar la URL a todos los botones "download-trigger"
-      document.querySelectorAll('.download-trigger').forEach(el => {
-        // Guardar la URL en un atributo data para usarla en el modal
-        el.setAttribute('data-download-url', downloadUrl);
-        // Reemplazar el comportamiento click para abrir el modal
-        el.addEventListener('click', function(e) {
-          e.preventDefault();
-          const url = this.getAttribute('data-download-url') || fallbackUrl;
-          openModal(url);
-        });
-      });
     }
 
-    updateDownloadLinks();
+    // Pre-cargar la URL al cargar la página
+    let cachedDownloadUrl = '';
+    getLatestDownloadUrl().then(url => { cachedDownloadUrl = url; });
+
+    // Disparar el modal
+    function showDownloadModal() {
+      if (!cachedDownloadUrl) {
+        getLatestDownloadUrl().then(url => {
+          cachedDownloadUrl = url;
+          modal.classList.add('active');
+        });
+      } else {
+        modal.classList.add('active');
+      }
+    }
+
+    // Cerrar modal
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    // Continuar descarga
+    function continueDownload() {
+      if (cachedDownloadUrl) {
+        // Evento de GA si existe
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'download', { 'event_category': 'engagement', 'event_label': 'TuMiPyme_apk' });
+        }
+        window.location.href = cachedDownloadUrl;
+      }
+      closeModal();
+    }
+
+    // Asignar eventos a todos los botones con clase 'download-trigger'
+    document.querySelectorAll('.download-trigger').forEach(el => {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        showDownloadModal();
+      });
+    });
+
+    // Eventos del modal
+    modalCancel.addEventListener('click', closeModal);
+    modalContinue.addEventListener('click', continueDownload);
+
+    // Cerrar modal al hacer clic fuera del diálogo
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
 
     // ============================================================
-    // 8. EVENTO DE DESCARGA EN GA (también se dispara en confirmación)
+    // 6. ACTUALIZAR ENLACES DE DESCARGA (fallback)
     // ============================================================
-    // Ya se maneja dentro del evento del confirmBtn
-
+    // (Ya se hace en getLatestDownloadUrl)
+    // Nota: los botones ya no son enlaces directos, sino que abren el modal.
   </script>
 </body>
 </html>
