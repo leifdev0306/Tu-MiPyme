@@ -811,7 +811,7 @@
     }
 
     /* ============================================================
-       CHANGELOG (Sin Supabase)
+       CHANGELOG (Sin menciones a Supabase)
        ============================================================ */
     .changelog {
       background: var(--bg-primary);
@@ -954,13 +954,8 @@
       color: var(--text-muted);
     }
 
-    .cta .version-info a {
-      color: var(--primary);
-      text-decoration: underline;
-    }
-
     /* ============================================================
-       FOOTER
+       FOOTER (Sin enlaces a GitHub)
        ============================================================ */
     footer {
       background: var(--footer-bg);
@@ -1184,7 +1179,7 @@
           Offline-first, sincronización automática y reportes avanzados.
         </p>
         <div class="hero-buttons">
-          <a href="#cta" class="btn btn-primary btn-lg">📲 Descargar ahora</a>
+          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-primary btn-lg">📲 Descargar ahora</a>
           <a href="#features" class="btn btn-secondary">Explorar más</a>
         </div>
         <div class="hero-features">
@@ -1391,7 +1386,7 @@
             <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
             <li><span>👤 1 vendedor</span></li>
           </ul>
-          <a href="#cta" class="btn btn-secondary">Probar 7 días</a>
+          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-secondary">Probar 7 días</a>
           <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Luego $1,000 CUP/mes</p>
         </div>
 
@@ -1413,7 +1408,7 @@
             <li><span>👥 Hasta 5 vendedores</span></li>
             <li><span>📞 Soporte prioritario</span></li>
           </ul>
-          <a href="#cta" class="btn btn-primary">Descargar ahora</a>
+          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-primary">Descargar ahora</a>
           <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Sin período de prueba</p>
         </div>
       </div>
@@ -1421,7 +1416,7 @@
   </section>
 
   <!-- ============================================================
-  CHANGELOG (Sin menciones a Supabase)
+  CHANGELOG
   ============================================================ -->
   <section id="changelog" class="changelog">
     <div class="container">
@@ -1532,26 +1527,24 @@
           ⚡ Siempre descargarás la <strong style="color:var(--text-primary);">última versión</strong> disponible.
         </span>
       </p>
-      <a href="#" class="btn btn-primary btn-lg" id="ctaDownloadBtn">
+      <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-primary btn-lg" id="ctaDownloadBtn">
         <span>⬇️</span> Descargar última versión
       </a>
       <p class="version-info">
         Android 5.0+ · ~15 MB
-        <br />
-        Si la descarga no comienza, <a href="#">visita nuestra página de lanzamientos</a>
       </p>
     </div>
   </section>
 
   <!-- ============================================================
-  FOOTER
+  FOOTER (Sin enlaces a GitHub)
   ============================================================ -->
   <footer>
     <div class="container">
       <div class="social">
         <a href="#" aria-label="Facebook">📘</a>
         <a href="#" aria-label="Telegram">✈️</a>
-        <a href="#" aria-label="GitHub">🐙</a>
+        <a href="#" aria-label="Twitter">🐦</a>
         <a href="mailto:Leifdev0306@gmail.com" aria-label="Email">📧</a>
       </div>
       <div class="footer-links">
@@ -1631,22 +1624,9 @@
         observer.observe(el);
       });
 
-      // 5. ENLACE DE DESCARGA (Configurable)
-      // Reemplaza '#' por la URL real de tu APK
-      const downloadUrl = '#'; 
-      document.querySelectorAll('#ctaDownloadBtn, .nav-download, .btn-primary[href="#cta"]').forEach(el => {
-        if (el.tagName === 'A') {
-          el.href = downloadUrl;
-        }
-      });
-
-      // Evento de descarga (para analytics)
+      // 5. Evento de descarga (para analytics)
       document.querySelectorAll('.btn-primary, .nav-download').forEach(el => {
-        el.addEventListener('click', function(e) {
-          if (this.getAttribute('href') === '#') {
-            e.preventDefault();
-            alert('Enlace de descarga configurado por el administrador.');
-          }
+        el.addEventListener('click', function() {
           if (typeof gtag !== 'undefined') {
             gtag('event', 'download', {
               'event_category': 'engagement',
