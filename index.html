@@ -1,1365 +1,684 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tu MiPyme – Administra tu negocio desde tu celular</title>
-  <meta name="description" content="Tu MiPyme es la app de gestión para MIPYMES cubanas: ventas, inventario, clientes, proveedores, reportes y más. Descarga gratis en APKLis." />
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-
-  <!-- Google Analytics (reemplaza G-XXXXXXXXXX con tu ID) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-
-  <style>
-    /* ===== RESET ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #faf9f6;
-      color: #1a1a2e;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ===== BOTONES ===== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: #f59e0b;
-      color: #1a1a2e;
-      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.5);
-    }
-
-    .btn-secondary {
-      background: #1a1a2e;
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(26, 26, 46, 0.3);
-    }
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26, 26, 46, 0.4);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: #1a1a2e;
-      border: 2px solid #1a1a2e;
-    }
-    .btn-outline:hover {
-      background: #1a1a2e;
-      color: #fff;
-    }
-
-    .btn-sm {
-      padding: 10px 20px;
-      font-size: 14px;
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, #f59e0b, #fbbf24);
-      color: #1a1a2e;
-      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
-    }
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6);
-    }
-
-    /* ===== HEADER ===== */
-    header {
-      padding: 16px 0;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    header .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 22px;
-      font-weight: 800;
-      color: #1a1a2e;
-    }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #f59e0b, #fbbf24);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      color: #1a1a2e;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    nav a {
-      font-size: 15px;
-      font-weight: 500;
-      color: #4a4a5e;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #f59e0b;
-    }
-
-    .nav-download {
-      background: #f59e0b;
-      color: #1a1a2e;
-      padding: 8px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .nav-download:hover {
-      background: #fbbf24;
-      color: #1a1a2e;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 28px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #1a1a2e;
-    }
-
-    /* ===== HERO ===== */
-    .hero {
-      padding: 80px 0 60px;
-      background: linear-gradient(160deg, #fef9e7 0%, #faf9f6 100%);
-      overflow: hidden;
-    }
-
-    .hero .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero-content h1 {
-      font-size: 52px;
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -1px;
-      color: #1a1a2e;
-      margin-bottom: 16px;
-    }
-
-    .hero-content h1 span {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-content p {
-      font-size: 20px;
-      color: #4a4a5e;
-      max-width: 500px;
-      margin-bottom: 32px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-      margin-top: 40px;
-    }
-
-    .hero-stats .stat h3 {
-      font-size: 28px;
-      font-weight: 800;
-      color: #1a1a2e;
-    }
-    .hero-stats .stat span {
-      font-size: 14px;
-      color: #6b6b80;
-    }
-
-    .hero-image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .phone-mockup {
-      width: 100%;
-      max-width: 340px;
-      border-radius: 36px;
-      box-shadow: 0 30px 80px rgba(26, 26, 46, 0.2);
-      background: #1a1a2e;
-      padding: 12px;
-      position: relative;
-    }
-
-    .phone-mockup .screen {
-      border-radius: 24px;
-      overflow: hidden;
-      background: #fff;
-      aspect-ratio: 9 / 19;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: #1a1a2e;
-      background: linear-gradient(180deg, #fef9e7, #fff);
-      padding: 20px 12px;
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .phone-mockup .screen .mockup-icon {
-      font-size: 48px;
-      margin-bottom: 12px;
-    }
-    .phone-mockup .screen .mockup-title {
-      font-weight: 700;
-      font-size: 18px;
-    }
-    .phone-mockup .screen .mockup-sub {
-      font-size: 12px;
-      color: #6b6b80;
-    }
-
-    /* ===== SECCIONES ===== */
-    section {
-      padding: 72px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 38px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: #1a1a2e;
-      margin-bottom: 12px;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      font-size: 18px;
-      color: #6b6b80;
-      max-width: 600px;
-      margin: 0 auto 48px;
-    }
-
-    .section-title span {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* ===== CARACTERÍSTICAS ===== */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 32px;
-    }
-
-    .feature-card {
-      background: #fff;
-      padding: 32px 24px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      transition: all 0.3s ease;
-      border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-    }
-
-    .feature-card .icon {
-      font-size: 36px;
-      margin-bottom: 12px;
-    }
-
-    .feature-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      font-size: 15px;
-      color: #6b6b80;
-    }
-
-    .feature-card .tag {
-      display: inline-block;
-      background: #fef3c7;
-      color: #d97706;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 12px;
-      border-radius: 50px;
-      margin-top: 8px;
-    }
-
-    .feature-card .tag-free {
-      display: inline-block;
-      background: #d1fae5;
-      color: #065f46;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 12px;
-      border-radius: 50px;
-      margin-top: 8px;
-    }
-
-    /* ===== PLANES ===== */
-    .plans {
-      background: #f1f0ee;
-    }
-
-    .plans-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .plan-card {
-      background: #fff;
-      padding: 40px 32px;
-      border-radius: 24px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-      position: relative;
-    }
-
-    .plan-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-    }
-
-    .plan-card.popular {
-      border-color: #f59e0b;
-      background: linear-gradient(180deg, #fff, #fef9e7);
-    }
-
-    .plan-card.popular .badge {
-      position: absolute;
-      top: -12px;
-      right: 24px;
-      background: #f59e0b;
-      color: #1a1a2e;
-      font-weight: 700;
-      font-size: 12px;
-      padding: 4px 16px;
-      border-radius: 50px;
-      text-transform: uppercase;
-    }
-
-    .plan-card .trial-badge {
-      display: inline-block;
-      background: #10b981;
-      color: #fff;
-      font-weight: 700;
-      font-size: 12px;
-      padding: 4px 16px;
-      border-radius: 50px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .plan-card .name {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .plan-card .price {
-      font-size: 36px;
-      font-weight: 800;
-      color: #1a1a2e;
-      margin-bottom: 4px;
-    }
-
-    .plan-card .price small {
-      font-size: 16px;
-      font-weight: 400;
-      color: #6b6b80;
-    }
-
-    .plan-card .period {
-      font-size: 14px;
-      color: #6b6b80;
-      margin-bottom: 20px;
-    }
-
-    .plan-card ul {
-      text-align: left;
-      list-style: none;
-      padding: 0;
-      margin-bottom: 24px;
-    }
-
-    .plan-card ul li {
-      padding: 6px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 15px;
-      color: #4a4a5e;
-    }
-
-    .plan-card ul li .check {
-      color: #10b981;
-      font-weight: 700;
-    }
-    .plan-card ul li .cross {
-      color: #ef4444;
-      font-weight: 700;
-    }
-
-    /* ===== RATING ===== */
-    .rating-section {
-      background: #fff;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .stars {
-      display: inline-flex;
-      gap: 8px;
-      font-size: 40px;
-      cursor: pointer;
-    }
-
-    .stars span {
-      transition: color 0.2s;
-      color: #d1d5db;
-    }
-
-    .stars span.active {
-      color: #f59e0b;
-    }
-
-    .stars span:hover {
-      color: #fbbf24;
-    }
-
-    .rating-message {
-      margin-top: 12px;
-      font-size: 16px;
-      color: #6b6b80;
-    }
-
-    /* ===== INSTRUCCIONES DE INSTALACIÓN ===== */
-    .install-guide {
-      background: #faf9f6;
-    }
-
-    .install-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .step {
-      text-align: center;
-      padding: 24px 16px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    }
-
-    .step .number {
-      display: inline-block;
-      background: #f59e0b;
-      color: #1a1a2e;
-      font-weight: 800;
-      font-size: 20px;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 50%;
-      margin-bottom: 12px;
-    }
-
-    .step h4 {
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .step p {
-      font-size: 14px;
-      color: #6b6b80;
-    }
-
-    .security-note {
-      max-width: 700px;
-      margin: 32px auto 0;
-      padding: 20px 24px;
-      background: #fef9e7;
-      border-left: 4px solid #f59e0b;
-      border-radius: 8px;
-      text-align: left;
-    }
-
-    .security-note strong {
-      color: #1a1a2e;
-    }
-
-    .security-note .icon {
-      font-size: 24px;
-      margin-right: 8px;
-    }
-
-    /* ===== CHANGELOG ===== */
-    .changelog {
-      background: #fff;
-    }
-
-    .changelog-list {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .changelog-item {
-      display: flex;
-      gap: 24px;
-      padding: 20px 0;
-      border-bottom: 1px solid #f1f0ee;
-    }
-
-    .changelog-item:last-child {
-      border-bottom: none;
-    }
-
-    .changelog-item .version {
-      font-weight: 700;
-      font-size: 18px;
-      color: #f59e0b;
-      min-width: 80px;
-    }
-
-    .changelog-item .date {
-      font-size: 14px;
-      color: #6b6b80;
-      min-width: 110px;
-    }
-
-    .changelog-item .desc {
-      font-size: 15px;
-      color: #4a4a5e;
-    }
-
-    .changelog-item .desc ul {
-      list-style: disc;
-      padding-left: 20px;
-      margin-top: 4px;
-    }
-
-    .changelog-item .desc ul li {
-      margin-bottom: 2px;
-    }
-
-    /* ===== BENEFICIOS ===== */
-    .benefits {
-      background: #faf9f6;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-    }
-
-    .benefit-item {
-      text-align: center;
-      padding: 24px 16px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    }
-
-    .benefit-item .icon {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
-
-    .benefit-item h4 {
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .benefit-item p {
-      font-size: 14px;
-      color: #6b6b80;
-    }
-
-    /* ===== CTA ===== */
-    .cta {
-      background: linear-gradient(135deg, #1a1a2e, #2d2d4a);
-      color: #fff;
-      text-align: center;
-      padding: 80px 0;
-    }
-
-    .cta h2 {
-      font-size: 40px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .cta p {
-      font-size: 18px;
-      color: #b0b0c8;
-      max-width: 500px;
-      margin: 0 auto 32px;
-    }
-
-    .cta .btn {
-      background: #f59e0b;
-      color: #1a1a2e;
-    }
-    .cta .btn:hover {
-      background: #fbbf24;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: #1a1a2e;
-      color: #b0b0c8;
-      padding: 40px 0;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    footer a {
-      color: #f59e0b;
-    }
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    footer .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 1024px) {
-      .hero .container {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero-content p {
-        margin: 0 auto 32px;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .hero-stats {
-        justify-content: center;
-      }
-
-      .hero-image {
-        order: -1;
-      }
-
-      .phone-mockup {
-        max-width: 260px;
-      }
-
-      .plans-grid {
-        grid-template-columns: 1fr;
-        max-width: 480px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 36px;
-      }
-
-      .section-title {
-        font-size: 28px;
-      }
-
-      nav {
-        display: none;
-        flex-direction: column;
-        background: #fff;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        width: 100%;
-        padding: 20px 24px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-        border-radius: 0 0 20px 20px;
-        gap: 16px;
-      }
-
-      nav.open {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .changelog-item {
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .changelog-item .version,
-      .changelog-item .date {
-        min-width: auto;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero {
-        padding: 40px 0;
-      }
-
-      .hero-content h1 {
-        font-size: 28px;
-      }
-
-      .hero-stats {
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .hero-stats .stat h3 {
-        font-size: 22px;
-      }
-
-      .btn {
-        padding: 12px 24px;
-        font-size: 14px;
-      }
-
-      .plan-card {
-        padding: 28px 20px;
-      }
-
-      .install-steps {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tu MiPyme - Gestión para tu negocio</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏪</text></svg>" />
+    <!-- Font Awesome (opcional, para iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== ESTILOS COMPLETOS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf5 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-weight: 300;
+            color: #90caf9;
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: #90caf9;
+        }
+
+        .btn-download-nav {
+            background: #ffc107;
+            color: #1a237e !important;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-download-nav:hover {
+            background: #ffb300;
+            transform: scale(1.05);
+            color: #1a237e !important;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #1a237e, #42a5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #475569;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero .badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+            color: #1a237e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge i {
+            font-size: 1.2rem;
+        }
+
+        /* ===== BOTÓN PRINCIPAL ===== */
+        .btn-download {
+            display: inline-block;
+            background: linear-gradient(135deg, #1a237e, #0d47a1);
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            padding: 18px 48px;
+            border-radius: 60px;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(26, 35, 126, 0.3);
+            transition: all 0.3s ease;
+            margin: 20px 0 10px;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(26, 35, 126, 0.4);
+            background: linear-gradient(135deg, #0d47a1, #1a237e);
+        }
+
+        .btn-download i {
+            margin-right: 12px;
+        }
+
+        .version {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        /* ===== CARACTERÍSTICAS ===== */
+        .features {
+            padding: 60px 0;
+        }
+
+        .features h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #1a237e;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .feature-card .icon {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #1a237e;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* ===== PLANES ===== */
+        .plans {
+            padding: 60px 0;
+            background: white;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .plans h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: #1a237e;
+        }
+
+        .plans .sub {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 40px;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .plan-card {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .plan-card:hover {
+            border-color: #1a237e;
+            box-shadow: 0 8px 30px rgba(26, 35, 126, 0.08);
+        }
+
+        .plan-card.premium {
+            background: linear-gradient(135deg, #f8fafc, #e8eaf6);
+            border-color: #1a237e;
+        }
+
+        .plan-card .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a237e;
+        }
+
+        .plan-card .price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1a237e;
+            margin: 12px 0;
+        }
+
+        .plan-card .price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #64748b;
+        }
+
+        .plan-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .plan-card ul li {
+            padding: 6px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .plan-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-card .badge-premium {
+            background: #1a237e;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        /* ===== PAGO ===== */
+        .pago-info {
+            padding: 60px 0;
+        }
+
+        .pago-info h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a237e;
+        }
+
+        .pago-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .pago-card p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pago-card .label {
+            font-weight: 600;
+            color: #1a237e;
+            min-width: 100px;
+        }
+
+        .pago-card .highlight {
+            background: #fff3cd;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-left: 4px solid #ffc107;
+            margin-top: 16px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1a237e;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer a {
+            color: #90caf9;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .copy {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .btn-download {
+                font-size: 1.1rem;
+                padding: 14px 32px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+            .pago-card p {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .pago-card .label {
+                min-width: auto;
+            }
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <!-- ===== HEADER ===== -->
-  <header>
-    <div class="container">
-      <a href="#" class="logo">
-        <span class="logo-icon">🏪</span>
-        Tu MiPyme
-      </a>
-
-      <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
-      <nav id="mainNav">
-        <a href="#features">Características</a>
-        <a href="#plans">Planes</a>
-        <a href="#install">Instalación</a>
-        <a href="#changelog">Historial</a>
-        <a href="#benefits">Beneficios</a>
-        <a href="#cta" class="nav-download">Descargar</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Tu negocio <br /><span>al alcance de tu mano</span></h1>
-        <p>
-          Administra ventas, inventario, clientes y proveedores desde tu celular.
-          Sin internet, con sincronización automática y reportes profesionales.
-        </p>
-        <div class="hero-buttons">
-          <a href="#" class="btn btn-primary" id="downloadBtn">
-            📲 Descargar última versión
-          </a>
-          <a href="#plans" class="btn btn-outline">Ver planes</a>
+    <!-- Barra de navegación -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-store"></i> Tu MiPyme
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Características</a></li>
+                <li><a href="#plans">Planes</a></li>
+                <li><a href="#download">Descargar</a></li>
+            </ul>
         </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <h3 id="downloadCount">+1.000</h3>
-            <span>Descargas estimadas</span>
-          </div>
-          <div class="stat">
-            <h3>4.8 ⭐</h3>
-            <span>Valoración media</span>
-          </div>
-          <div class="stat">
-            <h3>100%</h3>
-            <span>Offline-first</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="phone-mockup">
-          <div class="screen">
-            <div class="mockup-icon">📊</div>
-            <div class="mockup-title">Panel de Control</div>
-            <div class="mockup-sub">Ventas: $12,450.00</div>
-            <div class="mockup-sub" style="color:#10b981;">⬆ Ganancia: +18%</div>
-            <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-              <span style="background:#e5e7eb; padding:2px 12px; border-radius:12px; font-size:11px;">📦 Stock</span>
-              <span style="background:#e5e7eb; padding:2px 12px; border-radius:12px; font-size:11px;">👥 Clientes</span>
-              <span style="background:#e5e7eb; padding:2px 12px; border-radius:12px; font-size:11px;">📤 Exportar</span>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Administra tu negocio <br>de forma inteligente</h1>
+            <p>
+                Controla inventario, ventas, gastos y clientes desde una sola app.
+                Sincronización en la nube, disponible offline y con reportes en tiempo real.
+            </p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Descargar ahora
+                </a>
+                <a href="#features" class="btn btn-outline">
+                    Saber más
+                </a>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/600x400/1A237E/FFFFFF?text=Tu+MiPyme+App" alt="App screenshot" />
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <!-- Cambia "logo.png" por tu imagen o elimina la línea -->
+                <img src="images/logo.png" alt="Tu MiPyme Logo" onerror="this.style.display='none'" />
+                <h1>Tu <span>MiPyme</span></h1>
+</div>
+            <nav class="nav">
+                <a href="#caracteristicas">Características</a>
+                <a href="#planes">Planes</a>
+                <a href="#pago">Pago</a>
+                <a href="#descargar" class="btn-download-nav">Descargar</a>
+            </nav>
+</div>
+</header>
 
-  <!-- ===== CARACTERÍSTICAS ===== -->
-  <section id="features">
-    <div class="container">
-      <h2 class="section-title">Todo lo que necesitas <span>para gestionar</span></h2>
-      <p class="section-subtitle">Tu MiPyme incluye todas las herramientas que tu negocio requiere, diseñadas para el emprendedor cubano.</p>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="icon">🛒</div>
-          <h3>Ventas rápidas</h3>
-          <p>Registra ventas con múltiples productos, clientes y métodos de pago. Funciona sin internet.</p>
-          <span class="tag-free">✓ Todos los planes</span>
-        </div>
-        <div class="feature-card">
-          <div class="icon">📦</div>
-          <h3>Inventario inteligente</h3>
-          <p>Control de stock, reabastecimiento FIFO y alertas de productos agotados o con bajo stock.</p>
-          <span class="tag">Premium</span>
-        </div>
-        <div class="feature-card">
-          <div class="icon">👥</div>
-          <h3>Clientes + Proveedores</h3>
-          <p>Gestiona tu cartera de clientes y marca a tus proveedores. Control de saldos pendientes.</p>
-          <span class="tag-free">✓ Todos los planes</span>
-        </div>
-        <div class="feature-card">
-          <div class="icon">📊</div>
-          <h3>Panel de Control</h3>
-          <p>Gráficos, KPIs, ranking de productos, rendimiento de vendedores y alertas inteligentes.</p>
-          <span class="tag">Premium</span>
-        </div>
-        <div class="feature-card">
-          <div class="icon">📤</div>
-          <h3>Exporta reportes</h3>
-          <p>Genera y comparte reportes en PDF, Excel o CSV. Ideal para tu contador o auditoría.</p>
-          <span class="tag">Premium</span>
-        </div>
-        <div class="feature-card">
-          <div class="icon">🔒</div>
-          <h3>Seguridad total</h3>
-          <p>Oculta costos y márgenes a tus vendedores. Datos cifrados y sincronización segura.</p>
-          <span class="tag">Premium</span>
-        </div>
-        <div class="feature-card">
-          <div class="icon">☁️</div>
-          <h3>Offline + Sincronización</h3>
-          <p>Trabaja sin conexión y sincroniza automáticamente cuando tengas internet. Tus datos siempre seguros.</p>
-          <span class="tag-free">✓ Todos los planes</span>
-        </div>
-        <div class="feature-card">
-          <div class="icon">🎯</div>
-          <h3>Metas de ventas</h3>
-          <p>Define metas diarias, semanales y mensuales. Visualiza el progreso en tiempo real.</p>
-          <span class="tag-free">✓ Todos los planes</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PLANES ===== -->
-  <section id="plans" class="plans">
-    <div class="container">
-      <h2 class="section-title">Elige el plan <span>para tu negocio</span></h2>
-      <p class="section-subtitle">Comienza con 7 días de prueba gratuita del plan Normal. Sin compromisos, sin tarjeta de crédito.</p>
-
-      <div class="plans-grid">
-        <!-- Plan Normal -->
-        <div class="plan-card">
-          <div class="trial-badge">🎁 7 días de prueba gratis</div>
-          <div class="name">Normal</div>
-          <div class="price">$1,000 <small>CUP</small></div>
-          <div class="period">por mes</div>
-          <ul>
-            <li><span class="check">✅</span> Inventario básico (CRUD)</li>
-            <li><span class="check">✅</span> Ventas con clientes</li>
-            <li><span class="check">✅</span> Gestión de gastos</li>
-            <li><span class="check">✅</span> Metas de ventas</li>
-            <li><span class="check">✅</span> Sincronización offline</li>
-            <li><span class="cross">❌</span> Panel de Control avanzado</li>
-            <li><span class="cross">❌</span> Exportación de reportes</li>
-            <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
-            <li><span class="cross">❌</span> Gestión de proveedores</li>
-            <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
-            <li><span>👤 1 vendedor</span></li>
-          </ul>
-          <a href="#" class="btn btn-secondary btn-sm download-link">Probar 7 días gratis</a>
-          <p style="font-size:12px; color:#6b6b80; margin-top:8px;">Luego $1,000 CUP/mes</p>
-        </div>
-
-        <!-- Plan Premium -->
-        <div class="plan-card popular">
-          <div class="badge">Más popular</div>
-          <div class="name">Premium</div>
-          <div class="price">$2,000 <small>CUP</small></div>
-          <div class="period">por mes</div>
-          <ul>
-            <li><span class="check">✅</span> Todo lo del plan Normal</li>
-            <li><span class="check">✅</span> Panel de Control con gráficos y KPIs</li>
-            <li><span class="check">✅</span> Exportación PDF, Excel y CSV</li>
-            <li><span class="check">✅</span> Ocultar costos a vendedores</li>
-            <li><span class="check">✅</span> Gestión de proveedores</li>
-            <li><span class="check">✅</span> Notificaciones de stock bajo</li>
-            <li><span class="check">✅</span> Ranking de productos y clientes</li>
-            <li><span class="check">✅</span> Rendimiento de vendedores</li>
-            <li><span>👥 Hasta 5 vendedores</span></li>
-            <li><span>📞 Soporte prioritario</span></li>
-          </ul>
-          <a href="#" class="btn btn-primary btn-sm download-link">Descargar ahora</a>
-          <p style="font-size:12px; color:#6b6b80; margin-top:8px;">Sin período de prueba</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== RATING ===== -->
-  <section id="rating" class="rating-section">
-    <div class="container">
-      <h2 class="section-title">¿Qué opinas de <span>Tu MiPyme</span>?</h2>
-      <p class="section-subtitle">Tu valoración nos ayuda a mejorar. ¡Déjanos tu puntuación!</p>
-      <div class="stars" id="starsContainer">
-        <span data-value="1">☆</span>
-        <span data-value="2">☆</span>
-        <span data-value="3">☆</span>
-        <span data-value="4">☆</span>
-        <span data-value="5">☆</span>
-      </div>
-      <div id="ratingMessage" class="rating-message">Selecciona una estrella</div>
-    </div>
-  </section>
-
-  <!-- ===== GUÍA DE INSTALACIÓN ===== -->
-  <section id="install" class="install-guide">
-    <div class="container">
-      <h2 class="section-title">¿Cómo instalar <span>Tu MiPyme</span>?</h2>
-      <p class="section-subtitle">Sigue estos pasos para instalar la app en tu teléfono Android.</p>
-
-      <div class="install-steps">
-        <div class="step">
-          <div class="number">1</div>
-          <h4>Descarga el APK</h4>
-          <p>Haz clic en el botón "Descargar" y espera a que termine la descarga.</p>
-        </div>
-        <div class="step">
-          <div class="number">2</div>
-          <h4>Abre el archivo</h4>
-          <p>Ve a la carpeta de descargas y toca el archivo <strong>TuMiPyme.apk</strong>.</p>
-        </div>
-        <div class="step">
-          <div class="number">3</div>
-          <h4>Permite la instalación</h4>
-          <p>Android te pedirá permiso para instalar desde fuentes desconocidas. <strong>Activa la opción</strong>.</p>
-        </div>
-        <div class="step">
-          <div class="number">4</div>
-          <h4>Instala y disfruta</h4>
-          <p>Haz clic en "Instalar" y en unos segundos tendrás Tu MiPyme lista para usar.</p>
-        </div>
-      </div>
-
-      <div class="security-note">
+    <!-- Características -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>¿Por qué Tu MiPyme?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-boxes"></i>
+                    <h3>Inventario</h3>
+                    <p>Controla tu stock con gestión de lotes y precios de compra/venta.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cash-register"></i>
+                    <h3>Ventas</h3>
+                    <p>Registra ventas con múltiples métodos de pago y clientes.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Reportes</h3>
+                    <p>Obtén ganancias netas, gastos y análisis de productos más vendidos.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Vendedores</h3>
+                    <p>Gestiona varios vendedores con límites según tu plan.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Sincronización</h3>
+                    <p>Trabaja sin conexión y sincroniza automáticamente al recuperar internet.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Seguro</h3>
+                    <p>Tus datos están protegidos con autenticación y políticas de acceso.</p>
+                </div>
+    <!-- ===== HERO ===== -->
+    <section class="hero container">
+        <h2>Gestiona tu negocio con <br />la mejor herramienta</h2>
         <p>
-          <span class="icon">🛡️</span>
-          <strong>¿Por qué aparece "Esta aplicación puede dañar tu dispositivo"?</strong>
+            Administra inventario, ventas, gastos, clientes y más, todo desde una
+            aplicación fácil de usar. <strong>¡Y funciona sin internet!</strong>
         </p>
-        <p style="margin-top:8px;">
-          Este mensaje es <strong>normal</strong> al instalar APKs descargados fuera de Google Play Store.
-          No significa que la app sea dañina. Tu MiPyme está <strong>firmada y verificada</strong> por
-          Leifdev Software Developer. Puedes instalar con total confianza.
-        </p>
-        <p style="margin-top:8px; font-size:14px;">
-          Para evitar que aparezca en futuras instalaciones, puedes ir a:
-          <strong>Ajustes → Seguridad → Instalar desde fuentes desconocidas</strong>
-          y habilitar la opción para tu navegador o gestor de archivos.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CHANGELOG ===== -->
-  <section id="changelog" class="changelog">
-    <div class="container">
-      <h2 class="section-title">Historial de <span>cambios</span></h2>
-      <p class="section-subtitle">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
-
-      <div class="changelog-list">
-        <div class="changelog-item">
-          <div class="version">v2.0.0</div>
-          <div class="date">28 jul 2026</div>
-          <div class="desc">
-            <strong>¡Gran actualización!</strong>
-            <ul>
-              <li><strong>Nuevo Panel de Control:</strong> KPIs, gráfico de evolución, alertas inteligentes, ranking de productos, clientes y rendimiento de vendedores.</li>
-              <li><strong>Exportación Premium:</strong> Genera y comparte reportes en PDF, Excel y CSV.</li>
-              <li><strong>Gestión de proveedores:</strong> Marca clientes como proveedores y controla sus saldos.</li>
-              <li><strong>Ocultar costos a vendedores:</strong> Protege la información sensible de tu negocio.</li>
-              <li><strong>Bloqueo por falta de pago:</strong> Los administradores son redirigidos a pagar después del día 6.</li>
-              <li><strong>Modo oscuro mejorado:</strong> Colores más suaves y legibles.</li>
-              <li><strong>Mejoras UX:</strong> Filtro de categorías con botón "limpiar", validación de stock en tiempo real.</li>
-            </ul>
-          </div>
+        <div class="badges">
+            <span class="badge">📱 Android</span>
+            <span class="badge">☁️ Sincronización</span>
+            <span class="badge">🔐 Segura</span>
+            <span class="badge">📊 Reportes</span>
         </div>
+        <a id="descargar" href="https://github.com/TU_USUARIO/TuMiPyme/releases/latest/download/TuMiPyme.apk" class="btn-download">
+            ⬇️ Descargar APK
+        </a>
+        <div class="version">Última versión disponible</div>
+    </section>
 
-        <div class="changelog-item">
-          <div class="version">v1.5.0</div>
-          <div class="date">15 jun 2026</div>
-          <div class="desc">
-            <ul>
-              <li>Metas de ventas diarias, semanales y mensuales.</li>
-              <li>Notificaciones de stock bajo.</li>
-              <li>Mejoras en el rendimiento de sincronización.</li>
-            </ul>
-          </div>
-        </div>
+    <!-- ===== CARACTERÍSTICAS ===== -->
+    <section id="caracteristicas" class="features container">
+        <h3>✨ ¿Qué puedes hacer con Tu MiPyme?</h3>
+        <div class="grid">
+            <div class="feature-card">
+                <div class="icon">🛒</div>
+                <h4>Ventas rápidas</h4>
+                <p>Registra ventas en segundos, con múltiples productos y métodos de pago.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📦</div>
+                <h4>Inventario inteligente</h4>
+                <p>Controla tu stock, recibe alertas de productos agotados y reabastece fácilmente.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h4>Reportes y análisis</h4>
+                <p>Visualiza tus ganancias, gastos y productos más vendidos en gráficos claros.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">👥</div>
+                <h4>Gestión de clientes</h4>
+                <p>Lleva el registro de tus clientes, sus compras y saldos pendientes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">👤</div>
+                <h4>Vendedores</h4>
+                <p>Hasta 5 vendedores en el plan Premium. Cada uno con su propio registro.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🌐</div>
+                <h4>Offline + Sincronización</h4>
+                <p>Funciona sin internet y sincroniza tus datos automáticamente cuando vuelves a conectarte.</p>
+</div>
+</div>
+</section>
 
-        <div class="changelog-item">
-          <div class="version">v1.0.0</div>
-          <div class="date">1 mar 2026</div>
-          <div class="desc">
-            <ul>
-              <li>Lanzamiento inicial de Tu MiPyme.</li>
-              <li>Gestión de inventario, ventas, clientes, gastos y categorías.</li>
-              <li>Sincronización offline con Supabase.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Planes -->
+    <section id="plans" class="plans">
+    <!-- ===== PLANES ===== -->
+    <section id="planes" class="plans">
+<div class="container">
+            <h2>Elige tu plan</h2>
+            <h3>📋 Elige tu plan</h3>
+            <p class="sub">Paga mensualmente y disfruta de todas las ventajas.</p>
+<div class="plans-grid">
+<div class="plan-card">
+                    <div class="plan-header normal">
+                        <h3>Normal</h3>
+                        <p class="price">1,000 CUP<span>/mes</span></p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 1 vendedor</li>
+                        <li><i class="fas fa-check"></i> Gestión completa de inventario</li>
+                        <li><i class="fas fa-check"></i> Ventas y gastos ilimitados</li>
+                        <li><i class="fas fa-check"></i> Reportes básicos</li>
+                        <li><i class="fas fa-times"></i> Múltiples vendedores</li>
+                        <li><i class="fas fa-times"></i> Soporte prioritario</li>
+                    <div class="plan-name">Normal</div>
+                    <div class="price">$1,000 <small>CUP/mes</small></div>
+                    <ul>
+                        <li>✅ 1 vendedor</li>
+                        <li>✅ Inventario completo</li>
+                        <li>✅ Ventas y gastos</li>
+                        <li>✅ Reportes básicos</li>
+                        <li>✅ Clientes y categorías</li>
+                        <li>✅ Sincronización</li>
+</ul>
+                    <a href="#download" class="btn btn-plan">Elegir</a>
+</div>
+<div class="plan-card premium">
+                    <div class="plan-header premium">
+                        <h3>Premium</h3>
+                        <p class="price">2,000 CUP<span>/mes</span></p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 5 vendedores</li>
+                        <li><i class="fas fa-check"></i> Todo lo del plan Normal</li>
+                        <li><i class="fas fa-check"></i> Reportes avanzados</li>
+                        <li><i class="fas fa-check"></i> Exportación a Excel</li>
+                        <li><i class="fas fa-check"></i> Soporte prioritario</li>
+                        <li><i class="fas fa-check"></i> Personalización de marca</li>
+                    <div class="badge-premium">🌟 RECOMENDADO</div>
+                    <div class="plan-name">Premium</div>
+                    <div class="price">$2,000 <small>CUP/mes</small></div>
+                    <ul>
+                        <li>✅ Hasta 5 vendedores</li>
+                        <li>✅ Todo lo del plan Normal</li>
+                        <li>✅ Estadísticas por vendedor</li>
+                        <li>✅ Soporte prioritario</li>
+                        <li>✅ Próximas funcionalidades</li>
+</ul>
+                    <a href="#download" class="btn btn-plan">Elegir</a>
+</div>
+</div>
+</div>
+</section>
 
-  <!-- ===== BENEFICIOS ===== -->
-  <section id="benefits" class="benefits">
-    <div class="container">
-      <h2 class="section-title">¿Por qué <span>Tu MiPyme</span>?</h2>
-      <p class="section-subtitle">Miles de emprendedores cubanos ya confían en nosotros para administrar sus negocios.</p>
+    <!-- Descarga -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2>Descarga Tu MiPyme</h2>
+            <p>Obtén la aplicación en tu dispositivo Android. La versión más reciente siempre disponible.</p>
+            <a href="https://github.com/TU_USUARIO/TuMiPyme/releases/latest/download/TuMiPyme.apk" class="btn btn-download">
+                <i class="fas fa-download"></i> Descargar APK
+            </a>
+            <p class="version-info">Versión estable v2.0.0</p>
+    <!-- ===== INSTRUCCIONES DE PAGO ===== -->
+    <section id="pago" class="pago-info container">
+        <h3>💰 ¿Cómo pagar?</h3>
+        <div class="pago-card">
+            <p>
+                <span class="label">🏦 Tarjeta:</span>
+                <span><strong>Metropolitana</strong> 9227 9598 7522 7600</span>
+            </p>
+            <p>
+                <span class="label">📞 Confirmación:</span>
+                <span><strong>Teléfono:</strong> 59721408</span>
+            </p>
+            <p>
+                <span class="label">📅 Plazo:</span>
+                <span>Realiza tu pago entre el <strong>día 1 y 5 de cada mes</strong>.</span>
+            </p>
+            <div class="highlight">
+                <strong>📌 Importante:</strong> Después de realizar el pago, envía el
+                <strong>número de transacción</strong> desde la aplicación en la sección
+                "Realizar Pago". Tu solicitud será atendida antes del día 6 del mes.
+            </div>
+            <p style="margin-top:16px; font-size:0.95rem; color:#64748b;">
+                Al aprobar tu pago, tu plan se activa automáticamente.
+            </p>
+</div>
+</section>
 
-      <div class="benefits-grid">
-        <div class="benefit-item">
-          <div class="icon">📱</div>
-          <h4>100% offline</h4>
-          <p>Trabaja sin internet en cualquier lugar de Cuba.</p>
-        </div>
-        <div class="benefit-item">
-          <div class="icon">🔐</div>
-          <h4>Datos seguros</h4>
-          <p>Tus datos están cifrados y sincronizados en la nube.</p>
-        </div>
-        <div class="benefit-item">
-          <div class="icon">⚡</div>
-          <h4>Rápida y ligera</h4>
-          <p>Funciona en cualquier teléfono Android, sin consumir muchos recursos.</p>
-        </div>
-        <div class="benefit-item">
-          <div class="icon">📊</div>
-          <h4>Decisiones con datos</h4>
-          <p>Gráficos y KPIs para que tomes las mejores decisiones.</p>
-        </div>
-        <div class="benefit-item">
-          <div class="icon">🔄</div>
-          <h4>Sincronización automática</h4>
-          <p>Olvídate de perder información. Todo se sincroniza solo.</p>
-        </div>
-        <div class="benefit-item">
-          <div class="icon">❤️</div>
-          <h4>Hecha para Cuba</h4>
-          <p>Diseñada pensando en las necesidades reales del emprendedor cubano.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Pie de página -->
+    <footer>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+<div class="container">
+            <p>&copy; 2026 Tu MiPyme. Desarrollado por Leifdev Software Developer.</p>
+            <div class="footer-links">
+            <div>
+                <strong>Tu MiPyme</strong> — Gestión inteligente para tu negocio
+            </div>
+            <div>
+                <a href="https://github.com/TU_USUARIO/TuMiPyme" target="_blank">GitHub</a>
+                &nbsp;·&nbsp;
+<a href="mailto:Leifdev0306@gmail.com">Contacto</a>
+                <a href="#">Términos</a>
+                <a href="#">Privacidad</a>
+                &nbsp;·&nbsp;
+                <span class="copy">© 2026 Leifdev Software Developer</span>
+</div>
+</div>
+</footer>
 
-  <!-- ===== CTA ===== -->
-  <section id="cta" class="cta">
-    <div class="container">
-      <h2>📲 Descarga Tu MiPyme ahora</h2>
-      <p>
-        Prueba 7 días gratis el plan Normal. Sin compromisos, sin tarjeta de crédito.
-        <br />
-        <span style="font-size:14px; color:#b0b0c8;">
-          ⚡ Siempre descargarás la <strong>última versión</strong> disponible.
-        </span>
-      </p>
-      <a href="#" class="btn btn-primary" style="font-size:20px; padding:18px 48px;" id="ctaDownloadBtn">
-        ⬇️ Descargar última versión
-      </a>
-      <p style="margin-top:16px; font-size:14px; color:#b0b0c8;">
-        Disponible en GitHub Releases · Android 5.0+ · ~15 MB
-      </p>
-      <p style="margin-top:8px; font-size:12px; color:#6b6b80;">
-        Si la descarga no comienza, <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest" style="color:#f59e0b; text-decoration:underline;">visita la página de lanzamientos</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="#features">Características</a>
-        <a href="#plans">Planes</a>
-        <a href="#install">Instalación</a>
-        <a href="#changelog">Historial</a>
-        <a href="#benefits">Beneficios</a>
-        <a href="https://github.com/Leifdev0306/Tu-MiPyme" target="_blank">GitHub</a>
-        <a href="mailto:Leifdev0306@gmail.com">Contacto</a>
-      </div>
-      <p style="margin-bottom:8px;">
-        &copy; 2026 <strong>Leifdev Software Developer</strong> — Todos los derechos reservados.
-      </p>
-      <p style="font-size:13px; color:#6b6b80;">
-        Hecho con ❤️ para los emprendedores de Cuba.
-      </p>
-    </div>
-  </footer>
-
-  <!-- ===== JAVASCRIPT ===== -->
-  <script>
-    // ========== 1. MENÚ MÓVIL ==========
-    const toggle = document.getElementById('menuToggle');
-    const nav = document.getElementById('mainNav');
-
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('open');
-    });
-
-    document.querySelectorAll('#mainNav a').forEach(link => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('open');
-      });
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // ========== 2. DESCARGA DINÁMICA (API de GitHub) ==========
-    const repoOwner = 'Leifdev0306';
-    const repoName = 'Tu-MiPyme';
-    const assetName = 'TuMiPyme.apk';
-
-    async function getLatestDownloadUrl() {
-      try {
-        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`;
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error(`API error: ${response.status}`);
-        }
-        const data = await response.json();
-        const asset = data.assets.find(a => a.name === assetName);
-        if (asset) {
-          return asset.browser_download_url;
-        } else {
-          return `https://github.com/${repoOwner}/${repoName}/releases/latest/download/${assetName}`;
-        }
-      } catch (error) {
-        console.warn('Error fetching latest release, using fallback URL', error);
-        return `https://github.com/${repoOwner}/${repoName}/releases/latest/download/${assetName}`;
-      }
-    }
-
-    async function updateDownloadLinks() {
-      const downloadUrl = await getLatestDownloadUrl();
-      const downloadElements = document.querySelectorAll('.download-link, #downloadBtn, #ctaDownloadBtn');
-      downloadElements.forEach(el => {
-        el.href = downloadUrl;
-        if (typeof gtag !== 'undefined') {
-          el.addEventListener('click', () => {
-            gtag('event', 'download', {
-              'event_category': 'engagement',
-              'event_label': 'TuMiPyme_apk'
-            });
-          });
-        }
-      });
-
-      // Contador de descargas
-      try {
-        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases`;
-        const response = await fetch(apiUrl);
-        if (response.ok) {
-          const releases = await response.json();
-          let totalDownloads = 0;
-          releases.forEach(r => {
-            r.assets.forEach(a => {
-              if (a.name === assetName) {
-                totalDownloads += a.download_count || 0;
-              }
-            });
-          });
-          const downloadCountEl = document.getElementById('downloadCount');
-          if (downloadCountEl) {
-            if (totalDownloads > 0) {
-              downloadCountEl.textContent = totalDownloads.toLocaleString();
-            } else {
-              downloadCountEl.textContent = '+1.000';
-            }
-          }
-        }
-      } catch (e) {
-        console.warn('Could not fetch download count');
-      }
-    }
-
-    updateDownloadLinks();
-
-    // ========== 3. RATING ==========
-    const stars = document.querySelectorAll('#starsContainer span');
-    const ratingMessage = document.getElementById('ratingMessage');
-
-    const savedRating = localStorage.getItem('tu_mipyme_rating');
-    if (savedRating) {
-      const value = parseInt(savedRating);
-      stars.forEach(star => {
-        const starValue = parseInt(star.dataset.value);
-        if (starValue <= value) {
-          star.classList.add('active');
-          star.textContent = '★';
-        } else {
-          star.classList.remove('active');
-          star.textContent = '☆';
-        }
-      });
-      ratingMessage.textContent = `¡Gracias! Tu valoración: ${value} estrellas ⭐`;
-    }
-
-    stars.forEach(star => {
-      star.addEventListener('click', function() {
-        const value = parseInt(this.dataset.value);
-        stars.forEach(s => {
-          const sv = parseInt(s.dataset.value);
-          if (sv <= value) {
-            s.classList.add('active');
-            s.textContent = '★';
-          } else {
-            s.classList.remove('active');
-            s.textContent = '☆';
-          }
-        });
-        localStorage.setItem('tu_mipyme_rating', value);
-        ratingMessage.textContent = `¡Gracias por tu valoración! (${value} ⭐)`;
-      });
-
-      star.addEventListener('mouseenter', function() {
-        const value = parseInt(this.dataset.value);
-        stars.forEach(s => {
-          const sv = parseInt(s.dataset.value);
-          if (sv <= value) {
-            s.style.color = '#fbbf24';
-          } else {
-            s.style.color = '#d1d5db';
-          }
-        });
-      });
-
-      star.addEventListener('mouseleave', function() {
-        stars.forEach(s => {
-          if (s.classList.contains('active')) {
-            s.style.color = '#f59e0b';
-          } else {
-            s.style.color = '#d1d5db';
-          }
-        });
-      });
-    });
-  </script>
+    <script src="js/script.js"></script>
 </body>
+</html>
 </html>
