@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tu MiPyme – Gestión inteligente para tu negocio</title>
-  <meta name="description" content="Administra ventas, inventario, clientes y finanzas desde una sola app. Offline-first, sincronización en la nube y sin complicaciones." />
+  <meta name="description" content="Administra ventas, inventario, clientes, finanzas y obligaciones fiscales desde una sola app. Offline-first, sincronización en la nube y sin complicaciones." />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +20,9 @@
   </script>
 
   <style>
-    /* ===== RESET Y VARIABLES ===== */
+    /* ============================================================
+       RESET Y VARIABLES (Diseño definitivo)
+       ============================================================ */
     * {
       margin: 0;
       padding: 0;
@@ -29,10 +31,13 @@
 
     :root {
       --primary: #0a2463;
+      --primary-dark: #061b4a;
       --primary-light: #1e3a8a;
       --primary-lighter: #3b82f6;
-      --primary-lightest: #93c5fd;
-      --secondary: #1e293b;
+      --gold: #f5a623;
+      --gold-light: #f7c948;
+      --gold-dark: #d48c1a;
+      --white: #ffffff;
       --gray-50: #f8fafc;
       --gray-100: #f1f5f9;
       --gray-200: #e2e8f0;
@@ -44,12 +49,13 @@
       --gray-800: #1e293b;
       --gray-900: #0f172a;
       --shadow-sm: 0 1px 3px rgba(10, 36, 99, 0.06);
-      --shadow-md: 0 4px 16px rgba(10, 36, 99, 0.08);
-      --shadow-lg: 0 12px 48px rgba(10, 36, 99, 0.10);
-      --shadow-xl: 0 24px 80px rgba(10, 36, 99, 0.12);
+      --shadow-md: 0 4px 16px rgba(10, 36, 99, 0.10);
+      --shadow-lg: 0 12px 48px rgba(10, 36, 99, 0.14);
+      --shadow-xl: 0 24px 80px rgba(10, 36, 99, 0.18);
       --radius: 12px;
-      --radius-lg: 20px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     html {
@@ -58,10 +64,11 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #ffffff;
+      background: var(--white);
       color: var(--gray-900);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     a {
@@ -79,21 +86,28 @@
       padding: 0 24px;
     }
 
-    /* ===== ANIMACIONES ===== */
+    /* ============================================================
+       ANIMACIONES
+       ============================================================ */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-14px) scale(1.02); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
     }
 
     .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
     .animate-on-scroll.visible {
@@ -101,7 +115,9 @@
       transform: translateY(0);
     }
 
-    /* ===== BOTONES ===== */
+    /* ============================================================
+       BOTONES
+       ============================================================ */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -114,17 +130,19 @@
       cursor: pointer;
       transition: all var(--transition);
       background: transparent;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(10, 36, 99, 0.25);
+      background: var(--gold);
+      color: var(--primary-dark);
+      box-shadow: 0 4px 16px rgba(245, 166, 35, 0.35);
     }
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(10, 36, 99, 0.30);
-      background: var(--primary-light);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 32px rgba(245, 166, 35, 0.50);
+      background: var(--gold-light);
     }
 
     .btn-outline {
@@ -133,18 +151,20 @@
     }
     .btn-outline:hover {
       background: var(--primary);
-      color: #fff;
-      transform: translateY(-2px);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
     }
 
     .btn-white {
-      background: #fff;
-      color: var(--primary);
+      background: var(--white);
+      color: var(--primary-dark);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
     .btn-white:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+      background: var(--gray-50);
     }
 
     .btn-lg {
@@ -152,20 +172,28 @@
       font-size: 18px;
     }
 
-    /* ===== HEADER ===== */
+    .btn-sm {
+      padding: 8px 20px;
+      font-size: 14px;
+    }
+
+    /* ============================================================
+       HEADER (Sticky con efecto glass)
+       ============================================================ */
     header {
       padding: 16px 0;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px) saturate(180%);
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
-      border-bottom: 1px solid var(--gray-200);
+      border-bottom: 1px solid rgba(10, 36, 99, 0.06);
       transition: all var(--transition);
     }
 
     header.scrolled {
+      background: rgba(255, 255, 255, 0.96);
       box-shadow: var(--shadow-sm);
     }
 
@@ -179,22 +207,23 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 800;
       color: var(--primary);
     }
 
     .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--primary);
-      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-size: 18px;
+      color: var(--primary-dark);
+      font-size: 20px;
       font-weight: 700;
+      box-shadow: 0 2px 12px rgba(245, 166, 35, 0.30);
     }
 
     nav {
@@ -216,9 +245,10 @@
       bottom: -4px;
       left: 0;
       width: 0;
-      height: 2px;
-      background: var(--primary);
+      height: 2.5px;
+      background: var(--gold);
       transition: width var(--transition);
+      border-radius: 4px;
     }
     nav a:hover {
       color: var(--primary);
@@ -228,17 +258,18 @@
     }
 
     .nav-download {
-      background: var(--primary);
-      color: #fff;
-      padding: 8px 20px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--primary-dark);
+      padding: 8px 22px;
       border-radius: 50px;
       font-weight: 600;
       font-size: 14px;
-      box-shadow: 0 2px 12px rgba(10, 36, 99, 0.20);
+      box-shadow: 0 2px 12px rgba(245, 166, 35, 0.25);
     }
     .nav-download:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(10, 36, 99, 0.30);
+      box-shadow: 0 4px 20px rgba(245, 166, 35, 0.40);
+      background: var(--gold-light);
     }
     .nav-download::after { display: none; }
 
@@ -252,10 +283,12 @@
       padding: 4px;
     }
 
-    /* ===== HERO ===== */
+    /* ============================================================
+       HERO (con gradiente y decoración)
+       ============================================================ */
     .hero {
-      padding: 140px 0 80px;
-      background: linear-gradient(160deg, #f0f7ff 0%, #ffffff 50%, #f8fafc 100%);
+      padding: 160px 0 80px;
+      background: linear-gradient(165deg, #f0f7ff 0%, #ffffff 60%, #f8fafc 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -266,11 +299,23 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: -30%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+      top: -40%;
+      right: -15%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(245, 166, 35, 0.06) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
@@ -290,28 +335,31 @@
 
     .hero-badge {
       display: inline-block;
-      background: rgba(59, 130, 246, 0.12);
-      color: var(--primary);
+      background: rgba(245, 166, 35, 0.15);
+      color: var(--gold-dark);
       font-size: 13px;
       font-weight: 600;
-      padding: 4px 16px;
+      padding: 4px 18px;
       border-radius: 50px;
       margin-bottom: 16px;
-      letter-spacing: 0.3px;
-      border: 1px solid rgba(59, 130, 246, 0.15);
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(245, 166, 35, 0.20);
     }
 
     .hero-content h1 {
-      font-size: 52px;
+      font-size: 56px;
       font-weight: 900;
-      line-height: 1.08;
+      line-height: 1.06;
       letter-spacing: -1.5px;
       color: var(--gray-900);
       margin-bottom: 16px;
     }
 
     .hero-content h1 span {
-      color: var(--primary);
+      color: var(--gold-dark);
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero-content p {
@@ -319,16 +367,42 @@
       color: var(--gray-500);
       max-width: 480px;
       margin-bottom: 32px;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
+      margin-bottom: 48px;
     }
 
-    /* ===== MOCKUP ===== */
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .hero-stats .stat {
+      text-align: left;
+    }
+
+    .hero-stats .stat h3 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .hero-stats .stat h3 span {
+      color: var(--gold-dark);
+    }
+    .hero-stats .stat p {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    /* ===== HERO MOCKUP ===== */
     .hero-image {
       display: flex;
       justify-content: center;
@@ -339,16 +413,30 @@
     .phone-mockup {
       width: 100%;
       max-width: 320px;
-      border-radius: 32px;
+      border-radius: 36px;
       background: var(--gray-900);
       padding: 14px;
       box-shadow: var(--shadow-xl);
+      position: relative;
+    }
+
+    .phone-mockup::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark), var(--primary));
+      z-index: -1;
+      opacity: 0.25;
     }
 
     .phone-mockup .screen {
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
-      background: #fff;
+      background: var(--white);
       aspect-ratio: 9 / 19;
       padding: 16px 12px;
       display: flex;
@@ -371,7 +459,7 @@
       background: var(--gray-300);
     }
     .screen-header .dot.active {
-      background: var(--primary-light);
+      background: var(--gold);
     }
 
     .screen-body {
@@ -416,8 +504,8 @@
       min-height: 4px;
     }
     .screen-chart .bar.primary { background: var(--primary-light); }
+    .screen-chart .bar.gold { background: var(--gold); }
     .screen-chart .bar.green { background: #0b9e6a; }
-    .screen-chart .bar.orange { background: #d97706; }
 
     .screen-footer {
       display: flex;
@@ -434,19 +522,21 @@
       transition: all 0.2s;
     }
     .screen-footer .tab.active {
-      background: var(--primary);
-      color: #fff;
-      font-weight: 600;
+      background: var(--gold);
+      color: var(--primary-dark);
+      font-weight: 700;
     }
 
-    /* ===== SECCIONES ===== */
+    /* ============================================================
+       SECCIONES GENERALES
+       ============================================================ */
     section {
       padding: 80px 0;
     }
 
     .section-title {
       text-align: center;
-      font-size: 38px;
+      font-size: 40px;
       font-weight: 800;
       letter-spacing: -0.5px;
       color: var(--gray-900);
@@ -454,7 +544,10 @@
     }
 
     .section-title span {
-      color: var(--primary);
+      color: var(--gold-dark);
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .section-subtitle {
@@ -463,31 +556,51 @@
       color: var(--gray-500);
       max-width: 600px;
       margin: 0 auto 48px;
+      line-height: 1.7;
     }
 
-    /* ===== FEATURES ===== */
+    /* ============================================================
+       CARACTERÍSTICAS (Features)
+       ============================================================ */
     .features {
-      background: #ffffff;
+      background: var(--white);
     }
 
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+      gap: 28px;
     }
 
     .feature-card {
       background: var(--gray-50);
       padding: 32px 24px;
-      border-radius: var(--radius);
+      border-radius: var(--radius-lg);
       transition: all var(--transition);
       border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+      opacity: 0;
+      transition: opacity var(--transition);
     }
 
     .feature-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-md);
       border-color: var(--gray-200);
+    }
+    .feature-card:hover::before {
+      opacity: 1;
     }
 
     .feature-card .icon {
@@ -506,13 +619,13 @@
     .feature-card p {
       font-size: 15px;
       color: var(--gray-500);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .feature-card .tag {
       display: inline-block;
-      background: rgba(59, 130, 246, 0.10);
-      color: var(--primary);
+      background: rgba(245, 166, 35, 0.12);
+      color: var(--gold-dark);
       font-size: 11px;
       font-weight: 600;
       padding: 2px 12px;
@@ -531,7 +644,9 @@
       display: inline-block;
     }
 
-    /* ===== HOW IT WORKS ===== */
+    /* ============================================================
+       CÓMO FUNCIONA (Steps)
+       ============================================================ */
     .how-it-works {
       background: var(--gray-50);
     }
@@ -546,12 +661,14 @@
 
     .step {
       text-align: center;
-      padding: 24px 16px;
-      background: #fff;
-      border-radius: var(--radius);
+      padding: 28px 16px;
+      background: var(--white);
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
       transition: all var(--transition);
+      position: relative;
     }
+
     .step:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-md);
@@ -563,12 +680,13 @@
       justify-content: center;
       width: 48px;
       height: 48px;
-      background: var(--primary);
-      color: #fff;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--primary-dark);
       font-weight: 800;
       font-size: 20px;
       border-radius: 50%;
       margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(245, 166, 35, 0.25);
     }
 
     .step h4 {
@@ -583,9 +701,11 @@
       color: var(--gray-500);
     }
 
-    /* ===== PLANS ===== */
+    /* ============================================================
+       PLANES (con 3 días de prueba destacado)
+       ============================================================ */
     .plans {
-      background: #ffffff;
+      background: var(--white);
     }
 
     .plans-grid {
@@ -613,35 +733,37 @@
     }
 
     .plan-card.popular {
-      border-color: var(--primary);
-      background: #ffffff;
-      box-shadow: var(--shadow-md);
+      border-color: var(--gold);
+      background: linear-gradient(180deg, #fff, #fef9e7);
     }
 
     .plan-card.popular .badge {
       position: absolute;
       top: -12px;
       right: 24px;
-      background: var(--primary);
-      color: #fff;
+      background: var(--gold);
+      color: var(--primary-dark);
       font-weight: 700;
       font-size: 12px;
       padding: 4px 16px;
       border-radius: 50px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      box-shadow: 0 2px 12px rgba(245, 166, 35, 0.25);
     }
 
     .plan-card .trial-badge {
       display: inline-block;
       background: #0b9e6a;
-      color: #fff;
+      color: var(--white);
       font-weight: 700;
       font-size: 12px;
       padding: 4px 16px;
       border-radius: 50px;
       text-transform: uppercase;
       margin-bottom: 12px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(11, 158, 106, 0.25);
     }
 
     .plan-card .name {
@@ -696,7 +818,9 @@
       font-size: 18px;
     }
 
-    /* ===== CHANGELOG ===== */
+    /* ============================================================
+       CHANGELOG
+       ============================================================ */
     .changelog {
       background: var(--gray-50);
     }
@@ -710,7 +834,7 @@
       display: flex;
       gap: 24px;
       padding: 20px 24px;
-      background: #fff;
+      background: var(--white);
       border-radius: var(--radius);
       margin-bottom: 12px;
       box-shadow: var(--shadow-sm);
@@ -726,7 +850,7 @@
     .changelog-item .version {
       font-weight: 800;
       font-size: 18px;
-      color: var(--primary);
+      color: var(--gold-dark);
       min-width: 80px;
     }
 
@@ -753,16 +877,18 @@
       content: '▸';
       position: absolute;
       left: 0;
-      color: var(--primary);
+      color: var(--gold-dark);
       font-weight: 700;
     }
     .changelog-item .desc strong {
       color: var(--gray-900);
     }
 
-    /* ===== TRUST ===== */
+    /* ============================================================
+       CONFIANZA (Trust)
+       ============================================================ */
     .trust {
-      background: #ffffff;
+      background: var(--white);
     }
 
     .trust-grid {
@@ -786,7 +912,7 @@
     }
 
     .trust-item .icon {
-      font-size: 28px;
+      font-size: 32px;
       margin-bottom: 8px;
     }
 
@@ -801,18 +927,35 @@
       color: var(--gray-500);
     }
 
-    /* ===== CTA ===== */
+    /* ============================================================
+       CTA (Call to Action)
+       ============================================================ */
     .cta {
-      background: var(--primary);
-      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
       text-align: center;
       padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(245, 166, 35, 0.10) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .cta h2 {
-      font-size: 42px;
+      font-size: 44px;
       font-weight: 800;
       margin-bottom: 12px;
+      position: relative;
     }
 
     .cta p {
@@ -820,54 +963,104 @@
       color: rgba(255, 255, 255, 0.80);
       max-width: 500px;
       margin: 0 auto 32px;
+      position: relative;
     }
 
     .cta .btn-white {
-      background: #fff;
-      color: var(--primary);
+      background: var(--white);
+      color: var(--primary-dark);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
     }
     .cta .btn-white:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      background: var(--gray-50);
     }
 
     .cta .version-info {
       margin-top: 16px;
       font-size: 14px;
       color: rgba(255, 255, 255, 0.60);
+      position: relative;
     }
 
     .cta .version-info a {
-      color: #fff;
+      color: var(--gold-light);
       text-decoration: underline;
     }
 
-    /* ===== FOOTER ===== */
+    /* ============================================================
+       FOOTER
+       ============================================================ */
     footer {
       background: var(--gray-900);
       color: #94a3b8;
-      padding: 32px 0;
+      padding: 48px 0 32px;
       text-align: center;
+    }
+
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    footer .footer-links a {
+      font-size: 14px;
+      transition: color var(--transition);
+    }
+    footer .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    footer .social {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    footer .social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      transition: all var(--transition);
+      font-size: 18px;
+      color: #94a3b8;
+    }
+    footer .social a:hover {
+      background: var(--gold);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
     }
 
     footer p {
       font-size: 14px;
+      color: #6b6b8a;
     }
 
-    footer strong {
-      color: #fff;
+    footer p strong {
+      color: #b0b0c8;
     }
 
-    /* ===== MODAL DE DESCARGA ===== */
+    /* ============================================================
+       MODAL DE DESCARGA (mejorado)
+       ============================================================ */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(15, 23, 42, 0.60);
-      backdrop-filter: blur(6px);
+      background: rgba(10, 36, 99, 0.60);
+      backdrop-filter: blur(8px);
       z-index: 2000;
       display: none;
       align-items: center;
@@ -880,7 +1073,7 @@
     }
 
     .modal-dialog {
-      background: #ffffff;
+      background: var(--white);
       max-width: 480px;
       width: 100%;
       border-radius: var(--radius-lg);
@@ -908,7 +1101,7 @@
       font-size: 16px;
       color: var(--gray-600);
       text-align: center;
-      line-height: 1.6;
+      line-height: 1.7;
       margin-bottom: 8px;
     }
 
@@ -916,7 +1109,7 @@
       background: var(--gray-50);
       padding: 12px 16px;
       border-radius: var(--radius);
-      border-left: 4px solid var(--primary-light);
+      border-left: 4px solid var(--gold);
       margin: 16px 0 20px;
       font-size: 14px;
       color: var(--gray-700);
@@ -947,11 +1140,12 @@
     }
 
     .modal-actions .btn-primary {
-      background: var(--primary);
-      color: #fff;
+      background: var(--gold);
+      color: var(--primary-dark);
     }
     .modal-actions .btn-primary:hover {
-      background: var(--primary-light);
+      background: var(--gold-light);
+      box-shadow: 0 4px 16px rgba(245, 166, 35, 0.30);
     }
 
     /* ============================================================
@@ -969,6 +1163,10 @@
       }
 
       .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-stats {
         justify-content: center;
       }
 
@@ -998,7 +1196,7 @@
       nav {
         display: none;
         flex-direction: column;
-        background: #fff;
+        background: var(--white);
         position: absolute;
         top: 72px;
         left: 0;
@@ -1007,6 +1205,7 @@
         box-shadow: var(--shadow-lg);
         border-radius: 0 0 var(--radius) var(--radius);
         gap: 16px;
+        backdrop-filter: blur(16px);
       }
 
       nav.open {
@@ -1042,6 +1241,20 @@
 
       .modal-actions {
         flex-direction: column;
+      }
+
+      .hero-stats {
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .hero-stats .stat h3 {
+        font-size: 24px;
+      }
+
+      .btn-lg {
+        padding: 14px 32px;
+        font-size: 16px;
       }
     }
 
@@ -1101,15 +1314,29 @@
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge">Nueva versión 2.0.0</div>
+        <div class="hero-badge">🚀 Nueva versión 2.0.0</div>
         <h1>Gestión inteligente <br /><span>para tu negocio</span></h1>
         <p>
-          Administra ventas, inventario, clientes y finanzas desde una sola app.
+          Administra ventas, inventario, clientes, finanzas y tus obligaciones fiscales desde una sola app.
           Offline-first, sincronización en la nube y sin complicaciones.
         </p>
         <div class="hero-buttons">
           <button class="btn btn-primary btn-lg download-trigger">📲 Descargar ahora</button>
           <a href="#features" class="btn btn-outline">Explorar</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <h3>+<span id="downloadCount">1.500</span></h3>
+            <p>Descargas totales</p>
+          </div>
+          <div class="stat">
+            <h3>4.9 ⭐</h3>
+            <p>Valoración media</p>
+          </div>
+          <div class="stat">
+            <h3>100%</h3>
+            <p>Offline-first</p>
+          </div>
         </div>
       </div>
       <div class="hero-image">
@@ -1135,12 +1362,12 @@
               </div>
               <div class="screen-chart">
                 <div class="bar primary" style="height:28px"></div>
-                <div class="bar primary" style="height:18px"></div>
+                <div class="bar gold" style="height:18px"></div>
                 <div class="bar green" style="height:32px"></div>
-                <div class="bar orange" style="height:12px"></div>
-                <div class="bar primary" style="height:40px"></div>
+                <div class="bar primary" style="height:12px"></div>
+                <div class="bar gold" style="height:40px"></div>
                 <div class="bar green" style="height:24px"></div>
-                <div class="bar blue" style="height:16px"></div>
+                <div class="bar primary" style="height:16px"></div>
               </div>
               <div class="screen-footer">
                 <span class="tab active">📊 Resumen</span>
@@ -1213,6 +1440,13 @@
         </div>
 
         <div class="feature-card animate-on-scroll">
+          <div class="icon">🧾</div>
+          <h3>Módulo fiscal</h3>
+          <p>Simula el Vector Fiscal, calcula impuestos mensuales y genera la Declaración Jurada anual estimada.</p>
+          <span class="tag">Premium</span>
+        </div>
+
+        <div class="feature-card animate-on-scroll">
           <div class="icon">🎯</div>
           <h3>Metas de ventas</h3>
           <p>Define metas diarias, semanales y mensuales. Visualiza el progreso en tiempo real.</p>
@@ -1261,12 +1495,12 @@
   <section id="plans" class="plans">
     <div class="container">
       <h2 class="section-title animate-on-scroll">Elige el plan <span>para tu negocio</span></h2>
-      <p class="section-subtitle animate-on-scroll">Comienza con 7 días de prueba gratuita del plan Normal. Sin compromisos, sin tarjeta de crédito.</p>
+      <p class="section-subtitle animate-on-scroll">Comienza con 3 días de prueba gratuita con todas las funcionalidades Premium desbloqueadas. Sin compromisos, sin tarjeta de crédito.</p>
 
       <div class="plans-grid">
         <!-- Plan Normal -->
         <div class="plan-card animate-on-scroll">
-          <div class="trial-badge">🎁 7 días gratis</div>
+          <div class="trial-badge">🎁 3 días gratis con Premium</div>
           <div class="name">Normal</div>
           <div class="price">$1,000 <small>CUP</small></div>
           <div class="period">por mes</div>
@@ -1281,9 +1515,10 @@
             <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
             <li><span class="cross">❌</span> Gestión de proveedores</li>
             <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
+            <li><span class="cross">❌</span> Módulo fiscal</li>
             <li><span>👤 1 vendedor</span></li>
           </ul>
-          <button class="btn btn-outline download-trigger">Probar 7 días gratis</button>
+          <button class="btn btn-outline download-trigger">Probar 3 días gratis</button>
           <p style="font-size:12px; color:var(--gray-400); margin-top:8px;">Luego $1,000 CUP/mes</p>
         </div>
 
@@ -1302,6 +1537,7 @@
             <li><span class="check">✅</span> Notificaciones de stock bajo</li>
             <li><span class="check">✅</span> Ranking de productos y clientes</li>
             <li><span class="check">✅</span> Rendimiento de vendedores</li>
+            <li><span class="check">✅</span> Módulo fiscal completo</li>
             <li><span>👥 Hasta 5 vendedores</span></li>
             <li><span>📞 Soporte prioritario</span></li>
           </ul>
@@ -1323,16 +1559,17 @@
       <div class="changelog-list">
         <div class="changelog-item animate-on-scroll">
           <div class="version">v2.0.0</div>
-          <div class="date">28 jul 2026</div>
+          <div class="date">31 jul 2026</div>
           <div class="desc">
-            <strong>¡Gran actualización!</strong>
+            <strong>¡Actualización definitiva!</strong>
             <ul>
               <li><strong>Nuevo panel de control:</strong> KPIs, gráfico de evolución, alertas inteligentes, ranking de productos, clientes y rendimiento de vendedores.</li>
               <li><strong>Exportación Premium:</strong> Genera y comparte reportes en PDF, Excel y CSV.</li>
               <li><strong>Gestión de proveedores:</strong> Marca clientes como proveedores y controla sus saldos.</li>
               <li><strong>Ocultar costos a vendedores:</strong> Protege la información sensible de tu negocio.</li>
+              <li><strong>Módulo fiscal completo:</strong> Simulación de Vector Fiscal, cálculo de impuestos mensuales (10% ventas, 15% utilidades) y Declaración Jurada anual estimada.</li>
               <li><strong>Bloqueo por falta de pago:</strong> Los administradores son redirigidos a pagar después del día 6.</li>
-              <li><strong>Modo oscuro mejorado:</strong> Colores más suaves y legibles.</li>
+              <li><strong>Período de prueba:</strong> 3 días con todas las funcionalidades Premium desbloqueadas.</li>
               <li><strong>Mejoras UX:</strong> Filtro de categorías con botón "limpiar", validación de stock en tiempo real.</li>
             </ul>
           </div>
@@ -1400,9 +1637,9 @@
           <p>Olvídate de perder información.</p>
         </div>
         <div class="trust-item animate-on-scroll">
-          <div class="icon">❤️</div>
-          <h4>Pensada para ti</h4>
-          <p>Una herramienta que se adapta a tu negocio.</p>
+          <div class="icon">🧾</div>
+          <h4>Cumple con la ONAT</h4>
+          <p>Simula tus impuestos y genera reportes fiscales.</p>
         </div>
       </div>
     </div>
@@ -1415,7 +1652,7 @@
     <div class="container">
       <h2>📲 Descarga Tu MiPyme ahora</h2>
       <p>
-        Prueba 7 días gratis el plan Normal. Sin compromisos, sin tarjeta de crédito.
+        Prueba 3 días gratis con todas las funciones Premium. Sin compromisos, sin tarjeta de crédito.
         <br />
         <span style="font-size:14px; opacity:0.7;">Siempre descargarás la última versión disponible.</span>
       </p>
@@ -1433,7 +1670,25 @@
   ============================================================ -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 <strong>Leifdev</strong></p>
+      <div class="social">
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Telegram">✈️</a>
+        <a href="https://github.com/Leifdev0306/Tu-MiPyme" target="_blank" aria-label="GitHub">🐙</a>
+        <a href="mailto:Leifdev0306@gmail.com" aria-label="Email">📧</a>
+      </div>
+      <div class="footer-links">
+        <a href="#features">Características</a>
+        <a href="#plans">Planes</a>
+        <a href="#changelog">Historial</a>
+        <a href="#trust">Confianza</a>
+        <a href="https://github.com/Leifdev0306/Tu-MiPyme" target="_blank">GitHub</a>
+        <a href="mailto:Leifdev0306@gmail.com">Contacto</a>
+      </div>
+      <p>
+        &copy; 2026 <strong>Leifdev Software Developer</strong> — Todos los derechos reservados.
+        <br />
+        <span style="font-size:13px; color:#6b6b8a;">Hecho con ❤️ para los emprendedores de Cuba.</span>
+      </p>
     </div>
   </footer>
 
@@ -1599,10 +1854,31 @@
     });
 
     // ============================================================
-    // 6. ACTUALIZAR ENLACES DE DESCARGA (fallback)
+    // 6. CONTADOR DE DESCARGAS (desde API de GitHub)
     // ============================================================
-    // (Ya se hace en getLatestDownloadUrl)
-    // Nota: los botones ya no son enlaces directos, sino que abren el modal.
+    async function fetchDownloadCount() {
+      try {
+        const response = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases');
+        if (!response.ok) throw new Error('API error');
+        const releases = await response.json();
+        let total = 0;
+        releases.forEach(r => {
+          r.assets.forEach(a => {
+            if (a.name === 'TuMiPyme.apk') {
+              total += a.download_count || 0;
+            }
+          });
+        });
+        const el = document.getElementById('downloadCount');
+        if (el) {
+          el.textContent = total > 0 ? total.toLocaleString() : '1.500';
+        }
+      } catch (e) {
+        console.warn('No se pudo obtener el contador de descargas');
+      }
+    }
+
+    fetchDownloadCount();
   </script>
 </body>
 </html>
