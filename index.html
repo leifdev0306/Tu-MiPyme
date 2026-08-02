@@ -60,6 +60,21 @@
       color: var(--text-main);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Canvas de fondo para las constelaciones */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 30% 20%, #eef2ff 0%, #f8fafc 100%);
     }
 
     a {
@@ -75,6 +90,8 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
+      position: relative;
+      z-index: 1;
     }
 
     /* ============================================================
@@ -88,6 +105,11 @@
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-12px); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
 
     .animate-on-scroll {
@@ -159,7 +181,7 @@
        ============================================================ */
     header {
       padding: 16px 0;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       position: fixed;
       top: 0;
@@ -262,24 +284,11 @@
        ============================================================ */
     .hero {
       padding: 140px 0 80px;
-      background: linear-gradient(160deg, #f0f7ff 0%, #ffffff 50%, #f8fafc 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
       position: relative;
       overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -30%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
     }
 
     .hero .container {
@@ -306,6 +315,7 @@
       margin-bottom: 16px;
       letter-spacing: 0.3px;
       border: 1px solid rgba(59, 130, 246, 0.15);
+      animation: pulseGlow 3s ease-in-out infinite;
     }
 
     .hero-content h1 {
@@ -319,6 +329,17 @@
 
     .hero-content h1 span {
       color: var(--accent);
+      position: relative;
+    }
+    .hero-content h1 span::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: rgba(59, 130, 246, 0.15);
+      border-radius: 4px;
     }
 
     .hero-content p {
@@ -451,6 +472,8 @@
        ============================================================ */
     section {
       padding: 80px 0;
+      position: relative;
+      z-index: 1;
     }
 
     .section-title {
@@ -478,7 +501,8 @@
        FEATURES
        ============================================================ */
     .features {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(4px);
     }
 
     .features-grid {
@@ -488,11 +512,12 @@
     }
 
     .feature-card {
-      background: var(--bg-body);
+      background: var(--bg-card);
       padding: 32px 24px;
       border-radius: var(--radius);
       transition: all var(--transition);
       border: 1px solid transparent;
+      box-shadow: var(--shadow-sm);
     }
 
     .feature-card:hover {
@@ -543,10 +568,11 @@
     }
 
     /* ============================================================
-       MODULO FISCAL (NUEVO)
+       MODULO FISCAL
        ============================================================ */
     .fiscal {
-      background: var(--bg-body);
+      background: rgba(244, 247, 251, 0.70);
+      backdrop-filter: blur(4px);
     }
 
     .fiscal-grid {
@@ -619,7 +645,8 @@
        HOW IT WORKS
        ============================================================ */
     .how-it-works {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(4px);
     }
 
     .steps-grid {
@@ -633,7 +660,7 @@
     .step {
       text-align: center;
       padding: 24px 16px;
-      background: var(--bg-body);
+      background: var(--bg-card);
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
       transition: all var(--transition);
@@ -673,7 +700,8 @@
        PLANS
        ============================================================ */
     .plans {
-      background: var(--bg-body);
+      background: rgba(244, 247, 251, 0.70);
+      backdrop-filter: blur(4px);
     }
 
     .plans-grid {
@@ -788,7 +816,8 @@
        CHANGELOG
        ============================================================ */
     .changelog {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.70);
+      backdrop-filter: blur(4px);
     }
 
     .changelog-list {
@@ -800,7 +829,7 @@
       display: flex;
       gap: 24px;
       padding: 20px 24px;
-      background: var(--bg-body);
+      background: var(--bg-card);
       border-radius: var(--radius);
       margin-bottom: 12px;
       box-shadow: var(--shadow-sm);
@@ -854,7 +883,8 @@
        TRUST
        ============================================================ */
     .trust {
-      background: var(--bg-body);
+      background: rgba(244, 247, 251, 0.70);
+      backdrop-filter: blur(4px);
     }
 
     .trust-grid {
@@ -904,6 +934,7 @@
       padding: 100px 0;
       position: relative;
       overflow: hidden;
+      z-index: 1;
     }
 
     .cta::before {
@@ -957,6 +988,8 @@
       color: #94a3b8;
       padding: 32px 0;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     footer p {
@@ -1191,6 +1224,11 @@
 <body>
 
   <!-- ============================================================
+  CANVAS DE CONSTELACIONES (fondo animado)
+  ============================================================ -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- ============================================================
   HEADER
   ============================================================ -->
   <header id="header">
@@ -1217,7 +1255,7 @@
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge">Nueva versión 2.0.0</div>
+        <div class="hero-badge">🚀 Nueva versión 2.1.3</div>
         <h1>Gestión inteligente <br /><span>para tu negocio</span></h1>
         <p>
           Administra ventas, inventario, clientes, finanzas y obligaciones fiscales desde una sola app.
@@ -1481,6 +1519,22 @@
 
       <div class="changelog-list">
         <div class="changelog-item animate-on-scroll">
+          <div class="version">v2.1.3</div>
+          <div class="date">2 ago 2026</div>
+          <div class="desc">
+            <strong>✨ Actualización de estabilidad y nuevas funciones</strong>
+            <ul>
+              <li><strong>Compilación para Windows:</strong> Ahora Tu MiPyme también está disponible para escritorio con las mismas funcionalidades.</li>
+              <li><strong>Gestión avanzada de vendedores:</strong> Administradores pueden asignar, mover y promover vendedores a gestores por sucursal.</li>
+              <li><strong>Precios inteligentes:</strong> Cuatro precios por producto (efectivo/transferencia × minorista/mayorista) que se actualizan automáticamente al vender.</li>
+              <li><strong>Planes ajustados por sucursal:</strong> El costo del plan considera el número de sucursales, haciendo el pago más justo.</li>
+              <li><strong>Mejora en el módulo fiscal:</strong> Simulación más precisa y cálculos de impuestos actualizados.</li>
+              <li><strong>Optimización de sincronización:</strong> Menos consumo de datos y mayor velocidad.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="changelog-item animate-on-scroll">
           <div class="version">v2.0.0</div>
           <div class="date">28 jul 2026</div>
           <div class="desc">
@@ -1583,7 +1637,7 @@
         ⬇️ Descargar última versión
       </button>
       <p class="version-info">
-        Android 5.0+ · ~15 MB
+        Android 5.0+ · ~15 MB · También para Windows
       </p>
     </div>
   </section>
@@ -1628,6 +1682,113 @@
   JAVASCRIPT
   ============================================================ -->
   <script>
+    // ============================================================
+    // 0. CONSTELACIONES (Canvas Animado)
+    // ============================================================
+    (function() {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      let particles = [];
+      const NUM_PARTICLES = 180;
+      const CONNECTION_DIST = 150;
+      const MOUSE_RADIUS = 200;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.vy = (Math.random() - 0.5) * 0.4;
+          this.radius = Math.random() * 2.5 + 1.5;
+          this.baseColor = `hsla(${210 + Math.random() * 30}, 70%, ${60 + Math.random() * 30}%, 0.7)`;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > w) this.vx *= -1;
+          if (this.y < 0 || this.y > h) this.vy *= -1;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.baseColor;
+          ctx.fill();
+        }
+      }
+
+      // Crear partículas
+      for (let i = 0; i < NUM_PARTICLES; i++) {
+        particles.push(new Particle());
+      }
+
+      let mouse = { x: null, y: null };
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+      window.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+
+      function drawLines() {
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < CONNECTION_DIST) {
+              let alpha = 1 - (dist / CONNECTION_DIST);
+              // Influencia del mouse
+              if (mouse.x !== null && mouse.y !== null) {
+                const d1 = Math.sqrt((particles[i].x - mouse.x) ** 2 + (particles[i].y - mouse.y) ** 2);
+                const d2 = Math.sqrt((particles[j].x - mouse.x) ** 2 + (particles[j].y - mouse.y) ** 2);
+                if (d1 < MOUSE_RADIUS || d2 < MOUSE_RADIUS) {
+                  alpha = Math.min(alpha + 0.4, 1);
+                }
+              }
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(59, 130, 246, ${alpha * 0.5})`;
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+        // Fondo sutil
+        const grad = ctx.createRadialGradient(w*0.3, h*0.2, 100, w*0.5, h*0.5, w*0.8);
+        grad.addColorStop(0, '#eef2ff');
+        grad.addColorStop(1, '#f8fafc');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+
+        // Dibujar conexiones primero (detrás)
+        drawLines();
+
+        // Dibujar partículas encima
+        for (let p of particles) {
+          p.update();
+          p.draw();
+        }
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
     // ============================================================
     // 1. MENÚ MÓVIL
     // ============================================================
@@ -1732,7 +1893,6 @@
     // Continuar descarga
     function continueDownload() {
       if (cachedDownloadUrl) {
-        // Evento de GA si existe
         if (typeof gtag !== 'undefined') {
           gtag('event', 'download', { 'event_category': 'engagement', 'event_label': 'TuMiPyme_apk' });
         }
@@ -1757,12 +1917,6 @@
     modal.addEventListener('click', function(e) {
       if (e.target === this) closeModal();
     });
-
-    // ============================================================
-    // 6. ACTUALIZAR ENLACES DE DESCARGA (fallback)
-    // ============================================================
-    // (Ya se hace en getLatestDownloadUrl)
-    // Nota: los botones ya no son enlaces directos, sino que abren el modal.
   </script>
 </body>
 </html>
