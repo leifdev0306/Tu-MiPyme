@@ -156,6 +156,7 @@
       display: flex;
       align-items: center;
       position: relative;
+      overflow: hidden;
     }
 
     .hero-grid {
@@ -275,7 +276,7 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      height: 400px;
+      height: 420px;
     }
 
     .device-container {
@@ -287,22 +288,22 @@
       align-items: center;
     }
 
-    .device-phone, .device-laptop {
+    .device-phone, .device-desktop {
       position: absolute;
       transition: opacity 1.2s ease, transform 1.2s ease;
       opacity: 0;
       transform: scale(0.85) rotate(-2deg);
       filter: drop-shadow(0 20px 60px rgba(59, 130, 246, 0.2));
     }
-    .device-phone.active, .device-laptop.active {
+    .device-phone.active, .device-desktop.active {
       opacity: 1;
       transform: scale(1) rotate(0deg);
     }
     .device-phone {
       width: 180px;
     }
-    .device-laptop {
-      width: 320px;
+    .device-desktop {
+      width: 340px;
     }
 
     .device-phone .mockup {
@@ -320,22 +321,22 @@
       display: flex;
       flex-direction: column;
     }
-    .device-laptop .mockup {
+    .device-desktop .mockup {
       background: #1a1f35;
       border-radius: 16px 16px 0 0;
       padding: 10px 10px 0 10px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .device-laptop .screen {
+    .device-desktop .screen {
       background: #0a0e1a;
       border-radius: 10px 10px 0 0;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 16 / 9;
       padding: 12px 10px;
       display: flex;
       flex-direction: column;
     }
-    .device-laptop .keyboard {
+    .device-desktop .keyboard {
       height: 18px;
       background: rgba(255, 255, 255, 0.04);
       border-radius: 0 0 12px 12px;
@@ -345,12 +346,20 @@
       gap: 8px;
       padding: 0 12px;
     }
-    .device-laptop .keyboard span {
+    .device-desktop .keyboard span {
       display: inline-block;
       width: 8px;
       height: 8px;
       background: rgba(255, 255, 255, 0.08);
       border-radius: 2px;
+    }
+    .device-desktop .stand {
+      width: 60px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      margin: 2px auto 0;
+      border-radius: 0 0 8px 8px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
     }
     .mockup-header {
       display: flex;
@@ -498,7 +507,7 @@
       box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
     }
     .feature-card .icon { font-size: 32px; margin-bottom: 12px; display: inline-block; }
-    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .feature-card h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
     .feature-card p { font-size: 15px; color: rgba(255, 255, 255, 0.6); line-height: 1.6; }
     .feature-card .tag {
       display: inline-block;
@@ -727,7 +736,7 @@
       animation: fadeUp 0.3s ease;
     }
     .modal .icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
-    .modal h3 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 12px; color: #fff; }
+    .modal h3 { font-size: 22px; font-weight: 700; text-align: center; color: #fff; margin-bottom: 12px; }
     .modal p { font-size: 16px; color: rgba(255, 255, 255, 0.7); text-align: center; line-height: 1.6; }
     .modal .highlight {
       background: rgba(59, 130, 246, 0.08);
@@ -750,9 +759,9 @@
       .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
       .hero p { margin: 0 auto 32px; }
       .hero-actions { justify-content: center; }
-      .hero-devices { order: -1; height: 280px; }
+      .hero-devices { order: -1; height: 300px; }
       .device-phone { width: 150px; }
-      .device-laptop { width: 260px; }
+      .device-desktop { width: 280px; }
       .plans-grid { grid-template-columns: 1fr; max-width: 480px; }
     }
     @media (max-width: 768px) {
@@ -784,7 +793,7 @@
       .hero h1 { font-size: 28px; }
       .hero p { font-size: 16px; }
       .device-phone { width: 120px; }
-      .device-laptop { width: 200px; }
+      .device-desktop { width: 200px; }
       .plan-card { padding: 24px 16px; }
       .feature-card { padding: 24px 16px; }
       .trust-grid { grid-template-columns: 1fr 1fr; }
@@ -851,8 +860,8 @@
               </div>
             </div>
           </div>
-          <!-- Laptop -->
-          <div class="device-laptop" id="deviceLaptop">
+          <!-- PC de escritorio -->
+          <div class="device-desktop" id="deviceDesktop">
             <div class="mockup">
               <div class="screen">
                 <div class="mockup-header">
@@ -873,12 +882,13 @@
                 <div class="mockup-footer"><span class="active">📊</span><span>📦</span><span>👥</span></div>
               </div>
               <div class="keyboard"><span></span><span></span><span></span><span></span><span></span><span></span><span style="width:30px;"></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="stand"></div>
             </div>
           </div>
           <!-- Indicador de alternancia -->
           <div class="device-switch-indicator">
             <span class="dot-indicator active" id="dotPhone"></span>
-            <span class="dot-indicator" id="dotLaptop"></span>
+            <span class="dot-indicator" id="dotDesktop"></span>
           </div>
         </div>
       </div>
@@ -1147,7 +1157,7 @@
   <script>
     (function() {
       // ============================================================
-      // 1. PARTÍCULAS: CIELO ESTRELLADO CON COMETAS
+      // 1. PARTÍCULAS: CIELO ESTRELLADO CON COMETAS Y ELEMENTOS DE NEGOCIOS
       // ============================================================
       const canvas = document.getElementById('stars-canvas');
       const ctx = canvas.getContext('2d');
@@ -1160,17 +1170,36 @@
       window.addEventListener('resize', resize);
       resize();
 
-      // Estrellas fijas
+      // Estrellas fijas (más brillantes en la zona central)
       const stars = [];
-      const NUM_STARS = 300;
+      const NUM_STARS = 350;
       for (let i = 0; i < NUM_STARS; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 0.5;
+        const x = w/2 + Math.cos(angle) * radius * w * 0.8;
+        const y = h/2 + Math.sin(angle) * radius * h * 0.8;
         stars.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          r: Math.random() * 1.5 + 0.5,
+          r: Math.random() * 1.8 + 0.5,
           alpha: 0.3 + Math.random() * 0.7,
-          speed: 0.005 + Math.random() * 0.01,
+          speed: 0.005 + Math.random() * 0.015,
           phase: Math.random() * Math.PI * 2,
+        });
+      }
+
+      // Partículas de "datos" (pequeños círculos que se mueven lentamente)
+      const dataParticles = [];
+      const NUM_DATA = 20;
+      for (let i = 0; i < NUM_DATA; i++) {
+        dataParticles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
+          r: 2 + Math.random() * 3,
+          alpha: 0.1 + Math.random() * 0.2,
+          color: `hsla(${200 + Math.random() * 40}, 80%, 60%, 0.3)`,
         });
       }
 
@@ -1194,7 +1223,6 @@
         });
       }
 
-      // Crear cometas periódicamente
       setInterval(() => {
         if (comets.length < 4) createComet();
       }, 3000);
@@ -1207,13 +1235,30 @@
           ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255,255,255,${alpha})`;
           ctx.fill();
-          // Brillo extra
           if (s.r > 1.2) {
-            ctx.shadowColor = 'rgba(255,255,255,0.2)';
+            ctx.shadowColor = 'rgba(255,255,255,0.15)';
             ctx.shadowBlur = 10;
             ctx.fill();
             ctx.shadowBlur = 0;
           }
+        }
+      }
+
+      function drawDataParticles() {
+        for (let p of dataParticles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          // Brillo
+          ctx.shadowColor = p.color;
+          ctx.shadowBlur = 15;
+          ctx.fill();
+          ctx.shadowBlur = 0;
         }
       }
 
@@ -1227,7 +1272,6 @@
             comets.splice(i, 1);
             continue;
           }
-          // Estela
           const gradient = ctx.createLinearGradient(c.x, c.y, c.x - c.vx * c.length, c.y - c.vy * c.length);
           gradient.addColorStop(0, `rgba(180, 220, 255, ${c.life * 0.9})`);
           gradient.addColorStop(0.4, `rgba(100, 180, 255, ${c.life * 0.6})`);
@@ -1239,7 +1283,6 @@
           ctx.lineWidth = c.width * c.life;
           ctx.lineCap = 'round';
           ctx.stroke();
-          // Núcleo brillante
           ctx.beginPath();
           ctx.arc(c.x, c.y, c.width * c.life * 1.5, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255,255,255,${c.life * 0.9})`;
@@ -1249,39 +1292,41 @@
 
       function animate() {
         ctx.clearRect(0, 0, w, h);
-        // Fondo con gradiente sutil
+        // Fondo con gradiente más corporativo (azul profundo a morado suave)
         const grad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w*0.7);
-        grad.addColorStop(0, '#0f1a2f');
-        grad.addColorStop(1, '#060a14');
+        grad.addColorStop(0, '#0f1f3a');
+        grad.addColorStop(0.6, '#0a1220');
+        grad.addColorStop(1, '#05080f');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
 
         drawStars();
+        drawDataParticles();
         drawComets();
         requestAnimationFrame(animate);
       }
       animate();
 
       // ============================================================
-      // 2. ALTERNANCIA DE DISPOSITIVOS
+      // 2. ALTERNANCIA DE DISPOSITIVOS (teléfono <-> PC de escritorio)
       // ============================================================
       const phone = document.getElementById('devicePhone');
-      const laptop = document.getElementById('deviceLaptop');
+      const desktop = document.getElementById('deviceDesktop');
       const dotPhone = document.getElementById('dotPhone');
-      const dotLaptop = document.getElementById('dotLaptop');
+      const dotDesktop = document.getElementById('dotDesktop');
       let currentDevice = 'phone';
 
       setInterval(() => {
         if (currentDevice === 'phone') {
           phone.classList.remove('active');
-          laptop.classList.add('active');
+          desktop.classList.add('active');
           dotPhone.classList.remove('active');
-          dotLaptop.classList.add('active');
-          currentDevice = 'laptop';
+          dotDesktop.classList.add('active');
+          currentDevice = 'desktop';
         } else {
-          laptop.classList.remove('active');
+          desktop.classList.remove('active');
           phone.classList.add('active');
-          dotLaptop.classList.remove('active');
+          dotDesktop.classList.remove('active');
           dotPhone.classList.add('active');
           currentDevice = 'phone';
         }
