@@ -1,1664 +1,1753 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tu MiPyme · Gestión inteligente para tu negocio</title>
-  <meta name="description" content="Administra ventas, inventario, clientes y finanzas desde una app offline-first. Descarga gratis y empieza a crecer." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-  <style>
-    /* ============================================================
-       RESET Y VARIABLES
-    ============================================================ */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tu MiPyme · Gestión inteligente para tu negocio</title>
+    <meta name="description" content="Administra ventas, inventario, clientes y finanzas desde una app offline-first. Descarga gratis y empieza a crecer." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+           RESET Y VARIABLES CON AZULES Y DORADOS
+        ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-      --bg-primary: #060d1a;
-      --bg-secondary: #0b1a2e;
-      --bg-card: rgba(255, 255, 255, 0.04);
-      --bg-card-hover: rgba(255, 255, 255, 0.08);
-      --border-glass: rgba(255, 255, 255, 0.08);
-      --text-primary: #f0f4ff;
-      --text-secondary: #b0c4e0;
-      --text-muted: #7a8aa8;
-      --accent-gold: #d4a745;
-      --accent-gold-light: #f0d080;
-      --accent-gold-dark: #b8923a;
-      --shadow-glow: 0 8px 32px rgba(212, 167, 69, 0.15);
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --radius-sm: 10px;
-      --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
+        :root {
+            --bg-primary: #060d1a;
+            --bg-secondary: #0b1a2e;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
+            --border-glass: rgba(255, 255, 255, 0.08);
 
-    html {
-      scroll-behavior: smooth;
-    }
+            --text-primary: #f0f4ff;
+            --text-secondary: #b0c4e0;
+            --text-muted: #7a8aa8;
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+            --blue-deep: #0a1628;
+            --blue-mid: #1a3a6b;
+            --blue-bright: #4a7af7;
+            --blue-glow: #6b9aff;
+            --gold: #d4a745;
+            --gold-light: #f0d080;
+            --gold-dark: #b8923a;
 
-    /* ============================================================
-       CANVAS (LLUVIA DE ESTRELLAS)
-    ============================================================ */
-    #stars-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.8;
-    }
+            --gradient-primary: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+            --gradient-accent: linear-gradient(135deg, var(--gold), var(--gold-light));
+            --gradient-hero: linear-gradient(160deg, #060d1a, #0b1a2e 60%, #0f2140);
+            --shadow-glow: 0 8px 32px rgba(74, 122, 247, 0.2);
+            --shadow-gold: 0 8px 32px rgba(212, 167, 69, 0.25);
 
-    /* ============================================================
-       CONTENEDOR
-    ============================================================ */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-    }
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-    /* ============================================================
-       NAVBAR FIJA (GLASS)
-    ============================================================ */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 14px 0;
-      background: rgba(6, 13, 26, 0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-glass);
-      z-index: 1000;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-    header.scrolled {
-      background: rgba(6, 13, 26, 0.92);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--text-primary);
-      text-decoration: none;
-      letter-spacing: -0.3px;
-    }
-    .logo-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      color: #0b182e;
-      border-radius: var(--radius-sm);
-      font-size: 18px;
-      font-weight: 800;
-      box-shadow: 0 2px 16px rgba(212, 167, 69, 0.3);
-    }
+        /* ============================================================
+           CANVAS (LLUVIA DE ESTRELLAS)
+        ============================================================ */
+        #stars-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.9;
+        }
 
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-    nav a {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s;
-      position: relative;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
-      transition: width 0.3s;
-    }
-    nav a:hover {
-      color: var(--text-primary);
-    }
-    nav a:hover::after {
-      width: 100%;
-    }
+        /* ============================================================
+           CONTENEDOR
+        ============================================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
 
-    .nav-download {
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      color: #0b182e !important;
-      padding: 8px 24px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 2px 16px rgba(212, 167, 69, 0.2);
-      transition: all 0.3s;
-    }
-    .nav-download:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(212, 167, 69, 0.3);
-    }
-    .nav-download::after {
-      display: none;
-    }
+        /* ============================================================
+           NAVBAR FIJA (GLASS)
+        ============================================================ */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 14px 0;
+            background: rgba(6, 13, 26, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        header.scrolled {
+            background: rgba(6, 13, 26, 0.92);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
 
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      color: var(--text-primary);
-      padding: 4px;
-    }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    /* ============================================================
-       HERO
-    ============================================================ */
-    .hero {
-      padding: 160px 0 100px;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 60%;
-      height: 80%;
-      background: radial-gradient(ellipse, rgba(212, 167, 69, 0.04) 0%, transparent 70%);
-      pointer-events: none;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.3px;
+        }
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: var(--gradient-accent);
+            color: #0b182e;
+            border-radius: var(--radius-sm);
+            font-size: 18px;
+            font-weight: 800;
+            box-shadow: 0 2px 16px rgba(212, 167, 69, 0.3);
+        }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        nav a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.3s;
+        }
+        nav a:hover {
+            color: var(--text-primary);
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
 
-    .hero-content {
-      animation: fadeUp 0.9s ease;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .nav-download {
+            background: var(--gradient-accent);
+            color: #0b182e !important;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 2px 16px rgba(212, 167, 69, 0.2);
+            transition: all 0.3s;
+        }
+        .nav-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(212, 167, 69, 0.3);
+        }
+        .nav-download::after {
+            display: none;
+        }
 
-    .hero-badge {
-      display: inline-block;
-      background: rgba(212, 167, 69, 0.12);
-      color: var(--accent-gold-light);
-      font-weight: 600;
-      font-size: 13px;
-      padding: 6px 18px;
-      border-radius: 50px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(212, 167, 69, 0.15);
-      backdrop-filter: blur(4px);
-    }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 4px;
+        }
 
-    .hero h1 {
-      font-size: 56px;
-      font-weight: 900;
-      line-height: 1.04;
-      letter-spacing: -2px;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-    }
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .hero {
+            padding: 160px 0 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: var(--gradient-hero);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(74, 122, 247, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
 
-    .hero p {
-      font-size: 20px;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin-bottom: 40px;
-      line-height: 1.7;
-    }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-    }
+        .hero-content {
+            animation: fadeUp 0.9s ease;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 40px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 18px;
-      color: #0b182e;
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 24px rgba(212, 167, 69, 0.25);
-      transition: all 0.3s;
-      text-decoration: none;
-    }
-    .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 40px rgba(212, 167, 69, 0.35);
-    }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(74, 122, 247, 0.12);
+            color: var(--blue-bright);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(74, 122, 247, 0.15);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 20px rgba(74, 122, 247, 0.1);
+        }
 
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--text-secondary);
-      background: transparent;
-      border: 1.5px solid var(--border-glass);
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-    }
-    .btn-outline:hover {
-      border-color: var(--accent-gold);
-      color: var(--text-primary);
-      background: rgba(212, 167, 69, 0.06);
-      transform: translateY(-3px);
-    }
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.04;
+            letter-spacing: -2px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        .hero h1 .highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(212, 167, 69, 0.1);
+        }
 
-    .platform-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .platform-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 22px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      transition: all 0.3s;
-      border: 1px solid transparent;
-      backdrop-filter: blur(4px);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-secondary);
-      border-color: var(--border-glass);
-    }
-    .platform-badge:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--accent-gold);
-      color: var(--text-primary);
-    }
-    .platform-badge .icon {
-      font-size: 20px;
-      line-height: 1;
-    }
-    .platform-badge.android:hover {
-      background: rgba(61, 220, 132, 0.12);
-      border-color: #3ddc84;
-    }
-    .platform-badge.windows:hover {
-      background: rgba(0, 120, 212, 0.12);
-      border-color: #0078d4;
-    }
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
 
-    /* ============================================================
-       DISPOSITIVOS (mockups)
-    ============================================================ */
-    .hero-devices {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      height: 440px;
-    }
+        /* ---- Botón principal ---- */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 44px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            color: #0b182e;
+            background: var(--gradient-accent);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 30px rgba(212, 167, 69, 0.25);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 48px rgba(212, 167, 69, 0.35);
+        }
 
-    .device-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        /* ---- Filas de plataformas (2 columnas) ---- */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 20px;
+            max-width: 500px;
+        }
+        .platform-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 20px 16px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        .platform-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(74, 122, 247, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .platform-card .icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .platform-card .name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .platform-card .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+            background: var(--gradient-primary);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 0 2px 12px rgba(74, 122, 247, 0.15);
+        }
+        .platform-card .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(74, 122, 247, 0.25);
+        }
+        .platform-card.android .btn-download {
+            background: linear-gradient(135deg, #3ddc84, #20b86a);
+            color: #0b182e;
+            box-shadow: 0 2px 12px rgba(61, 220, 132, 0.2);
+        }
+        .platform-card.android .btn-download:hover {
+            box-shadow: 0 6px 24px rgba(61, 220, 132, 0.3);
+        }
+        .platform-card.windows .btn-download {
+            background: linear-gradient(135deg, #0078d4, #005a9e);
+            box-shadow: 0 2px 12px rgba(0, 120, 212, 0.2);
+        }
+        .platform-card.windows .btn-download:hover {
+            box-shadow: 0 6px 24px rgba(0, 120, 212, 0.3);
+        }
 
-    .device-phone,
-    .device-desktop {
-      position: absolute;
-      transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      opacity: 0;
-      transform: scale(0.92) rotate(-2deg);
-      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
-    }
-    .device-phone.active,
-    .device-desktop.active {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-    }
+        /* ============================================================
+           DISPOSITIVOS (mockups)
+        ============================================================ */
+        .hero-devices {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 440px;
+        }
 
-    .device-phone { width: 190px; }
-    .device-desktop { width: 360px; }
+        .device-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .device-phone .mockup,
-    .device-desktop .mockup {
-      background: var(--bg-secondary);
-      border-radius: var(--radius-xl);
-      padding: 12px;
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
-      border: 1px solid var(--border-glass);
-    }
-    .device-phone .screen,
-    .device-desktop .screen {
-      background: var(--bg-primary);
-      border-radius: var(--radius-md);
-      padding: 14px 10px;
-      display: flex;
-      flex-direction: column;
-    }
-    .device-phone .screen { aspect-ratio: 9 / 19; }
-    .device-desktop .screen {
-      aspect-ratio: 16 / 9;
-      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-    }
-    .device-desktop .mockup {
-      border-radius: var(--radius-md) var(--radius-md) 0 0;
-      padding: 10px 10px 0 10px;
-    }
-    .device-desktop .keyboard {
-      height: 18px;
-      background: var(--bg-secondary);
-      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-      margin-top: 2px;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 0 14px;
-    }
-    .device-desktop .keyboard span {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: var(--border-glass);
-      border-radius: 2px;
-    }
-    .device-desktop .stand {
-      width: 70px;
-      height: 12px;
-      background: var(--bg-secondary);
-      margin: 2px auto 0;
-      border-radius: 0 0 8px 8px;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
+        .device-phone,
+        .device-desktop {
+            position: absolute;
+            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0;
+            transform: scale(0.92) rotate(-2deg);
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
+        }
+        .device-phone.active,
+        .device-desktop.active {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
 
-    .mockup-header {
-      display: flex;
-      justify-content: space-between;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border-glass);
-      margin-bottom: 6px;
-    }
-    .mockup-header .dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--border-glass);
-    }
-    .mockup-header .dot.active {
-      background: var(--accent-gold);
-    }
-    .mockup-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      padding: 3px 0;
-      border-bottom: 1px solid var(--border-glass);
-      color: var(--text-muted);
-    }
-    .mockup-row .value {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .mockup-row .value.green { color: #10b981; }
-    .mockup-row .value.blue { color: var(--accent-gold); }
-    .mockup-row .value.orange { color: #f59e0b; }
-    .mockup-chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 2px;
-      height: 28px;
-      padding: 4px 0;
-    }
-    .mockup-chart .bar {
-      flex: 1;
-      background: var(--border-glass);
-      border-radius: 2px 2px 0 0;
-      min-height: 4px;
-    }
-    .mockup-chart .bar.primary { background: var(--accent-gold); }
-    .mockup-chart .bar.green { background: #10b981; }
-    .mockup-chart .bar.orange { background: #f59e0b; }
-    .mockup-footer {
-      display: flex;
-      justify-content: space-around;
-      padding-top: 6px;
-      border-top: 1px solid var(--border-glass);
-      margin-top: 4px;
-    }
-    .mockup-footer span {
-      font-size: 9px;
-      color: var(--text-muted);
-      padding: 2px 8px;
-      border-radius: 6px;
-    }
-    .mockup-footer span.active {
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      color: #0b182e;
-      font-weight: 700;
-    }
+        .device-phone {
+            width: 190px;
+        }
+        .device-desktop {
+            width: 360px;
+        }
 
-    .device-switch-indicator {
-      position: absolute;
-      bottom: 10px;
-      display: flex;
-      gap: 8px;
-    }
-    .device-switch-indicator .dot-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--border-glass);
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-    .device-switch-indicator .dot-indicator.active {
-      background: var(--accent-gold);
-      box-shadow: 0 0 20px rgba(212, 167, 69, 0.4);
-    }
+        .device-phone .mockup,
+        .device-desktop .mockup {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 12px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border-glass);
+        }
+        .device-phone .screen,
+        .device-desktop .screen {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: 14px 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .device-phone .screen {
+            aspect-ratio: 9 / 19;
+        }
+        .device-desktop .screen {
+            aspect-ratio: 16 / 9;
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        }
+        .device-desktop .mockup {
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            padding: 10px 10px 0 10px;
+        }
+        .device-desktop .keyboard {
+            height: 18px;
+            background: var(--bg-secondary);
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+            margin-top: 2px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 14px;
+        }
+        .device-desktop .keyboard span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--border-glass);
+            border-radius: 2px;
+        }
+        .device-desktop .stand {
+            width: 70px;
+            height: 12px;
+            background: var(--bg-secondary);
+            margin: 2px auto 0;
+            border-radius: 0 0 8px 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
 
-    /* ============================================================
-       SECCIONES
-    ============================================================ */
-    section {
-      padding: 100px 0;
-      position: relative;
-    }
-    .section-title {
-      font-size: 40px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      text-align: center;
-      margin-bottom: 16px;
-      color: var(--text-primary);
-    }
-    .section-title .gradient-text {
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .section-subtitle {
-      text-align: center;
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 640px;
-      margin: 0 auto 56px;
-    }
+        .mockup-header {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-glass);
+            margin-bottom: 6px;
+        }
+        .mockup-header .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--border-glass);
+        }
+        .mockup-header .dot.active {
+            background: var(--gold);
+        }
+        .mockup-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            padding: 3px 0;
+            border-bottom: 1px solid var(--border-glass);
+            color: var(--text-muted);
+        }
+        .mockup-row .value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .mockup-row .value.green {
+            color: #10b981;
+        }
+        .mockup-row .value.blue {
+            color: var(--blue-bright);
+        }
+        .mockup-row .value.orange {
+            color: #f59e0b;
+        }
+        .mockup-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 28px;
+            padding: 4px 0;
+        }
+        .mockup-chart .bar {
+            flex: 1;
+            background: var(--border-glass);
+            border-radius: 2px 2px 0 0;
+            min-height: 4px;
+        }
+        .mockup-chart .bar.primary {
+            background: var(--blue-bright);
+        }
+        .mockup-chart .bar.green {
+            background: #10b981;
+        }
+        .mockup-chart .bar.orange {
+            background: #f59e0b;
+        }
+        .mockup-footer {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 6px;
+            border-top: 1px solid var(--border-glass);
+            margin-top: 4px;
+        }
+        .mockup-footer span {
+            font-size: 9px;
+            color: var(--text-muted);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+        .mockup-footer span.active {
+            background: var(--gradient-accent);
+            color: #0b182e;
+            font-weight: 700;
+        }
 
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+        .device-switch-indicator {
+            position: absolute;
+            bottom: 10px;
+            display: flex;
+            gap: 8px;
+        }
+        .device-switch-indicator .dot-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-glass);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .device-switch-indicator .dot-indicator.active {
+            background: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 167, 69, 0.4);
+        }
 
-    /* ============================================================
-       FEATURES (GLASSMORPHISM)
-    ============================================================ */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-    }
-    .feature-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 36px 28px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-glass);
-      transition: all 0.3s;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    .feature-card:hover {
-      background: var(--bg-card-hover);
-      transform: translateY(-8px);
-      border-color: rgba(212, 167, 69, 0.2);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    }
-    .feature-card .icon {
-      font-size: 36px;
-      margin-bottom: 16px;
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 12px;
-      border-radius: var(--radius-md);
-    }
-    .feature-card h3 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-    .feature-card p {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .feature-card .tag {
-      display: inline-block;
-      margin-top: 16px;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 14px;
-      border-radius: 50px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-muted);
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-    }
-    .feature-card .tag-free {
-      background: rgba(212, 167, 69, 0.12);
-      color: var(--accent-gold-light);
-    }
+        /* ============================================================
+           SECCIONES
+        ============================================================ */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+        .section-title {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-align: center;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .section-title .gradient-text {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 56px;
+        }
 
-    /* ============================================================
-       TUTORIAL
-    ============================================================ */
-    .tutorial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .step-card {
-      text-align: center;
-      padding: 32px 20px;
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-glass);
-      transition: all 0.3s;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    .step-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(212, 167, 69, 0.15);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    }
-    .step-card .number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      color: #0b182e;
-      font-weight: 800;
-      font-size: 22px;
-      border-radius: 50%;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 20px rgba(212, 167, 69, 0.25);
-    }
-    .step-card h4 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-    }
-    .step-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* ============================================================
-       PLANES
-    ============================================================ */
-    .plans-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .plan-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      padding: 44px 36px;
-      border-radius: var(--radius-xl);
-      text-align: center;
-      border: 1px solid var(--border-glass);
-      transition: all 0.3s;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    .plan-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(212, 167, 69, 0.15);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    }
-    .plan-card.popular {
-      border-color: var(--accent-gold);
-      background: rgba(212, 167, 69, 0.04);
-      box-shadow: 0 0 0 1px var(--accent-gold), 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-    .plan-card.popular .badge {
-      position: absolute;
-      top: -12px;
-      right: 28px;
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      color: #0b182e;
-      font-weight: 700;
-      font-size: 12px;
-      padding: 4px 18px;
-      border-radius: 50px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      box-shadow: 0 2px 16px rgba(212, 167, 69, 0.25);
-    }
-    .plan-card .trial-badge {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-muted);
-      font-weight: 700;
-      font-size: 12px;
-      padding: 4px 18px;
-      border-radius: 50px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      letter-spacing: 0.3px;
-    }
-    .plan-card .name {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .plan-card .price {
-      font-size: 44px;
-      font-weight: 800;
-      color: var(--text-primary);
-    }
-    .plan-card .price small {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--text-muted);
-    }
-    .plan-card .period {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-    .plan-card ul {
-      text-align: left;
-      list-style: none;
-      padding: 0;
-      margin-bottom: 28px;
-    }
-    .plan-card ul li {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 0;
-      font-size: 15px;
-      color: var(--text-muted);
-    }
-    .plan-card ul li .check {
-      color: var(--accent-gold-light);
-      font-weight: 700;
-      font-size: 18px;
-    }
-    .plan-card ul li .cross {
-      color: var(--border-glass);
-      font-weight: 700;
-      font-size: 18px;
-    }
+        /* ============================================================
+           FEATURES (GLASSMORPHISM)
+        ============================================================ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 36px 28px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-glass);
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-8px);
+            border-color: rgba(74, 122, 247, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        .feature-card .icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 12px;
+            border-radius: var(--radius-md);
+        }
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .feature-card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .feature-card .tag {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .feature-card .tag-free {
+            background: rgba(74, 122, 247, 0.12);
+            color: var(--blue-bright);
+        }
 
-    /* ============================================================
-       CHANGELOG
-    ============================================================ */
-    .changelog-list {
-      max-width: 820px;
-      margin: 0 auto;
-    }
-    .changelog-item {
-      display: flex;
-      gap: 28px;
-      padding: 24px 28px;
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius-md);
-      margin-bottom: 14px;
-      border: 1px solid var(--border-glass);
-      transition: all 0.3s;
-      align-items: flex-start;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    .changelog-item:hover {
-      border-color: rgba(212, 167, 69, 0.15);
-      transform: translateX(6px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-    .changelog-item .version {
-      font-weight: 800;
-      font-size: 18px;
-      color: var(--accent-gold-light);
-      min-width: 80px;
-    }
-    .changelog-item .date {
-      font-size: 14px;
-      color: var(--text-muted);
-      min-width: 100px;
-    }
-    .changelog-item .desc {
-      font-size: 15px;
-      color: var(--text-muted);
-    }
-    .changelog-item .desc ul {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 4px;
-    }
-    .changelog-item .desc ul li {
-      padding: 2px 0 2px 20px;
-      position: relative;
-    }
-    .changelog-item .desc ul li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--accent-gold);
-      font-weight: 700;
-    }
-    .changelog-item .desc strong {
-      color: var(--text-primary);
-    }
+        /* ============================================================
+           TUTORIAL
+        ============================================================ */
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .step-card {
+            text-align: center;
+            padding: 32px 20px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-glass);
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .step-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 122, 247, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        .step-card .number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-accent);
+            color: #0b182e;
+            font-weight: 800;
+            font-size: 22px;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(212, 167, 69, 0.25);
+        }
+        .step-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        .step-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
 
-    /* ============================================================
-       TRUST
-    ============================================================ */
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 28px;
-      max-width: 820px;
-      margin: 0 auto;
-    }
-    .trust-item {
-      text-align: center;
-      padding: 28px 16px;
-      background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-glass);
-      transition: all 0.3s;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    .trust-item:hover {
-      transform: translateY(-6px);
-      border-color: rgba(212, 167, 69, 0.15);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-    .trust-item .icon {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-    .trust-item h4 {
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--text-primary);
-    }
-    .trust-item p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
+        /* ============================================================
+           PLANES
+        ============================================================ */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .plan-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            padding: 44px 36px;
+            border-radius: var(--radius-xl);
+            text-align: center;
+            border: 1px solid var(--border-glass);
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .plan-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 122, 247, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        .plan-card.popular {
+            border-color: var(--gold);
+            background: rgba(212, 167, 69, 0.04);
+            box-shadow: 0 0 0 1px var(--gold), 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .plan-card.popular .badge {
+            position: absolute;
+            top: -12px;
+            right: 28px;
+            background: var(--gradient-accent);
+            color: #0b182e;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 18px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 16px rgba(212, 167, 69, 0.25);
+        }
+        .plan-card .trial-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 18px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            letter-spacing: 0.3px;
+        }
+        .plan-card .name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .plan-card .price {
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .plan-card .price small {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .plan-card .period {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        .plan-card ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 28px;
+        }
+        .plan-card ul li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+        .plan-card ul li .check {
+            color: var(--gold-light);
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .plan-card ul li .cross {
+            color: var(--border-glass);
+            font-weight: 700;
+            font-size: 18px;
+        }
 
-    /* ============================================================
-       CTA
-    ============================================================ */
-    .cta {
-      background: var(--bg-secondary);
-      text-align: center;
-      padding: 120px 0;
-      border-top: 1px solid var(--border-glass);
-      border-bottom: 1px solid var(--border-glass);
-      position: relative;
-      overflow: hidden;
-    }
-    .cta::before {
-      content: '';
-      position: absolute;
-      top: -30%;
-      left: -10%;
-      width: 60%;
-      height: 80%;
-      background: radial-gradient(ellipse, rgba(212, 167, 69, 0.04) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta h2 {
-      font-size: 44px;
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: 16px;
-    }
-    .cta p {
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 540px;
-      margin: 0 auto 36px;
-    }
-    .cta .version-info {
-      margin-top: 20px;
-      font-size: 14px;
-      color: var(--text-muted);
-    }
+        /* ============================================================
+           CHANGELOG
+        ============================================================ */
+        .changelog-list {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .changelog-item {
+            display: flex;
+            gap: 28px;
+            padding: 24px 28px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-md);
+            margin-bottom: 14px;
+            border: 1px solid var(--border-glass);
+            transition: all 0.3s;
+            align-items: flex-start;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .changelog-item:hover {
+            border-color: rgba(74, 122, 247, 0.15);
+            transform: translateX(6px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .changelog-item .version {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--gold-light);
+            min-width: 80px;
+        }
+        .changelog-item .date {
+            font-size: 14px;
+            color: var(--text-muted);
+            min-width: 100px;
+        }
+        .changelog-item .desc {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+        .changelog-item .desc ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 4px;
+        }
+        .changelog-item .desc ul li {
+            padding: 2px 0 2px 20px;
+            position: relative;
+        }
+        .changelog-item .desc ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 700;
+        }
+        .changelog-item .desc strong {
+            color: var(--text-primary);
+        }
 
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      background: var(--bg-primary);
-      color: var(--text-muted);
-      padding: 40px 0;
-      text-align: center;
-      border-top: 1px solid var(--border-glass);
-    }
-    footer strong {
-      color: var(--text-primary);
-    }
+        /* ============================================================
+           TRUST
+        ============================================================ */
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 28px;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .trust-item {
+            text-align: center;
+            padding: 28px 16px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-glass);
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .trust-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(74, 122, 247, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .trust-item .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .trust-item h4 {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+        .trust-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
 
-    /* ============================================================
-       MODAL
-    ============================================================ */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .modal-overlay.active {
-      display: flex;
-    }
-    .modal {
-      background: var(--bg-secondary);
-      max-width: 480px;
-      width: 100%;
-      border-radius: var(--radius-xl);
-      padding: 44px 36px;
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8);
-      animation: fadeUp 0.4s ease;
-      border: 1px solid var(--border-glass);
-    }
-    .modal .icon {
-      font-size: 52px;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-    .modal h3 {
-      font-size: 24px;
-      font-weight: 700;
-      text-align: center;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-    }
-    .modal p {
-      font-size: 16px;
-      color: var(--text-muted);
-      text-align: center;
-      line-height: 1.7;
-    }
-    .modal .highlight {
-      background: rgba(255, 255, 255, 0.04);
-      padding: 16px 20px;
-      border-radius: var(--radius-md);
-      border-left: 4px solid var(--accent-gold);
-      margin: 20px 0 24px;
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-    .modal .highlight strong {
-      color: var(--text-primary);
-    }
-    .modal-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 8px;
-    }
-    .modal-actions .btn {
-      flex: 1;
-      justify-content: center;
-      padding: 14px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-actions .btn-secondary {
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-secondary);
-    }
-    .modal-actions .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.10);
-    }
-    .modal-actions .btn-primary {
-      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-      color: #0b182e;
-      box-shadow: 0 4px 16px rgba(212, 167, 69, 0.2);
-    }
-    .modal-actions .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(212, 167, 69, 0.3);
-    }
+        /* ============================================================
+           CTA
+        ============================================================ */
+        .cta {
+            background: var(--bg-secondary);
+            text-align: center;
+            padding: 120px 0;
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -10%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(74, 122, 247, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .cta h2 {
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+        .cta p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 540px;
+            margin: 0 auto 36px;
+        }
+        .cta .version-info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
 
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 1024px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-      }
-      .hero p {
-        margin: 0 auto 32px;
-      }
-      .hero-actions {
-        justify-content: center;
-      }
-      .platform-badges {
-        justify-content: center;
-      }
-      .hero-devices {
-        order: -1;
-        height: 320px;
-      }
-      .device-phone { width: 160px; }
-      .device-desktop { width: 280px; }
-      .plans-grid {
-        grid-template-columns: 1fr;
-        max-width: 480px;
-      }
-      .cta h2 { font-size: 36px; }
-    }
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        footer {
+            background: var(--bg-primary);
+            color: var(--text-muted);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+        }
+        footer strong {
+            color: var(--text-primary);
+        }
 
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 40px; }
-      .section-title { font-size: 32px; }
-      nav {
-        display: none;
-        flex-direction: column;
-        background: var(--bg-secondary);
-        position: absolute;
-        top: 72px;
-        left: 0;
-        width: 100%;
-        padding: 28px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        border-radius: 0 0 var(--radius-md) var(--radius-md);
-        gap: 16px;
-        border: 1px solid var(--border-glass);
-        border-top: none;
-      }
-      nav.open { display: flex; }
-      .menu-toggle { display: block; }
-      .changelog-item {
-        flex-wrap: wrap;
-        gap: 8px;
-        padding: 18px;
-      }
-      .changelog-item .version,
-      .changelog-item .date {
-        min-width: auto;
-      }
-      .modal {
-        padding: 32px 20px;
-      }
-      .modal-actions {
-        flex-direction: column;
-      }
-      .platform-badge {
-        flex: 1;
-        justify-content: center;
-        font-size: 13px;
-        padding: 10px 16px;
-      }
-      .hero-devices {
-        height: 280px;
-      }
-      .device-phone { width: 140px; }
-      .device-desktop { width: 230px; }
-    }
+        /* ============================================================
+           MODAL
+        ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal {
+            background: var(--bg-secondary);
+            max-width: 480px;
+            width: 100%;
+            border-radius: var(--radius-xl);
+            padding: 44px 36px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8);
+            animation: fadeUp 0.4s ease;
+            border: 1px solid var(--border-glass);
+        }
+        .modal .icon {
+            font-size: 52px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .modal h3 {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        .modal p {
+            font-size: 16px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.7;
+        }
+        .modal .highlight {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--gold);
+            margin: 20px 0 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .modal .highlight strong {
+            color: var(--text-primary);
+        }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+        .modal-actions .btn {
+            flex: 1;
+            justify-content: center;
+            padding: 14px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-actions .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary);
+        }
+        .modal-actions .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.10);
+        }
+        .modal-actions .btn-primary {
+            background: var(--gradient-accent);
+            color: #0b182e;
+            box-shadow: 0 4px 16px rgba(212, 167, 69, 0.2);
+        }
+        .modal-actions .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(212, 167, 69, 0.3);
+        }
 
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 32px; }
-      .hero p { font-size: 16px; }
-      .device-phone { width: 120px; }
-      .device-desktop { width: 190px; }
-      .plan-card { padding: 28px 20px; }
-      .feature-card { padding: 24px 18px; }
-      .trust-grid { grid-template-columns: 1fr 1fr; }
-      .cta h2 { font-size: 28px; }
-      .btn-primary { font-size: 16px; padding: 14px 32px; }
-    }
-  </style>
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            .hero p {
+                margin: 0 auto 32px;
+            }
+            .platform-grid {
+                margin: 20px auto 0;
+            }
+            .hero-devices {
+                order: -1;
+                height: 320px;
+            }
+            .device-phone {
+                width: 160px;
+            }
+            .device-desktop {
+                width: 280px;
+            }
+            .plans-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+            }
+            .cta h2 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            .section-title {
+                font-size: 32px;
+            }
+            nav {
+                display: none;
+                flex-direction: column;
+                background: var(--bg-secondary);
+                position: absolute;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                padding: 28px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+                border-radius: 0 0 var(--radius-md) var(--radius-md);
+                gap: 16px;
+                border: 1px solid var(--border-glass);
+                border-top: none;
+            }
+            nav.open {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .changelog-item {
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 18px;
+            }
+            .changelog-item .version,
+            .changelog-item .date {
+                min-width: auto;
+            }
+            .modal {
+                padding: 32px 20px;
+            }
+            .modal-actions {
+                flex-direction: column;
+            }
+            .platform-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+            .platform-card {
+                padding: 16px 12px;
+            }
+            .platform-card .btn-download {
+                font-size: 13px;
+                padding: 6px 16px;
+            }
+            .hero-devices {
+                height: 280px;
+            }
+            .device-phone {
+                width: 140px;
+            }
+            .device-desktop {
+                width: 230px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .device-phone {
+                width: 120px;
+            }
+            .device-desktop {
+                width: 190px;
+            }
+            .plan-card {
+                padding: 28px 20px;
+            }
+            .feature-card {
+                padding: 24px 18px;
+            }
+            .trust-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .cta h2 {
+                font-size: 28px;
+            }
+            .btn-primary {
+                font-size: 16px;
+                padding: 14px 32px;
+            }
+            .platform-grid {
+                grid-template-columns: 1fr;
+                max-width: 280px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- ===== CANVAS (LLUVIA DE ESTRELLAS) ===== -->
-  <canvas id="stars-canvas"></canvas>
+    <!-- ===== CANVAS (LLUVIA DE ESTRELLAS) ===== -->
+    <canvas id="stars-canvas"></canvas>
 
-  <!-- ===== HEADER ===== -->
-  <header id="header">
-    <div class="container header-inner">
-      <a href="#" class="logo">
-        <span class="logo-icon">TM</span>
-        Tu MiPyme
-      </a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
-      <nav id="mainNav">
-        <a href="#features">Características</a>
-        <a href="#tutorial">Tutorial</a>
-        <a href="#plans">Planes</a>
-        <a href="#changelog">Historial</a>
-        <a href="#cta" class="nav-download download-trigger">Descargar</a>
-      </nav>
-    </div>
-  </header>
+    <!-- ===== HEADER ===== -->
+    <header id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <span class="logo-icon">TM</span>
+                Tu MiPyme
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
+            <nav id="mainNav">
+                <a href="#features">Características</a>
+                <a href="#tutorial">Tutorial</a>
+                <a href="#plans">Planes</a>
+                <a href="#changelog">Historial</a>
+                <a href="#cta" class="nav-download download-trigger">Descargar</a>
+            </nav>
+        </div>
+    </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="home">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="hero-badge">🚀 Nueva versión 2.1.3</div>
-        <h1>Gestión inteligente <br /><span class="highlight">para tu negocio</span></h1>
-        <p>Administra ventas, inventario, clientes y finanzas desde una sola app. Offline-first, sincronización en la nube y sin complicaciones.</p>
-        <div class="hero-actions">
-          <button class="btn-primary download-trigger">📲 Descargar ahora</button>
-          <a href="#features" class="btn-outline">Explorar</a>
-        </div>
-        <div class="platform-badges">
-          <a href="#" class="platform-badge android download-trigger" title="Descargar para Android">
-            <span class="icon">📱</span> Android
-          </a>
-          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar" class="platform-badge windows" title="Descargar para Windows">
-            <span class="icon">💻</span> Windows
-          </a>
-        </div>
-      </div>
-      <div class="hero-devices">
-        <div class="device-container">
-          <!-- Teléfono -->
-          <div class="device-phone active" id="devicePhone">
-            <div class="mockup">
-              <div class="screen">
-                <div class="mockup-header">
-                  <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">🚀 Nueva versión 2.1.3</div>
+                <h1>Gestión inteligente <br /><span class="highlight">para tu negocio</span></h1>
+                <p>Administra ventas, inventario, clientes y finanzas desde una sola app. Offline-first, sincronización en la nube y sin complicaciones.</p>
+
+                <!-- Botón principal -->
+                <button class="btn-primary download-trigger">📲 Descargar ahora</button>
+
+                <!-- Grid de plataformas (2 columnas) -->
+                <div class="platform-grid">
+                    <!-- Android -->
+                    <div class="platform-card android">
+                        <span class="icon">📱</span>
+                        <div class="name">Android</div>
+                        <button class="btn-download download-trigger">Descargar APK</button>
+                    </div>
+                    <!-- Windows -->
+                    <div class="platform-card windows">
+                        <span class="icon">💻</span>
+                        <div class="name">Windows</div>
+                        <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar" class="btn-download">Descargar RAR</a>
+                    </div>
                 </div>
-                <div class="mockup-row"><span>Ventas hoy</span><span class="value green">+$12,450</span></div>
-                <div class="mockup-row"><span>Ganancia neta</span><span class="value orange">+$3,280</span></div>
-                <div class="mockup-row"><span>Productos</span><span class="value blue">156</span></div>
-                <div class="mockup-chart">
-                  <div class="bar primary" style="height:28px"></div>
-                  <div class="bar primary" style="height:18px"></div>
-                  <div class="bar green" style="height:32px"></div>
-                  <div class="bar orange" style="height:12px"></div>
-                  <div class="bar primary" style="height:40px"></div>
-                  <div class="bar green" style="height:24px"></div>
-                  <div class="bar blue" style="height:16px"></div>
-                </div>
-                <div class="mockup-footer"><span class="active">📊</span><span>📦</span><span>👥</span></div>
-              </div>
             </div>
-          </div>
-          <!-- Escritorio -->
-          <div class="device-desktop" id="deviceDesktop">
-            <div class="mockup">
-              <div class="screen">
-                <div class="mockup-header">
-                  <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+            <div class="hero-devices">
+                <div class="device-container">
+                    <!-- Teléfono -->
+                    <div class="device-phone active" id="devicePhone">
+                        <div class="mockup">
+                            <div class="screen">
+                                <div class="mockup-header">
+                                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+                                </div>
+                                <div class="mockup-row"><span>Ventas hoy</span><span class="value green">+$12,450</span></div>
+                                <div class="mockup-row"><span>Ganancia neta</span><span class="value orange">+$3,280</span></div>
+                                <div class="mockup-row"><span>Productos</span><span class="value blue">156</span></div>
+                                <div class="mockup-chart">
+                                    <div class="bar primary" style="height:28px"></div>
+                                    <div class="bar primary" style="height:18px"></div>
+                                    <div class="bar green" style="height:32px"></div>
+                                    <div class="bar orange" style="height:12px"></div>
+                                    <div class="bar primary" style="height:40px"></div>
+                                    <div class="bar green" style="height:24px"></div>
+                                    <div class="bar blue" style="height:16px"></div>
+                                </div>
+                                <div class="mockup-footer"><span class="active">📊</span><span>📦</span><span>👥</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Escritorio -->
+                    <div class="device-desktop" id="deviceDesktop">
+                        <div class="mockup">
+                            <div class="screen">
+                                <div class="mockup-header">
+                                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+                                </div>
+                                <div class="mockup-row"><span>Ventas hoy</span><span class="value green">+$12,450</span></div>
+                                <div class="mockup-row"><span>Ganancia neta</span><span class="value orange">+$3,280</span></div>
+                                <div class="mockup-row"><span>Productos</span><span class="value blue">156</span></div>
+                                <div class="mockup-chart">
+                                    <div class="bar primary" style="height:28px"></div>
+                                    <div class="bar primary" style="height:18px"></div>
+                                    <div class="bar green" style="height:32px"></div>
+                                    <div class="bar orange" style="height:12px"></div>
+                                    <div class="bar primary" style="height:40px"></div>
+                                    <div class="bar green" style="height:24px"></div>
+                                    <div class="bar blue" style="height:16px"></div>
+                                </div>
+                                <div class="mockup-footer"><span class="active">📊</span><span>📦</span><span>👥</span></div>
+                            </div>
+                            <div class="keyboard"><span></span><span></span><span></span><span></span><span></span><span></span><span style="width:30px;"></span><span></span><span></span><span></span><span></span><span></span></div>
+                            <div class="stand"></div>
+                        </div>
+                    </div>
+                    <!-- Indicador -->
+                    <div class="device-switch-indicator">
+                        <span class="dot-indicator active" id="dotPhone"></span>
+                        <span class="dot-indicator" id="dotDesktop"></span>
+                    </div>
                 </div>
-                <div class="mockup-row"><span>Ventas hoy</span><span class="value green">+$12,450</span></div>
-                <div class="mockup-row"><span>Ganancia neta</span><span class="value orange">+$3,280</span></div>
-                <div class="mockup-row"><span>Productos</span><span class="value blue">156</span></div>
-                <div class="mockup-chart">
-                  <div class="bar primary" style="height:28px"></div>
-                  <div class="bar primary" style="height:18px"></div>
-                  <div class="bar green" style="height:32px"></div>
-                  <div class="bar orange" style="height:12px"></div>
-                  <div class="bar primary" style="height:40px"></div>
-                  <div class="bar green" style="height:24px"></div>
-                  <div class="bar blue" style="height:16px"></div>
-                </div>
-                <div class="mockup-footer"><span class="active">📊</span><span>📦</span><span>👥</span></div>
-              </div>
-              <div class="keyboard"><span></span><span></span><span></span><span></span><span></span><span></span><span style="width:30px;"></span><span></span><span></span><span></span><span></span><span></span></div>
-              <div class="stand"></div>
             </div>
-          </div>
-          <!-- Indicador -->
-          <div class="device-switch-indicator">
-            <span class="dot-indicator active" id="dotPhone"></span>
-            <span class="dot-indicator" id="dotDesktop"></span>
-          </div>
         </div>
-      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title fade-up">Todo lo que necesitas <span class="gradient-text">para gestionar</span></h2>
+            <p class="section-subtitle fade-up">Herramientas diseñadas para que tomes el control total de tu negocio.</p>
+            <div class="features-grid">
+                <div class="feature-card fade-up">
+                    <div class="icon">🛒</div>
+                    <h3>Ventas rápidas</h3>
+                    <p>Registra ventas con múltiples productos, clientes y métodos de pago. Funciona sin internet.</p>
+                    <span class="tag tag-free">Todos los planes</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">📦</div>
+                    <h3>Inventario inteligente</h3>
+                    <p>Control de stock, reabastecimiento FIFO, lotes y alertas de productos agotados o con bajo stock.</p>
+                    <span class="tag">Premium</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">👥</div>
+                    <h3>Clientes y proveedores</h3>
+                    <p>Gestiona tu cartera de clientes y marca a tus proveedores. Control de saldos pendientes.</p>
+                    <span class="tag tag-free">Todos los planes</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">📊</div>
+                    <h3>Panel de control</h3>
+                    <p>KPIs, gráficos, ranking de productos, rendimiento de vendedores y alertas inteligentes.</p>
+                    <span class="tag">Premium</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">📤</div>
+                    <h3>Exporta reportes</h3>
+                    <p>Genera y comparte reportes en PDF, Excel o CSV. Ideal para tu contador o auditoría.</p>
+                    <span class="tag">Premium</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">🔒</div>
+                    <h3>Seguridad total</h3>
+                    <p>Oculta costos y márgenes a tus vendedores. Datos cifrados y sincronización segura.</p>
+                    <span class="tag">Premium</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">☁️</div>
+                    <h3>Offline + sincronización</h3>
+                    <p>Trabaja sin conexión y sincroniza automáticamente cuando tengas internet. Tus datos siempre seguros.</p>
+                    <span class="tag tag-free">Todos los planes</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">🎯</div>
+                    <h3>Metas de ventas</h3>
+                    <p>Define metas diarias, semanales y mensuales. Visualiza el progreso en tiempo real.</p>
+                    <span class="tag tag-free">Todos los planes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TUTORIAL ===== -->
+    <section id="tutorial" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title fade-up">Cómo <span class="gradient-text">empezar</span></h2>
+            <p class="section-subtitle fade-up">Sigue estos pasos y en minutos tendrás tu negocio gestionado desde tu dispositivo.</p>
+            <div class="tutorial-grid">
+                <div class="step-card fade-up">
+                    <div class="number">1</div>
+                    <h4>Descarga la app</h4>
+                    <p>Elige tu versión: Android (APK) o Windows (RAR) y descárgala gratis.</p>
+                </div>
+                <div class="step-card fade-up">
+                    <div class="number">2</div>
+                    <h4>Regístrate</h4>
+                    <p>Crea tu cuenta con email y contraseña. Disfruta de 3 días de prueba Premium.</p>
+                </div>
+                <div class="step-card fade-up">
+                    <div class="number">3</div>
+                    <h4>Agrega productos</h4>
+                    <p>Registra tu inventario con precios, stock y categorías. Así de simple.</p>
+                </div>
+                <div class="step-card fade-up">
+                    <div class="number">4</div>
+                    <h4>¡Vende!</h4>
+                    <p>Haz tu primera venta, gestiona clientes y mira cómo crece tu negocio.</p>
+                </div>
+                <div class="step-card fade-up">
+                    <div class="number">5</div>
+                    <h4>Analiza y mejora</h4>
+                    <p>Revisa reportes, KPIs y metas. Toma decisiones basadas en datos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PLANES ===== -->
+    <section id="plans">
+        <div class="container">
+            <h2 class="section-title fade-up">Elige el plan <span class="gradient-text">para tu negocio</span></h2>
+            <p class="section-subtitle fade-up">Comienza con 3 días de prueba gratuita con todas las funciones Premium desbloqueadas.</p>
+            <div class="plans-grid">
+                <div class="plan-card fade-up">
+                    <div class="trial-badge">🎁 3 días gratis</div>
+                    <div class="name">Normal</div>
+                    <div class="price">$1,000 <small>CUP</small></div>
+                    <div class="period">por mes</div>
+                    <ul>
+                        <li><span class="check">✅</span> Inventario básico (CRUD)</li>
+                        <li><span class="check">✅</span> Ventas con clientes</li>
+                        <li><span class="check">✅</span> Gestión de gastos</li>
+                        <li><span class="check">✅</span> Metas de ventas</li>
+                        <li><span class="check">✅</span> Sincronización offline</li>
+                        <li><span class="cross">❌</span> Panel de control avanzado</li>
+                        <li><span class="cross">❌</span> Exportación de reportes</li>
+                        <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
+                        <li><span class="cross">❌</span> Gestión de proveedores</li>
+                        <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
+                        <li><span>👤 1 vendedor</span></li>
+                    </ul>
+                    <button class="btn-primary download-trigger" style="width:100%; justify-content:center; background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary); box-shadow: none;">Probar 3 días gratis</button>
+                    <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Luego $1,000 CUP/mes</p>
+                </div>
+                <div class="plan-card popular fade-up">
+                    <div class="badge">🔥 Más popular</div>
+                    <div class="name">Premium</div>
+                    <div class="price">$2,000 <small>CUP</small></div>
+                    <div class="period">por mes</div>
+                    <ul>
+                        <li><span class="check">✅</span> Todo lo del plan Normal</li>
+                        <li><span class="check">✅</span> Panel de control con gráficos y KPIs</li>
+                        <li><span class="check">✅</span> Exportación PDF, Excel y CSV</li>
+                        <li><span class="check">✅</span> Ocultar costos a vendedores</li>
+                        <li><span class="check">✅</span> Gestión de proveedores</li>
+                        <li><span class="check">✅</span> Notificaciones de stock bajo</li>
+                        <li><span class="check">✅</span> Ranking de productos y clientes</li>
+                        <li><span class="check">✅</span> Rendimiento de vendedores</li>
+                        <li><span>👥 Hasta 5 vendedores</span></li>
+                        <li><span>📞 Soporte prioritario</span></li>
+                    </ul>
+                    <button class="btn-primary download-trigger" style="width:100%; justify-content:center;">Descargar ahora</button>
+                    <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Sin período de prueba</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CHANGELOG ===== -->
+    <section id="changelog" style="background: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title fade-up">Historial de <span class="gradient-text">cambios</span></h2>
+            <p class="section-subtitle fade-up">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
+            <div class="changelog-list">
+                <div class="changelog-item fade-up">
+                    <div class="version">v2.1.3</div>
+                    <div class="date">2 ago 2026</div>
+                    <div class="desc">
+                        <strong>✨ Actualización de estabilidad y nuevas funciones</strong>
+                        <ul>
+                            <li><strong>Compilación para Windows:</strong> Ahora Tu MiPyme también está disponible para escritorio con las mismas funcionalidades.</li>
+                            <li><strong>Gestión avanzada de vendedores:</strong> Administradores pueden asignar, mover y promover vendedores a gestores por sucursal.</li>
+                            <li><strong>Precios inteligentes:</strong> Cuatro precios por producto (efectivo/transferencia × minorista/mayorista) que se actualizan automáticamente al vender.</li>
+                            <li><strong>Planes ajustados por sucursal:</strong> El costo del plan considera el número de sucursales, haciendo el pago más justo.</li>
+                            <li><strong>Mejora en el módulo fiscal:</strong> Simulación más precisa y cálculos de impuestos actualizados.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="changelog-item fade-up">
+                    <div class="version">v2.0.0</div>
+                    <div class="date">28 jul 2026</div>
+                    <div class="desc">
+                        <strong>¡Gran actualización!</strong>
+                        <ul>
+                            <li>Nuevo panel de control con KPIs, gráficos y alertas.</li>
+                            <li>Exportación Premium a PDF, Excel y CSV.</li>
+                            <li>Gestión de proveedores y ocultar costos a vendedores.</li>
+                            <li>Módulo fiscal integrado.</li>
+                            <li>Período de prueba de 3 días con Premium desbloqueado.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="changelog-item fade-up">
+                    <div class="version">v1.5.0</div>
+                    <div class="date">15 jun 2026</div>
+                    <div class="desc">
+                        <ul>
+                            <li>Metas de ventas diarias, semanales y mensuales.</li>
+                            <li>Notificaciones de stock bajo.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="changelog-item fade-up">
+                    <div class="version">v1.0.0</div>
+                    <div class="date">1 mar 2026</div>
+                    <div class="desc">
+                        <ul>
+                            <li>Lanzamiento inicial: inventario, ventas, clientes, gastos, categorías.</li>
+                            <li>Sincronización offline con Supabase.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TRUST ===== -->
+    <section id="trust">
+        <div class="container">
+            <h2 class="section-title fade-up">¿Por qué <span class="gradient-text">Tu MiPyme</span>?</h2>
+            <p class="section-subtitle fade-up">Razones para confiar en nuestra plataforma.</p>
+            <div class="trust-grid">
+                <div class="trust-item fade-up"><div class="icon">📱</div><h4>100% offline</h4><p>Trabaja sin conexión.</p></div>
+                <div class="trust-item fade-up"><div class="icon">🔐</div><h4>Datos seguros</h4><p>Cifrados y sincronizados.</p></div>
+                <div class="trust-item fade-up"><div class="icon">⚡</div><h4>Rápida y ligera</h4><p>Funciona en cualquier teléfono.</p></div>
+                <div class="trust-item fade-up"><div class="icon">📊</div><h4>Decisiones con datos</h4><p>Gráficos y KPIs.</p></div>
+                <div class="trust-item fade-up"><div class="icon">🔄</div><h4>Sincronización automática</h4><p>Olvídate de perder info.</p></div>
+                <div class="trust-item fade-up"><div class="icon">❤️</div><h4>Pensada para ti</h4><p>Se adapta a tu negocio.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section id="cta" class="cta">
+        <div class="container">
+            <h2>📲 Descarga Tu MiPyme ahora</h2>
+            <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas.<br /><span style="font-size:14px; opacity:0.6;">Siempre descargarás la última versión disponible.</span></p>
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:16px; position:relative;">
+                <button class="btn-primary download-trigger" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass); box-shadow: none;">⬇️ Android (APK)</button>
+                <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar" class="btn-primary" style="background: var(--gradient-accent); color: #0b182e;">💻 Windows (RAR)</a>
+            </div>
+            <p class="version-info">Android 5.0+ · ~15 MB · Windows 10+ · ~65 MB</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 <strong>Leifdev</strong></p>
+        </div>
+    </footer>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal">
+            <div class="icon">🛡️</div>
+            <h3>Antes de descargar</h3>
+            <p>Es posible que tu dispositivo muestre un mensaje de advertencia como <strong>"Esta aplicación puede dañar tu dispositivo"</strong>.</p>
+            <div class="highlight">
+                <strong>¿Por qué aparece esto?</strong><br />
+                Es un aviso estándar de Android para apps que no se descargan desde Google Play.
+                <strong>Tu MiPyme</strong> está firmada y verificada, no contiene virus ni malware.
+                Puedes instalarla con total tranquilidad.
+            </div>
+            <p style="font-size:14px; color:var(--text-muted);">Si confías en esta app, pulsa "Continuar descarga". En caso contrario, cancela.</p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
+                <button class="btn btn-primary" id="modalContinue">Continuar descarga</button>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- ===== FEATURES ===== -->
-  <section id="features">
-    <div class="container">
-      <h2 class="section-title fade-up">Todo lo que necesitas <span class="gradient-text">para gestionar</span></h2>
-      <p class="section-subtitle fade-up">Herramientas diseñadas para que tomes el control total de tu negocio.</p>
-      <div class="features-grid">
-        <div class="feature-card fade-up">
-          <div class="icon">🛒</div>
-          <h3>Ventas rápidas</h3>
-          <p>Registra ventas con múltiples productos, clientes y métodos de pago. Funciona sin internet.</p>
-          <span class="tag tag-free">Todos los planes</span>
-        </div>
-        <div class="feature-card fade-up">
-          <div class="icon">📦</div>
-          <h3>Inventario inteligente</h3>
-          <p>Control de stock, reabastecimiento FIFO, lotes y alertas de productos agotados o con bajo stock.</p>
-          <span class="tag">Premium</span>
-        </div>
-        <div class="feature-card fade-up">
-          <div class="icon">👥</div>
-          <h3>Clientes y proveedores</h3>
-          <p>Gestiona tu cartera de clientes y marca a tus proveedores. Control de saldos pendientes.</p>
-          <span class="tag tag-free">Todos los planes</span>
-        </div>
-        <div class="feature-card fade-up">
-          <div class="icon">📊</div>
-          <h3>Panel de control</h3>
-          <p>KPIs, gráficos, ranking de productos, rendimiento de vendedores y alertas inteligentes.</p>
-          <span class="tag">Premium</span>
-        </div>
-        <div class="feature-card fade-up">
-          <div class="icon">📤</div>
-          <h3>Exporta reportes</h3>
-          <p>Genera y comparte reportes en PDF, Excel o CSV. Ideal para tu contador o auditoría.</p>
-          <span class="tag">Premium</span>
-        </div>
-        <div class="feature-card fade-up">
-          <div class="icon">🔒</div>
-          <h3>Seguridad total</h3>
-          <p>Oculta costos y márgenes a tus vendedores. Datos cifrados y sincronización segura.</p>
-          <span class="tag">Premium</span>
-        </div>
-        <div class="feature-card fade-up">
-          <div class="icon">☁️</div>
-          <h3>Offline + sincronización</h3>
-          <p>Trabaja sin conexión y sincroniza automáticamente cuando tengas internet. Tus datos siempre seguros.</p>
-          <span class="tag tag-free">Todos los planes</span>
-        </div>
-        <div class="feature-card fade-up">
-          <div class="icon">🎯</div>
-          <h3>Metas de ventas</h3>
-          <p>Define metas diarias, semanales y mensuales. Visualiza el progreso en tiempo real.</p>
-          <span class="tag tag-free">Todos los planes</span>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
 
-  <!-- ===== TUTORIAL ===== -->
-  <section id="tutorial" style="background: var(--bg-secondary);">
-    <div class="container">
-      <h2 class="section-title fade-up">Cómo <span class="gradient-text">empezar</span></h2>
-      <p class="section-subtitle fade-up">Sigue estos pasos y en minutos tendrás tu negocio gestionado desde tu dispositivo.</p>
-      <div class="tutorial-grid">
-        <div class="step-card fade-up">
-          <div class="number">1</div>
-          <h4>Descarga la app</h4>
-          <p>Elige tu versión: Android (APK) o Windows (RAR) y descárgala gratis.</p>
-        </div>
-        <div class="step-card fade-up">
-          <div class="number">2</div>
-          <h4>Regístrate</h4>
-          <p>Crea tu cuenta con email y contraseña. Disfruta de 3 días de prueba Premium.</p>
-        </div>
-        <div class="step-card fade-up">
-          <div class="number">3</div>
-          <h4>Agrega productos</h4>
-          <p>Registra tu inventario con precios, stock y categorías. Así de simple.</p>
-        </div>
-        <div class="step-card fade-up">
-          <div class="number">4</div>
-          <h4>¡Vende!</h4>
-          <p>Haz tu primera venta, gestiona clientes y mira cómo crece tu negocio.</p>
-        </div>
-        <div class="step-card fade-up">
-          <div class="number">5</div>
-          <h4>Analiza y mejora</h4>
-          <p>Revisa reportes, KPIs y metas. Toma decisiones basadas en datos.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            // ============================================================
+            // 1. LLUVIA DE ESTRELLAS (partículas)
+            // ============================================================
+            const canvas = document.getElementById('stars-canvas');
+            const ctx = canvas.getContext('2d');
+            let w, h;
 
-  <!-- ===== PLANES ===== -->
-  <section id="plans">
-    <div class="container">
-      <h2 class="section-title fade-up">Elige el plan <span class="gradient-text">para tu negocio</span></h2>
-      <p class="section-subtitle fade-up">Comienza con 3 días de prueba gratuita con todas las funciones Premium desbloqueadas.</p>
-      <div class="plans-grid">
-        <div class="plan-card fade-up">
-          <div class="trial-badge">🎁 3 días gratis</div>
-          <div class="name">Normal</div>
-          <div class="price">$1,000 <small>CUP</small></div>
-          <div class="period">por mes</div>
-          <ul>
-            <li><span class="check">✅</span> Inventario básico (CRUD)</li>
-            <li><span class="check">✅</span> Ventas con clientes</li>
-            <li><span class="check">✅</span> Gestión de gastos</li>
-            <li><span class="check">✅</span> Metas de ventas</li>
-            <li><span class="check">✅</span> Sincronización offline</li>
-            <li><span class="cross">❌</span> Panel de control avanzado</li>
-            <li><span class="cross">❌</span> Exportación de reportes</li>
-            <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
-            <li><span class="cross">❌</span> Gestión de proveedores</li>
-            <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
-            <li><span>👤 1 vendedor</span></li>
-          </ul>
-          <button class="btn-outline download-trigger" style="width:100%; justify-content:center;">Probar 3 días gratis</button>
-          <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Luego $1,000 CUP/mes</p>
-        </div>
-        <div class="plan-card popular fade-up">
-          <div class="badge">🔥 Más popular</div>
-          <div class="name">Premium</div>
-          <div class="price">$2,000 <small>CUP</small></div>
-          <div class="period">por mes</div>
-          <ul>
-            <li><span class="check">✅</span> Todo lo del plan Normal</li>
-            <li><span class="check">✅</span> Panel de control con gráficos y KPIs</li>
-            <li><span class="check">✅</span> Exportación PDF, Excel y CSV</li>
-            <li><span class="check">✅</span> Ocultar costos a vendedores</li>
-            <li><span class="check">✅</span> Gestión de proveedores</li>
-            <li><span class="check">✅</span> Notificaciones de stock bajo</li>
-            <li><span class="check">✅</span> Ranking de productos y clientes</li>
-            <li><span class="check">✅</span> Rendimiento de vendedores</li>
-            <li><span>👥 Hasta 5 vendedores</span></li>
-            <li><span>📞 Soporte prioritario</span></li>
-          </ul>
-          <button class="btn-primary download-trigger" style="width:100%; justify-content:center;">Descargar ahora</button>
-          <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Sin período de prueba</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
 
-  <!-- ===== CHANGELOG ===== -->
-  <section id="changelog" style="background: var(--bg-secondary);">
-    <div class="container">
-      <h2 class="section-title fade-up">Historial de <span class="gradient-text">cambios</span></h2>
-      <p class="section-subtitle fade-up">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
-      <div class="changelog-list">
-        <div class="changelog-item fade-up">
-          <div class="version">v2.1.3</div>
-          <div class="date">2 ago 2026</div>
-          <div class="desc">
-            <strong>✨ Actualización de estabilidad y nuevas funciones</strong>
-            <ul>
-              <li><strong>Compilación para Windows:</strong> Ahora Tu MiPyme también está disponible para escritorio con las mismas funcionalidades.</li>
-              <li><strong>Gestión avanzada de vendedores:</strong> Administradores pueden asignar, mover y promover vendedores a gestores por sucursal.</li>
-              <li><strong>Precios inteligentes:</strong> Cuatro precios por producto (efectivo/transferencia × minorista/mayorista) que se actualizan automáticamente al vender.</li>
-              <li><strong>Planes ajustados por sucursal:</strong> El costo del plan considera el número de sucursales, haciendo el pago más justo.</li>
-              <li><strong>Mejora en el módulo fiscal:</strong> Simulación más precisa y cálculos de impuestos actualizados.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="changelog-item fade-up">
-          <div class="version">v2.0.0</div>
-          <div class="date">28 jul 2026</div>
-          <div class="desc">
-            <strong>¡Gran actualización!</strong>
-            <ul>
-              <li>Nuevo panel de control con KPIs, gráficos y alertas.</li>
-              <li>Exportación Premium a PDF, Excel y CSV.</li>
-              <li>Gestión de proveedores y ocultar costos a vendedores.</li>
-              <li>Módulo fiscal integrado.</li>
-              <li>Período de prueba de 3 días con Premium desbloqueado.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="changelog-item fade-up">
-          <div class="version">v1.5.0</div>
-          <div class="date">15 jun 2026</div>
-          <div class="desc">
-            <ul>
-              <li>Metas de ventas diarias, semanales y mensuales.</li>
-              <li>Notificaciones de stock bajo.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="changelog-item fade-up">
-          <div class="version">v1.0.0</div>
-          <div class="date">1 mar 2026</div>
-          <div class="desc">
-            <ul>
-              <li>Lanzamiento inicial: inventario, ventas, clientes, gastos, categorías.</li>
-              <li>Sincronización offline con Supabase.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+            const stars = [];
+            const NUM_STARS = 130;
 
-  <!-- ===== TRUST ===== -->
-  <section id="trust">
-    <div class="container">
-      <h2 class="section-title fade-up">¿Por qué <span class="gradient-text">Tu MiPyme</span>?</h2>
-      <p class="section-subtitle fade-up">Razones para confiar en nuestra plataforma.</p>
-      <div class="trust-grid">
-        <div class="trust-item fade-up"><div class="icon">📱</div><h4>100% offline</h4><p>Trabaja sin conexión.</p></div>
-        <div class="trust-item fade-up"><div class="icon">🔐</div><h4>Datos seguros</h4><p>Cifrados y sincronizados.</p></div>
-        <div class="trust-item fade-up"><div class="icon">⚡</div><h4>Rápida y ligera</h4><p>Funciona en cualquier teléfono.</p></div>
-        <div class="trust-item fade-up"><div class="icon">📊</div><h4>Decisiones con datos</h4><p>Gráficos y KPIs.</p></div>
-        <div class="trust-item fade-up"><div class="icon">🔄</div><h4>Sincronización automática</h4><p>Olvídate de perder info.</p></div>
-        <div class="trust-item fade-up"><div class="icon">❤️</div><h4>Pensada para ti</h4><p>Se adapta a tu negocio.</p></div>
-      </div>
-    </div>
-  </section>
+            for (let i = 0; i < NUM_STARS; i++) {
+                stars.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h - h,
+                    size: Math.random() * 2.2 + 0.5,
+                    speed: 0.6 + Math.random() * 2.0,
+                    opacity: 0.3 + Math.random() * 0.6,
+                    tail: 12 + Math.random() * 40,
+                    angle: (Math.random() - 0.5) * 0.4,
+                });
+            }
 
-  <!-- ===== CTA ===== -->
-  <section id="cta" class="cta">
-    <div class="container">
-      <h2>📲 Descarga Tu MiPyme ahora</h2>
-      <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas.<br /><span style="font-size:14px; opacity:0.6;">Siempre descargarás la última versión disponible.</span></p>
-      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:16px; position:relative;">
-        <button class="btn-primary download-trigger" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass); box-shadow: none;">⬇️ Android (APK)</button>
-        <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar" class="btn-primary" style="background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light)); color: #0b182e;">💻 Windows (RAR)</a>
-      </div>
-      <p class="version-info">Android 5.0+ · ~15 MB · Windows 10+ · ~65 MB</p>
-    </div>
-  </section>
+            function drawStars() {
+                ctx.clearRect(0, 0, w, h);
+                for (let s of stars) {
+                    s.y += s.speed;
+                    s.x += s.angle * 0.3;
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 <strong>Leifdev</strong></p>
-    </div>
-  </footer>
+                    if (s.y > h + 50) {
+                        s.y = -50;
+                        s.x = Math.random() * w;
+                        s.speed = 0.6 + Math.random() * 2.0;
+                        s.size = Math.random() * 2.2 + 0.5;
+                        s.opacity = 0.3 + Math.random() * 0.6;
+                        s.tail = 12 + Math.random() * 40;
+                    }
 
-  <!-- ===== MODAL ===== -->
-  <div class="modal-overlay" id="downloadModal">
-    <div class="modal">
-      <div class="icon">🛡️</div>
-      <h3>Antes de descargar</h3>
-      <p>Es posible que tu dispositivo muestre un mensaje de advertencia como <strong>"Esta aplicación puede dañar tu dispositivo"</strong>.</p>
-      <div class="highlight">
-        <strong>¿Por qué aparece esto?</strong><br />
-        Es un aviso estándar de Android para apps que no se descargan desde Google Play.
-        <strong>Tu MiPyme</strong> está firmada y verificada, no contiene virus ni malware.
-        Puedes instalarla con total tranquilidad.
-      </div>
-      <p style="font-size:14px; color:var(--text-muted);">Si confías en esta app, pulsa "Continuar descarga". En caso contrario, cancela.</p>
-      <div class="modal-actions">
-        <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
-        <button class="btn btn-primary" id="modalContinue">Continuar descarga</button>
-      </div>
-    </div>
-  </div>
+                    // Estela
+                    const grad = ctx.createLinearGradient(
+                        s.x, s.y - s.tail * s.speed * 0.3,
+                        s.x, s.y
+                    );
+                    grad.addColorStop(0, 'rgba(255,255,255,0)');
+                    grad.addColorStop(0.3, `rgba(255,255,255,${s.opacity * 0.2})`);
+                    grad.addColorStop(1, `rgba(255,255,255,${s.opacity})`);
 
-  <!-- ============================================================
-       JAVASCRIPT
-  ============================================================ -->
-  <script>
-    (function() {
-      'use strict';
+                    ctx.beginPath();
+                    ctx.moveTo(s.x, s.y - s.tail * s.speed * 0.3);
+                    ctx.lineTo(s.x, s.y);
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = s.size * 0.8;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
 
-      // ============================================================
-      // 1. LLUVIA DE ESTRELLAS (partículas)
-      // ============================================================
-      const canvas = document.getElementById('stars-canvas');
-      const ctx = canvas.getContext('2d');
-      let w, h;
+                    // Cabeza
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255,255,255,${s.opacity})`;
+                    ctx.shadowColor = 'rgba(255,255,255,0.25)';
+                    ctx.shadowBlur = 12;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+                requestAnimationFrame(drawStars);
+            }
+            drawStars();
 
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resize);
-      resize();
+            // ============================================================
+            // 2. ALTERNANCIA DE DISPOSITIVOS
+            // ============================================================
+            const phone = document.getElementById('devicePhone');
+            const desktop = document.getElementById('deviceDesktop');
+            const dotPhone = document.getElementById('dotPhone');
+            const dotDesktop = document.getElementById('dotDesktop');
+            let currentDevice = 'phone';
 
-      const stars = [];
-      const NUM_STARS = 130;
+            setInterval(() => {
+                if (currentDevice === 'phone') {
+                    phone.classList.remove('active');
+                    desktop.classList.add('active');
+                    dotPhone.classList.remove('active');
+                    dotDesktop.classList.add('active');
+                    currentDevice = 'desktop';
+                } else {
+                    desktop.classList.remove('active');
+                    phone.classList.add('active');
+                    dotDesktop.classList.remove('active');
+                    dotPhone.classList.add('active');
+                    currentDevice = 'phone';
+                }
+            }, 4500);
 
-      for (let i = 0; i < NUM_STARS; i++) {
-        stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h - h,
-          size: Math.random() * 2.2 + 0.5,
-          speed: 0.6 + Math.random() * 2.0,
-          opacity: 0.3 + Math.random() * 0.6,
-          tail: 12 + Math.random() * 40,
-          angle: (Math.random() - 0.5) * 0.4,
-        });
-      }
+            // ============================================================
+            // 3. MENÚ MÓVIL
+            // ============================================================
+            const toggle = document.getElementById('menuToggle');
+            const nav = document.getElementById('mainNav');
+            toggle.addEventListener('click', () => nav.classList.toggle('open'));
+            document.querySelectorAll('#mainNav a').forEach(link => {
+                link.addEventListener('click', () => nav.classList.remove('open'));
+            });
 
-      function drawStars() {
-        ctx.clearRect(0, 0, w, h);
-        for (let s of stars) {
-          s.y += s.speed;
-          s.x += s.angle * 0.3;
+            // ============================================================
+            // 4. HEADER SCROLL
+            // ============================================================
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
 
-          if (s.y > h + 50) {
-            s.y = -50;
-            s.x = Math.random() * w;
-            s.speed = 0.6 + Math.random() * 2.0;
-            s.size = Math.random() * 2.2 + 0.5;
-            s.opacity = 0.3 + Math.random() * 0.6;
-            s.tail = 12 + Math.random() * 40;
-          }
+            // ============================================================
+            // 5. ANIMACIONES AL SCROLL
+            // ============================================================
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-          // Estela
-          const grad = ctx.createLinearGradient(
-            s.x, s.y - s.tail * s.speed * 0.3,
-            s.x, s.y
-          );
-          grad.addColorStop(0, 'rgba(255,255,255,0)');
-          grad.addColorStop(0.3, `rgba(255,255,255,${s.opacity * 0.2})`);
-          grad.addColorStop(1, `rgba(255,255,255,${s.opacity})`);
+            // ============================================================
+            // 6. MODAL DE DESCARGA
+            // ============================================================
+            const modal = document.getElementById('downloadModal');
+            const cancelBtn = document.getElementById('modalCancel');
+            const continueBtn = document.getElementById('modalContinue');
+            let cachedUrl = '';
 
-          ctx.beginPath();
-          ctx.moveTo(s.x, s.y - s.tail * s.speed * 0.3);
-          ctx.lineTo(s.x, s.y);
-          ctx.strokeStyle = grad;
-          ctx.lineWidth = s.size * 0.8;
-          ctx.lineCap = 'round';
-          ctx.stroke();
+            async function getLatestUrl() {
+                const fallback = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk';
+                try {
+                    const res = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases/latest');
+                    if (!res.ok) throw new Error();
+                    const data = await res.json();
+                    const asset = data.assets.find(a => a.name === 'TuMiPyme.apk');
+                    return asset ? asset.browser_download_url : fallback;
+                } catch { return fallback; }
+            }
 
-          // Cabeza
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${s.opacity})`;
-          ctx.shadowColor = 'rgba(255,255,255,0.25)';
-          ctx.shadowBlur = 12;
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-        requestAnimationFrame(drawStars);
-      }
-      drawStars();
+            getLatestUrl().then(url => cachedUrl = url);
 
-      // ============================================================
-      // 2. ALTERNANCIA DE DISPOSITIVOS
-      // ============================================================
-      const phone = document.getElementById('devicePhone');
-      const desktop = document.getElementById('deviceDesktop');
-      const dotPhone = document.getElementById('dotPhone');
-      const dotDesktop = document.getElementById('dotDesktop');
-      let currentDevice = 'phone';
+            function showModal() {
+                if (!cachedUrl) getLatestUrl().then(url => { cachedUrl = url;
+                    modal.classList.add('active'); });
+                else modal.classList.add('active');
+            }
 
-      setInterval(() => {
-        if (currentDevice === 'phone') {
-          phone.classList.remove('active');
-          desktop.classList.add('active');
-          dotPhone.classList.remove('active');
-          dotDesktop.classList.add('active');
-          currentDevice = 'desktop';
-        } else {
-          desktop.classList.remove('active');
-          phone.classList.add('active');
-          dotDesktop.classList.remove('active');
-          dotPhone.classList.add('active');
-          currentDevice = 'phone';
-        }
-      }, 4500);
+            function closeModal() { modal.classList.remove('active'); }
 
-      // ============================================================
-      // 3. MENÚ MÓVIL
-      // ============================================================
-      const toggle = document.getElementById('menuToggle');
-      const nav = document.getElementById('mainNav');
-      toggle.addEventListener('click', () => nav.classList.toggle('open'));
-      document.querySelectorAll('#mainNav a').forEach(link => {
-        link.addEventListener('click', () => nav.classList.remove('open'));
-      });
+            function download() {
+                if (cachedUrl) {
+                    if (typeof gtag !== 'undefined') gtag('event', 'download', { event_category: 'engagement',
+                        event_label: 'TuMiPyme_apk' });
+                    window.location.href = cachedUrl;
+                }
+                closeModal();
+            }
 
-      // ============================================================
-      // 4. HEADER SCROLL
-      // ============================================================
-      const header = document.getElementById('header');
-      window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 50);
-      });
+            document.querySelectorAll('.download-trigger').forEach(el => {
+                el.addEventListener('click', function(e) {
+                    // Si es el enlace directo de Windows (con href), no mostramos modal
+                    if (this.tagName === 'A' && this.href.includes('TuMiPyme.rar')) return;
+                    e.preventDefault();
+                    showModal();
+                });
+            });
+            cancelBtn.addEventListener('click', closeModal);
+            continueBtn.addEventListener('click', download);
+            modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
-      // ============================================================
-      // 5. ANIMACIONES AL SCROLL
-      // ============================================================
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-      // ============================================================
-      // 6. MODAL DE DESCARGA
-      // ============================================================
-      const modal = document.getElementById('downloadModal');
-      const cancelBtn = document.getElementById('modalCancel');
-      const continueBtn = document.getElementById('modalContinue');
-      let cachedUrl = '';
-
-      async function getLatestUrl() {
-        const fallback = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk';
-        try {
-          const res = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases/latest');
-          if (!res.ok) throw new Error();
-          const data = await res.json();
-          const asset = data.assets.find(a => a.name === 'TuMiPyme.apk');
-          return asset ? asset.browser_download_url : fallback;
-        } catch { return fallback; }
-      }
-
-      getLatestUrl().then(url => cachedUrl = url);
-
-      function showModal() {
-        if (!cachedUrl) getLatestUrl().then(url => { cachedUrl = url; modal.classList.add('active'); });
-        else modal.classList.add('active');
-      }
-      function closeModal() { modal.classList.remove('active'); }
-      function download() {
-        if (cachedUrl) {
-          if (typeof gtag !== 'undefined') gtag('event', 'download', { event_category: 'engagement', event_label: 'TuMiPyme_apk' });
-          window.location.href = cachedUrl;
-        }
-        closeModal();
-      }
-
-      document.querySelectorAll('.download-trigger').forEach(el => {
-        el.addEventListener('click', function(e) {
-          // Si es el enlace directo de Windows, no mostrar modal
-          if (this.classList.contains('windows')) return;
-          e.preventDefault();
-          showModal();
-        });
-      });
-      cancelBtn.addEventListener('click', closeModal);
-      continueBtn.addEventListener('click', download);
-      modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
-
-    })();
-  </script>
+        })();
+    </script>
 </body>
 </html>
