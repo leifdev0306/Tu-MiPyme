@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -181,8 +180,21 @@
       width: 100%;
     }
 
-    /* Toggle de tema oculto (solo modo oscuro) */
-    .theme-toggle {
+    .nav-download {
+      background: var(--gradient-accent);
+      color: #0b182e !important;
+      padding: 8px 24px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 2px 12px rgba(212, 167, 69, 0.25);
+      transition: all 0.3s;
+    }
+    .nav-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(212, 167, 69, 0.35);
+    }
+    .nav-download::after {
       display: none;
     }
 
@@ -271,47 +283,72 @@
       line-height: 1.7;
     }
 
-    .download-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .download-badge {
+    /* Botón de descarga principal */
+    .hero-download-btn {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      padding: 14px 32px;
+      padding: 16px 40px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 18px;
+      color: #0b182e;
+      background: var(--gradient-accent);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(212, 167, 69, 0.3);
+      transition: all 0.3s;
+      text-decoration: none;
+      margin-bottom: 20px;
+    }
+    .hero-download-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 36px rgba(212, 167, 69, 0.4);
+    }
+
+    /* Badges de plataforma */
+    .platform-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .platform-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
       border-radius: var(--radius-full);
       font-weight: 600;
-      font-size: 16px;
+      font-size: 15px;
       text-decoration: none;
       transition: all 0.3s;
-      box-shadow: var(--shadow-sm);
       border: 1px solid transparent;
       backdrop-filter: blur(4px);
+      box-shadow: var(--shadow-sm);
     }
-    .download-badge:hover {
-      transform: translateY(-4px);
+    .platform-badge:hover {
+      transform: translateY(-3px);
       box-shadow: var(--shadow-md);
     }
-    .download-badge.android {
+    .platform-badge.android {
       background: linear-gradient(135deg, #3ddc84, #20b86a);
       color: #0b182e;
       border-color: #3ddc84;
     }
-    .download-badge.android:hover {
-      box-shadow: 0 8px 28px rgba(61, 220, 132, 0.3);
+    .platform-badge.android:hover {
+      box-shadow: 0 6px 24px rgba(61, 220, 132, 0.3);
     }
-    .download-badge.windows {
+    .platform-badge.windows {
       background: linear-gradient(135deg, #0078d4, #005a9e);
       color: #fff;
       border-color: #0078d4;
     }
-    .download-badge.windows:hover {
-      box-shadow: 0 8px 28px rgba(0, 120, 212, 0.3);
+    .platform-badge.windows:hover {
+      box-shadow: 0 6px 24px rgba(0, 120, 212, 0.3);
     }
-    .download-badge .icon {
-      font-size: 26px;
+    .platform-badge .icon {
+      font-size: 24px;
       line-height: 1;
     }
 
@@ -1076,8 +1113,11 @@
       .hero p {
         margin: 0 auto 32px;
       }
-      .download-badges {
+      .platform-badges {
         justify-content: center;
+      }
+      .hero-download-btn {
+        margin: 0 auto 20px;
       }
       .hero-devices {
         order: -1;
@@ -1127,11 +1167,11 @@
       .modal-actions {
         flex-direction: column;
       }
-      .download-badge {
+      .platform-badge {
         flex: 1;
         justify-content: center;
         font-size: 14px;
-        padding: 12px 20px;
+        padding: 10px 20px;
       }
       .hero-devices {
         height: 280px;
@@ -1170,7 +1210,7 @@
         <a href="#tutorial">Tutorial</a>
         <a href="#plans">Planes</a>
         <a href="#changelog">Historial</a>
-        <a href="#cta" class="nav-download">Descargar</a>
+        <a href="#cta" class="nav-download download-trigger">Descargar</a>
       </nav>
     </div>
   </header>
@@ -1182,11 +1222,18 @@
         <div class="hero-badge">🚀 Nueva versión 2.1.3</div>
         <h1>Gestión inteligente <br /><span class="highlight">para tu negocio</span></h1>
         <p>Administra ventas, inventario, clientes y finanzas desde una sola app. Offline-first, sincronización en la nube y sin complicaciones.</p>
-        <div class="download-badges">
-          <a href="#" class="download-badge android download-trigger" title="Descargar para Android">
+
+        <!-- Botón principal de descarga -->
+        <button class="hero-download-btn download-trigger">
+          📲 Descargar ahora
+        </button>
+
+        <!-- Badges de plataforma -->
+        <div class="platform-badges">
+          <a href="#" class="platform-badge android download-trigger" title="Descargar para Android">
             <span class="icon">📱</span> Android
           </a>
-          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar" class="download-badge windows" title="Descargar para Windows">
+          <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar" class="platform-badge windows" title="Descargar para Windows">
             <span class="icon">💻</span> Windows
           </a>
         </div>
@@ -1518,7 +1565,7 @@
       'use strict';
 
       // ============================================================
-      // 1. SISTEMA DE PARTÍCULAS - LLUVIA DE ESTRELLAS
+      // 1. SISTEMA DE PARTÍCULAS - LLUVIA DE ESTRELLAS (se ve en toda la página)
       // ============================================================
       const canvas = document.getElementById('particles-canvas');
       const ctx = canvas.getContext('2d');
@@ -1531,40 +1578,37 @@
       window.addEventListener('resize', resize);
       resize();
 
-      // Estrellas que caen con estela
       const stars = [];
-      const NUM_STARS = 100;
+      const NUM_STARS = 120;
 
       for (let i = 0; i < NUM_STARS; i++) {
         stars.push({
           x: Math.random() * w,
           y: Math.random() * h - h,
           size: Math.random() * 2 + 0.5,
-          speed: 0.5 + Math.random() * 1.5,
-          opacity: 0.3 + Math.random() * 0.5,
-          tail: 10 + Math.random() * 30,
-          angle: (Math.random() - 0.5) * 0.4, // ligera desviación
+          speed: 0.5 + Math.random() * 1.8,
+          opacity: 0.3 + Math.random() * 0.6,
+          tail: 10 + Math.random() * 35,
+          angle: (Math.random() - 0.5) * 0.4,
         });
       }
 
       function drawStars() {
         ctx.clearRect(0, 0, w, h);
         for (let s of stars) {
-          // Movimiento
           s.y += s.speed;
           s.x += s.angle * 0.3;
 
-          // Reiniciar cuando sale de la pantalla
           if (s.y > h + 50) {
             s.y = -50;
             s.x = Math.random() * w;
-            s.speed = 0.5 + Math.random() * 1.5;
+            s.speed = 0.5 + Math.random() * 1.8;
             s.size = Math.random() * 2 + 0.5;
-            s.opacity = 0.3 + Math.random() * 0.5;
-            s.tail = 10 + Math.random() * 30;
+            s.opacity = 0.3 + Math.random() * 0.6;
+            s.tail = 10 + Math.random() * 35;
           }
 
-          // Dibujar estela (línea)
+          // Estela
           const gradient = ctx.createLinearGradient(
             s.x, s.y - s.tail * s.speed * 0.3,
             s.x, s.y
@@ -1581,12 +1625,12 @@
           ctx.lineCap = 'round';
           ctx.stroke();
 
-          // Cabeza de la estrella (punto brillante)
+          // Cabeza brillante
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
           ctx.shadowColor = 'rgba(255, 255, 255, 0.3)';
-          ctx.shadowBlur = 10;
+          ctx.shadowBlur = 12;
           ctx.fill();
           ctx.shadowBlur = 0;
         }
@@ -1683,6 +1727,7 @@
 
       document.querySelectorAll('.download-trigger').forEach(el => {
         el.addEventListener('click', function(e) {
+          // Si es el enlace directo de Windows, no mostrar modal
           if (this.classList.contains('windows')) return;
           e.preventDefault();
           showModal();
@@ -1696,4 +1741,3 @@
   </script>
 </body>
 </html>
-```
