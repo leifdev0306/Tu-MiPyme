@@ -50,9 +50,9 @@
             --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
             /* Particulas (nuevo efecto) */
-            --particle-color: rgba(100, 180, 255, 0.6);
-            --particle-glow: rgba(100, 180, 255, 0.3);
-            --particle-line: rgba(100, 180, 255, 0.15);
+            --particle-color: rgba(100, 180, 255, 0.7);
+            --particle-glow: rgba(100, 180, 255, 0.25);
+            --particle-line: rgba(100, 180, 255, 0.12);
         }
 
         /* Modo claro */
@@ -71,9 +71,9 @@
             --shadow-glow: 0 8px 32px rgba(74, 122, 247, 0.15);
             --shadow-gold: 0 8px 32px rgba(212, 167, 69, 0.2);
 
-            --particle-color: rgba(40, 80, 180, 0.5);
+            --particle-color: rgba(40, 80, 180, 0.6);
             --particle-glow: rgba(40, 80, 180, 0.2);
-            --particle-line: rgba(40, 80, 180, 0.15);
+            --particle-line: rgba(40, 80, 180, 0.12);
         }
 
         html {
@@ -1444,7 +1444,7 @@
 </head>
 <body>
 
-    <!-- ===== CANVAS DE PARTÍCULAS (NUEVO EFECTO) ===== -->
+    <!-- ===== CANVAS DE PARTÍCULAS (INTERACTIVO) ===== -->
     <canvas id="particles-canvas"></canvas>
 
     <!-- ===== HEADER ===== -->
@@ -1469,7 +1469,7 @@
     <section class="hero" id="home">
         <div class="container hero-grid">
             <div class="hero-content">
-                <div class="hero-badge">🚀 Nueva versión 2.1.5</div>
+                <div class="hero-badge">🚀 Nueva versión 2.1.6</div>
                 <h1>Gestión inteligente <br /><span class="highlight">para tu negocio</span></h1>
                 <p>Administra ventas, inventario, clientes y finanzas desde una sola app. Offline-first, sincronización en la nube y sin complicaciones.</p>
 
@@ -1578,6 +1578,12 @@
                     <span class="tag">Premium</span>
                 </div>
                 <div class="feature-card fade-up">
+                    <div class="icon">📏</div>
+                    <h3>Unidades de medida personalizadas</h3>
+                    <p>Gestiona productos con unidades propias: kg, L, metros, cajas, docenas, etc. Stock decimal incluido.</p>
+                    <span class="tag tag-free">Todos los planes</span>
+                </div>
+                <div class="feature-card fade-up">
                     <div class="icon">👥</div>
                     <h3>Clientes y proveedores</h3>
                     <p>Gestiona tu cartera de clientes y marca a tus proveedores. Control de saldos pendientes.</p>
@@ -1648,7 +1654,7 @@
                 <div class="step-card fade-up">
                     <div class="number">3</div>
                     <h4>Agrega productos</h4>
-                    <p>Registra tu inventario con precios, stock y categorías. Así de simple.</p>
+                    <p>Registra tu inventario con precios, stock, categorías y unidades de medida.</p>
                 </div>
                 <div class="step-card fade-up">
                     <div class="number">4</div>
@@ -1681,6 +1687,7 @@
                         <li><span class="check">✅</span> Gestión de gastos</li>
                         <li><span class="check">✅</span> Metas de ventas</li>
                         <li><span class="check">✅</span> Sincronización offline</li>
+                        <li><span class="check">✅</span> Unidades de medida</li>
                         <li><span class="cross">❌</span> Panel de control avanzado</li>
                         <li><span class="cross">❌</span> Exportación de reportes</li>
                         <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
@@ -1722,6 +1729,23 @@
             <h2 class="section-title fade-up">Historial de <span class="gradient-text">cambios</span></h2>
             <p class="section-subtitle fade-up">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
             <div class="changelog-list">
+                <!-- NUEVO v2.1.6 -->
+                <div class="changelog-item fade-up">
+                    <div class="version">v2.1.6</div>
+                    <div class="date">13 ago 2026</div>
+                    <div class="desc">
+                        <strong>✨ Unidades de medida y stock decimal</strong>
+                        <ul>
+                            <li><strong>📏 Unidades de medida personalizables:</strong> ahora cada producto puede tener su propia unidad (kg, L, metros, cajas, etc.).</li>
+                            <li><strong>🔢 Stock con decimales:</strong> permite cantidades fraccionarias (ej. 1.5 kg, 0.75 L).</li>
+                            <li><strong>📱 Todas las pantallas actualizadas:</strong> nueva venta, nuevo producto y reabastecimiento muestran y respetan la unidad de medida.</li>
+                            <li><strong>🔄 Sincronización más robusta:</strong> se mejoró el manejo de la conexión y los reintentos automáticos.</li>
+                            <li><strong>🐛 Correcciones internas:</strong> se solucionaron problemas de inicialización en entornos de desarrollo que no afectaban a usuarios finales.</li>
+                            <li><strong>⚡ Mejoras de rendimiento:</strong> la app es más rápida al manejar grandes volúmenes de datos.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- v2.1.5 -->
                 <div class="changelog-item fade-up">
                     <div class="version">v2.1.5</div>
                     <div class="date">12 ago 2026</div>
@@ -1853,7 +1877,7 @@
             'use strict';
 
             // ============================================================
-            // 1. PARTÍCULAS CON LÍNEAS (NUEVO EFECTO)
+            // 1. PARTÍCULAS CON LÍNEAS (INTERACTIVO) - MEJORADO
             // ============================================================
             const canvas = document.getElementById('particles-canvas');
             const ctx = canvas.getContext('2d');
@@ -1867,8 +1891,10 @@
             resize();
 
             const particles = [];
-            const NUM_PARTICLES = 60;
+            const NUM_PARTICLES = 100;
             const CONNECTION_DIST = 140;
+            let mouse = { x: -1000, y: -1000 };
+            let mouseActive = false;
 
             function getColors() {
                 const isLight = document.documentElement.getAttribute('data-theme') === 'light';
@@ -1882,77 +1908,156 @@
                 particles.push({
                     x: Math.random() * w,
                     y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 0.8,
-                    vy: (Math.random() - 0.5) * 0.8,
-                    radius: 2 + Math.random() * 3,
+                    vx: (Math.random() - 0.5) * 1.2,
+                    vy: (Math.random() - 0.5) * 1.2,
+                    radius: 2 + Math.random() * 3.5,
+                    baseOpacity: 0.3 + Math.random() * 0.5,
                     opacity: 0.3 + Math.random() * 0.5,
                 });
             }
+
+            // Interacción con el mouse
+            function handleMouseMove(e) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                if (x >= 0 && x <= w && y >= 0 && y <= h) {
+                    mouse.x = x;
+                    mouse.y = y;
+                    mouseActive = true;
+                } else {
+                    mouseActive = false;
+                }
+            }
+            function handleMouseLeave() {
+                mouseActive = false;
+                mouse.x = -1000;
+                mouse.y = -1000;
+            }
+            canvas.addEventListener('mousemove', handleMouseMove);
+            canvas.addEventListener('mouseleave', handleMouseLeave);
+            // También para touch
+            canvas.addEventListener('touchmove', function(e) {
+                const touch = e.touches[0];
+                if (touch) {
+                    const rect = canvas.getBoundingClientRect();
+                    mouse.x = touch.clientX - rect.left;
+                    mouse.y = touch.clientY - rect.top;
+                    mouseActive = true;
+                }
+            }, { passive: true });
+            canvas.addEventListener('touchend', function() {
+                mouseActive = false;
+                mouse.x = -1000;
+                mouse.y = -1000;
+            }, { passive: true });
 
             function drawParticles() {
                 ctx.clearRect(0, 0, w, h);
                 const colors = getColors();
 
-                // Dibujar líneas
+                // Actualizar opacidad según mouse
+                for (let p of particles) {
+                    if (mouseActive) {
+                        const dx = p.x - mouse.x;
+                        const dy = p.y - mouse.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 150) {
+                            p.opacity = Math.min(1, p.baseOpacity + 0.4 * (1 - dist / 150));
+                        } else {
+                            p.opacity = p.baseOpacity;
+                        }
+                    } else {
+                        p.opacity = p.baseOpacity;
+                    }
+                }
+
+                // Líneas
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
                         const dy = particles[i].y - particles[j].y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < CONNECTION_DIST) {
-                            const alpha = 0.08 * (1 - dist / CONNECTION_DIST);
+                        const maxDist = mouseActive ? CONNECTION_DIST * 1.3 : CONNECTION_DIST;
+                        if (dist < maxDist) {
+                            const alpha = 0.08 * (1 - dist / maxDist);
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
                             ctx.strokeStyle = `rgba(${colors.line}, ${alpha})`;
-                            ctx.lineWidth = 0.8;
+                            ctx.lineWidth = 0.6;
                             ctx.stroke();
                         }
                     }
                 }
 
-                // Dibujar partículas
+                // Partículas
                 for (let p of particles) {
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                     const grad = ctx.createRadialGradient(p.x - 2, p.y - 2, 0, p.x, p.y, p.radius * 2);
-                    grad.addColorStop(0, `rgba(${colors.particle}, ${p.opacity})`);
+                    grad.addColorStop(0, `rgba(${colors.particle}, ${p.opacity * 0.9})`);
                     grad.addColorStop(1, `rgba(${colors.particle}, 0)`);
                     ctx.fillStyle = grad;
                     ctx.shadowColor = `rgba(${colors.particle}, 0.2)`;
-                    ctx.shadowBlur = 20;
+                    ctx.shadowBlur = 25;
                     ctx.fill();
                     ctx.shadowBlur = 0;
 
-                    // centro brillante
+                    // brillo central
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius * 0.3, 0, Math.PI * 2);
+                    ctx.arc(p.x, p.y, p.radius * 0.25, 0, Math.PI * 2);
                     ctx.fillStyle = `rgba(255,255,255,0.3)`;
                     ctx.fill();
                 }
 
-                // Mover partículas
+                // Interacción con el mouse (efecto de repulsión)
+                if (mouseActive) {
+                    for (let p of particles) {
+                        const dx = p.x - mouse.x;
+                        const dy = p.y - mouse.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 100 && dist > 0) {
+                            const force = (100 - dist) / 100 * 1.2;
+                            p.vx += (dx / dist) * force * 0.05;
+                            p.vy += (dy / dist) * force * 0.05;
+                        }
+                    }
+                }
+
+                // Movimiento y límites
                 for (let p of particles) {
                     p.x += p.vx;
                     p.y += p.vy;
-                    if (p.x < 0 || p.x > w) p.vx *= -1;
-                    if (p.y < 0 || p.y > h) p.vy *= -1;
+
+                    // Fricción
+                    p.vx *= 0.995;
+                    p.vy *= 0.995;
+
+                    // Rebote suave
+                    if (p.x < 0) { p.x = 0;
+                        p.vx *= -0.8; }
+                    if (p.x > w) { p.x = w;
+                        p.vx *= -0.8; }
+                    if (p.y < 0) { p.y = 0;
+                        p.vy *= -0.8; }
+                    if (p.y > h) { p.y = h;
+                        p.vy *= -0.8; }
                 }
 
                 requestAnimationFrame(drawParticles);
             }
             drawParticles();
 
-            // Reiniciar partículas al cambiar el tema (para actualizar colores)
+            // ============================================================
+            // 2. TEMA CLARO/OSCURO
+            // ============================================================
             const themeToggle = document.createElement('button');
             themeToggle.className = 'theme-toggle';
             themeToggle.innerHTML = '🌙';
             themeToggle.setAttribute('aria-label', 'Cambiar tema');
             document.body.appendChild(themeToggle);
 
-            // ============================================================
-            // 2. TEMA CLARO/OSCURO
-            // ============================================================
             function getPreferredTheme() {
                 return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
             }
@@ -1961,6 +2066,7 @@
                 document.documentElement.setAttribute('data-theme', theme);
                 themeToggle.innerHTML = theme === 'light' ? '🌙' : '☀️';
                 localStorage.setItem('theme', theme);
+                // Actualizar colores de partículas automáticamente al cambiar tema
             }
 
             const savedTheme = localStorage.getItem('theme');
@@ -2006,11 +2112,9 @@
                 }
             }
 
-            // Click en indicadores
             dotPhone.addEventListener('click', () => switchDevice('phone'));
             dotDesktop.addEventListener('click', () => switchDevice('desktop'));
 
-            // Auto alternancia
             setInterval(() => {
                 if (currentDevice === 'phone') {
                     switchDevice('desktop');
