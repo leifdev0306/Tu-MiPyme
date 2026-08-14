@@ -254,6 +254,18 @@
             display: none;
         }
 
+        /* Nuevo enlace "Software a medida" en el nav */
+        .nav-custom {
+            color: var(--gold-light) !important;
+            font-weight: 600;
+        }
+        .nav-custom::after {
+            background: var(--gradient-gold) !important;
+        }
+        .nav-custom:hover {
+            color: var(--gold) !important;
+        }
+
         .menu-toggle {
             display: none;
             background: none;
@@ -1021,6 +1033,32 @@
         }
 
         /* ============================================================
+           SECCIÓN "SOFTWARE A MEDIDA" (NUEVA)
+        ============================================================ */
+        .custom-software {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 80px 0;
+            text-align: center;
+        }
+        .custom-software .highlight-gold {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .custom-software .btn-gold {
+            background: var(--gradient-gold);
+            color: #0b182e;
+            box-shadow: 0 4px 24px rgba(212, 167, 69, 0.25);
+        }
+        .custom-software .btn-gold:hover {
+            box-shadow: 0 8px 40px rgba(212, 167, 69, 0.4);
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        /* ============================================================
            CTA
         ============================================================ */
         .cta {
@@ -1072,6 +1110,21 @@
         }
         footer strong {
             color: var(--text-primary);
+        }
+        footer .footer-links {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        footer .footer-links a {
+            color: var(--text-muted);
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        footer .footer-links a:hover {
+            color: var(--accent-1);
         }
 
         /* ============================================================
@@ -1334,6 +1387,10 @@
                 <a href="#plans">Planes</a>
                 <a href="#changelog">Historial</a>
                 <a href="#cta" class="nav-download download-trigger">Descargar</a>
+                <!-- NUEVO: enlace a portafolio como "Software a medida" -->
+                <a href="https://leifdev0306.github.io/portafolio/" target="_blank" class="nav-custom">
+                    <i class="fas fa-code"></i> Software a medida
+                </a>
             </nav>
         </div>
     </header>
@@ -1697,6 +1754,30 @@
         </div>
     </section>
 
+    <!-- ===== NUEVA SECCIÓN: SOFTWARE A MEDIDA ===== -->
+    <section class="custom-software">
+        <div class="container">
+            <div class="fade-up">
+                <span class="section-label" style="color: var(--gold);">¿Necesitas algo más?</span>
+                <h2 class="section-title">Desarrollo de software <span class="highlight-gold">a tu medida</span></h2>
+                <p class="section-subtitle" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+                    Cada negocio es único. Si necesitas una solución personalizada, puedo ayudarte a construirla.
+                    Desde aplicaciones móviles, plataformas web, videojuegos o sistemas de gestión,
+                    transformo tus ideas en productos digitales de alto impacto.
+                </p>
+                <div style="margin-top: 32px;">
+                    <a href="https://leifdev0306.github.io/portafolio/" target="_blank" class="btn-cta btn-gold">
+                        <i class="fas fa-arrow-right"></i> Conoce mi portafolio
+                    </a>
+                </div>
+                <p style="margin-top: 20px; color: var(--text-muted); font-size: 0.9rem;">
+                    <i class="fas fa-envelope"></i> leifdev0306@gmail.com · 
+                    <i class="fab fa-github"></i> @leifdev0306
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== CTA ===== -->
     <section id="cta" class="cta">
         <div class="container">
@@ -1714,6 +1795,11 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 <strong>Leifdev</strong> · Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="https://leifdev0306.github.io/portafolio/" target="_blank">Portafolio</a>
+                <a href="mailto:leifdev0306@gmail.com">Contacto</a>
+                <a href="https://github.com/leifdev0306" target="_blank">GitHub</a>
+            </div>
         </div>
     </footer>
 
