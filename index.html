@@ -49,7 +49,7 @@
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        /* Modo claro (opcional) */
+        /* Modo claro */
         [data-theme="light"] {
             --bg-primary: #f0f4ff;
             --bg-secondary: #dce4f5;
@@ -280,7 +280,10 @@
         }
 
         .hero-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px 16px;
             background: rgba(56, 189, 248, 0.08);
             color: var(--accent-1);
             font-weight: 600;
@@ -291,6 +294,30 @@
             border: 1px solid rgba(56, 189, 248, 0.15);
             backdrop-filter: blur(4px);
             box-shadow: 0 0 24px rgba(56, 189, 248, 0.05);
+        }
+        .hero-badge .whats-new-link {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.06);
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .hero-badge .whats-new-link:hover {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: var(--accent-1);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            transform: scale(1.05);
+        }
+        .hero-badge .whats-new-link i {
+            font-size: 14px;
         }
 
         .hero h1 {
@@ -705,7 +732,7 @@
         }
 
         /* ============================================================
-           TUTORIAL
+           TUTORIAL (breve)
         ============================================================ */
         section.tutorial {
             background: var(--bg-secondary);
@@ -754,6 +781,173 @@
         }
         .step-card p {
             font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ============================================================
+           GUÍA DE USUARIO (nueva sección)
+        ============================================================ */
+        section.user-guide {
+            background: var(--bg-primary);
+        }
+        .guide-grid {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .guide-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-glass);
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s;
+        }
+        .guide-card:hover {
+            border-color: rgba(56, 189, 248, 0.15);
+            box-shadow: 0 8px 36px rgba(0, 0, 0, 0.3);
+        }
+        .guide-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .guide-card .card-header .icon {
+            font-size: 32px;
+        }
+        .guide-card .card-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .guide-card p,
+        .guide-card li {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .guide-card ul {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+        .guide-card ul li {
+            margin-bottom: 4px;
+        }
+        .guide-card .highlight-box {
+            background: rgba(56, 189, 248, 0.06);
+            border-left: 4px solid var(--accent-1);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 12px 0;
+        }
+        .guide-card .warning-box {
+            background: rgba(212, 167, 69, 0.08);
+            border-left: 4px solid var(--gold);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 12px 0;
+        }
+        .guide-card .warning-box strong {
+            color: var(--gold-light);
+        }
+
+        /* Acordeón para funcionalidades */
+        .accordion {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-glass);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .accordion:hover {
+            border-color: rgba(56, 189, 248, 0.2);
+        }
+        .accordion summary {
+            padding: 16px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.3s;
+            list-style: none;
+        }
+        .accordion summary::-webkit-details-marker {
+            display: none;
+        }
+        .accordion summary::after {
+            content: '▸';
+            margin-left: auto;
+            transition: transform 0.3s;
+            color: var(--text-muted);
+            font-size: 20px;
+        }
+        .accordion[open] summary::after {
+            transform: rotate(90deg);
+        }
+        .accordion summary:hover {
+            background: var(--bg-card-hover);
+        }
+        .accordion .content {
+            padding: 0 20px 20px 20px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .accordion .content strong {
+            color: var(--text-primary);
+        }
+        .accordion .content ul {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+        .accordion .content .examples {
+            background: rgba(255,255,255,0.03);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            margin: 12px 0;
+        }
+        .accordion .content .examples strong {
+            color: var(--accent-1);
+        }
+
+        .badge-role {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent-1);
+        }
+        .badge-role.admin { background: rgba(212, 167, 69, 0.15); color: var(--gold); }
+        .badge-role.gestor { background: rgba(129, 140, 248, 0.15); color: var(--accent-2); }
+        .badge-role.vendedor { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 12px 0;
+        }
+        .stat-item {
+            text-align: center;
+            background: rgba(255,255,255,0.03);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+        }
+        .stat-item .number {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent-1);
+        }
+        .stat-item .label {
+            font-size: 13px;
             color: var(--text-muted);
         }
 
@@ -954,6 +1148,13 @@
         }
         .changelog-item .desc strong {
             color: var(--text-primary);
+        }
+        .changelog-item.latest {
+            border-left: 4px solid var(--gold);
+            background: rgba(212, 167, 69, 0.04);
+        }
+        .changelog-item.latest .version {
+            color: var(--gold);
         }
 
         /* ============================================================
@@ -1221,6 +1422,9 @@
             .cta h2 {
                 font-size: 36px;
             }
+            .stat-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -1293,6 +1497,27 @@
                 height: 46px;
                 font-size: 20px;
             }
+            .hero-badge {
+                font-size: 12px;
+                padding: 4px 14px;
+            }
+            .hero-badge .whats-new-link {
+                font-size: 11px;
+                padding: 2px 10px;
+            }
+            .guide-card {
+                padding: 20px 16px;
+            }
+            .stat-row {
+                grid-template-columns: 1fr 1fr;
+            }
+            .accordion summary {
+                font-size: 16px;
+                padding: 14px 16px;
+            }
+            .accordion .content {
+                padding: 0 16px 16px 16px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1328,6 +1553,17 @@
                 font-size: 16px;
                 padding: 14px 28px;
             }
+            .hero-badge {
+                font-size: 11px;
+                padding: 4px 12px;
+            }
+            .hero-badge .whats-new-link {
+                font-size: 10px;
+                padding: 2px 8px;
+            }
+            .stat-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -1341,6 +1577,7 @@
             <nav id="mainNav">
                 <a href="#features">Características</a>
                 <a href="#tutorial">Tutorial</a>
+                <a href="#guia">Guía</a>
                 <a href="#plans">Planes</a>
                 <a href="#changelog">Historial</a>
                 <a href="#cta" class="nav-download download-trigger">Descargar</a>
@@ -1355,7 +1592,12 @@
     <section class="hero" id="home">
         <div class="container hero-grid">
             <div class="hero-content">
-                <div class="hero-badge">🚀 Nueva versión 2.1.7</div>
+                <div class="hero-badge">
+                    🚀 Nueva versión 2.1.7
+                    <a href="#changelog" class="whats-new-link">
+                        <i>✨</i> ¿Qué hay de nuevo?
+                    </a>
+                </div>
                 <h1>Gestión inteligente <br /><span class="highlight">para tu negocio</span></h1>
                 <p>Administra ventas, inventario, clientes y finanzas desde una sola app. Offline-first, sincronización en la nube y sin complicaciones.</p>
 
@@ -1518,7 +1760,7 @@
         </div>
     </section>
 
-    <!-- ===== TUTORIAL ===== -->
+    <!-- ===== TUTORIAL (breve) ===== -->
     <section id="tutorial" class="tutorial">
         <div class="container">
             <h2 class="section-title fade-up">Cómo <span class="gradient-text">empezar</span></h2>
@@ -1550,6 +1792,481 @@
                     <p>Revisa reportes, KPIs y metas. Toma decisiones basadas en datos.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         NUEVA SECCIÓN: GUÍA DE USUARIO COMPLETA
+    ============================================================ -->
+    <section id="guia" class="user-guide">
+        <div class="container">
+            <h2 class="section-title fade-up">📖 Guía de <span class="gradient-text">usuario</span></h2>
+            <p class="section-subtitle fade-up">Descubre todas las funcionalidades de Tu MiPyme y aprende a sacarle el máximo partido a tu negocio.</p>
+
+            <div class="guide-grid">
+
+                <!-- ===== BIENVENIDA ===== -->
+                <div class="guide-card fade-up">
+                    <div class="card-header">
+                        <span class="icon">🏪</span>
+                        <h3>¡Bienvenido a Tu MiPyme!</h3>
+                    </div>
+                    <p>Tu aliado para gestionar tu negocio de forma sencilla, rápida y sin necesidad de internet. Explora todas las secciones y descubre todo lo que puedes hacer.</p>
+                    <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;">
+                        <span class="badge-role admin">Administrador</span>
+                        <span class="badge-role gestor">Gestor</span>
+                        <span class="badge-role vendedor">Vendedor</span>
+                    </div>
+                </div>
+
+                <!-- ===== ESTADÍSTICAS RÁPIDAS (simuladas) ===== -->
+                <div class="guide-card fade-up">
+                    <div class="card-header">
+                        <span class="icon">📊</span>
+                        <h3>Resumen rápido</h3>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-item"><span class="number">156</span><div class="label">📦 Productos</div></div>
+                        <div class="stat-item"><span class="number">342</span><div class="label">📊 Ventas</div></div>
+                        <div class="stat-item"><span class="number">89</span><div class="label">👥 Clientes</div></div>
+                    </div>
+                    <p style="font-size:14px; color:var(--text-muted);">Estos datos son de ejemplo. Al usar la app, verás tus propias estadísticas en tiempo real.</p>
+                </div>
+
+                <!-- ===== PRIMEROS PASOS ===== -->
+                <div class="guide-card fade-up">
+                    <div class="card-header">
+                        <span class="icon">🚀</span>
+                        <h3>Primeros pasos</h3>
+                    </div>
+                    <p>Sigue estos pasos para poner tu negocio en marcha en minutos:</p>
+                    <ul>
+                        <li><strong>1. Registra tus productos</strong> – Agrega tu inventario desde la sección "Inventario". Puedes crear categorías y definir precios de compra y venta.</li>
+                        <li><strong>2. Registra tus clientes</strong> – Añade tus clientes para tener un control de ventas y saldos pendientes. Puedes marcar clientes como proveedores.</li>
+                        <li><strong>3. Haz tu primera venta</strong> – Ve a "Ventas", selecciona productos, elige método de pago y registra la venta. El stock se actualiza automáticamente.</li>
+                        <li><strong>4. Explora el Panel de Control</strong> – Analiza tus ventas, gastos, márgenes y toma decisiones basadas en datos reales.</li>
+                        <li><strong>5. Define tus metas</strong> – Establece metas diarias, semanales y mensuales para motivar a tu equipo y medir tu crecimiento.</li>
+                    </ul>
+                </div>
+
+                <!-- ===== CONFIGURACIÓN INICIAL (Admin/Gestor) ===== -->
+                <div class="guide-card fade-up">
+                    <div class="card-header">
+                        <span class="icon">⚙️</span>
+                        <h3>Configuración inicial <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin / Gestor)</span></h3>
+                    </div>
+                    <p>Antes de empezar, configura estos elementos clave:</p>
+                    <ul>
+                        <li><strong>📂 Categorías</strong> – Crea categorías para organizar tus productos (ej: Bebidas, Lácteos, Panadería).</li>
+                        <li><strong>👥 Clientes y Proveedores</strong> – Agrega tus clientes habituales y marca a tus proveedores para controlar deudas.</li>
+                        <li><strong>📦 Productos</strong> – Registra todos tus productos con precios de compra y venta, stock inicial y unidad de medida.</li>
+                        <li><strong>🎯 Metas</strong> – Define metas de ventas para medir el rendimiento de tu negocio.</li>
+                        <li><strong>👤 Vendedores</strong> – Crea usuarios para tus vendedores (plan Premium permite hasta 5).</li>
+                    </ul>
+                </div>
+
+                <!-- ===== FUNCIONALIDADES COMPLETAS (ACORDEÓN) ===== -->
+                <div style="margin-top:20px;">
+                    <h3 style="font-size:28px; font-weight:800; color:var(--text-primary); margin-bottom:8px;">📱 Funcionalidades completas</h3>
+                    <p style="color:var(--text-muted); margin-bottom:20px;">Toca cada sección para expandir y conocer todos los detalles. ¡Descubre todo lo que puedes hacer con Tu MiPyme!</p>
+
+                    <!-- 1. Ventas -->
+                    <details class="accordion fade-up">
+                        <summary>🛒 Ventas</summary>
+                        <div class="content">
+                            <p>Registra ventas de forma rápida e intuitiva. Puedes vender uno o varios productos en una sola transacción, asignar un cliente (opcional), elegir el método de pago (Efectivo CUP, MLC, Transfermóvil, EnZona) y añadir notas. La app calcula automáticamente el total, actualiza el stock en tiempo real y aplica precios según el tipo de cliente (minorista/mayorista).</p>
+                            <p><strong>📌 Pasos para vender:</strong></p>
+                            <ul>
+                                <li>Toca "Agregar producto" y selecciona del listado.</li>
+                                <li>Ajusta la cantidad con los botones + y – (puedes mantener presionado para cambiar rápido).</li>
+                                <li>Si es venta mayorista, activa el checkbox para aplicar descuentos automáticos.</li>
+                                <li>Selecciona el método de pago y el cliente (si aplica).</li>
+                                <li>Revisa el total y presiona "Registrar Venta".</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Vender 3 productos diferentes en una misma venta.<br>
+                                • Vender al mayorista Juan con descuento del 10%.<br>
+                                • Registrar una venta a crédito (cliente con saldo pendiente).
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Stock actualizado al instante, control de clientes y saldos pendientes, múltiples productos en una sola factura, funciona sin internet.</p>
+                        </div>
+                    </details>
+
+                    <!-- 2. Inventario (Admin/Gestor) -->
+                    <details class="accordion fade-up">
+                        <summary>📦 Inventario <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin/Gestor)</span></summary>
+                        <div class="content">
+                            <p>Gestiona tu stock de forma profesional con todas las herramientas necesarias.</p>
+                            <ul>
+                                <li><strong>Agregar producto</strong> – Crea un producto con nombre, categoría, precio de compra, precio de venta (efectivo y transferencia), stock inicial y unidad de medida (kg, L, unidades, etc.).</li>
+                                <li><strong>Editar producto</strong> – Modifica cualquier dato del producto en cualquier momento.</li>
+                                <li><strong>Reabastecer</strong> – Añade stock con un nuevo lote. La app registra el precio de compra de cada lote y aplica FIFO (primero en entrar, primero en salir) al calcular costos.</li>
+                                <li><strong>Ver historial</strong> – Cada producto guarda todos sus lotes de reabastecimiento.</li>
+                                <li><strong>Control de costos</strong> – Los administradores ven el costo y margen; los vendedores solo ven el precio de venta.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Crear producto "Leche Entera" con unidad "L" y stock 10.<br>
+                                • Reabastecer con 5 unidades a precio de 1.50 CUP cada una.<br>
+                                • Ver historial de compras de un producto.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Control preciso de inventario con lotes, cálculo automático de costo de ventas (FIFO), alertas de stock bajo (plan Premium).</p>
+                        </div>
+                    </details>
+
+                    <!-- 3. Inventario (Vendedor) -->
+                    <details class="accordion fade-up">
+                        <summary>📦 Inventario <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Consulta – Vendedor)</span></summary>
+                        <div class="content">
+                            <p>Como vendedor, puedes consultar el stock y precios de todos los productos. Puedes ver la lista completa, buscar por nombre o categoría, y ver el precio de venta. No puedes crear, editar ni eliminar productos. Si necesitas hacer cambios, contacta a tu administrador.</p>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Buscar "Leche" para ver stock disponible.<br>
+                                • Consultar el precio de un producto antes de vender.<br>
+                                • Ver qué productos están agotados.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Acceso rápido a stock y precios, búsqueda por nombre o categoría, información clara y actualizada.</p>
+                        </div>
+                    </details>
+
+                    <!-- 4. Categorías -->
+                    <details class="accordion fade-up">
+                        <summary>📂 Categorías</summary>
+                        <div class="content">
+                            <p>Organiza tus productos en categorías para facilitar la búsqueda y el filtrado.</p>
+                            <ul>
+                                <li><strong>Crear categoría</strong> – Dale un nombre y descripción.</li>
+                                <li><strong>Editar</strong> – Modifica el nombre o descripción de una categoría existente.</li>
+                                <li><strong>Eliminar</strong> – Si eliminas una categoría que tiene productos, estos se reasignan automáticamente a "Sin categoría", sin perder información.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Crear categoría "Lácteos" para tus productos.<br>
+                                • Editar el nombre de una categoría existente.<br>
+                                • Eliminar una categoría y reasignar productos automáticamente.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Inventario más ordenado, filtros rápidos en la lista de productos y en ventas, mejor organización por tipo de producto.</p>
+                        </div>
+                    </details>
+
+                    <!-- 5. Clientes y proveedores -->
+                    <details class="accordion fade-up">
+                        <summary>👥 Clientes y Proveedores</summary>
+                        <div class="content">
+                            <p>Administra tu cartera de clientes y proveedores en un solo lugar.</p>
+                            <ul>
+                                <li><strong>Clientes</strong> – Agrega nombre, teléfono, dirección y controla su saldo pendiente (créditos).</li>
+                                <li><strong>Proveedores</strong> – Marca cualquier cliente como proveedor. Al reabastecer un producto, si seleccionas un proveedor, su saldo se actualiza automáticamente con el monto de la compra.</li>
+                                <li><strong>Editar y eliminar</strong> – Modifica los datos de cualquier cliente o proveedor cuando lo necesites.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Agregar cliente "María" con teléfono y dirección.<br>
+                                • Marcar a "Distribuidora XYZ" como proveedor.<br>
+                                • Ver saldo pendiente de un cliente.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Control de deudas de clientes y proveedores, historial de compras por cliente, gestión unificada de relaciones comerciales.</p>
+                        </div>
+                    </details>
+
+                    <!-- 6. Gastos -->
+                    <details class="accordion fade-up">
+                        <summary>💸 Gastos</summary>
+                        <div class="content">
+                            <p>Lleva un registro detallado de todos tus gastos operativos: alquiler, luz, agua, insumos, transporte, sueldos, etc.</p>
+                            <ul>
+                                <li><strong>Registrar gasto</strong> – Añade concepto, monto, categoría, fecha y una nota opcional.</li>
+                                <li><strong>Categorías de gastos</strong> – Clasifica tus gastos para un mejor análisis (ej: servicios, insumos, personal).</li>
+                                <li><strong>Filtrar por fecha</strong> – Visualiza los gastos de un período específico.</li>
+                                <li><strong>Eliminar</strong> – Si cometiste un error, puedes eliminar un gasto (los datos se sincronizan).</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Registrar gasto de alquiler mensual de 500 CUP.<br>
+                                • Filtrar gastos por categoría "Insumos" para ver el total.<br>
+                                • Ver total de gastos del mes en el panel de control.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Control total de tus egresos, los gastos se reflejan en los reportes para calcular tu ganancia neta real, identifica áreas de ahorro.</p>
+                        </div>
+                    </details>
+
+                    <!-- 7. Reportes y Panel de Control -->
+                    <details class="accordion fade-up">
+                        <summary>📊 Reportes y Panel de Control</summary>
+                        <div class="content">
+                            <p>Obtén una visión completa de la salud financiera de tu negocio con métricas y gráficos en tiempo real.</p>
+                            <ul>
+                                <li><strong>KPIs clave</strong> – Ventas, costo de ventas, ganancia bruta, gastos, ganancia neta, ticket promedio, márgenes (bruto y neto).</li>
+                                <li><strong>Gráfico de evolución</strong> – Visualiza la tendencia de los últimos 7 días (ventas, ganancia bruta y neta).</li>
+                                <li><strong>Estado de resultados</strong> – Ingresos, costos, gastos e impuesto estimado (10%).</li>
+                                <li><strong>Gastos por categoría</strong> – Barras que muestran cómo se distribuyen tus gastos.</li>
+                                <li><strong>Ventas por método de pago</strong> – Porcentaje de cada método (Efectivo, Transfermóvil, etc.).</li>
+                                <li><strong>Ranking de productos</strong> – Los 5 productos más vendidos (con cantidad y ganancia).</li>
+                                <li><strong>Ranking de clientes</strong> – Los 5 mejores clientes por volumen de compra.</li>
+                                <li><strong>Rendimiento de vendedores</strong> – Ventas y ganancia generada por cada vendedor (solo admin).</li>
+                                <li><strong>Progreso de metas</strong> – Barras de avance para metas diarias, semanales y mensuales.</li>
+                                <li><strong>Exportación</strong> – Genera reportes en PDF, Excel o CSV (solo plan Premium).</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Ver ganancia neta del mes actual.<br>
+                                • Identificar el producto más vendido y su margen.<br>
+                                • Exportar reporte a PDF para tu contador.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Toma decisiones basadas en datos reales, identifica productos, clientes y vendedores estrella, controla costos y maximiza ganancias.</p>
+                        </div>
+                    </details>
+
+                    <!-- 8. Historial de Ventas -->
+                    <details class="accordion fade-up">
+                        <summary>📜 Historial de Ventas</summary>
+                        <div class="content">
+                            <p>Revisa todas tus ventas pasadas con el detalle completo de cada transacción.</p>
+                            <ul>
+                                <li><strong>Lista de ventas</strong> – Visualiza todas las ventas del período seleccionado (hoy, semana, mes, etc.).</li>
+                                <li><strong>Detalle de venta</strong> – Al tocar una venta, verás el producto, cantidad, precio, método de pago, cliente y notas.</li>
+                                <li><strong>Cancelación de venta</strong> (solo admin) – Cancela una venta y restaura automáticamente el stock y el saldo del cliente.</li>
+                                <li><strong>Filtros</strong> – Puedes filtrar por fecha o buscar por cliente/producto.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Ver todas las ventas de hoy.<br>
+                                • Consultar el detalle de una venta específica.<br>
+                                • Cancelar una venta incorrecta y restaurar stock.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Trazabilidad total de tus transacciones, control sobre devoluciones y ajustes, auditoría de ventas por período.</p>
+                        </div>
+                    </details>
+
+                    <!-- 9. Sincronización Offline -->
+                    <details class="accordion fade-up">
+                        <summary>🔄 Sincronización Offline</summary>
+                        <div class="content">
+                            <p>Tu MiPyme está diseñada para funcionar sin conexión a internet. Todas las operaciones se guardan localmente en tu dispositivo con Hive.</p>
+                            <ul>
+                                <li><strong>Modo offline</strong> – Puedes vender, agregar productos, registrar clientes y gastos sin internet.</li>
+                                <li><strong>Sincronización automática</strong> – Cuando recuperes conexión, la app sincroniza automáticamente todos los cambios con la nube (Supabase).</li>
+                                <li><strong>Sincronización manual</strong> – Desde la pantalla de inicio, puedes forzar la sincronización con el botón de sincronización.</li>
+                                <li><strong>Pendientes</strong> – La app muestra un badge con el número de operaciones pendientes de sincronizar.</li>
+                                <li><strong>Reintentos automáticos</strong> – Si falla la sincronización, la app reintenta automáticamente cada 30 segundos.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Vender en una feria sin internet y sincronizar al llegar a casa.<br>
+                                • Ver el estado de sincronización en tiempo real.<br>
+                                • Forzar sincronización manual antes de cerrar la app.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Trabaja desde cualquier lugar, incluso sin cobertura, tus datos siempre seguros en la nube, sin pérdida de información por falta de conexión.</p>
+                        </div>
+                    </details>
+
+                    <!-- 10. Metas de Ventas -->
+                    <details class="accordion fade-up">
+                        <summary>🎯 Metas de Ventas</summary>
+                        <div class="content">
+                            <p>Define objetivos claros y mide tu progreso en tiempo real.</p>
+                            <ul>
+                                <li><strong>Metas diarias, semanales y mensuales</strong> – Establece montos específicos para cada período.</li>
+                                <li><strong>Barras de progreso</strong> – Visualiza el avance en la pantalla de inicio y en el panel de control.</li>
+                                <li><strong>Actualización automática</strong> – Las metas se actualizan con cada venta registrada.</li>
+                                <li><strong>Flexibilidad</strong> – Puedes modificar las metas en cualquier momento.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Fijar meta diaria de 500 CUP.<br>
+                                • Ver el porcentaje de cumplimiento en tiempo real.<br>
+                                • Aumentar la meta mensual en temporada alta.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Motiva a tu equipo con objetivos claros, mide el crecimiento de tu negocio, identifica desviaciones y ajusta estrategias.</p>
+                        </div>
+                    </details>
+
+                    <!-- 11. Módulo Fiscal -->
+                    <details class="accordion fade-up">
+                        <summary>🧾 Módulo Fiscal</summary>
+                        <div class="content">
+                            <p>Accede a herramientas fiscales para cumplir con tus obligaciones tributarias.</p>
+                            <ul>
+                                <li><strong>Resumen de ventas</strong> – Totaliza tus ventas por período para declaraciones.</li>
+                                <li><strong>Generación de reportes fiscales</strong> – Obtén documentos estructurados para la ONAT.</li>
+                                <li><strong>Facturación</strong> – Genera facturas de tus ventas (opcional).</li>
+                                <li><strong>Impuesto estimado</strong> – La app calcula automáticamente el 10% de impuesto sobre ventas.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Generar resumen fiscal del mes.<br>
+                                • Consultar el total de ventas del trimestre.<br>
+                                • Preparar documentación para la declaración de impuestos.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Simplifica tu contabilidad, cumple con las normativas fiscales, ahorra tiempo en la preparación de declaraciones.</p>
+                        </div>
+                    </details>
+
+                    <!-- 12. Vendedores (Admin) -->
+                    <details class="accordion fade-up">
+                        <summary>👤 Vendedores y Gestores <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin)</span></summary>
+                        <div class="content">
+                            <p>Gestiona todo tu equipo de ventas desde la app.</p>
+                            <ul>
+                                <li><strong>Crear vendedor</strong> – Registra un nuevo usuario con email y contraseña. Asigna una sucursal (opcional).</li>
+                                <li><strong>Limitar por plan</strong> – El plan Normal permite 1 vendedor; el Premium hasta 5.</li>
+                                <li><strong>Asignar salario</strong> – Define salario base, tipo de contrato (fijo, comisión, mixto) y porcentaje de comisión.</li>
+                                <li><strong>Promover a gestor</strong> – Convierte a un vendedor en gestor para que supervise una sucursal.</li>
+                                <li><strong>Eliminar vendedor</strong> – Remueve usuarios que ya no trabajan en el negocio.</li>
+                                <li><strong>Cambiar sucursal</strong> – Asigna o modifica la sucursal de cualquier usuario.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Crear usuario para un nuevo vendedor.<br>
+                                • Asignar salario base y comisión del 5%.<br>
+                                • Promover a un vendedor a gestor de una sucursal.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Control total del equipo de ventas, cálculo automático de comisiones, gestión de salarios y nóminas integrada.</p>
+                        </div>
+                    </details>
+
+                    <!-- 13. Estadísticas de Vendedores (Admin) -->
+                    <details class="accordion fade-up">
+                        <summary>📈 Estadísticas de Vendedores <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin)</span></summary>
+                        <div class="content">
+                            <p>Analiza el rendimiento de tu equipo de ventas con métricas clave.</p>
+                            <ul>
+                                <li><strong>Ventas totales</strong> – Número de ventas realizadas por cada vendedor.</li>
+                                <li><strong>Monto facturado</strong> – Total en dinero vendido por cada uno.</li>
+                                <li><strong>Ganancia generada</strong> – Contribución a la ganancia neta de cada vendedor.</li>
+                                <li><strong>Ranking</strong> – Identifica a los mejores vendedores y áreas de mejora.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Ver ranking de vendedores del mes.<br>
+                                • Comparar ganancia generada por vendedor.<br>
+                                • Identificar a los vendedores más productivos.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Motiva a tu equipo con datos objetivos, toma decisiones de incentivos y comisiones, identifica oportunidades de capacitación.</p>
+                        </div>
+                    </details>
+
+                    <!-- 14. Planes y Pagos (Admin) -->
+                    <details class="accordion fade-up">
+                        <summary>💳 Planes y Pagos <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin)</span></summary>
+                        <div class="content">
+                            <p>Gestiona la suscripción de tu negocio y mantén tu servicio activo.</p>
+                            <ul>
+                                <li><strong>Período de prueba</strong> – Al registrarte, disfrutas de 3 días de prueba gratuita con todas las funciones Premium desbloqueadas.</li>
+                                <li><strong>Plan Normal</strong> – 1,000 CUP/mes – incluye inventario básico, ventas, clientes, gastos, metas y sincronización offline.</li>
+                                <li><strong>Plan Premium</strong> – 2,000 CUP/mes – todo lo del plan Normal + panel de control avanzado, exportación de reportes, gestión de proveedores, notificaciones de stock y ocultar costos a vendedores.</li>
+                                <li><strong>Solicitar pago</strong> – Desde la sección de pago, envía tu comprobante de transferencia y la app registrará tu solicitud.</li>
+                                <li><strong>Estado de suscripción</strong> – Consulta el estado de tu pago (pendiente/aprobado) y la fecha de aprobación.</li>
+                                <li><strong>Recordatorio</strong> – Si pasas del día 6 del mes sin pago, la app te mostrará un bloqueo hasta que regularices.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Activar período de prueba de 3 días.<br>
+                                • Solicitar plan Premium desde la app.<br>
+                                • Ver estado de tu suscripción y fecha de aprobación.
+                            </div>
+                            <p><strong>✅ Beneficios:</strong> Acceso a todas las funcionalidades según tu plan, pago seguro y controlado desde la app, flexibilidad para cambiar de plan cuando lo necesites.</p>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- ===== RECOMENDACIONES POR ROL ===== -->
+                <div class="guide-card fade-up" style="margin-top:20px;">
+                    <div class="card-header">
+                        <span class="icon">🎯</span>
+                        <h3>Recomendaciones por rol</h3>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:12px;">
+                        <div style="background:rgba(212,167,69,0.06); padding:16px; border-radius:var(--radius-sm); border-left:4px solid var(--gold);">
+                            <h4 style="color:var(--gold);">👑 Administrador</h4>
+                            <ul style="font-size:14px; color:var(--text-muted); padding-left:16px;">
+                                <li>Control total – usa el panel para decisiones estratégicas.</li>
+                                <li>Gestiona tu equipo: roles, salarios y comisiones.</li>
+                                <li>Exporta reportes para tu contador.</li>
+                                <li>Oculta costos a vendedores (Premium).</li>
+                                <li>Mantén tu suscripción activa.</li>
+                            </ul>
+                        </div>
+                        <div style="background:rgba(129,140,248,0.06); padding:16px; border-radius:var(--radius-sm); border-left:4px solid var(--accent-2);">
+                            <h4 style="color:var(--accent-2);">📋 Gestor</h4>
+                            <ul style="font-size:14px; color:var(--text-muted); padding-left:16px;">
+                                <li>Supervisa tu sucursal.</li>
+                                <li>Controla stock y reabastece.</li>
+                                <li>Analiza reportes de tu sucursal.</li>
+                                <li>Gestiona clientes y proveedores.</li>
+                            </ul>
+                        </div>
+                        <div style="background:rgba(16,185,129,0.06); padding:16px; border-radius:var(--radius-sm); border-left:4px solid #10b981;">
+                            <h4 style="color:#10b981;">🛒 Vendedor</h4>
+                            <ul style="font-size:14px; color:var(--text-muted); padding-left:16px;">
+                                <li>Enfócate en vender.</li>
+                                <li>Consulta stock antes de cada venta.</li>
+                                <li>Revisa tu historial de ventas.</li>
+                                <li>Avísale a tu gestor si falta stock.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== CONSEJOS AVANZADOS ===== -->
+                <div class="guide-card fade-up">
+                    <div class="card-header">
+                        <span class="icon">💡</span>
+                        <h3>Consejos avanzados</h3>
+                    </div>
+                    <ul>
+                        <li>📈 Revisa el Panel de Control a diario. Identifica tendencias y actúa rápido.</li>
+                        <li>🔁 Actualiza precios regularmente. Revisa tu margen de ganancia con cada reabastecimiento.</li>
+                        <li>👥 Fideliza a tus mejores clientes con promociones personalizadas. Usa el ranking de clientes.</li>
+                        <li>📦 Controla el stock de baja rotación. Si un producto no se vende, reduce su precio o elimínalo.</li>
+                        <li>📤 Exporta reportes mensuales. Lleva un historial financiero para comparar meses.</li>
+                        <li>📱 Aprovecha el modo offline. Puedes vender en ferias o mercados sin cobertura.</li>
+                        <li>🎯 Fija metas realistas. Ajusta tus metas según temporada y capacidad del equipo.</li>
+                        <li>📊 Analiza los gastos por categoría. Identifica dónde puedes ahorrar.</li>
+                    </ul>
+                </div>
+
+                <!-- ===== PREGUNTAS FRECUENTES ===== -->
+                <div class="guide-card fade-up">
+                    <div class="card-header">
+                        <span class="icon">❓</span>
+                        <h3>Preguntas frecuentes</h3>
+                    </div>
+                    <div style="margin-top:8px;">
+                        <p><strong>¿Cómo sincronizo mis datos si no tengo internet?</strong><br>La app guarda todo localmente. Cuando recuperes conexión, se sincroniza automáticamente. También puedes forzar la sincronización desde el botón de sincronización en la pantalla de inicio.</p>
+                        <p><strong>¿Qué pasa si elimino un producto con ventas?</strong><br>No puedes eliminar un producto si tiene ventas asociadas. La app te lo impedirá para mantener la integridad de los datos. Si necesitas descontinuarlo, edita el nombre y stock a 0.</p>
+                        <p><strong>¿Puedo tener múltiples sucursales?</strong><br>Sí, como administrador puedes crear sucursales y asignar gestores. El costo del plan se ajusta según el número de sucursales.</p>
+                        <p><strong>¿Los vendedores ven los costos de compra?</strong><br>No. Los vendedores solo ven el precio de venta. Esto protege tu margen de ganancia.</p>
+                        <p><strong>¿Cómo funciona el cálculo de costos (FIFO)?</strong><br>La app registra cada lote de reabastecimiento con su precio. Al vender, se descuentan primero los lotes más antiguos. Esto da un costo de venta más realista.</p>
+                    </div>
+                </div>
+
+                <!-- ===== ADVERTENCIA SOBRE DATOS REALES vs. PRUEBA ===== -->
+                <div class="guide-card fade-up" style="border-left:4px solid var(--gold);">
+                    <div class="card-header">
+                        <span class="icon">⚠️</span>
+                        <h3 style="color:var(--gold);">Datos reales vs. datos de prueba</h3>
+                    </div>
+                    <div class="warning-box">
+                        <p><strong>Importante:</strong> Esta aplicación está diseñada para gestionar datos reales de tu negocio. Para que los reportes y análisis sean precisos, <strong>te recomendamos usar datos reales desde el principio</strong> (productos, precios, ventas, clientes, etc.).</p>
+                        <p>Si decides hacer pruebas con datos ficticios, ten en cuenta lo siguiente:</p>
+                        <ul>
+                            <li>Los datos de prueba pueden distorsionar los reportes y las estadísticas.</li>
+                            <li>La app no se hace responsable de la veracidad de los datos ingresados.</li>
+                            <li>Si quieres empezar de nuevo, puedes <strong>eliminar los productos</strong> creados o <strong>cancelar todas las ventas</strong> desde el historial (los administradores pueden cancelar ventas y restaurar el stock automáticamente).</li>
+                        </ul>
+                        <p><strong>💡 Recomendación para limpiar datos de prueba:</strong></p>
+                        <ol style="padding-left:20px;">
+                            <li>Ve al <strong>Historial de Ventas</strong> y cancela todas las ventas de prueba (esto restaurará el stock).</li>
+                            <li>Luego, desde el <strong>Inventario</strong>, elimina los productos que hayas creado para pruebas.</li>
+                            <li>Si también registraste clientes o gastos de prueba, puedes eliminarlos desde sus respectivas secciones.</li>
+                        </ol>
+                        <p><strong>✅ Si usas datos reales desde el inicio, obtendrás el máximo valor de Tu MiPyme.</strong></p>
+                    </div>
+                </div>
+
+            </div><!-- /guide-grid -->
         </div>
     </section>
 
@@ -1612,19 +2329,18 @@
             <h2 class="section-title fade-up">Historial de <span class="gradient-text">cambios</span></h2>
             <p class="section-subtitle fade-up">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
             <div class="changelog-list">
-                <!-- NUEVA v2.1.7 -->
-                <div class="changelog-item fade-up">
+                <!-- v2.1.7 con contenido actualizado -->
+                <div class="changelog-item latest fade-up">
                     <div class="version">v2.1.7</div>
                     <div class="date">17 ago 2026</div>
                     <div class="desc">
-                        <strong>✨ Guía interactiva y mejoras de experiencia</strong>
+                        <strong>✨ Novedades destacadas</strong>
                         <ul>
-                            <li><strong>📖 Guía de usuario mejorada:</strong> ahora se muestra automáticamente al primer inicio (registro o login).</li>
-                            <li><strong>🔒 Bloqueo de salida:</strong> el usuario debe hacer scroll hasta el final de la guía para poder salir, asegurando que lea toda la información.</li>
-                            <li><strong>⚠️ Advertencia sobre datos reales vs. prueba:</strong> se explica claramente que la app usa datos reales y que el usuario es responsable de su veracidad. También se indica cómo limpiar datos de prueba (cancelar ventas y eliminar productos).</li>
-                            <li><strong>📱 Mejoras visuales en la pantalla de inventario:</strong> resumen de estadísticas, filtro rápido de productos agotados y ordenación por stock crítico.</li>
-                            <li><strong>🔄 Correcciones de sincronización:</strong> se solucionaron problemas que mostraban ceros en la pantalla de inicio y reportes.</li>
-                            <li><strong>⚡ Mejoras de rendimiento y estabilidad general.</strong></li>
+                            <li><strong>📖 Guía de usuario:</strong> se ha añadido una guía interactiva que se muestra al primer inicio (registro o login) para explicar el funcionamiento de la app, advertir sobre la veracidad de los datos (responsabilidad del usuario) y cómo tratar los datos de prueba (cancelar ventas, eliminar productos de prueba, etc.).</li>
+                            <li><strong>📦 Mejoras en inventario:</strong> la sección de inventario ahora incluye estadísticas de margen y costos (coste total, beneficio estimado, margen promedio) y nuevos filtros para visualizar productos con stock crítico o agotados.</li>
+                            <li><strong>🔄 Reabastecimiento mejorado:</strong> la pantalla de reabastecer productos ha sido rediseñada para hacer el proceso más rápido e intuitivo, con selección múltiple y previsualización de cantidades.</li>
+                            <li><strong>📊 Reportes por sucursal:</strong> ahora puedes ver reportes individuales de cada sucursal, además del reporte general. Los reportes exportados en Excel incluyen totales de ventas por producto, ganancias, costos y márgenes, facilitando el análisis detallado.</li>
+                            <li><strong>⚡ Estabilidad y rendimiento:</strong> se han corregido diversos errores y optimizado la sincronización para una experiencia más fluida.</li>
                         </ul>
                     </div>
                 </div>
@@ -1951,6 +2667,17 @@
             continueBtn.addEventListener('click', download);
             modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
+            // ============================================================
+            // 7. ACORDEÓN: abrir el que tenga el hash en la URL
+            // ============================================================
+            if (window.location.hash) {
+                const targetId = window.location.hash.replace('#', '');
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const details = target.closest('details');
+                    if (details) details.open = true;
+                }
+            }
         })();
     </script>
 </body>
