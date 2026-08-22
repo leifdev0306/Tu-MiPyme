@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
     <style>
         /* ============================================================
-           RESET Y VARIABLES (idéntico al portafolio)
+           RESET Y VARIABLES (mejorados)
         ============================================================ */
         * {
             margin: 0;
@@ -21,13 +21,13 @@
         :root {
             --bg-primary: #0b0d15;
             --bg-secondary: #11131f;
-            --bg-card: rgba(20, 24, 40, 0.7);
-            --bg-card-hover: rgba(255, 255, 255, 0.06);
-            --border-glass: rgba(255, 255, 255, 0.06);
+            --bg-card: rgba(20, 24, 40, 0.65);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
+            --border-glass: rgba(255, 255, 255, 0.08);
 
             --text-primary: #edf2f7;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
 
             --accent-1: #38bdf8;
             --accent-2: #818cf8;
@@ -40,29 +40,30 @@
 
             --radius: 20px;
             --radius-sm: 12px;
-            --radius-xl: 24px;
-            --shadow-glow: 0 8px 32px rgba(56, 189, 248, 0.08);
-            --shadow-gold: 0 8px 32px rgba(212, 167, 69, 0.15);
+            --radius-xl: 28px;
+            --shadow-glow: 0 8px 40px rgba(56, 189, 248, 0.15);
+            --shadow-gold: 0 8px 40px rgba(212, 167, 69, 0.2);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
 
-            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        /* Modo claro */
         [data-theme="light"] {
             --bg-primary: #f0f4ff;
             --bg-secondary: #dce4f5;
-            --bg-card: rgba(0, 0, 0, 0.04);
-            --bg-card-hover: rgba(0, 0, 0, 0.08);
+            --bg-card: rgba(255, 255, 255, 0.6);
+            --bg-card-hover: rgba(0, 0, 0, 0.05);
             --border-glass: rgba(0, 0, 0, 0.08);
 
             --text-primary: #0a1628;
             --text-secondary: #1a2a4a;
             --text-muted: #4a5a7a;
 
-            --shadow-glow: 0 8px 32px rgba(56, 189, 248, 0.12);
-            --shadow-gold: 0 8px 32px rgba(212, 167, 69, 0.2);
+            --shadow-glow: 0 8px 40px rgba(56, 189, 248, 0.15);
+            --shadow-gold: 0 8px 40px rgba(212, 167, 69, 0.2);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         html {
@@ -77,6 +78,19 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             transition: background 0.4s, color 0.4s;
+            position: relative;
+        }
+
+        /* Fondo animado con partículas (sutil) */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.4;
         }
 
         a {
@@ -105,45 +119,45 @@
             bottom: 24px;
             right: 24px;
             z-index: 999;
-            width: 52px;
-            height: 52px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: var(--bg-card);
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--border-glass);
             color: var(--text-primary);
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
             transition: all 0.4s;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
         }
         .theme-toggle:hover {
-            transform: scale(1.10) rotate(8deg);
+            transform: scale(1.12) rotate(12deg);
             border-color: var(--accent-1);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.25);
         }
 
         /* ============================================================
-           HEADER
+           HEADER (mejorado)
         ============================================================ */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 14px 0;
-            background: rgba(11, 13, 21, 0.75);
-            backdrop-filter: blur(18px) saturate(1.4);
+            padding: 16px 0;
+            background: rgba(11, 13, 21, 0.7);
+            backdrop-filter: blur(24px) saturate(1.6);
             border-bottom: 1px solid var(--border-glass);
             z-index: 1000;
             transition: background 0.4s, box-shadow 0.4s, border-color 0.4s;
         }
         header.scrolled {
             background: rgba(11, 13, 21, 0.92);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
         }
 
         .header-inner {
@@ -157,20 +171,23 @@
             align-items: center;
             gap: 12px;
             font-family: var(--font-mono);
-            font-size: 22px;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 800;
             color: var(--text-primary);
-            letter-spacing: -0.3px;
+            letter-spacing: -0.5px;
             transition: color 0.3s;
         }
         .logo .accent {
             color: var(--accent-1);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         nav {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 36px;
         }
         nav a {
             font-size: 15px;
@@ -188,6 +205,7 @@
             height: 2px;
             background: var(--accent-gradient);
             transition: width 0.3s;
+            border-radius: 2px;
         }
         nav a:hover {
             color: var(--text-primary);
@@ -199,11 +217,11 @@
         .nav-download {
             background: var(--accent-gradient);
             color: #fff !important;
-            padding: 10px 28px;
+            padding: 10px 32px;
             border-radius: 50px;
             font-weight: 700;
             font-size: 14px;
-            box-shadow: 0 2px 16px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
             transition: all 0.3s;
             border: none;
             cursor: pointer;
@@ -211,8 +229,8 @@
             display: inline-block;
         }
         .nav-download:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 6px 32px rgba(56, 189, 248, 0.35);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 8px 40px rgba(56, 189, 248, 0.4);
         }
         .nav-download::after {
             display: none;
@@ -233,7 +251,7 @@
             display: none;
             background: none;
             border: none;
-            font-size: 28px;
+            font-size: 30px;
             cursor: pointer;
             color: var(--text-primary);
             padding: 4px;
@@ -241,7 +259,7 @@
         }
 
         /* ============================================================
-           HERO
+           HERO (más espectacular)
         ============================================================ */
         .hero {
             padding: 160px 0 100px;
@@ -249,18 +267,28 @@
             display: flex;
             align-items: center;
             position: relative;
-            background: radial-gradient(ellipse at 30% 40%, rgba(56, 189, 248, 0.06) 0%, transparent 70%);
             overflow: hidden;
-            transition: background 0.4s;
+            background: radial-gradient(ellipse at 20% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 70%, rgba(129, 140, 248, 0.06) 0%, transparent 60%);
         }
         .hero::before {
             content: '';
             position: absolute;
-            top: -20%;
+            top: -30%;
             right: -10%;
-            width: 60%;
+            width: 70%;
             height: 80%;
-            background: radial-gradient(ellipse, rgba(129, 140, 248, 0.06) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(129, 140, 248, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, var(--bg-primary), transparent);
             pointer-events: none;
         }
 
@@ -269,13 +297,14 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
+            position: relative;
         }
 
         .hero-content {
             animation: fadeUp 0.9s ease;
         }
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -284,49 +313,46 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 8px 16px;
-            background: rgba(56, 189, 248, 0.08);
+            background: rgba(56, 189, 248, 0.1);
             color: var(--accent-1);
-            font-weight: 600;
-            font-size: 13px;
-            padding: 6px 20px;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 8px 24px;
             border-radius: 50px;
-            margin-bottom: 24px;
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            backdrop-filter: blur(4px);
-            box-shadow: 0 0 24px rgba(56, 189, 248, 0.05);
+            margin-bottom: 28px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.05);
         }
         .hero-badge .whats-new-link {
             color: var(--text-primary);
-            background: rgba(255,255,255,0.06);
-            padding: 2px 14px;
+            background: rgba(255,255,255,0.08);
+            padding: 4px 18px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             transition: all 0.3s;
             border: 1px solid transparent;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
         .hero-badge .whats-new-link:hover {
             background: var(--accent-gradient);
             color: #fff;
             border-color: var(--accent-1);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-            transform: scale(1.05);
-        }
-        .hero-badge .whats-new-link i {
-            font-size: 14px;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+            transform: scale(1.06);
         }
 
         .hero h1 {
-            font-size: 56px;
+            font-size: 60px;
             font-weight: 900;
             line-height: 1.04;
-            letter-spacing: -2px;
+            letter-spacing: -2.5px;
             color: var(--text-primary);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             transition: color 0.3s;
         }
         .hero h1 .highlight {
@@ -341,11 +367,9 @@
             color: var(--text-muted);
             max-width: 480px;
             margin-bottom: 40px;
-            line-height: 1.7;
-            transition: color 0.3s;
+            line-height: 1.8;
         }
 
-        /* ---- Grid de plataformas ---- */
         .platform-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -355,76 +379,90 @@
         }
         .platform-card {
             background: var(--bg-card);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border-glass);
-            border-radius: var(--radius-md);
-            padding: 20px 16px;
+            border-radius: var(--radius);
+            padding: 24px 20px;
             text-align: center;
             transition: all 0.4s;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-card);
             position: relative;
             overflow: hidden;
         }
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.05), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+        .platform-card:hover::before {
+            opacity: 1;
+        }
         .platform-card:hover {
             background: var(--bg-card-hover);
-            border-color: rgba(56, 189, 248, 0.25);
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 16px 60px rgba(0, 0, 0, 0.5);
         }
         .platform-card .icon {
-            font-size: 32px;
+            font-size: 36px;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .platform-card .name {
             font-weight: 700;
             color: var(--text-primary);
-            font-size: 16px;
-            margin-bottom: 12px;
+            font-size: 18px;
+            margin-bottom: 14px;
         }
         .platform-card .btn-download {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 28px;
+            gap: 10px;
+            padding: 12px 32px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
             color: #fff;
             background: var(--accent-gradient);
             border: none;
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
-            box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
         }
         .platform-card .btn-download:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 28px rgba(56, 189, 248, 0.35);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 40px rgba(56, 189, 248, 0.4);
         }
         .platform-card.android .btn-download {
             background: linear-gradient(135deg, #3ddc84, #20b86a);
             color: #0b182e;
-            box-shadow: 0 4px 16px rgba(61, 220, 132, 0.25);
+            box-shadow: 0 4px 20px rgba(61, 220, 132, 0.3);
         }
         .platform-card.android .btn-download:hover {
-            box-shadow: 0 8px 28px rgba(61, 220, 132, 0.4);
+            box-shadow: 0 8px 40px rgba(61, 220, 132, 0.5);
         }
         .platform-card.windows .btn-download {
             background: linear-gradient(135deg, #0078d4, #005a9e);
-            box-shadow: 0 4px 16px rgba(0, 120, 212, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 120, 212, 0.3);
         }
         .platform-card.windows .btn-download:hover {
-            box-shadow: 0 8px 28px rgba(0, 120, 212, 0.4);
+            box-shadow: 0 8px 40px rgba(0, 120, 212, 0.5);
         }
 
-        /* ---- Dispositivos (mockups) ---- */
+        /* Dispositivos */
         .hero-devices {
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            height: 460px;
+            height: 480px;
         }
 
         .device-container {
@@ -440,10 +478,10 @@
         .device-desktop {
             position: absolute;
             transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1),
-                transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+                        transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
             opacity: 0;
-            transform: scale(0.90) rotate(-3deg) translateY(20px);
-            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
+            transform: scale(0.90) rotate(-4deg) translateY(30px);
+            filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.7));
         }
         .device-phone.active,
         .device-desktop.active {
@@ -452,26 +490,26 @@
         }
 
         .device-phone {
-            width: 200px;
+            width: 210px;
         }
         .device-desktop {
-            width: 380px;
+            width: 400px;
         }
 
         .device-phone .mockup,
         .device-desktop .mockup {
             background: var(--bg-secondary);
             border-radius: var(--radius-xl);
-            padding: 12px;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            padding: 14px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-glass);
             transition: background 0.4s, border-color 0.4s;
         }
         .device-phone .screen,
         .device-desktop .screen {
             background: var(--bg-primary);
-            border-radius: var(--radius-md);
-            padding: 14px 12px;
+            border-radius: var(--radius);
+            padding: 16px 14px;
             display: flex;
             flex-direction: column;
             transition: background 0.4s;
@@ -485,44 +523,44 @@
             border-radius: var(--radius-sm) var(--radius-sm) 0 0;
         }
         .device-desktop .mockup {
-            border-radius: var(--radius-md) var(--radius-md) 0 0;
-            padding: 10px 10px 0 10px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            padding: 12px 12px 0 12px;
         }
         .device-desktop .keyboard {
-            height: 18px;
+            height: 20px;
             background: var(--bg-secondary);
             border-radius: 0 0 var(--radius-sm) var(--radius-sm);
             margin-top: 2px;
             display: flex;
             justify-content: center;
-            gap: 10px;
-            padding: 0 14px;
+            gap: 12px;
+            padding: 0 16px;
             transition: background 0.4s;
         }
         .device-desktop .keyboard span {
             display: inline-block;
-            width: 10px;
-            height: 8px;
+            width: 12px;
+            height: 10px;
             background: var(--border-glass);
-            border-radius: 2px;
+            border-radius: 3px;
             transition: background 0.4s;
         }
         .device-desktop .stand {
-            width: 80px;
-            height: 14px;
+            width: 90px;
+            height: 16px;
             background: var(--bg-secondary);
             margin: 2px auto 0;
-            border-radius: 0 0 10px 10px;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 12px 12px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
             transition: background 0.4s;
         }
 
         .mockup-header {
             display: flex;
             justify-content: space-between;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--border-glass);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             align-items: center;
         }
         .mockup-header .dots {
@@ -531,27 +569,28 @@
         }
         .mockup-header .dot {
             display: inline-block;
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: var(--border-glass);
             transition: background 0.4s;
         }
         .mockup-header .dot.active {
             background: var(--accent-1);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
         }
         .mockup-header .title {
-            font-size: 10px;
-            font-weight: 600;
+            font-size: 11px;
+            font-weight: 700;
             color: var(--text-muted);
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
         .mockup-row {
             display: flex;
             justify-content: space-between;
-            font-size: 10px;
-            padding: 4px 0;
+            font-size: 11px;
+            padding: 5px 0;
             border-bottom: 1px solid var(--border-glass);
             color: var(--text-muted);
         }
@@ -565,15 +604,16 @@
         .mockup-chart {
             display: flex;
             align-items: flex-end;
-            gap: 3px;
-            height: 32px;
+            gap: 4px;
+            height: 36px;
             padding: 6px 0;
         }
         .mockup-chart .bar {
             flex: 1;
             background: var(--border-glass);
-            border-radius: 3px 3px 0 0;
+            border-radius: 4px 4px 0 0;
             min-height: 4px;
+            transition: background 0.4s;
         }
         .mockup-chart .bar.primary { background: var(--accent-1); }
         .mockup-chart .bar.green { background: #10b981; }
@@ -581,15 +621,15 @@
         .mockup-footer {
             display: flex;
             justify-content: space-around;
-            padding-top: 8px;
+            padding-top: 10px;
             border-top: 1px solid var(--border-glass);
-            margin-top: 6px;
+            margin-top: 8px;
         }
         .mockup-footer span {
-            font-size: 9px;
+            font-size: 10px;
             color: var(--text-muted);
-            padding: 4px 12px;
-            border-radius: 6px;
+            padding: 4px 16px;
+            border-radius: 8px;
             transition: all 0.3s;
             font-weight: 600;
             background: transparent;
@@ -597,29 +637,29 @@
         .mockup-footer span.active {
             background: var(--accent-gradient);
             color: #fff;
-            box-shadow: 0 2px 12px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 2px 16px rgba(56, 189, 248, 0.3);
         }
 
         .device-switch-indicator {
             position: absolute;
             bottom: 10px;
             display: flex;
-            gap: 10px;
+            gap: 14px;
         }
         .device-switch-indicator .dot-indicator {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: var(--border-glass);
             transition: all 0.4s;
             cursor: pointer;
-            border: 1px solid transparent;
+            border: 2px solid transparent;
         }
         .device-switch-indicator .dot-indicator.active {
             background: var(--accent-1);
-            box-shadow: 0 0 24px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
             border-color: rgba(56, 189, 248, 0.3);
-            transform: scale(1.15);
+            transform: scale(1.2);
         }
 
         /* ============================================================
@@ -631,11 +671,11 @@
             transition: background 0.4s;
         }
         .section-title {
-            font-size: 40px;
+            font-size: 44px;
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             color: var(--text-primary);
             transition: color 0.3s;
         }
@@ -649,15 +689,15 @@
             text-align: center;
             font-size: 18px;
             color: var(--text-muted);
-            max-width: 640px;
+            max-width: 680px;
             margin: 0 auto 56px;
             transition: color 0.3s;
         }
 
         .fade-up {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         .fade-up.visible {
             opacity: 1;
@@ -665,77 +705,101 @@
         }
 
         /* ============================================================
-           FEATURES
+           FEATURES (mejorados)
         ============================================================ */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 28px;
+            gap: 30px;
         }
         .feature-card {
             background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            padding: 36px 28px;
+            backdrop-filter: blur(20px);
+            padding: 40px 30px;
             border-radius: var(--radius);
             border: 1px solid var(--border-glass);
             transition: all 0.4s;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-card);
             position: relative;
             overflow: hidden;
         }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            border-radius: var(--radius);
+            transition: opacity 0.4s;
+            z-index: -1;
+        }
+        .feature-card:hover::before {
+            opacity: 0.1;
+        }
         .feature-card:hover {
             background: var(--bg-card-hover);
-            transform: translateY(-10px) scale(1.01);
+            transform: translateY(-12px) scale(1.02);
             border-color: rgba(56, 189, 248, 0.2);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
         .feature-card .icon {
-            font-size: 38px;
-            margin-bottom: 16px;
+            font-size: 42px;
+            margin-bottom: 18px;
             display: inline-block;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 14px;
-            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px;
+            border-radius: var(--radius);
             transition: all 0.4s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         .feature-card:hover .icon {
-            transform: scale(1.05) rotate(-2deg);
-            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.08) rotate(-3deg);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
         }
         .feature-card h3 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         .feature-card p {
             font-size: 15px;
             color: var(--text-muted);
-            line-height: 1.7;
+            line-height: 1.8;
         }
         .feature-card .tag {
             display: inline-block;
             margin-top: 16px;
             font-size: 11px;
             font-weight: 700;
-            padding: 4px 16px;
+            padding: 4px 18px;
             border-radius: 50px;
             background: rgba(255, 255, 255, 0.04);
             color: var(--text-muted);
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
         .feature-card .tag-free {
             background: rgba(56, 189, 248, 0.12);
             color: var(--accent-1);
         }
+        .feature-card .tag-new {
+            background: var(--gradient-gold);
+            color: #0b182e;
+            box-shadow: 0 2px 12px rgba(212, 167, 69, 0.3);
+        }
 
         /* ============================================================
-           TUTORIAL (breve)
+           TUTORIAL
         ============================================================ */
         section.tutorial {
             background: var(--bg-secondary);
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
         }
         .tutorial-grid {
             display: grid;
@@ -746,38 +810,38 @@
         }
         .step-card {
             text-align: center;
-            padding: 32px 20px;
+            padding: 36px 20px;
             background: var(--bg-card);
             backdrop-filter: blur(16px);
             border-radius: var(--radius);
             border: 1px solid var(--border-glass);
             transition: all 0.4s;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-card);
         }
         .step-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-12px) scale(1.03);
             border-color: rgba(56, 189, 248, 0.2);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
         .step-card .number {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             background: var(--accent-gradient);
             color: #fff;
             font-weight: 800;
-            font-size: 24px;
+            font-size: 26px;
             border-radius: 50%;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 24px rgba(56, 189, 248, 0.3);
+            margin-bottom: 18px;
+            box-shadow: 0 4px 30px rgba(56, 189, 248, 0.4);
         }
         .step-card h4 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .step-card p {
             font-size: 14px;
@@ -785,7 +849,7 @@
         }
 
         /* ============================================================
-           GUÍA DE USUARIO (nueva sección)
+           GUÍA DE USUARIO
         ============================================================ */
         section.user-guide {
             background: var(--bg-primary);
@@ -796,68 +860,67 @@
         }
         .guide-card {
             background: var(--bg-card);
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
             border-radius: var(--radius);
             border: 1px solid var(--border-glass);
-            padding: 28px 32px;
+            padding: 32px 36px;
             margin-bottom: 28px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-card);
             transition: all 0.4s;
         }
         .guide-card:hover {
             border-color: rgba(56, 189, 248, 0.15);
-            box-shadow: 0 8px 36px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
         }
         .guide-card .card-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 14px;
+            margin-bottom: 14px;
         }
         .guide-card .card-header .icon {
-            font-size: 32px;
+            font-size: 36px;
         }
         .guide-card .card-header h3 {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: var(--text-primary);
         }
         .guide-card p,
         .guide-card li {
             color: var(--text-muted);
-            line-height: 1.7;
+            line-height: 1.8;
         }
         .guide-card ul {
-            padding-left: 20px;
-            margin: 8px 0;
+            padding-left: 22px;
+            margin: 10px 0;
         }
         .guide-card ul li {
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .guide-card .highlight-box {
             background: rgba(56, 189, 248, 0.06);
             border-left: 4px solid var(--accent-1);
-            padding: 16px 20px;
+            padding: 18px 22px;
             border-radius: var(--radius-sm);
-            margin: 12px 0;
+            margin: 14px 0;
         }
         .guide-card .warning-box {
             background: rgba(212, 167, 69, 0.08);
             border-left: 4px solid var(--gold);
-            padding: 16px 20px;
+            padding: 18px 22px;
             border-radius: var(--radius-sm);
-            margin: 12px 0;
+            margin: 14px 0;
         }
         .guide-card .warning-box strong {
             color: var(--gold-light);
         }
 
-        /* Acordeón para funcionalidades */
         .accordion {
             background: var(--bg-card);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-glass);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             overflow: hidden;
             transition: all 0.3s;
         }
@@ -865,14 +928,14 @@
             border-color: rgba(56, 189, 248, 0.2);
         }
         .accordion summary {
-            padding: 16px 20px;
+            padding: 18px 24px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 18px;
             color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             transition: background 0.3s;
             list-style: none;
         }
@@ -884,7 +947,7 @@
             margin-left: auto;
             transition: transform 0.3s;
             color: var(--text-muted);
-            font-size: 20px;
+            font-size: 22px;
         }
         .accordion[open] summary::after {
             transform: rotate(90deg);
@@ -893,22 +956,23 @@
             background: var(--bg-card-hover);
         }
         .accordion .content {
-            padding: 0 20px 20px 20px;
+            padding: 0 24px 24px 24px;
             color: var(--text-muted);
-            line-height: 1.7;
+            line-height: 1.8;
         }
         .accordion .content strong {
             color: var(--text-primary);
         }
         .accordion .content ul {
-            padding-left: 20px;
+            padding-left: 22px;
             margin: 8px 0;
         }
         .accordion .content .examples {
             background: rgba(255,255,255,0.03);
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: var(--radius-sm);
-            margin: 12px 0;
+            margin: 14px 0;
+            border-left: 3px solid var(--accent-1);
         }
         .accordion .content .examples strong {
             color: var(--accent-1);
@@ -916,12 +980,12 @@
 
         .badge-role {
             display: inline-block;
-            padding: 2px 12px;
+            padding: 2px 14px;
             border-radius: 30px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
             background: rgba(56, 189, 248, 0.12);
             color: var(--accent-1);
         }
@@ -933,16 +997,16 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 16px;
-            margin: 12px 0;
+            margin: 14px 0;
         }
         .stat-item {
             text-align: center;
             background: rgba(255,255,255,0.03);
-            padding: 12px;
+            padding: 14px;
             border-radius: var(--radius-sm);
         }
         .stat-item .number {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 800;
             color: var(--accent-1);
         }
@@ -957,88 +1021,104 @@
         .plans-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 36px;
+            gap: 40px;
             max-width: 960px;
             margin: 0 auto;
         }
         .plan-card {
             background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            padding: 44px 36px;
+            backdrop-filter: blur(20px);
+            padding: 48px 40px;
             border-radius: var(--radius-xl);
             text-align: center;
             border: 1px solid var(--border-glass);
             transition: all 0.4s;
             position: relative;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-card);
             overflow: hidden;
         }
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            border-radius: var(--radius-xl);
+            transition: opacity 0.4s;
+            z-index: -1;
+        }
+        .plan-card:hover::before {
+            opacity: 0.08;
+        }
         .plan-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-14px);
             border-color: rgba(56, 189, 248, 0.2);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
         }
         .plan-card.popular {
             border-color: var(--gold);
             background: rgba(212, 167, 69, 0.04);
-            box-shadow: 0 0 0 1px var(--gold), 0 8px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 1px var(--gold), 0 16px 60px rgba(0, 0, 0, 0.4);
         }
         .plan-card.popular .badge {
             position: absolute;
-            top: -12px;
-            right: 28px;
+            top: -14px;
+            right: 30px;
             background: var(--gradient-gold);
             color: #0b182e;
-            font-weight: 700;
-            font-size: 12px;
-            padding: 4px 20px;
+            font-weight: 800;
+            font-size: 13px;
+            padding: 6px 24px;
             border-radius: 50px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 16px rgba(212, 167, 69, 0.3);
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 20px rgba(212, 167, 69, 0.4);
         }
         .plan-card .trial-badge {
             display: inline-block;
             background: rgba(255, 255, 255, 0.06);
             color: var(--text-muted);
             font-weight: 700;
-            font-size: 12px;
-            padding: 4px 20px;
+            font-size: 13px;
+            padding: 4px 22px;
             border-radius: 50px;
             text-transform: uppercase;
-            margin-bottom: 16px;
-            letter-spacing: 0.3px;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
         }
         .plan-card .name {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: var(--text-primary);
         }
         .plan-card .price {
-            font-size: 44px;
+            font-size: 48px;
             font-weight: 800;
             color: var(--text-primary);
         }
         .plan-card .price small {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 400;
             color: var(--text-muted);
         }
         .plan-card .period {
             font-size: 14px;
             color: var(--text-muted);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .plan-card ul {
             text-align: left;
             list-style: none;
             padding: 0;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
         .plan-card ul li {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             padding: 8px 0;
             font-size: 15px;
             color: var(--text-muted);
@@ -1046,19 +1126,19 @@
         .plan-card ul li .check {
             color: var(--accent-1);
             font-weight: 700;
-            font-size: 18px;
+            font-size: 20px;
         }
         .plan-card ul li .cross {
             color: var(--border-glass);
             font-weight: 700;
-            font-size: 18px;
+            font-size: 20px;
         }
 
         .btn-cta {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 16px 44px;
+            padding: 18px 48px;
             border-radius: 50px;
             font-weight: 700;
             font-size: 18px;
@@ -1068,11 +1148,11 @@
             text-decoration: none;
             background: var(--accent-gradient);
             color: #fff;
-            box-shadow: 0 4px 24px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 6px 30px rgba(56, 189, 248, 0.3);
         }
         .btn-cta:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 8px 40px rgba(56, 189, 248, 0.4);
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 12px 50px rgba(56, 189, 248, 0.5);
         }
         .btn-cta-outline {
             background: transparent;
@@ -1083,7 +1163,7 @@
         }
         .btn-cta-outline:hover {
             border-color: var(--accent-1);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.1);
             background: rgba(56, 189, 248, 0.04);
         }
 
@@ -1092,6 +1172,8 @@
         ============================================================ */
         section.changelog {
             background: var(--bg-secondary);
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
         }
         .changelog-list {
             max-width: 820px;
@@ -1099,32 +1181,32 @@
         }
         .changelog-item {
             display: flex;
-            gap: 28px;
-            padding: 24px 28px;
+            gap: 30px;
+            padding: 28px 32px;
             background: var(--bg-card);
             backdrop-filter: blur(16px);
-            border-radius: var(--radius-md);
-            margin-bottom: 14px;
+            border-radius: var(--radius);
+            margin-bottom: 16px;
             border: 1px solid var(--border-glass);
             transition: all 0.4s;
             align-items: flex-start;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-card);
         }
         .changelog-item:hover {
             border-color: rgba(56, 189, 248, 0.2);
-            transform: translateX(8px) scale(1.01);
-            box-shadow: 0 8px 36px rgba(0, 0, 0, 0.4);
+            transform: translateX(10px) scale(1.01);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
         }
         .changelog-item .version {
             font-weight: 800;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--accent-1);
-            min-width: 80px;
+            min-width: 90px;
         }
         .changelog-item .date {
             font-size: 14px;
             color: var(--text-muted);
-            min-width: 100px;
+            min-width: 110px;
         }
         .changelog-item .desc {
             font-size: 15px;
@@ -1133,10 +1215,10 @@
         .changelog-item .desc ul {
             list-style: none;
             padding-left: 0;
-            margin-top: 4px;
+            margin-top: 6px;
         }
         .changelog-item .desc ul li {
-            padding: 2px 0 2px 24px;
+            padding: 3px 0 3px 28px;
             position: relative;
         }
         .changelog-item .desc ul li::before {
@@ -1163,32 +1245,32 @@
         .trust-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 28px;
+            gap: 30px;
             max-width: 820px;
             margin: 0 auto;
         }
         .trust-item {
             text-align: center;
-            padding: 28px 16px;
+            padding: 32px 16px;
             background: var(--bg-card);
             backdrop-filter: blur(16px);
             border-radius: var(--radius);
             border: 1px solid var(--border-glass);
             transition: all 0.4s;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-card);
         }
         .trust-item:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-10px) scale(1.04);
             border-color: rgba(56, 189, 248, 0.2);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 16px 60px rgba(0, 0, 0, 0.5);
         }
         .trust-item .icon {
-            font-size: 34px;
-            margin-bottom: 10px;
+            font-size: 38px;
+            margin-bottom: 12px;
         }
         .trust-item h4 {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 18px;
             color: var(--text-primary);
         }
         .trust-item p {
@@ -1215,11 +1297,11 @@
         .custom-software .btn-gold {
             background: var(--gradient-gold);
             color: #0b182e;
-            box-shadow: 0 4px 24px rgba(212, 167, 69, 0.25);
+            box-shadow: 0 6px 30px rgba(212, 167, 69, 0.3);
         }
         .custom-software .btn-gold:hover {
-            box-shadow: 0 8px 40px rgba(212, 167, 69, 0.4);
-            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 50px rgba(212, 167, 69, 0.5);
+            transform: translateY(-6px) scale(1.04);
         }
 
         /* ============================================================
@@ -1241,23 +1323,23 @@
             left: -10%;
             width: 60%;
             height: 80%;
-            background: radial-gradient(ellipse, rgba(56, 189, 248, 0.06) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
             pointer-events: none;
         }
         .cta h2 {
-            font-size: 44px;
+            font-size: 48px;
             font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
         .cta p {
             font-size: 18px;
             color: var(--text-muted);
-            max-width: 540px;
-            margin: 0 auto 36px;
+            max-width: 560px;
+            margin: 0 auto 40px;
         }
         .cta .version-info {
-            margin-top: 20px;
+            margin-top: 24px;
             font-size: 14px;
             color: var(--text-muted);
         }
@@ -1268,7 +1350,7 @@
         footer {
             background: var(--bg-primary);
             color: var(--text-muted);
-            padding: 40px 0;
+            padding: 44px 0;
             text-align: center;
             border-top: 1px solid var(--border-glass);
         }
@@ -1276,23 +1358,23 @@
             color: var(--text-primary);
         }
         footer .footer-links {
-            margin-top: 12px;
+            margin-top: 14px;
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 28px;
             flex-wrap: wrap;
         }
         footer .footer-links a {
             color: var(--text-muted);
             transition: var(--transition);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         footer .footer-links a:hover {
             color: var(--accent-1);
         }
 
         /* ============================================================
-           MODAL
+           MODAL (mejorado)
         ============================================================ */
         .modal-overlay {
             position: fixed;
@@ -1300,8 +1382,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(16px);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(24px);
             z-index: 2000;
             display: none;
             align-items: center;
@@ -1313,38 +1395,39 @@
         }
         .modal {
             background: var(--bg-secondary);
-            max-width: 480px;
+            max-width: 500px;
             width: 100%;
             border-radius: var(--radius-xl);
-            padding: 44px 36px;
-            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8);
-            animation: fadeUp 0.4s ease;
+            padding: 48px 40px;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.9);
+            animation: fadeUp 0.5s ease;
             border: 1px solid var(--border-glass);
+            backdrop-filter: blur(20px);
         }
         .modal .icon {
-            font-size: 54px;
+            font-size: 60px;
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
         .modal h3 {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 26px;
+            font-weight: 800;
             text-align: center;
             color: var(--text-primary);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
         .modal p {
             font-size: 16px;
             color: var(--text-muted);
             text-align: center;
-            line-height: 1.7;
+            line-height: 1.8;
         }
         .modal .highlight {
             background: rgba(255, 255, 255, 0.04);
-            padding: 16px 20px;
-            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            border-radius: var(--radius);
             border-left: 4px solid var(--accent-1);
-            margin: 20px 0 24px;
+            margin: 24px 0 28px;
             font-size: 14px;
             color: var(--text-muted);
         }
@@ -1353,16 +1436,16 @@
         }
         .modal-actions {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             justify-content: center;
-            margin-top: 8px;
+            margin-top: 10px;
         }
         .modal-actions .btn {
             flex: 1;
             justify-content: center;
-            padding: 14px 24px;
+            padding: 16px 28px;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 16px;
             border: none;
             cursor: pointer;
@@ -1378,16 +1461,16 @@
         }
         .modal-actions .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.12);
-            transform: scale(1.02);
+            transform: scale(1.04);
         }
         .modal-actions .btn-primary {
             background: var(--accent-gradient);
             color: #fff;
-            box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
         }
         .modal-actions .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 28px rgba(56, 189, 248, 0.3);
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 12px 40px rgba(56, 189, 248, 0.5);
         }
 
         /* ============================================================
@@ -1407,20 +1490,20 @@
             }
             .hero-devices {
                 order: -1;
-                height: 340px;
+                height: 360px;
             }
             .device-phone {
-                width: 160px;
+                width: 170px;
             }
             .device-desktop {
-                width: 300px;
+                width: 310px;
             }
             .plans-grid {
                 grid-template-columns: 1fr;
-                max-width: 480px;
+                max-width: 500px;
             }
             .cta h2 {
-                font-size: 36px;
+                font-size: 38px;
             }
             .stat-row {
                 grid-template-columns: repeat(3, 1fr);
@@ -1429,23 +1512,23 @@
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 40px;
+                font-size: 42px;
             }
             .section-title {
-                font-size: 32px;
+                font-size: 34px;
             }
             nav {
                 display: none;
                 flex-direction: column;
                 background: var(--bg-secondary);
                 position: absolute;
-                top: 72px;
+                top: 76px;
                 left: 0;
                 width: 100%;
-                padding: 28px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-                border-radius: 0 0 var(--radius-md) var(--radius-md);
-                gap: 16px;
+                padding: 32px;
+                box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+                border-radius: 0 0 var(--radius) var(--radius);
+                gap: 18px;
                 border: 1px solid var(--border-glass);
                 border-top: none;
             }
@@ -1457,93 +1540,85 @@
             }
             .changelog-item {
                 flex-wrap: wrap;
-                gap: 8px;
-                padding: 18px;
+                gap: 10px;
+                padding: 20px;
             }
             .changelog-item .version,
             .changelog-item .date {
                 min-width: auto;
             }
             .modal {
-                padding: 32px 20px;
+                padding: 36px 24px;
             }
             .modal-actions {
                 flex-direction: column;
             }
             .platform-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 16px;
+                gap: 18px;
             }
             .platform-card {
-                padding: 16px 12px;
+                padding: 18px 14px;
             }
             .platform-card .btn-download {
                 font-size: 13px;
-                padding: 8px 18px;
+                padding: 10px 20px;
             }
             .hero-devices {
-                height: 300px;
+                height: 320px;
             }
             .device-phone {
-                width: 140px;
+                width: 150px;
             }
             .device-desktop {
-                width: 240px;
+                width: 250px;
             }
             .theme-toggle {
                 bottom: 16px;
                 right: 16px;
-                width: 46px;
-                height: 46px;
-                font-size: 20px;
-            }
-            .hero-badge {
-                font-size: 12px;
-                padding: 4px 14px;
-            }
-            .hero-badge .whats-new-link {
-                font-size: 11px;
-                padding: 2px 10px;
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
             }
             .guide-card {
-                padding: 20px 16px;
+                padding: 24px 18px;
             }
             .stat-row {
                 grid-template-columns: 1fr 1fr;
             }
             .accordion summary {
                 font-size: 16px;
-                padding: 14px 16px;
+                padding: 16px 18px;
             }
             .accordion .content {
-                padding: 0 16px 16px 16px;
+                padding: 0 18px 18px 18px;
             }
         }
 
         @media (max-width: 480px) {
             .hero h1 {
-                font-size: 32px;
+                font-size: 34px;
             }
             .hero p {
                 font-size: 16px;
             }
             .device-phone {
-                width: 120px;
+                width: 130px;
             }
             .device-desktop {
-                width: 200px;
+                width: 210px;
             }
             .plan-card {
-                padding: 28px 20px;
+                padding: 32px 24px;
             }
             .feature-card {
-                padding: 24px 18px;
+                padding: 28px 20px;
             }
             .trust-grid {
                 grid-template-columns: 1fr 1fr;
             }
             .cta h2 {
-                font-size: 28px;
+                font-size: 30px;
             }
             .platform-grid {
                 grid-template-columns: 1fr;
@@ -1551,15 +1626,7 @@
             }
             .btn-cta {
                 font-size: 16px;
-                padding: 14px 28px;
-            }
-            .hero-badge {
-                font-size: 11px;
-                padding: 4px 12px;
-            }
-            .hero-badge .whats-new-link {
-                font-size: 10px;
-                padding: 2px 8px;
+                padding: 16px 32px;
             }
             .stat-row {
                 grid-template-columns: 1fr;
@@ -1568,6 +1635,9 @@
     </style>
 </head>
 <body>
+
+    <!-- ===== FONDO DE PARTÍCULAS ===== -->
+    <canvas id="particles-canvas"></canvas>
 
     <!-- ===== HEADER ===== -->
     <header id="header">
@@ -1593,9 +1663,9 @@
         <div class="container hero-grid">
             <div class="hero-content">
                 <div class="hero-badge">
-                    🚀 Nueva versión 2.1.7
+                    🚀 Nueva versión 2.2.0
                     <a href="#changelog" class="whats-new-link">
-                        <i>✨</i> ¿Qué hay de nuevo?
+                        <i>✨</i> Descubre las novedades
                     </a>
                 </div>
                 <h1>Gestión inteligente <br /><span class="highlight">para tu negocio</span></h1>
@@ -1690,6 +1760,25 @@
             <h2 class="section-title fade-up">Todo lo que necesitas <span class="gradient-text">para gestionar</span></h2>
             <p class="section-subtitle fade-up">Herramientas diseñadas para que tomes el control total de tu negocio.</p>
             <div class="features-grid">
+                <!-- Nuevas características destacadas con tag "Novedad" -->
+                <div class="feature-card fade-up">
+                    <div class="icon">⚡</div>
+                    <h3>Ventas ultrarrápidas</h3>
+                    <p>Nuevo módulo optimizado para ventas más rápidas, cómodas y sencillas. Interfaz rediseñada para reducir clics.</p>
+                    <span class="tag tag-new">Novedad v2.2</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">💸</div>
+                    <h3>Historial de transferencias</h3>
+                    <p>Registra y consulta todas las transferencias realizadas. Exporta a Excel con un solo clic.</p>
+                    <span class="tag tag-new">Novedad v2.2</span>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="icon">🤝</div>
+                    <h3>Invitar amigos</h3>
+                    <p>Comparte Tu MiPyme con otros emprendedores. Gana beneficios por cada invitado que se registre.</p>
+                    <span class="tag tag-new">Novedad v2.2</span>
+                </div>
                 <div class="feature-card fade-up">
                     <div class="icon">🛒</div>
                     <h3>Ventas rápidas</h3>
@@ -1796,7 +1885,7 @@
     </section>
 
     <!-- ============================================================
-         NUEVA SECCIÓN: GUÍA DE USUARIO COMPLETA
+         GUÍA DE USUARIO COMPLETA (actualizada con nuevas funcionalidades)
     ============================================================ -->
     <section id="guia" class="user-guide">
         <div class="container">
@@ -1805,7 +1894,7 @@
 
             <div class="guide-grid">
 
-                <!-- ===== BIENVENIDA ===== -->
+                <!-- Bienvenida -->
                 <div class="guide-card fade-up">
                     <div class="card-header">
                         <span class="icon">🏪</span>
@@ -1819,7 +1908,7 @@
                     </div>
                 </div>
 
-                <!-- ===== ESTADÍSTICAS RÁPIDAS (simuladas) ===== -->
+                <!-- Estadísticas rápidas -->
                 <div class="guide-card fade-up">
                     <div class="card-header">
                         <span class="icon">📊</span>
@@ -1833,7 +1922,7 @@
                     <p style="font-size:14px; color:var(--text-muted);">Estos datos son de ejemplo. Al usar la app, verás tus propias estadísticas en tiempo real.</p>
                 </div>
 
-                <!-- ===== PRIMEROS PASOS ===== -->
+                <!-- Primeros pasos -->
                 <div class="guide-card fade-up">
                     <div class="card-header">
                         <span class="icon">🚀</span>
@@ -1849,7 +1938,7 @@
                     </ul>
                 </div>
 
-                <!-- ===== CONFIGURACIÓN INICIAL (Admin/Gestor) ===== -->
+                <!-- Configuración inicial -->
                 <div class="guide-card fade-up">
                     <div class="card-header">
                         <span class="icon">⚙️</span>
@@ -1861,39 +1950,78 @@
                         <li><strong>👥 Clientes y Proveedores</strong> – Agrega tus clientes habituales y marca a tus proveedores para controlar deudas.</li>
                         <li><strong>📦 Productos</strong> – Registra todos tus productos con precios de compra y venta, stock inicial y unidad de medida.</li>
                         <li><strong>🎯 Metas</strong> – Define metas de ventas para medir el rendimiento de tu negocio.</li>
-                        <li><strong>👤 Vendedores</strong> – Crea usuarios para tus vendedores (plan Premium permite hasta 5).</li>
+                        <li><strong>👤 Vendedores</strong> – Crea usuarios para tus vendedores (plan Premium hasta 5, Normal hasta 2).</li>
                     </ul>
                 </div>
 
-                <!-- ===== FUNCIONALIDADES COMPLETAS (ACORDEÓN) ===== -->
+                <!-- Funcionalidades completas (acordeón) -->
                 <div style="margin-top:20px;">
                     <h3 style="font-size:28px; font-weight:800; color:var(--text-primary); margin-bottom:8px;">📱 Funcionalidades completas</h3>
                     <p style="color:var(--text-muted); margin-bottom:20px;">Toca cada sección para expandir y conocer todos los detalles. ¡Descubre todo lo que puedes hacer con Tu MiPyme!</p>
 
-                    <!-- 1. Ventas -->
+                    <!-- Ventas (optimizado) -->
                     <details class="accordion fade-up">
-                        <summary>🛒 Ventas</summary>
+                        <summary>🛒 Ventas (optimizado para rapidez)</summary>
                         <div class="content">
-                            <p>Registra ventas de forma rápida e intuitiva. Puedes vender uno o varios productos en una sola transacción, asignar un cliente (opcional), elegir el método de pago (Efectivo CUP, MLC, Transfermóvil, EnZona) y añadir notas. La app calcula automáticamente el total, actualiza el stock en tiempo real y aplica precios según el tipo de cliente (minorista/mayorista).</p>
-                            <p><strong>📌 Pasos para vender:</strong></p>
+                            <p><strong>Nuevo módulo de ventas ultrarrápido</strong> – Interfaz rediseñada para reducir clics y agilizar el proceso. Ahora puedes:</p>
                             <ul>
-                                <li>Toca "Agregar producto" y selecciona del listado.</li>
-                                <li>Ajusta la cantidad con los botones + y – (puedes mantener presionado para cambiar rápido).</li>
-                                <li>Si es venta mayorista, activa el checkbox para aplicar descuentos automáticos.</li>
-                                <li>Selecciona el método de pago y el cliente (si aplica).</li>
-                                <li>Revisa el total y presiona "Registrar Venta".</li>
+                                <li><strong>Selección rápida de productos</strong> – Búsqueda instantánea y añadido con un solo toque.</li>
+                                <li><strong>Cantidad ajustable</strong> – Botones + y – con respuesta táctil mejorada.</li>
+                                <li><strong>Venta mayorista</strong> – Activa el descuento automático con un toggle.</li>
+                                <li><strong>Método de pago</strong> – Selección visual con iconos (Efectivo CUP, MLC, Transfermóvil, EnZona).</li>
+                                <li><strong>Cliente opcional</strong> – Asignación rápida desde la misma pantalla.</li>
+                                <li><strong>Total en tiempo real</strong> – Actualización instantánea al modificar cantidades.</li>
                             </ul>
                             <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Vender 3 productos diferentes en una misma venta.<br>
-                                • Vender al mayorista Juan con descuento del 10%.<br>
-                                • Registrar una venta a crédito (cliente con saldo pendiente).
+                                <strong>📌 Novedades:</strong><br>
+                                • La venta se registra en <strong>menos de 5 segundos</strong>.<br>
+                                • Visualización clara de los productos añadidos y su precio.<br>
+                                • Compatible con el nuevo <strong>historial de transferencias</strong> (si aplica).
                             </div>
-                            <p><strong>✅ Beneficios:</strong> Stock actualizado al instante, control de clientes y saldos pendientes, múltiples productos en una sola factura, funciona sin internet.</p>
                         </div>
                     </details>
 
-                    <!-- 2. Inventario (Admin/Gestor) -->
+                    <!-- Historial de transferencias -->
+                    <details class="accordion fade-up">
+                        <summary>💸 Historial de transferencias</summary>
+                        <div class="content">
+                            <p><strong>Nuevo módulo para gestionar transferencias bancarias</strong> – Ideal para negocios que reciben pagos por Transfermóvil, EnZona u otros.</p>
+                            <ul>
+                                <li><strong>Registro automático</strong> – Cuando realizas una venta con método de pago "Transferencia", se guarda automáticamente en este historial.</li>
+                                <li><strong>Consulta y filtros</strong> – Visualiza todas las transferencias, filtra por fecha, cliente o estado.</li>
+                                <li><strong>Exportar a Excel</strong> – Genera un reporte detallado con todas las transferencias para tu contabilidad.</li>
+                                <li><strong>Estado de pago</strong> – Marca cada transferencia como "Pendiente" o "Confirmada".</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Revisar todas las transferencias del mes.<br>
+                                • Exportar a Excel para conciliar con tu banco.<br>
+                                • Confirmar pagos y actualizar saldos de clientes.
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Invitar amigos -->
+                    <details class="accordion fade-up">
+                        <summary>🤝 Invitar amigos</summary>
+                        <div class="content">
+                            <p><strong>Comparte Tu MiPyme y obtén beneficios</strong> – Ayuda a otros emprendedores a digitalizar su negocio y recibe recompensas.</p>
+                            <ul>
+                                <li><strong>Genera tu enlace de invitación</strong> – Desde la app, obtén un código único para compartir.</li>
+                                <li><strong>Beneficios por cada registro</strong> – Cuando un amigo se registra con tu código, ambos obtienen <strong>días extra de prueba Premium</strong> o descuentos en el plan.</li>
+                                <li><strong>Panel de seguimiento</strong> – Consulta cuántos amigos han aceptado tu invitación.</li>
+                                <li><strong>Comparte fácilmente</strong> – Envía el enlace por WhatsApp, correo o redes sociales.</li>
+                            </ul>
+                            <div class="examples">
+                                <strong>📌 Ejemplos de uso:</strong><br>
+                                • Compartir tu código en un grupo de emprendedores.<br>
+                                • Ver el progreso de tus invitados.<br>
+                                • Canjear recompensas por registros exitosos.
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Resto de funcionalidades (se mantienen igual pero con algunas mejoras visuales) -->
                     <details class="accordion fade-up">
                         <summary>📦 Inventario <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin/Gestor)</span></summary>
                         <div class="content">
@@ -1905,32 +2033,16 @@
                                 <li><strong>Ver historial</strong> – Cada producto guarda todos sus lotes de reabastecimiento.</li>
                                 <li><strong>Control de costos</strong> – Los administradores ven el costo y margen; los vendedores solo ven el precio de venta.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Crear producto "Leche Entera" con unidad "L" y stock 10.<br>
-                                • Reabastecer con 5 unidades a precio de 1.50 CUP cada una.<br>
-                                • Ver historial de compras de un producto.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Control preciso de inventario con lotes, cálculo automático de costo de ventas (FIFO), alertas de stock bajo (plan Premium).</p>
                         </div>
                     </details>
 
-                    <!-- 3. Inventario (Vendedor) -->
                     <details class="accordion fade-up">
                         <summary>📦 Inventario <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Consulta – Vendedor)</span></summary>
                         <div class="content">
                             <p>Como vendedor, puedes consultar el stock y precios de todos los productos. Puedes ver la lista completa, buscar por nombre o categoría, y ver el precio de venta. No puedes crear, editar ni eliminar productos. Si necesitas hacer cambios, contacta a tu administrador.</p>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Buscar "Leche" para ver stock disponible.<br>
-                                • Consultar el precio de un producto antes de vender.<br>
-                                • Ver qué productos están agotados.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Acceso rápido a stock y precios, búsqueda por nombre o categoría, información clara y actualizada.</p>
                         </div>
                     </details>
 
-                    <!-- 4. Categorías -->
                     <details class="accordion fade-up">
                         <summary>📂 Categorías</summary>
                         <div class="content">
@@ -1940,17 +2052,9 @@
                                 <li><strong>Editar</strong> – Modifica el nombre o descripción de una categoría existente.</li>
                                 <li><strong>Eliminar</strong> – Si eliminas una categoría que tiene productos, estos se reasignan automáticamente a "Sin categoría", sin perder información.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Crear categoría "Lácteos" para tus productos.<br>
-                                • Editar el nombre de una categoría existente.<br>
-                                • Eliminar una categoría y reasignar productos automáticamente.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Inventario más ordenado, filtros rápidos en la lista de productos y en ventas, mejor organización por tipo de producto.</p>
                         </div>
                     </details>
 
-                    <!-- 5. Clientes y proveedores -->
                     <details class="accordion fade-up">
                         <summary>👥 Clientes y Proveedores</summary>
                         <div class="content">
@@ -1960,17 +2064,9 @@
                                 <li><strong>Proveedores</strong> – Marca cualquier cliente como proveedor. Al reabastecer un producto, si seleccionas un proveedor, su saldo se actualiza automáticamente con el monto de la compra.</li>
                                 <li><strong>Editar y eliminar</strong> – Modifica los datos de cualquier cliente o proveedor cuando lo necesites.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Agregar cliente "María" con teléfono y dirección.<br>
-                                • Marcar a "Distribuidora XYZ" como proveedor.<br>
-                                • Ver saldo pendiente de un cliente.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Control de deudas de clientes y proveedores, historial de compras por cliente, gestión unificada de relaciones comerciales.</p>
                         </div>
                     </details>
 
-                    <!-- 6. Gastos -->
                     <details class="accordion fade-up">
                         <summary>💸 Gastos</summary>
                         <div class="content">
@@ -1981,17 +2077,9 @@
                                 <li><strong>Filtrar por fecha</strong> – Visualiza los gastos de un período específico.</li>
                                 <li><strong>Eliminar</strong> – Si cometiste un error, puedes eliminar un gasto (los datos se sincronizan).</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Registrar gasto de alquiler mensual de 500 CUP.<br>
-                                • Filtrar gastos por categoría "Insumos" para ver el total.<br>
-                                • Ver total de gastos del mes en el panel de control.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Control total de tus egresos, los gastos se reflejan en los reportes para calcular tu ganancia neta real, identifica áreas de ahorro.</p>
                         </div>
                     </details>
 
-                    <!-- 7. Reportes y Panel de Control -->
                     <details class="accordion fade-up">
                         <summary>📊 Reportes y Panel de Control</summary>
                         <div class="content">
@@ -2008,17 +2096,9 @@
                                 <li><strong>Progreso de metas</strong> – Barras de avance para metas diarias, semanales y mensuales.</li>
                                 <li><strong>Exportación</strong> – Genera reportes en PDF, Excel o CSV (solo plan Premium).</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Ver ganancia neta del mes actual.<br>
-                                • Identificar el producto más vendido y su margen.<br>
-                                • Exportar reporte a PDF para tu contador.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Toma decisiones basadas en datos reales, identifica productos, clientes y vendedores estrella, controla costos y maximiza ganancias.</p>
                         </div>
                     </details>
 
-                    <!-- 8. Historial de Ventas -->
                     <details class="accordion fade-up">
                         <summary>📜 Historial de Ventas</summary>
                         <div class="content">
@@ -2029,17 +2109,9 @@
                                 <li><strong>Cancelación de venta</strong> (solo admin) – Cancela una venta y restaura automáticamente el stock y el saldo del cliente.</li>
                                 <li><strong>Filtros</strong> – Puedes filtrar por fecha o buscar por cliente/producto.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Ver todas las ventas de hoy.<br>
-                                • Consultar el detalle de una venta específica.<br>
-                                • Cancelar una venta incorrecta y restaurar stock.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Trazabilidad total de tus transacciones, control sobre devoluciones y ajustes, auditoría de ventas por período.</p>
                         </div>
                     </details>
 
-                    <!-- 9. Sincronización Offline -->
                     <details class="accordion fade-up">
                         <summary>🔄 Sincronización Offline</summary>
                         <div class="content">
@@ -2051,17 +2123,9 @@
                                 <li><strong>Pendientes</strong> – La app muestra un badge con el número de operaciones pendientes de sincronizar.</li>
                                 <li><strong>Reintentos automáticos</strong> – Si falla la sincronización, la app reintenta automáticamente cada 30 segundos.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Vender en una feria sin internet y sincronizar al llegar a casa.<br>
-                                • Ver el estado de sincronización en tiempo real.<br>
-                                • Forzar sincronización manual antes de cerrar la app.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Trabaja desde cualquier lugar, incluso sin cobertura, tus datos siempre seguros en la nube, sin pérdida de información por falta de conexión.</p>
                         </div>
                     </details>
 
-                    <!-- 10. Metas de Ventas -->
                     <details class="accordion fade-up">
                         <summary>🎯 Metas de Ventas</summary>
                         <div class="content">
@@ -2072,17 +2136,9 @@
                                 <li><strong>Actualización automática</strong> – Las metas se actualizan con cada venta registrada.</li>
                                 <li><strong>Flexibilidad</strong> – Puedes modificar las metas en cualquier momento.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Fijar meta diaria de 500 CUP.<br>
-                                • Ver el porcentaje de cumplimiento en tiempo real.<br>
-                                • Aumentar la meta mensual en temporada alta.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Motiva a tu equipo con objetivos claros, mide el crecimiento de tu negocio, identifica desviaciones y ajusta estrategias.</p>
                         </div>
                     </details>
 
-                    <!-- 11. Módulo Fiscal -->
                     <details class="accordion fade-up">
                         <summary>🧾 Módulo Fiscal</summary>
                         <div class="content">
@@ -2093,40 +2149,24 @@
                                 <li><strong>Facturación</strong> – Genera facturas de tus ventas (opcional).</li>
                                 <li><strong>Impuesto estimado</strong> – La app calcula automáticamente el 10% de impuesto sobre ventas.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Generar resumen fiscal del mes.<br>
-                                • Consultar el total de ventas del trimestre.<br>
-                                • Preparar documentación para la declaración de impuestos.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Simplifica tu contabilidad, cumple con las normativas fiscales, ahorra tiempo en la preparación de declaraciones.</p>
                         </div>
                     </details>
 
-                    <!-- 12. Vendedores (Admin) -->
                     <details class="accordion fade-up">
                         <summary>👤 Vendedores y Gestores <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin)</span></summary>
                         <div class="content">
                             <p>Gestiona todo tu equipo de ventas desde la app.</p>
                             <ul>
                                 <li><strong>Crear vendedor</strong> – Registra un nuevo usuario con email y contraseña. Asigna una sucursal (opcional).</li>
-                                <li><strong>Limitar por plan</strong> – El plan Normal permite 1 vendedor; el Premium hasta 5.</li>
+                                <li><strong>Limitar por plan</strong> – El plan Normal permite <strong>2 vendedores</strong>; el Premium hasta 5.</li>
                                 <li><strong>Asignar salario</strong> – Define salario base, tipo de contrato (fijo, comisión, mixto) y porcentaje de comisión.</li>
                                 <li><strong>Promover a gestor</strong> – Convierte a un vendedor en gestor para que supervise una sucursal.</li>
                                 <li><strong>Eliminar vendedor</strong> – Remueve usuarios que ya no trabajan en el negocio.</li>
                                 <li><strong>Cambiar sucursal</strong> – Asigna o modifica la sucursal de cualquier usuario.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Crear usuario para un nuevo vendedor.<br>
-                                • Asignar salario base y comisión del 5%.<br>
-                                • Promover a un vendedor a gestor de una sucursal.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Control total del equipo de ventas, cálculo automático de comisiones, gestión de salarios y nóminas integrada.</p>
                         </div>
                     </details>
 
-                    <!-- 13. Estadísticas de Vendedores (Admin) -->
                     <details class="accordion fade-up">
                         <summary>📈 Estadísticas de Vendedores <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin)</span></summary>
                         <div class="content">
@@ -2137,41 +2177,26 @@
                                 <li><strong>Ganancia generada</strong> – Contribución a la ganancia neta de cada vendedor.</li>
                                 <li><strong>Ranking</strong> – Identifica a los mejores vendedores y áreas de mejora.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Ver ranking de vendedores del mes.<br>
-                                • Comparar ganancia generada por vendedor.<br>
-                                • Identificar a los vendedores más productivos.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Motiva a tu equipo con datos objetivos, toma decisiones de incentivos y comisiones, identifica oportunidades de capacitación.</p>
                         </div>
                     </details>
 
-                    <!-- 14. Planes y Pagos (Admin) -->
                     <details class="accordion fade-up">
                         <summary>💳 Planes y Pagos <span style="font-size:14px; font-weight:400; color:var(--text-muted);">(Admin)</span></summary>
                         <div class="content">
                             <p>Gestiona la suscripción de tu negocio y mantén tu servicio activo.</p>
                             <ul>
                                 <li><strong>Período de prueba</strong> – Al registrarte, disfrutas de 3 días de prueba gratuita con todas las funciones Premium desbloqueadas.</li>
-                                <li><strong>Plan Normal</strong> – 1,000 CUP/mes – incluye inventario básico, ventas, clientes, gastos, metas y sincronización offline.</li>
+                                <li><strong>Plan Normal</strong> – 1,000 CUP/mes – incluye inventario básico, ventas, clientes, gastos, metas, sincronización offline y <strong>hasta 2 vendedores</strong>.</li>
                                 <li><strong>Plan Premium</strong> – 2,000 CUP/mes – todo lo del plan Normal + panel de control avanzado, exportación de reportes, gestión de proveedores, notificaciones de stock y ocultar costos a vendedores.</li>
                                 <li><strong>Solicitar pago</strong> – Desde la sección de pago, envía tu comprobante de transferencia y la app registrará tu solicitud.</li>
                                 <li><strong>Estado de suscripción</strong> – Consulta el estado de tu pago (pendiente/aprobado) y la fecha de aprobación.</li>
                                 <li><strong>Recordatorio</strong> – Si pasas del día 6 del mes sin pago, la app te mostrará un bloqueo hasta que regularices.</li>
                             </ul>
-                            <div class="examples">
-                                <strong>📌 Ejemplos de uso:</strong><br>
-                                • Activar período de prueba de 3 días.<br>
-                                • Solicitar plan Premium desde la app.<br>
-                                • Ver estado de tu suscripción y fecha de aprobación.
-                            </div>
-                            <p><strong>✅ Beneficios:</strong> Acceso a todas las funcionalidades según tu plan, pago seguro y controlado desde la app, flexibilidad para cambiar de plan cuando lo necesites.</p>
                         </div>
                     </details>
                 </div>
 
-                <!-- ===== RECOMENDACIONES POR ROL ===== -->
+                <!-- Recomendaciones por rol -->
                 <div class="guide-card fade-up" style="margin-top:20px;">
                     <div class="card-header">
                         <span class="icon">🎯</span>
@@ -2209,7 +2234,7 @@
                     </div>
                 </div>
 
-                <!-- ===== CONSEJOS AVANZADOS ===== -->
+                <!-- Consejos avanzados -->
                 <div class="guide-card fade-up">
                     <div class="card-header">
                         <span class="icon">💡</span>
@@ -2227,7 +2252,7 @@
                     </ul>
                 </div>
 
-                <!-- ===== PREGUNTAS FRECUENTES ===== -->
+                <!-- Preguntas frecuentes -->
                 <div class="guide-card fade-up">
                     <div class="card-header">
                         <span class="icon">❓</span>
@@ -2242,7 +2267,7 @@
                     </div>
                 </div>
 
-                <!-- ===== ADVERTENCIA SOBRE DATOS REALES vs. PRUEBA ===== -->
+                <!-- Advertencia sobre datos reales -->
                 <div class="guide-card fade-up" style="border-left:4px solid var(--gold);">
                     <div class="card-header">
                         <span class="icon">⚠️</span>
@@ -2293,7 +2318,7 @@
                         <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
                         <li><span class="cross">❌</span> Gestión de proveedores</li>
                         <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
-                        <li>👤 1 vendedor</li>
+                        <li>👤 <strong>2 vendedores</strong> (antes 1)</li>
                     </ul>
                     <button class="btn-cta-outline download-trigger" style="width:100%; justify-content:center;">Probar 3 días gratis</button>
                     <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Luego $1,000 CUP/mes</p>
@@ -2329,12 +2354,28 @@
             <h2 class="section-title fade-up">Historial de <span class="gradient-text">cambios</span></h2>
             <p class="section-subtitle fade-up">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
             <div class="changelog-list">
-                <!-- v2.1.7 con contenido actualizado -->
+                <!-- v2.2.0 con todas las novedades -->
                 <div class="changelog-item latest fade-up">
+                    <div class="version">v2.2.0</div>
+                    <div class="date">22 ago 2026</div>
+                    <div class="desc">
+                        <strong>🚀 Novedades espectaculares</strong>
+                        <ul>
+                            <li><strong>⚡ Módulo de ventas optimizado:</strong> interfaz rediseñada para ventas más rápidas, cómodas y sencillas. Menos clics, más eficiencia.</li>
+                            <li><strong>💸 Historial de transferencias:</strong> registro automático de todas las transferencias realizadas. Exporta a Excel con un solo clic.</li>
+                            <li><strong>🤝 Invitar amigos:</strong> comparte Tu MiPyme y gana beneficios por cada amigo que se registre con tu código.</li>
+                            <li><strong>👤 Plan Normal mejorado:</strong> ahora incluye <strong>2 vendedores</strong> (antes solo 1), ideal para pequeños equipos.</li>
+                            <li><strong>🎨 Mejoras visuales generales:</strong> animaciones más suaves, nuevos efectos de vidrio, tipografía mejorada y un fondo con partículas dinámicas.</li>
+                            <li><strong>🔧 Correcciones de estabilidad:</strong> se han solucionado varios errores menores y optimizado la sincronización.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- v2.1.7 -->
+                <div class="changelog-item fade-up">
                     <div class="version">v2.1.7</div>
                     <div class="date">17 ago 2026</div>
                     <div class="desc">
-                        <strong>✨ Novedades destacadas</strong>
+                        <strong>✨ Guía de usuario interactiva y mejoras en inventario</strong>
                         <ul>
                             <li><strong>📖 Guía de usuario:</strong> se ha añadido una guía interactiva que se muestra al primer inicio (registro o login) para explicar el funcionamiento de la app, advertir sobre la veracidad de los datos (responsabilidad del usuario) y cómo tratar los datos de prueba (cancelar ventas, eliminar productos de prueba, etc.).</li>
                             <li><strong>📦 Mejoras en inventario:</strong> la sección de inventario ahora incluye estadísticas de margen y costos (coste total, beneficio estimado, margen promedio) y nuevos filtros para visualizar productos con stock crítico o agotados.</li>
@@ -2355,11 +2396,10 @@
                             <li><strong>🔢 Stock con decimales:</strong> permite cantidades fraccionarias (ej. 1.5 kg, 0.75 L).</li>
                             <li><strong>📱 Todas las pantallas actualizadas:</strong> nueva venta, nuevo producto y reabastecimiento muestran y respetan la unidad de medida.</li>
                             <li><strong>🔄 Sincronización más robusta:</strong> se mejoró el manejo de la conexión y los reintentos automáticos.</li>
-                            <li><strong>🐛 Correcciones internas:</strong> se solucionaron problemas de inicialización en entornos de desarrollo que no afectaban a usuarios finales.</li>
-                            <li><strong>⚡ Mejoras de rendimiento:</strong> la app es más rápida al manejar grandes volúmenes de datos.</li>
                         </ul>
                     </div>
                 </div>
+                <!-- v2.1.5 -->
                 <div class="changelog-item fade-up">
                     <div class="version">v2.1.5</div>
                     <div class="date">12 ago 2026</div>
@@ -2375,6 +2415,7 @@
                         </ul>
                     </div>
                 </div>
+                <!-- ... más versiones anteriores ... -->
                 <div class="changelog-item fade-up">
                     <div class="version">v2.1.3</div>
                     <div class="date">2 ago 2026</div>
@@ -2513,14 +2554,69 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT
+    JAVASCRIPT (mejorado con partículas)
     ============================================================ -->
     <script>
         (function() {
             'use strict';
 
             // ============================================================
-            // 1. TEMA CLARO/OSCURO
+            // 1. PARTÍCULAS (fondo animado)
+            // ============================================================
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const NUM_PARTICLES = 60;
+
+            function resize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.4;
+                    this.vy = (Math.random() - 0.5) * 0.4;
+                    this.radius = Math.random() * 2 + 1;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(56, 189, 248, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particles.push(new Particle());
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(drawParticles);
+            }
+            drawParticles();
+
+            // ============================================================
+            // 2. TEMA CLARO/OSCURO
             // ============================================================
             const themeToggle = document.createElement('button');
             themeToggle.className = 'theme-toggle';
@@ -2536,6 +2632,8 @@
                 document.documentElement.setAttribute('data-theme', theme);
                 themeToggle.innerHTML = theme === 'light' ? '🌙' : '☀️';
                 localStorage.setItem('theme', theme);
+                // Actualizar color de partículas según tema (se reinicia el canvas)
+                // pero no es necesario, se mantiene el mismo.
             }
 
             const savedTheme = localStorage.getItem('theme');
@@ -2557,7 +2655,7 @@
             });
 
             // ============================================================
-            // 2. ALTERNANCIA DE DISPOSITIVOS
+            // 3. ALTERNANCIA DE DISPOSITIVOS
             // ============================================================
             const phone = document.getElementById('devicePhone');
             const desktop = document.getElementById('deviceDesktop');
@@ -2593,7 +2691,7 @@
             }, 4500);
 
             // ============================================================
-            // 3. MENÚ MÓVIL
+            // 4. MENÚ MÓVIL
             // ============================================================
             const toggle = document.getElementById('menuToggle');
             const nav = document.getElementById('mainNav');
@@ -2603,7 +2701,7 @@
             });
 
             // ============================================================
-            // 4. HEADER SCROLL
+            // 5. HEADER SCROLL
             // ============================================================
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
@@ -2611,7 +2709,7 @@
             });
 
             // ============================================================
-            // 5. ANIMACIONES AL SCROLL
+            // 6. ANIMACIONES AL SCROLL
             // ============================================================
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -2621,7 +2719,7 @@
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
             // ============================================================
-            // 6. MODAL DE DESCARGA
+            // 7. MODAL DE DESCARGA
             // ============================================================
             const modal = document.getElementById('downloadModal');
             const cancelBtn = document.getElementById('modalCancel');
@@ -2668,7 +2766,7 @@
             modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
             // ============================================================
-            // 7. ACORDEÓN: abrir el que tenga el hash en la URL
+            // 8. ACORDEÓN: abrir el que tenga el hash en la URL
             // ============================================================
             if (window.location.hash) {
                 const targetId = window.location.hash.replace('#', '');
