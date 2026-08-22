@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <style>
         /* ============================================================
-           VARIABLES – Elegancia corporativa
+           VARIABLES – Elegancia corporativa (mejorada)
            ============================================================ */
         :root {
             --bg-primary: #ffffff;
@@ -31,19 +31,19 @@
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Modo oscuro (sutil y elegante) */
+        /* Modo oscuro – más profundo y elegante */
         [data-theme="dark"] {
-            --bg-primary: #0a1120;
-            --bg-secondary: #111d2e;
-            --bg-tertiary: #18273d;
-            --text-primary: #f0f5ff;
-            --text-secondary: #b6c9e8;
-            --text-muted: #6e88b0;
+            --bg-primary: #0a0f1e;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1a2332;
+            --text-primary: #eef2ff;
+            --text-secondary: #b8c9e8;
+            --text-muted: #6a84b0;
             --accent: #4a8bff;
             --accent-light: #1a2a4a;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
 
         /* ============================================================
@@ -81,6 +81,20 @@
         }
 
         /* ============================================================
+           PARTÍCULAS DE DINERO (canvas) – Billetes y monedas
+           ============================================================ */
+        #money-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* ============================================================
            BOTÓN DE TEMA
            ============================================================ */
         .theme-toggle {
@@ -111,7 +125,7 @@
         }
 
         /* ============================================================
-           HEADER – Transparente y sofisticado
+           HEADER
            ============================================================ */
         header {
             position: fixed;
@@ -128,8 +142,8 @@
             box-shadow: 0 2px 40px rgba(0, 0, 0, 0.04);
         }
         [data-theme="dark"] header.scrolled {
-            background: rgba(10, 17, 32, 0.78);
-            box-shadow: 0 2px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(10, 15, 30, 0.82);
+            box-shadow: 0 2px 40px rgba(0, 0, 0, 0.4);
         }
         .header-inner {
             display: flex;
@@ -174,23 +188,40 @@
         nav a:hover::after {
             width: 100%;
         }
-        .nav-download {
-            background: var(--accent-gradient);
-            color: #fff !important;
-            padding: 10px 28px;
+        .nav-download-android,
+        .nav-download-windows {
+            padding: 8px 18px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 4px 16px rgba(26, 92, 255, 0.2);
+            font-size: 13px;
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        .nav-download:hover {
+        .nav-download-android {
+            background: var(--accent-gradient);
+            color: #fff !important;
+            box-shadow: 0 4px 16px rgba(26, 92, 255, 0.2);
+        }
+        .nav-download-android:hover {
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 8px 30px rgba(26, 92, 255, 0.35);
         }
-        .nav-download::after {
+        .nav-download-windows {
+            background: var(--bg-tertiary);
+            color: var(--text-primary) !important;
+            border: 1px solid var(--text-muted);
+        }
+        .nav-download-windows:hover {
+            border-color: var(--accent);
+            color: var(--accent) !important;
+            transform: translateY(-2px);
+        }
+        .nav-download-android::after,
+        .nav-download-windows::after {
             display: none;
         }
         .nav-portfolio {
@@ -211,7 +242,7 @@
         }
 
         /* ============================================================
-           HERO – Gran impacto visual
+           HERO
            ============================================================ */
         .hero {
             padding: 180px 0 140px;
@@ -316,24 +347,39 @@
             flex-wrap: wrap;
             gap: 16px;
         }
-        .btn-primary {
+        .btn-android,
+        .btn-windows {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 40px;
+            padding: 16px 32px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 17px;
-            background: var(--accent-gradient);
-            color: #fff;
+            font-size: 16px;
             border: none;
             cursor: pointer;
             transition: all 0.3s;
+        }
+        .btn-android {
+            background: var(--accent-gradient);
+            color: #fff;
             box-shadow: 0 6px 24px rgba(26, 92, 255, 0.25);
         }
-        .btn-primary:hover {
+        .btn-android:hover {
             transform: translateY(-4px) scale(1.02);
             box-shadow: 0 12px 40px rgba(26, 92, 255, 0.35);
+        }
+        .btn-windows {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--text-muted);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-windows:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(26, 92, 255, 0.06);
         }
         .btn-secondary {
             display: inline-flex;
@@ -356,7 +402,7 @@
             box-shadow: 0 8px 24px rgba(26, 92, 255, 0.06);
         }
 
-        /* Hero visual – formas abstractas */
+        /* Hero visual – mockup */
         .hero-visual {
             display: flex;
             justify-content: center;
@@ -508,7 +554,7 @@
         }
 
         /* ============================================================
-           FEATURES – Tarjetas elegantes
+           FEATURES
            ============================================================ */
         .features-grid {
             display: grid;
@@ -568,7 +614,7 @@
         }
 
         /* ============================================================
-           PLANES – Limpios y distinguidos
+           PLANES
            ============================================================ */
         .plans-grid {
             display: grid;
@@ -794,7 +840,7 @@
         }
 
         /* ============================================================
-           CTA – Sofisticada
+           CTA – Botones separados
            ============================================================ */
         .cta-section {
             background: var(--bg-secondary);
@@ -825,20 +871,36 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 16px;
+            gap: 20px;
         }
-        .btn-cta-outline {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--text-muted);
+        .btn-cta-android,
+        .btn-cta-windows {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             padding: 16px 40px;
             border-radius: 50px;
             font-weight: 600;
             font-size: 17px;
+            border: none;
             cursor: pointer;
             transition: all 0.3s;
         }
-        .btn-cta-outline:hover {
+        .btn-cta-android {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 6px 24px rgba(26, 92, 255, 0.2);
+        }
+        .btn-cta-android:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(26, 92, 255, 0.3);
+        }
+        .btn-cta-windows {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--text-muted);
+        }
+        .btn-cta-windows:hover {
             border-color: var(--accent);
             color: var(--accent);
             transform: translateY(-4px);
@@ -875,7 +937,7 @@
         }
 
         /* ============================================================
-           MODAL
+           MODAL (sin cambios)
            ============================================================ */
         .modal-overlay {
             position: fixed;
@@ -1034,6 +1096,11 @@
                 height: 44px;
                 font-size: 20px;
             }
+            .nav-download-android,
+            .nav-download-windows {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
         }
         @media (max-width: 600px) {
             .hero h1 {
@@ -1054,11 +1121,12 @@
             .cta-section h2 {
                 font-size: 30px;
             }
-            .btn-primary,
-            .btn-secondary,
-            .btn-cta-outline {
-                font-size: 15px;
-                padding: 14px 28px;
+            .btn-android,
+            .btn-windows,
+            .btn-cta-android,
+            .btn-cta-windows {
+                font-size: 14px;
+                padding: 14px 24px;
             }
             .hero-badge {
                 font-size: 12px;
@@ -1098,6 +1166,9 @@
 </head>
 <body>
 
+    <!-- ===== CANVAS DE PARTÍCULAS (billetes y monedas) ===== -->
+    <canvas id="money-canvas"></canvas>
+
     <!-- ===== HEADER ===== -->
     <header id="header">
         <div class="container header-inner">
@@ -1108,7 +1179,8 @@
                 <a href="#plans">Planes</a>
                 <a href="#changelog">Historial</a>
                 <a href="#testimonios">Testimonios</a>
-                <a href="#cta" class="nav-download download-trigger">Descargar</a>
+                <button class="nav-download-android download-trigger" data-platform="android">📱 Android</button>
+                <button class="nav-download-windows download-trigger" data-platform="windows">💻 Windows</button>
                 <a href="https://leifdev0306.github.io/Portafolio/" target="_blank" class="nav-portfolio">Portafolio</a>
             </nav>
         </div>
@@ -1125,7 +1197,8 @@
                 <h1>Gestión <span class="highlight">inteligente</span><br />para tu negocio</h1>
                 <p>Administra ventas, inventario, clientes y finanzas en una sola plataforma. Offline-first, sincronización en la nube y diseño de élite.</p>
                 <div class="hero-actions">
-                    <button class="btn-primary download-trigger">⬇️ Descargar ahora</button>
+                    <button class="btn-android download-trigger" data-platform="android">📱 Descargar para Android</button>
+                    <button class="btn-windows download-trigger" data-platform="windows">💻 Descargar para Windows</button>
                     <a href="#features" class="btn-secondary">Explorar</a>
                 </div>
             </div>
@@ -1272,7 +1345,7 @@
                         <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
                         <li>👤 <strong>2 vendedores</strong></li>
                     </ul>
-                    <button class="btn-plan btn-plan-outline download-trigger" style="width:100%; justify-content:center;">Probar 3 días gratis</button>
+                    <button class="btn-plan btn-plan-outline download-trigger" data-platform="android" style="width:100%; justify-content:center;">Probar 3 días gratis</button>
                     <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Luego $1,000 CUP/mes</p>
                 </div>
                 <div class="plan-card popular fade-up">
@@ -1293,7 +1366,7 @@
                         <li>👥 Hasta 5 vendedores</li>
                         <li>📞 Soporte prioritario</li>
                     </ul>
-                    <button class="btn-plan download-trigger" style="width:100%; justify-content:center;">Descargar ahora</button>
+                    <button class="btn-plan download-trigger" data-platform="android" style="width:100%; justify-content:center;">Descargar ahora</button>
                     <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Sin período de prueba</p>
                 </div>
             </div>
@@ -1392,8 +1465,8 @@
             <h2>📲 Descarga Tu MiPyme ahora</h2>
             <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas.<br /><span style="font-size:14px; opacity:0.6;">Siempre descargarás la última versión disponible.</span></p>
             <div class="cta-actions">
-                <button class="btn-cta-outline download-trigger">⬇️ Android (APK)</button>
-                <a href="https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar" class="btn-primary" style="background: var(--accent-gradient); color: #fff; padding: 16px 40px; border-radius: 50px; font-weight: 600; font-size: 17px; display: inline-flex; align-items: center; gap: 10px;">💻 Windows (RAR)</a>
+                <button class="btn-cta-android download-trigger" data-platform="android">📱 Android (APK)</button>
+                <button class="btn-cta-windows download-trigger" data-platform="windows">💻 Windows (RAR)</button>
             </div>
             <p class="version-info">Android 5.0+ · ~15 MB · Windows 10+ · ~65 MB</p>
         </div>
@@ -1439,7 +1512,74 @@
             'use strict';
 
             // ============================================================
-            // 1. TEMA CLARO/OSCURO
+            // 1. PARTÍCULAS DE DINERO (billetes, monedas, símbolos)
+            // ============================================================
+            const canvas = document.getElementById('money-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const NUM_PARTICLES = 40;
+            const symbols = ['💵', '💰', '🪙', '💸', '🏦', '📈', '$', '€', '£', '¥'];
+
+            function resize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 28 + 18;
+                    this.speedX = (Math.random() - 0.5) * 0.6;
+                    this.speedY = (Math.random() - 0.5) * 0.6;
+                    this.opacity = Math.random() * 0.25 + 0.05;
+                    this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+                    this.rotation = Math.random() * Math.PI * 2;
+                    this.rotationSpeed = (Math.random() - 0.5) * 0.01;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.rotation += this.rotationSpeed;
+                    if (this.x < 0 || this.x > width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > height) this.speedY *= -1;
+                }
+                draw() {
+                    ctx.save();
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate(this.rotation);
+                    ctx.font = `${this.size}px "Segoe UI", "Arial", sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = `rgba(26, 92, 255, ${this.opacity})`;
+                    ctx.shadowColor = 'rgba(26, 92, 255, 0.1)';
+                    ctx.shadowBlur = 12;
+                    ctx.fillText(this.symbol, 0, 0);
+                    ctx.restore();
+                }
+            }
+
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particles.push(new Particle());
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(drawParticles);
+            }
+            drawParticles();
+
+            // ============================================================
+            // 2. TEMA CLARO/OSCURO (con nuevo fondo oscuro)
             // ============================================================
             const themeToggle = document.createElement('button');
             themeToggle.className = 'theme-toggle';
@@ -1476,17 +1616,17 @@
             });
 
             // ============================================================
-            // 2. MENÚ MÓVIL
+            // 3. MENÚ MÓVIL
             // ============================================================
             const toggle = document.getElementById('menuToggle');
             const nav = document.getElementById('mainNav');
             toggle.addEventListener('click', () => nav.classList.toggle('open'));
-            document.querySelectorAll('#mainNav a').forEach(link => {
+            document.querySelectorAll('#mainNav a, #mainNav button').forEach(link => {
                 link.addEventListener('click', () => nav.classList.remove('open'));
             });
 
             // ============================================================
-            // 3. HEADER SCROLL
+            // 4. HEADER SCROLL
             // ============================================================
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
@@ -1494,7 +1634,7 @@
             });
 
             // ============================================================
-            // 4. ANIMACIONES AL SCROLL
+            // 5. ANIMACIONES AL SCROLL
             // ============================================================
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1504,46 +1644,52 @@
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
             // ============================================================
-            // 5. MODAL DE DESCARGA
+            // 6. MODAL DE DESCARGA
             // ============================================================
             const modal = document.getElementById('downloadModal');
             const cancelBtn = document.getElementById('modalCancel');
             const continueBtn = document.getElementById('modalContinue');
-            let cachedUrl = '';
+            let cachedAndroidUrl = '';
+            let cachedWindowsUrl = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar';
 
-            async function getLatestUrl() {
-                const fallback = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk';
+            async function getLatestUrls() {
+                const fallbackAndroid = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk';
                 try {
                     const res = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases/latest');
                     if (!res.ok) throw new Error();
                     const data = await res.json();
-                    const asset = data.assets.find(a => a.name === 'TuMiPyme.apk');
-                    return asset ? asset.browser_download_url : fallback;
-                } catch { return fallback; }
+                    const apk = data.assets.find(a => a.name === 'TuMiPyme.apk');
+                    const rar = data.assets.find(a => a.name === 'TuMiPyme.rar');
+                    cachedAndroidUrl = apk ? apk.browser_download_url : fallbackAndroid;
+                    cachedWindowsUrl = rar ? rar.browser_download_url : cachedWindowsUrl;
+                } catch {
+                    cachedAndroidUrl = fallbackAndroid;
+                }
             }
+            getLatestUrls();
 
-            getLatestUrl().then(url => cachedUrl = url);
+            let pendingPlatform = 'android';
 
-            function showModal() {
-                if (!cachedUrl) getLatestUrl().then(url => { cachedUrl = url;
-                    modal.classList.add('active'); });
-                else modal.classList.add('active');
+            function showModal(platform) {
+                pendingPlatform = platform || 'android';
+                modal.classList.add('active');
             }
 
             function closeModal() { modal.classList.remove('active'); }
 
             function download() {
-                if (cachedUrl) {
-                    window.location.href = cachedUrl;
+                const url = pendingPlatform === 'android' ? cachedAndroidUrl : cachedWindowsUrl;
+                if (url) {
+                    window.location.href = url;
                 }
                 closeModal();
             }
 
             document.querySelectorAll('.download-trigger').forEach(el => {
                 el.addEventListener('click', function(e) {
-                    if (this.tagName === 'A' && this.href.includes('TuMiPyme.rar')) return;
                     e.preventDefault();
-                    showModal();
+                    const platform = this.dataset.platform || 'android';
+                    showModal(platform);
                 });
             });
             cancelBtn.addEventListener('click', closeModal);
@@ -1551,7 +1697,7 @@
             modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
             // ============================================================
-            // 6. HASH PARA ACORDEONES (si existieran)
+            // 7. HASH
             // ============================================================
             if (window.location.hash) {
                 const targetId = window.location.hash.replace('#', '');
