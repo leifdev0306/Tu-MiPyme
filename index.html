@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TuMiPyme · Gestión empresarial de élite</title>
     <meta name="description" content="La plataforma definitiva para gestionar tu negocio con inteligencia, diseño y rendimiento sin precedentes." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -10,12 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <style>
         /* ============================================================
-           VARIABLES – Fondo unificado con gradientes azules
+           VARIABLES – Fondos unificados con gradientes azules
            ============================================================ */
         :root {
             --bg-gradient: linear-gradient(145deg, #e8f0fe, #d4e2f7);
-            --bg-card: rgba(255, 255, 255, 0.6);
-            --bg-card-solid: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.55);
+            --bg-card-hover: rgba(255, 255, 255, 0.75);
             --text-primary: #0b1a2e;
             --text-secondary: #1f334f;
             --text-muted: #4a6180;
@@ -31,14 +31,13 @@
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --border-glow: rgba(26, 92, 255, 0.2);
             --particle-opacity: 0.25;
-            --header-bg: rgba(255, 255, 255, 0.15);
         }
 
-        /* Modo oscuro – gradiente azul profundo (restaurado) */
+        /* Modo oscuro – gradiente azul profundo y elegante */
         [data-theme="dark"] {
             --bg-gradient: linear-gradient(145deg, #0a1a3a, #0d2147, #0a1a3a);
-            --bg-card: rgba(255, 255, 255, 0.08);
-            --bg-card-solid: #0d1f3a;
+            --bg-card: rgba(255, 255, 255, 0.06);
+            --bg-card-hover: rgba(255, 255, 255, 0.12);
             --text-primary: #f0f5ff;
             --text-secondary: #b8ccee;
             --text-muted: #6a88b0;
@@ -49,7 +48,6 @@
             --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
             --border-glow: rgba(74, 139, 255, 0.3);
             --particle-opacity: 0.2;
-            --header-bg: rgba(10, 26, 58, 0.25);
         }
 
         /* ============================================================
@@ -87,7 +85,7 @@
         }
 
         /* ============================================================
-           PARTÍCULAS DE DINERO
+           PARTÍCULAS DE DINERO – Siempre visibles
            ============================================================ */
         #money-canvas {
             position: fixed;
@@ -101,7 +99,7 @@
         }
 
         /* ============================================================
-           BOTÓN DE TEMA – Siempre visible
+           BOTÓN DE TEMA
            ============================================================ */
         .theme-toggle {
             position: fixed;
@@ -139,12 +137,13 @@
             width: 100%;
             padding: 16px 0;
             z-index: 1000;
-            background: var(--header-bg);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(18px) saturate(1.4);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             transition: background 0.4s, box-shadow 0.4s;
         }
         [data-theme="dark"] header {
+            background: rgba(10, 26, 58, 0.25);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
         header.scrolled {
@@ -255,7 +254,7 @@
         }
 
         /* ============================================================
-           HERO
+           HERO – Con mockups elegantes
            ============================================================ */
         .hero {
             padding: 150px 0 120px;
@@ -1075,7 +1074,7 @@
         }
 
         /* ============================================================
-           RESPONSIVE – Mejoras para móviles sin romper el diseño
+           RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
             .hero-grid {
@@ -1154,71 +1153,19 @@
                 font-size: 12px;
             }
         }
-
-        @media (max-width: 768px) {
-            /* En móviles, mejoramos el contraste del modo claro */
-            [data-theme="light"] {
-                --bg-card: rgba(255, 255, 255, 0.85);
-                --bg-card-solid: #ffffff;
-                --text-primary: #0b1a2e;
-                --text-secondary: #1f334f;
-                --text-muted: #4a6180;
-                --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.06);
-                --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.08);
-                --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.1);
-                --border-glow: rgba(26, 92, 255, 0.25);
-            }
-            /* En móviles oscuro mantenemos el gradiente profundo */
-            [data-theme="dark"] {
-                --bg-card: rgba(255, 255, 255, 0.1);
-                --bg-card-solid: #0d1f3a;
-                --text-primary: #f0f5ff;
-                --text-secondary: #b8ccee;
-                --text-muted: #6a88b0;
-                --border-glow: rgba(74, 139, 255, 0.35);
-            }
-            /* Ajustes de tamaño y espaciado */
+        @media (max-width: 600px) {
             .hero {
                 padding: 120px 0 80px;
             }
             .hero h1 {
-                font-size: 36px;
+                font-size: 32px;
             }
             .hero p {
                 font-size: 16px;
-                padding: 0 8px;
+                padding: 0 12px;
             }
             .section-title {
-                font-size: 32px;
-            }
-            .section-subtitle {
-                font-size: 16px;
-            }
-            .mockup-phone {
-                width: 120px;
-            }
-            .mockup-desktop {
-                width: 200px;
-            }
-            .hero-mockups {
-                gap: 16px;
-            }
-            .btn-android,
-            .btn-windows,
-            .btn-cta-android,
-            .btn-cta-windows {
-                padding: 14px 28px;
-                font-size: 15px;
-                width: 100%;
-                justify-content: center;
-            }
-            .hero-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .btn-secondary {
-                width: 100%;
-                justify-content: center;
+                font-size: 30px;
             }
             .plan-card {
                 padding: 28px 20px;
@@ -1226,45 +1173,54 @@
             .feature-card {
                 padding: 24px 18px;
             }
-            /* Reducir opacidad de partículas en móviles para no saturar */
-            #money-canvas {
-                opacity: 0.2 !important;
-            }
-            /* Asegurar que el botón de tema se vea */
-            .theme-toggle {
-                width: 44px;
-                height: 44px;
-                font-size: 20px;
-                bottom: 16px;
-                right: 16px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .hero h1 {
+            .cta-section h2 {
                 font-size: 30px;
             }
-            .section-title {
-                font-size: 28px;
+            .btn-android,
+            .btn-windows,
+            .btn-cta-android,
+            .btn-cta-windows {
+                font-size: 14px;
+                padding: 14px 24px;
+            }
+            .hero-badge {
+                font-size: 12px;
+                padding: 4px 14px;
+            }
+            .hero-badge .whats-new {
+                font-size: 10px;
+                padding: 2px 10px;
+            }
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-secondary {
+                font-size: 15px;
+                padding: 14px 28px;
             }
             .mockup-phone {
-                width: 100px;
+                width: 120px;
             }
             .mockup-desktop {
-                width: 170px;
+                width: 210px;
             }
             .hero-mockups {
-                gap: 12px;
+                gap: 16px;
             }
         }
-
-        /* En escritorio mantenemos el efecto vidrio original */
-        @media (min-width: 769px) {
-            [data-theme="light"] {
-                --bg-card: rgba(255, 255, 255, 0.6);
+        @media (min-width: 1025px) {
+            .hero h1 {
+                font-size: 64px;
             }
-            [data-theme="dark"] {
-                --bg-card: rgba(255, 255, 255, 0.08);
+            .section-title {
+                font-size: 48px;
+            }
+            .feature-card:hover {
+                transform: translateY(-10px);
+            }
+            .plan-card:hover {
+                transform: translateY(-12px);
             }
         }
     </style>
@@ -1642,13 +1598,13 @@
             'use strict';
 
             // ============================================================
-            // 1. PARTÍCULAS DE DINERO – Dinámicas y con color real
+            // 1. PARTÍCULAS DE DINERO – Siempre visibles
             // ============================================================
             const canvas = document.getElementById('money-canvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
-            const MAX_PARTICLES = window.innerWidth < 768 ? 18 : 35;
+            const NUM_PARTICLES = 45;
             const symbols = ['💵', '💰', '🪙', '💸', '🏦', '📈', '$', '€', '£', '¥'];
 
             function resize() {
@@ -1656,11 +1612,6 @@
                 height = window.innerHeight;
                 canvas.width = width;
                 canvas.height = height;
-                // Recrear partículas al redimensionar
-                particles = [];
-                for (let i = 0; i < MAX_PARTICLES; i++) {
-                    particles.push(new Particle());
-                }
             }
             resize();
             window.addEventListener('resize', resize);
@@ -1669,13 +1620,13 @@
                 constructor() {
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    this.size = Math.random() * 24 + 14;
-                    this.speedX = (Math.random() - 0.5) * 0.3;
-                    this.speedY = (Math.random() - 0.5) * 0.3;
-                    this.opacity = Math.random() * 0.2 + 0.04;
+                    this.size = Math.random() * 28 + 16;
+                    this.speedX = (Math.random() - 0.5) * 0.4;
+                    this.speedY = (Math.random() - 0.5) * 0.4;
+                    this.opacity = Math.random() * 0.15 + 0.03;
                     this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
                     this.rotation = Math.random() * Math.PI * 2;
-                    this.rotationSpeed = (Math.random() - 0.5) * 0.005;
+                    this.rotationSpeed = (Math.random() - 0.5) * 0.006;
                 }
                 update() {
                     this.x += this.speedX;
@@ -1691,17 +1642,16 @@
                     ctx.font = `${this.size}px "Segoe UI", "Arial", sans-serif`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    // Color azul con opacidad
+                    const color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#1a5cff';
                     ctx.fillStyle = `rgba(26, 92, 255, ${this.opacity})`;
-                    ctx.shadowColor = 'rgba(26, 92, 255, 0.1)';
-                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = 'rgba(26, 92, 255, 0.08)';
+                    ctx.shadowBlur = 12;
                     ctx.fillText(this.symbol, 0, 0);
                     ctx.restore();
                 }
             }
 
-            // Inicializar partículas
-            for (let i = 0; i < MAX_PARTICLES; i++) {
+            for (let i = 0; i < NUM_PARTICLES; i++) {
                 particles.push(new Particle());
             }
 
@@ -1716,7 +1666,7 @@
             drawParticles();
 
             // ============================================================
-            // 2. TEMA CLARO/OSCURO (con modo oscuro restaurado)
+            // 2. TEMA CLARO/OSCURO
             // ============================================================
             const themeToggle = document.createElement('button');
             themeToggle.className = 'theme-toggle';
