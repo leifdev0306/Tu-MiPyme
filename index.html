@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>TuMiPyme · Gestión empresarial de élite</title>
     <meta name="description" content="La plataforma definitiva para gestionar tu negocio con inteligencia, diseño y rendimiento sin precedentes." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,7 +15,7 @@
         :root {
             --bg-gradient: linear-gradient(145deg, #e8f0fe, #d4e2f7);
             --bg-card: rgba(255, 255, 255, 0.55);
-            --bg-card-hover: rgba(255, 255, 255, 0.75);
+            --bg-card-solid: #ffffff;
             --text-primary: #0b1a2e;
             --text-secondary: #1f334f;
             --text-muted: #4a6180;
@@ -31,13 +31,14 @@
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --border-glow: rgba(26, 92, 255, 0.2);
             --particle-opacity: 0.25;
+            --header-bg: rgba(255, 255, 255, 0.15);
         }
 
         /* Modo oscuro – gradiente azul profundo y elegante */
         [data-theme="dark"] {
             --bg-gradient: linear-gradient(145deg, #0a1a3a, #0d2147, #0a1a3a);
             --bg-card: rgba(255, 255, 255, 0.06);
-            --bg-card-hover: rgba(255, 255, 255, 0.12);
+            --bg-card-solid: #0d1f3a;
             --text-primary: #f0f5ff;
             --text-secondary: #b8ccee;
             --text-muted: #6a88b0;
@@ -48,6 +49,7 @@
             --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
             --border-glow: rgba(74, 139, 255, 0.3);
             --particle-opacity: 0.2;
+            --header-bg: rgba(10, 26, 58, 0.25);
         }
 
         /* ============================================================
@@ -85,7 +87,7 @@
         }
 
         /* ============================================================
-           PARTÍCULAS DE DINERO – Siempre visibles
+           PARTÍCULAS DE DINERO – Siempre visibles, con colores reales
            ============================================================ */
         #money-canvas {
             position: fixed;
@@ -137,13 +139,12 @@
             width: 100%;
             padding: 16px 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--header-bg);
             backdrop-filter: blur(18px) saturate(1.4);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             transition: background 0.4s, box-shadow 0.4s;
         }
         [data-theme="dark"] header {
-            background: rgba(10, 26, 58, 0.25);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
         header.scrolled {
@@ -1074,7 +1075,7 @@
         }
 
         /* ============================================================
-           RESPONSIVE
+           RESPONSIVE – Ajustes específicos para móviles
            ============================================================ */
         @media (max-width: 1024px) {
             .hero-grid {
@@ -1153,19 +1154,85 @@
                 font-size: 12px;
             }
         }
-        @media (max-width: 600px) {
-            .hero {
-                padding: 120px 0 80px;
+
+        @media (max-width: 768px) {
+            /* Mejoras de contraste y fondo en móviles */
+            body {
+                background-attachment: scroll;
             }
+            /* Tarjetas con fondo más sólido para legibilidad */
+            .feature-card,
+            .plan-card,
+            .testimonial-card,
+            .changelog-item,
+            .cta-section,
+            footer {
+                background: var(--bg-card-solid) !important;
+                backdrop-filter: none !important;
+                border-color: var(--border-glow);
+            }
+            .hero-badge,
+            .btn-android,
+            .btn-windows,
+            .btn-secondary,
+            .btn-cta-android,
+            .btn-cta-windows,
+            .nav-download-android,
+            .nav-download-windows {
+                backdrop-filter: none !important;
+            }
+            .mockup-phone,
+            .mockup-desktop {
+                backdrop-filter: none !important;
+                background: var(--bg-card-solid) !important;
+            }
+            .mockup-screen {
+                background: var(--bg-gradient) !important;
+            }
+            /* Ajuste de opacidad de partículas en móviles */
+            #money-canvas {
+                opacity: 0.2 !important;
+            }
+            /* Mayor contraste en textos */
             .hero h1 {
-                font-size: 32px;
+                font-size: 36px;
             }
             .hero p {
                 font-size: 16px;
-                padding: 0 12px;
+                padding: 0 8px;
             }
             .section-title {
-                font-size: 30px;
+                font-size: 32px;
+            }
+            .section-subtitle {
+                font-size: 16px;
+            }
+            .mockup-phone {
+                width: 120px;
+            }
+            .mockup-desktop {
+                width: 200px;
+            }
+            .hero-mockups {
+                gap: 16px;
+            }
+            /* Botones más grandes para tocar */
+            .btn-android,
+            .btn-windows,
+            .btn-cta-android,
+            .btn-cta-windows {
+                padding: 14px 28px;
+                font-size: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
             }
             .plan-card {
                 padding: 28px 20px;
@@ -1173,54 +1240,44 @@
             .feature-card {
                 padding: 24px 18px;
             }
-            .cta-section h2 {
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            .hero h1 {
                 font-size: 30px;
             }
-            .btn-android,
-            .btn-windows,
-            .btn-cta-android,
-            .btn-cta-windows {
-                font-size: 14px;
-                padding: 14px 24px;
-            }
-            .hero-badge {
-                font-size: 12px;
-                padding: 4px 14px;
-            }
-            .hero-badge .whats-new {
-                font-size: 10px;
-                padding: 2px 10px;
-            }
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            .btn-secondary {
-                font-size: 15px;
-                padding: 14px 28px;
+            .section-title {
+                font-size: 28px;
             }
             .mockup-phone {
-                width: 120px;
+                width: 100px;
             }
             .mockup-desktop {
-                width: 210px;
+                width: 170px;
             }
             .hero-mockups {
-                gap: 16px;
+                gap: 12px;
             }
         }
-        @media (min-width: 1025px) {
-            .hero h1 {
-                font-size: 64px;
+
+        @media (min-width: 769px) {
+            /* En escritorio mantenemos el efecto vidrio */
+            .feature-card,
+            .plan-card,
+            .testimonial-card,
+            .changelog-item,
+            .cta-section,
+            footer {
+                background: var(--bg-card);
+                backdrop-filter: blur(12px);
             }
-            .section-title {
-                font-size: 48px;
-            }
-            .feature-card:hover {
-                transform: translateY(-10px);
-            }
-            .plan-card:hover {
-                transform: translateY(-12px);
+            .mockup-phone,
+            .mockup-desktop {
+                background: var(--bg-card);
+                backdrop-filter: blur(12px);
             }
         }
     </style>
@@ -1598,13 +1655,13 @@
             'use strict';
 
             // ============================================================
-            // 1. PARTÍCULAS DE DINERO – Siempre visibles
+            // 1. PARTÍCULAS DE DINERO – Con colores reales y dinámicas
             // ============================================================
             const canvas = document.getElementById('money-canvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
-            const NUM_PARTICLES = 45;
+            const MAX_PARTICLES = window.innerWidth < 768 ? 20 : 40;
             const symbols = ['💵', '💰', '🪙', '💸', '🏦', '📈', '$', '€', '£', '¥'];
 
             function resize() {
@@ -1612,21 +1669,27 @@
                 height = window.innerHeight;
                 canvas.width = width;
                 canvas.height = height;
+                // Recrear partículas al redimensionar para ajustar posiciones
+                particles = [];
+                for (let i = 0; i < MAX_PARTICLES; i++) {
+                    particles.push(new Particle());
+                }
             }
             resize();
             window.addEventListener('resize', resize);
 
             class Particle {
                 constructor() {
+                    // Posiciones distribuidas por toda la pantalla, con más densidad en laterales
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    this.size = Math.random() * 28 + 16;
-                    this.speedX = (Math.random() - 0.5) * 0.4;
-                    this.speedY = (Math.random() - 0.5) * 0.4;
-                    this.opacity = Math.random() * 0.15 + 0.03;
+                    this.size = Math.random() * 24 + 14;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.2 + 0.04;
                     this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
                     this.rotation = Math.random() * Math.PI * 2;
-                    this.rotationSpeed = (Math.random() - 0.5) * 0.006;
+                    this.rotationSpeed = (Math.random() - 0.5) * 0.005;
                 }
                 update() {
                     this.x += this.speedX;
@@ -1642,16 +1705,17 @@
                     ctx.font = `${this.size}px "Segoe UI", "Arial", sans-serif`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    const color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#1a5cff';
+                    // Color real del símbolo (azul con opacidad)
                     ctx.fillStyle = `rgba(26, 92, 255, ${this.opacity})`;
-                    ctx.shadowColor = 'rgba(26, 92, 255, 0.08)';
-                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = 'rgba(26, 92, 255, 0.1)';
+                    ctx.shadowBlur = 10;
                     ctx.fillText(this.symbol, 0, 0);
                     ctx.restore();
                 }
             }
 
-            for (let i = 0; i < NUM_PARTICLES; i++) {
+            // Inicializar partículas
+            for (let i = 0; i < MAX_PARTICLES; i++) {
                 particles.push(new Particle());
             }
 
