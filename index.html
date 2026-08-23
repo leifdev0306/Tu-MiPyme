@@ -147,7 +147,7 @@
         .hero-actions .primary-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
         /* ============================================================
-           BOTÓN CON ANIMACIÓN DEL CORREDOR (en bucle)
+           BOTÓN CON ANIMACIÓN DEL CORREDOR (de derecha a izquierda)
            ============================================================ */
         .btn-with-runner {
             position: relative;
@@ -179,30 +179,31 @@
         .btn-with-runner .runner {
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 100%;
             font-size: 26px;
-            animation: run 8s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: runRightToLeft 8s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 2;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
             will-change: transform;
         }
+        /* La bolsa y la bandera ahora están a la izquierda (inicio) */
         .btn-with-runner .money-bag {
             position: absolute;
             bottom: 2px;
-            right: 2%;
+            left: 2%;
             font-size: 22px;
             opacity: 0;
-            animation: bagAppear 8s infinite;
+            animation: bagAppearLeft 8s infinite;
             z-index: 3;
             filter: drop-shadow(0 0 8px gold);
         }
         .btn-with-runner .finish-flag {
             position: absolute;
             bottom: 4px;
-            right: 0%;
+            left: 0%;
             font-size: 18px;
             opacity: 0;
-            animation: flagAppear 8s infinite;
+            animation: flagAppearLeft 8s infinite;
             z-index: 1;
         }
         .btn-with-runner .money-particle {
@@ -221,25 +222,29 @@
         .btn-with-runner .money-particle:nth-child(8) { left: 65%; animation-delay: 1.9s; font-size: 22px; }
         .btn-with-runner .money-particle:nth-child(9) { left: 85%; animation-delay: 0.5s; }
 
-        @keyframes run {
-            0%   { left: 0%; transform: scaleX(1); }
-            80%  { left: 80%; transform: scaleX(1); }
-            85%  { left: 85%; transform: scaleX(1); }
-            90%  { left: 90%; transform: scaleX(1); }
-            95%  { left: 95%; transform: scaleX(1); }
-            100% { left: 100%; transform: scaleX(1); }
+        /* Corredor de derecha a izquierda */
+        @keyframes runRightToLeft {
+            0%   { left: 100%; transform: scaleX(1); }
+            80%  { left: 20%; transform: scaleX(1); }
+            85%  { left: 15%; transform: scaleX(1); }
+            90%  { left: 10%; transform: scaleX(1); }
+            95%  { left: 5%; transform: scaleX(1); }
+            100% { left: 0%; transform: scaleX(1); }
         }
-        @keyframes bagAppear {
+        /* Bolsa aparece al final (izquierda) */
+        @keyframes bagAppearLeft {
             0%, 85% { opacity: 0; transform: scale(0.5); }
             90% { opacity: 1; transform: scale(1.2); }
             95% { opacity: 1; transform: scale(1); }
             100% { opacity: 1; }
         }
-        @keyframes flagAppear {
+        /* Bandera aparece al final (izquierda) */
+        @keyframes flagAppearLeft {
             0%, 88% { opacity: 0; }
             92% { opacity: 1; }
             100% { opacity: 1; }
         }
+        /* Billetes cayendo */
         @keyframes fall {
             0%   { opacity: 1; top: -10px; transform: rotate(0deg) scale(1); }
             100% { opacity: 0; top: 100%; transform: rotate(360deg) scale(0.6); }
@@ -582,18 +587,16 @@
                 <p>Administra ventas, inventario, clientes y finanzas en una sola plataforma. Offline-first, sincronización en la nube y diseño de élite.</p>
                 <div class="hero-actions">
                     <div class="primary-group">
-                        <!-- Botón principal con animación del corredor -->
+                        <!-- Botón principal con animación del corredor (de derecha a izquierda) -->
                         <div class="btn-with-runner">
                             <button class="btn-android-primary download-trigger" data-platform="android64">
                                 📱 Descargar para Android (recomendado)
                             </button>
-                            <!-- Pista del corredor (se superpone al botón) -->
                             <div class="runner-track">
                                 <div class="ground"></div>
                                 <div class="runner">🏃‍♂️</div>
                                 <div class="money-bag">💰</div>
                                 <div class="finish-flag">🏁</div>
-                                <!-- Billetes cayendo -->
                                 <div class="money-particle">💵</div>
                                 <div class="money-particle">💸</div>
                                 <div class="money-particle">🪙</div>
@@ -775,7 +778,7 @@
             <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas.<br /><span style="font-size:14px; opacity:0.6;">Siempre descargarás la última versión disponible.</span></p>
             <div class="cta-actions">
                 <div class="primary-group">
-                    <!-- Botón principal con animación del corredor (CTA) -->
+                    <!-- Botón principal con animación del corredor (de derecha a izquierda) en CTA -->
                     <div class="btn-with-runner">
                         <button class="btn-cta-android-primary download-trigger" data-platform="android64">
                             📱 Descargar para Android (recomendado)
