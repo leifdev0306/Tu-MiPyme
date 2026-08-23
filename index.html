@@ -171,7 +171,8 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 16px;
+            flex-wrap: wrap;
         }
         nav a {
             font-size: 14px;
@@ -197,42 +198,43 @@
         nav a:hover::after {
             width: 100%;
         }
-        .nav-download-android,
+        .nav-download-android64,
+        .nav-download-android32,
         .nav-download-windows {
-            padding: 8px 20px;
+            padding: 6px 14px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             transition: all 0.3s;
             border: 1px solid var(--border-glow);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: var(--bg-card);
             backdrop-filter: blur(4px);
             box-shadow: 0 2px 12px var(--border-glow);
+            color: var(--text-primary);
         }
-        .nav-download-android {
+        .nav-download-android64 {
             background: var(--accent-gradient);
             color: #fff !important;
             border-color: transparent;
             box-shadow: 0 4px 20px rgba(26, 92, 255, 0.3);
         }
-        .nav-download-android:hover {
+        .nav-download-android64:hover {
             transform: translateY(-2px) scale(1.03);
             box-shadow: 0 8px 30px rgba(26, 92, 255, 0.45);
         }
-        .nav-download-windows {
-            color: var(--text-primary) !important;
-        }
+        .nav-download-android32:hover,
         .nav-download-windows:hover {
             border-color: var(--accent);
-            color: var(--accent) !important;
+            color: var(--accent);
             transform: translateY(-2px);
             box-shadow: 0 4px 24px var(--border-glow);
         }
-        .nav-download-android::after,
+        .nav-download-android64::after,
+        .nav-download-android32::after,
         .nav-download-windows::after {
             display: none;
         }
@@ -254,7 +256,7 @@
         }
 
         /* ============================================================
-           HERO – Con mockups elegantes
+           HERO
            ============================================================ */
         .hero {
             padding: 150px 0 120px;
@@ -274,14 +276,8 @@
             animation: fadeUp 1s ease;
         }
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
         .hero-badge {
             display: inline-flex;
@@ -299,7 +295,7 @@
         }
         .hero-badge .whats-new {
             color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255,255,255,0.5);
             padding: 2px 12px;
             border-radius: 30px;
             font-size: 11px;
@@ -334,36 +330,50 @@
         }
         .hero-actions {
             display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
         }
-        .btn-android,
-        .btn-windows {
+        .hero-actions .primary-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .btn-android-primary {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 36px;
+            padding: 18px 44px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(26, 92, 255, 0.45);
+            letter-spacing: 0.3px;
+        }
+        .btn-android-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(26, 92, 255, 0.6);
+        }
+        .btn-windows {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
             border: 1px solid var(--border-glow);
             cursor: pointer;
             transition: all 0.3s;
             background: var(--bg-card);
             backdrop-filter: blur(4px);
             box-shadow: 0 4px 20px var(--border-glow);
-        }
-        .btn-android {
-            background: var(--accent-gradient);
-            color: #fff;
-            border-color: transparent;
-            box-shadow: 0 6px 28px rgba(26, 92, 255, 0.35);
-        }
-        .btn-android:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 44px rgba(26, 92, 255, 0.5);
-        }
-        .btn-windows {
             color: var(--text-primary);
         }
         .btn-windows:hover {
@@ -376,10 +386,10 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 40px;
+            padding: 14px 32px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 17px;
+            font-size: 16px;
             background: transparent;
             color: var(--text-primary);
             border: 1px solid var(--border-glow);
@@ -392,6 +402,19 @@
             color: var(--accent);
             transform: translateY(-4px);
             box-shadow: 0 8px 32px var(--border-glow);
+        }
+        .hero-actions .fallback-link {
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+            margin-top: 2px;
+        }
+        .hero-actions .fallback-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        .hero-actions .fallback-link .icon {
+            font-size: 16px;
         }
 
         /* ===== MOCKUPS ===== */
@@ -431,10 +454,10 @@
             border-radius: var(--radius);
             padding: 16px 14px;
             overflow: hidden;
-            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.05);
         }
         [data-theme="dark"] .mockup-screen {
-            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.3);
         }
         .mockup-phone .mockup-screen {
             aspect-ratio: 9 / 19;
@@ -476,22 +499,16 @@
             justify-content: space-between;
             font-size: 10px;
             padding: 4px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
             color: var(--text-muted);
         }
         .mockup-row .value {
             font-weight: 700;
             color: var(--text-primary);
         }
-        .mockup-row .value.green {
-            color: #10b981;
-        }
-        .mockup-row .value.blue {
-            color: var(--accent);
-        }
-        .mockup-row .value.orange {
-            color: #f59e0b;
-        }
+        .mockup-row .value.green { color: #10b981; }
+        .mockup-row .value.blue  { color: var(--accent); }
+        .mockup-row .value.orange { color: #f59e0b; }
         .mockup-chart {
             display: flex;
             align-items: flex-end;
@@ -506,15 +523,9 @@
             min-height: 4px;
             transition: height 0.6s ease;
         }
-        .mockup-chart .bar.primary {
-            background: var(--accent);
-        }
-        .mockup-chart .bar.green {
-            background: #10b981;
-        }
-        .mockup-chart .bar.orange {
-            background: #f59e0b;
-        }
+        .mockup-chart .bar.primary { background: var(--accent); }
+        .mockup-chart .bar.green   { background: #10b981; }
+        .mockup-chart .bar.orange  { background: #f59e0b; }
         .mockup-footer {
             display: flex;
             justify-content: space-around;
@@ -657,7 +668,7 @@
             color: #fff;
         }
         .feature-card .tag-free {
-            background: rgba(16, 185, 129, 0.15);
+            background: rgba(16,185,129,0.15);
             color: #10b981;
         }
 
@@ -702,7 +713,7 @@
         }
         .plan-card .trial-badge {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.04);
             color: var(--text-muted);
             font-weight: 600;
             font-size: 12px;
@@ -767,11 +778,11 @@
             transition: all 0.3s;
             background: var(--accent-gradient);
             color: #fff;
-            box-shadow: 0 4px 20px rgba(26, 92, 255, 0.25);
+            box-shadow: 0 4px 20px rgba(26,92,255,0.25);
         }
         .btn-plan:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 36px rgba(26, 92, 255, 0.4);
+            box-shadow: 0 8px 36px rgba(26,92,255,0.4);
         }
         .btn-plan-outline {
             background: var(--bg-card);
@@ -911,37 +922,50 @@
         }
         .cta-actions {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .cta-actions .primary-group {
+            display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 16px;
         }
-        .btn-cta-android,
-        .btn-cta-windows {
+        .btn-cta-android-primary {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 44px;
+            padding: 18px 44px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(26, 92, 255, 0.45);
+            letter-spacing: 0.3px;
+        }
+        .btn-cta-android-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(26, 92, 255, 0.6);
+        }
+        .btn-cta-windows {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 17px;
+            font-size: 16px;
             border: 1px solid var(--border-glow);
             cursor: pointer;
             transition: all 0.3s;
             background: var(--bg-card);
             backdrop-filter: blur(4px);
             box-shadow: 0 4px 20px var(--border-glow);
-        }
-        .btn-cta-android {
-            background: var(--accent-gradient);
-            color: #fff;
-            border-color: transparent;
-            box-shadow: 0 6px 28px rgba(26, 92, 255, 0.35);
-        }
-        .btn-cta-android:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 44px rgba(26, 92, 255, 0.5);
-        }
-        .btn-cta-windows {
             color: var(--text-primary);
         }
         .btn-cta-windows:hover {
@@ -949,6 +973,15 @@
             color: var(--accent);
             transform: translateY(-4px);
             box-shadow: 0 8px 32px var(--border-glow);
+        }
+        .cta-actions .fallback-link {
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .cta-actions .fallback-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
         }
 
         /* ===== FOOTER ===== */
@@ -986,7 +1019,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0,0,0,0.4);
             backdrop-filter: blur(8px);
             z-index: 2000;
             display: none;
@@ -1031,11 +1064,23 @@
             padding: 16px 20px;
             border-radius: var(--radius);
             border-left: 4px solid var(--accent);
-            margin: 20px 0 24px;
+            margin: 20px 0 16px;
             font-size: 14px;
             color: var(--text-secondary);
         }
         .modal .highlight strong {
+            color: var(--text-primary);
+        }
+        .modal .note-fallback {
+            background: rgba(255, 193, 7, 0.08);
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .modal .note-fallback strong {
             color: var(--text-primary);
         }
         .modal-actions {
@@ -1066,11 +1111,11 @@
             background: var(--accent-gradient);
             color: #fff;
             border-color: transparent;
-            box-shadow: 0 4px 20px rgba(26, 92, 255, 0.25);
+            box-shadow: 0 4px 20px rgba(26,92,255,0.25);
         }
         .modal-actions .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(26, 92, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(26,92,255,0.4);
         }
 
         /* ============================================================
@@ -1086,6 +1131,9 @@
                 margin: 0 auto 32px;
             }
             .hero-actions {
+                align-items: center;
+            }
+            .hero-actions .primary-group {
                 justify-content: center;
             }
             .hero-mockups {
@@ -1093,12 +1141,8 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            .mockup-phone {
-                width: 150px;
-            }
-            .mockup-desktop {
-                width: 280px;
-            }
+            .mockup-phone { width: 150px; }
+            .mockup-desktop { width: 280px; }
             .plans-grid {
                 grid-template-columns: 1fr;
                 max-width: 480px;
@@ -1119,12 +1163,8 @@
                 border: 1px solid var(--border-glow);
                 border-top: none;
             }
-            nav.open {
-                display: flex;
-            }
-            .menu-toggle {
-                display: block;
-            }
+            nav.open { display: flex; }
+            .menu-toggle { display: block; }
             .changelog-item {
                 flex-wrap: wrap;
                 gap: 8px;
@@ -1146,11 +1186,6 @@
                 width: 44px;
                 height: 44px;
                 font-size: 20px;
-            }
-            .nav-download-android,
-            .nav-download-windows {
-                padding: 6px 16px;
-                font-size: 12px;
             }
         }
         @media (max-width: 600px) {
@@ -1176,12 +1211,15 @@
             .cta-section h2 {
                 font-size: 30px;
             }
-            .btn-android,
+            .btn-android-primary,
+            .btn-cta-android-primary {
+                font-size: 16px;
+                padding: 16px 32px;
+            }
             .btn-windows,
-            .btn-cta-android,
             .btn-cta-windows {
                 font-size: 14px;
-                padding: 14px 24px;
+                padding: 12px 24px;
             }
             .hero-badge {
                 font-size: 12px;
@@ -1191,37 +1229,27 @@
                 font-size: 10px;
                 padding: 2px 10px;
             }
-            .hero-actions {
+            .hero-actions .primary-group {
                 flex-direction: column;
                 align-items: center;
             }
             .btn-secondary {
                 font-size: 15px;
-                padding: 14px 28px;
+                padding: 12px 24px;
             }
-            .mockup-phone {
-                width: 120px;
-            }
-            .mockup-desktop {
-                width: 210px;
-            }
-            .hero-mockups {
-                gap: 16px;
+            .mockup-phone { width: 120px; }
+            .mockup-desktop { width: 210px; }
+            .hero-mockups { gap: 16px; }
+            .cta-actions .primary-group {
+                flex-direction: column;
+                align-items: center;
             }
         }
         @media (min-width: 1025px) {
-            .hero h1 {
-                font-size: 64px;
-            }
-            .section-title {
-                font-size: 48px;
-            }
-            .feature-card:hover {
-                transform: translateY(-10px);
-            }
-            .plan-card:hover {
-                transform: translateY(-12px);
-            }
+            .hero h1 { font-size: 64px; }
+            .section-title { font-size: 48px; }
+            .feature-card:hover { transform: translateY(-10px); }
+            .plan-card:hover { transform: translateY(-12px); }
         }
     </style>
 </head>
@@ -1240,7 +1268,8 @@
                 <a href="#plans">Planes</a>
                 <a href="#changelog">Historial</a>
                 <a href="#testimonios">Testimonios</a>
-                <button class="nav-download-android download-trigger" data-platform="android">📱 Android</button>
+                <button class="nav-download-android64 download-trigger" data-platform="android64">📱 64 bits</button>
+                <button class="nav-download-android32 download-trigger" data-platform="android32">📱 32 bits</button>
                 <button class="nav-download-windows download-trigger" data-platform="windows">💻 Windows</button>
                 <a href="https://leifdev0306.github.io/Portafolio/" target="_blank" class="nav-portfolio">Portafolio</a>
             </nav>
@@ -1258,9 +1287,18 @@
                 <h1>Gestión <span class="highlight">inteligente</span><br />para tu negocio</h1>
                 <p>Administra ventas, inventario, clientes y finanzas en una sola plataforma. Offline-first, sincronización en la nube y diseño de élite.</p>
                 <div class="hero-actions">
-                    <button class="btn-android download-trigger" data-platform="android">📱 Descargar para Android</button>
-                    <button class="btn-windows download-trigger" data-platform="windows">💻 Descargar para Windows</button>
-                    <a href="#features" class="btn-secondary">Explorar</a>
+                    <div class="primary-group">
+                        <button class="btn-android-primary download-trigger" data-platform="android64">
+                            📱 Descargar para Android (recomendado)
+                        </button>
+                        <button class="btn-windows download-trigger" data-platform="windows">
+                            💻 Windows
+                        </button>
+                        <a href="#features" class="btn-secondary">Explorar</a>
+                    </div>
+                    <a href="#" class="fallback-link download-trigger" data-platform="android32">
+                        <span class="icon">🔄</span> Si tu app no instala o tu móvil es antiguo, descarga esta versión (32 bits)
+                    </a>
                 </div>
             </div>
             <div class="hero-mockups">
@@ -1431,7 +1469,7 @@
                         <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
                         <li>👤 <strong>2 vendedores</strong></li>
                     </ul>
-                    <button class="btn-plan btn-plan-outline download-trigger" data-platform="android" style="width:100%; justify-content:center;">Probar 3 días gratis</button>
+                    <button class="btn-plan btn-plan-outline download-trigger" data-platform="android64" style="width:100%; justify-content:center;">Probar 3 días gratis</button>
                     <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Luego $1,000 CUP/mes</p>
                 </div>
                 <div class="plan-card popular fade-up">
@@ -1452,7 +1490,7 @@
                         <li>👥 Hasta 5 vendedores</li>
                         <li>📞 Soporte prioritario</li>
                     </ul>
-                    <button class="btn-plan download-trigger" data-platform="android" style="width:100%; justify-content:center;">Descargar ahora</button>
+                    <button class="btn-plan download-trigger" data-platform="android64" style="width:100%; justify-content:center;">Descargar ahora</button>
                     <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Sin período de prueba</p>
                 </div>
             </div>
@@ -1551,10 +1589,19 @@
             <h2>📲 Descarga Tu MiPyme ahora</h2>
             <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas.<br /><span style="font-size:14px; opacity:0.6;">Siempre descargarás la última versión disponible.</span></p>
             <div class="cta-actions">
-                <button class="btn-cta-android download-trigger" data-platform="android">📱 Android (APK)</button>
-                <button class="btn-cta-windows download-trigger" data-platform="windows">💻 Windows (RAR)</button>
+                <div class="primary-group">
+                    <button class="btn-cta-android-primary download-trigger" data-platform="android64">
+                        📱 Descargar para Android (recomendado)
+                    </button>
+                    <button class="btn-cta-windows download-trigger" data-platform="windows">
+                        💻 Windows (RAR)
+                    </button>
+                </div>
+                <a href="#" class="fallback-link download-trigger" data-platform="android32">
+                    🔄 Si tu app no instala o tu móvil es antiguo, descarga esta versión (32 bits)
+                </a>
             </div>
-            <p class="version-info">Android 5.0+ · ~15 MB · Windows 10+ · ~65 MB</p>
+            <p class="version-info">Android 5.0+ · ~15-25 MB · Windows 10+ · ~14 MB (comprimido)</p>
         </div>
     </section>
 
@@ -1581,6 +1628,9 @@
                 Es un aviso estándar de Android para apps que no se descargan desde Google Play.
                 <strong>Tu MiPyme</strong> está firmada y verificada, no contiene virus ni malware.
                 Puedes instalarla con total tranquilidad.
+            </div>
+            <div class="note-fallback">
+                <strong>💡 Nota:</strong> Si la instalación falla, prueba con la versión de <strong>32 bits</strong> (para dispositivos más antiguos). En la página principal encontrarás el enlace correspondiente.
             </div>
             <p style="font-size:14px; color:var(--text-muted);">Si confías en esta app, pulsa "Continuar descarga". En caso contrario, cancela.</p>
             <div class="modal-actions">
@@ -1731,41 +1781,53 @@
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
             // ============================================================
-            // 6. MODAL DE DESCARGA
+            // 6. MODAL DE DESCARGA – Manejo de Android 64/32 y Windows
             // ============================================================
             const modal = document.getElementById('downloadModal');
             const cancelBtn = document.getElementById('modalCancel');
             const continueBtn = document.getElementById('modalContinue');
-            let cachedAndroidUrl = '';
-            let cachedWindowsUrl = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar';
+
+            let cachedAndroid64Url = '';
+            let cachedAndroid32Url = '';
+            let cachedWindowsUrl = '';
 
             async function getLatestUrls() {
-                const fallbackAndroid = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.apk';
+                const fallback64 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme64.apk';
+                const fallback32 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme32.apk';
+                const fallbackWindows = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar';
                 try {
                     const res = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases/latest');
                     if (!res.ok) throw new Error();
                     const data = await res.json();
-                    const apk = data.assets.find(a => a.name === 'TuMiPyme.apk');
-                    const rar = data.assets.find(a => a.name === 'TuMiPyme.rar');
-                    cachedAndroidUrl = apk ? apk.browser_download_url : fallbackAndroid;
-                    cachedWindowsUrl = rar ? rar.browser_download_url : cachedWindowsUrl;
+                    const assets = data.assets;
+                    const apk64 = assets.find(a => a.name === 'TuMiPyme64.apk');
+                    const apk32 = assets.find(a => a.name === 'TuMiPyme32.apk');
+                    const rar = assets.find(a => a.name === 'TuMiPyme.rar');
+                    cachedAndroid64Url = apk64 ? apk64.browser_download_url : fallback64;
+                    cachedAndroid32Url = apk32 ? apk32.browser_download_url : fallback32;
+                    cachedWindowsUrl = rar ? rar.browser_download_url : fallbackWindows;
                 } catch {
-                    cachedAndroidUrl = fallbackAndroid;
+                    cachedAndroid64Url = fallback64;
+                    cachedAndroid32Url = fallback32;
+                    cachedWindowsUrl = fallbackWindows;
                 }
             }
             getLatestUrls();
 
-            let pendingPlatform = 'android';
+            let pendingPlatform = 'android64';
 
             function showModal(platform) {
-                pendingPlatform = platform || 'android';
+                pendingPlatform = platform || 'android64';
                 modal.classList.add('active');
             }
 
             function closeModal() { modal.classList.remove('active'); }
 
             function download() {
-                const url = pendingPlatform === 'android' ? cachedAndroidUrl : cachedWindowsUrl;
+                let url = '';
+                if (pendingPlatform === 'android64') url = cachedAndroid64Url;
+                else if (pendingPlatform === 'android32') url = cachedAndroid32Url;
+                else if (pendingPlatform === 'windows') url = cachedWindowsUrl;
                 if (url) {
                     window.location.href = url;
                 }
@@ -1775,7 +1837,7 @@
             document.querySelectorAll('.download-trigger').forEach(el => {
                 el.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const platform = this.dataset.platform || 'android';
+                    const platform = this.dataset.platform || 'android64';
                     showModal(platform);
                 });
             });
