@@ -32,6 +32,8 @@
             --border-glow: rgba(26, 92, 255, 0.2);
             --particle-opacity: 0.25;
         }
+
+        /* Modo oscuro – gradiente azul profundo y elegante */
         [data-theme="dark"] {
             --bg-gradient: linear-gradient(145deg, #0a1a3a, #0d2147, #0a1a3a);
             --bg-card: rgba(255, 255, 255, 0.06);
@@ -47,6 +49,10 @@
             --border-glow: rgba(74, 139, 255, 0.3);
             --particle-opacity: 0.2;
         }
+
+        /* ============================================================
+           RESET Y BASE
+           ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
         body {
@@ -61,6 +67,8 @@
         }
         a { color: inherit; text-decoration: none; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+
+        /* ===== Partículas de fondo ===== */
         #money-canvas {
             position: fixed;
             top: 0;
@@ -71,6 +79,8 @@
             pointer-events: none;
             opacity: var(--particle-opacity);
         }
+
+        /* ===== Tema toggle ===== */
         .theme-toggle {
             position: fixed; bottom: 28px; right: 28px; z-index: 999;
             width: 48px; height: 48px; border-radius: 50%;
@@ -82,6 +92,8 @@
             display: flex; align-items: center; justify-content: center;
         }
         .theme-toggle:hover { transform: scale(1.06) rotate(4deg); border-color: var(--accent); box-shadow: var(--shadow-lg), 0 0 40px var(--border-glow); }
+
+        /* ===== Header ===== */
         header {
             position: fixed; top: 0; left: 0; width: 100%; padding: 16px 0; z-index: 1000;
             background: rgba(255,255,255,0.15); backdrop-filter: blur(18px) saturate(1.4);
@@ -113,6 +125,8 @@
         .nav-portfolio { color: var(--accent) !important; font-weight: 600; }
         .nav-portfolio::after { background: var(--accent) !important; }
         .menu-toggle { display: none; background: none; border: none; font-size: 26px; color: var(--text-primary); cursor: pointer; padding: 4px; }
+
+        /* ===== Hero ===== */
         .hero { padding: 150px 0 120px; min-height: 100vh; display: flex; align-items: center; position: relative; text-align: left; }
         .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .hero-content { animation: fadeUp 1s ease; }
@@ -131,34 +145,186 @@
         .hero p { font-size: 19px; color: var(--text-secondary); max-width: 480px; margin-bottom: 40px; line-height: 1.8; }
         .hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
         .hero-actions .primary-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-        .btn-android-primary {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 18px 44px; border-radius: 50px; font-weight: 700; font-size: 18px;
-            border: none; cursor: pointer; transition: all 0.3s;
-            background: var(--accent-gradient); color: #fff;
+
+        /* ============================================================
+           BOTÓN CON ANIMACIÓN DEL CORREDOR (en bucle)
+           ============================================================ */
+        .btn-with-runner {
+            position: relative;
+            display: inline-block;
+            overflow: visible;
+            cursor: pointer;
+        }
+        .btn-with-runner .runner-track {
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 28px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
+            border-radius: 0 0 50px 50px;
+        }
+        .btn-with-runner .runner-track .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+        .btn-with-runner .runner {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 26px;
+            animation: run 8s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 2;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            will-change: transform;
+        }
+        .btn-with-runner .money-bag {
+            position: absolute;
+            bottom: 2px;
+            right: 2%;
+            font-size: 22px;
+            opacity: 0;
+            animation: bagAppear 8s infinite;
+            z-index: 3;
+            filter: drop-shadow(0 0 8px gold);
+        }
+        .btn-with-runner .finish-flag {
+            position: absolute;
+            bottom: 4px;
+            right: 0%;
+            font-size: 18px;
+            opacity: 0;
+            animation: flagAppear 8s infinite;
+            z-index: 1;
+        }
+        .btn-with-runner .money-particle {
+            position: absolute;
+            top: -10px;
+            font-size: 16px;
+            animation: fall 2s infinite;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        /* Diferentes delays para los billetes */
+        .btn-with-runner .money-particle:nth-child(5) { left: 8%; animation-delay: 0.2s; }
+        .btn-with-runner .money-particle:nth-child(6) { left: 25%; animation-delay: 1.4s; font-size: 20px; }
+        .btn-with-runner .money-particle:nth-child(7) { left: 45%; animation-delay: 0.8s; }
+        .btn-with-runner .money-particle:nth-child(8) { left: 65%; animation-delay: 1.9s; font-size: 22px; }
+        .btn-with-runner .money-particle:nth-child(9) { left: 85%; animation-delay: 0.5s; }
+
+        @keyframes run {
+            0%   { left: 0%; transform: scaleX(1); }
+            80%  { left: 80%; transform: scaleX(1); }
+            85%  { left: 85%; transform: scaleX(1); }
+            90%  { left: 90%; transform: scaleX(1); }
+            95%  { left: 95%; transform: scaleX(1); }
+            100% { left: 100%; transform: scaleX(1); }
+        }
+        @keyframes bagAppear {
+            0%, 85% { opacity: 0; transform: scale(0.5); }
+            90% { opacity: 1; transform: scale(1.2); }
+            95% { opacity: 1; transform: scale(1); }
+            100% { opacity: 1; }
+        }
+        @keyframes flagAppear {
+            0%, 88% { opacity: 0; }
+            92% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+        @keyframes fall {
+            0%   { opacity: 1; top: -10px; transform: rotate(0deg) scale(1); }
+            100% { opacity: 0; top: 100%; transform: rotate(360deg) scale(0.6); }
+        }
+
+        /* Estilos del botón principal (se mantienen) */
+        .btn-android-primary, .btn-cta-android-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 44px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--accent-gradient);
+            color: #fff;
             box-shadow: 0 8px 32px rgba(26,92,255,0.45);
             letter-spacing: 0.3px;
+            position: relative;
+            z-index: 5;
         }
-        .btn-android-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 48px rgba(26,92,255,0.6); }
+        .btn-android-primary:hover, .btn-cta-android-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(26,92,255,0.6);
+        }
         .btn-windows {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 15px;
-            border: 1px solid var(--border-glow); cursor: pointer; transition: all 0.3s;
-            background: var(--bg-card); backdrop-filter: blur(4px);
-            box-shadow: 0 4px 20px var(--border-glow); color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid var(--border-glow);
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-card);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 20px var(--border-glow);
+            color: var(--text-primary);
         }
-        .btn-windows:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 32px var(--border-glow); }
+        .btn-windows:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px var(--border-glow);
+        }
         .btn-secondary {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 16px;
-            background: transparent; color: var(--text-primary);
-            border: 1px solid var(--border-glow); cursor: pointer; transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-glow);
+            cursor: pointer;
+            transition: all 0.3s;
             backdrop-filter: blur(4px);
         }
-        .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 32px var(--border-glow); }
-        .hero-actions .fallback-link { font-size: 14px; color: var(--text-muted); transition: color 0.3s; margin-top: 2px; }
-        .hero-actions .fallback-link:hover { color: var(--accent); text-decoration: underline; }
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px var(--border-glow);
+        }
+
+        .hero-actions .fallback-link {
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+            margin-top: 2px;
+        }
+        .hero-actions .fallback-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
         .hero-actions .fallback-link .icon { font-size: 16px; }
+
+        /* ===== MOCKUPS ===== */
         .hero-mockups { display: flex; justify-content: center; align-items: center; gap: 30px; position: relative; perspective: 1200px; }
         .mockup-phone, .mockup-desktop {
             background: var(--bg-card); backdrop-filter: blur(12px);
@@ -202,12 +368,16 @@
         }
         .mockup-desktop .keyboard span { display: inline-block; width: 8px; height: 6px; background: var(--border-glow); border-radius: 2px; }
         .mockup-desktop .stand { width: 60px; height: 10px; background: var(--bg-card); margin: 2px auto 0; border-radius: 0 0 8px 8px; border: 1px solid var(--border-glow); border-top: none; }
+
+        /* ===== RESTO DE SECCIONES ===== */
         section { padding: 100px 0; position: relative; z-index: 1; }
         .section-title { font-size: 42px; font-weight: 700; letter-spacing: -1px; text-align: center; margin-bottom: 16px; color: var(--text-primary); }
         .section-title .accent { color: var(--accent); }
         .section-subtitle { text-align: center; font-size: 18px; color: var(--text-secondary); max-width: 640px; margin: 0 auto 56px; line-height: 1.7; }
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== FEATURES ===== */
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; }
         .feature-card {
             background: var(--bg-card); backdrop-filter: blur(12px);
@@ -222,6 +392,8 @@
         .feature-card .tag { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 50px; background: var(--accent-light); color: var(--accent); text-transform: uppercase; letter-spacing: 0.3px; }
         .feature-card .tag-new { background: var(--accent-gradient); color: #fff; }
         .feature-card .tag-free { background: rgba(16,185,129,0.15); color: #10b981; }
+
+        /* ===== PLANES ===== */
         .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 960px; margin: 0 auto; }
         .plan-card {
             background: var(--bg-card); backdrop-filter: blur(12px);
@@ -245,6 +417,8 @@
         .btn-plan:hover { transform: translateY(-4px); box-shadow: 0 8px 36px rgba(26,92,255,0.4); }
         .btn-plan-outline { background: var(--bg-card); color: var(--text-primary); box-shadow: var(--shadow-sm); }
         .btn-plan-outline:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-md), 0 0 30px var(--border-glow); }
+
+        /* ===== CHANGELOG ===== */
         .changelog-list { max-width: 820px; margin: 0 auto; }
         .changelog-item {
             display: flex; gap: 28px; padding: 20px 28px;
@@ -261,6 +435,8 @@
         .changelog-item .desc ul li { padding: 2px 0 2px 24px; position: relative; }
         .changelog-item .desc ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
         .changelog-item.latest { border-left: 4px solid var(--accent); background: var(--accent-light); }
+
+        /* ===== TESTIMONIOS ===== */
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; max-width: 960px; margin: 0 auto; }
         .testimonial-card {
             background: var(--bg-card); backdrop-filter: blur(12px);
@@ -272,6 +448,8 @@
         .testimonial-card .quote { font-size: 15px; font-style: italic; color: var(--text-primary); margin-bottom: 12px; line-height: 1.7; }
         .testimonial-card .author { font-weight: 700; color: var(--accent); }
         .testimonial-card .role { font-size: 13px; color: var(--text-muted); }
+
+        /* ===== CTA ===== */
         .cta-section {
             background: var(--bg-card); backdrop-filter: blur(12px);
             padding: 100px 0; text-align: center;
@@ -282,25 +460,8 @@
         .cta-section .version-info { margin-top: 20px; font-size: 14px; color: var(--text-muted); }
         .cta-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; }
         .cta-actions .primary-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
-        .btn-cta-android-primary {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 18px 44px; border-radius: 50px; font-weight: 700; font-size: 18px;
-            border: none; cursor: pointer; transition: all 0.3s;
-            background: var(--accent-gradient); color: #fff;
-            box-shadow: 0 8px 32px rgba(26,92,255,0.45);
-            letter-spacing: 0.3px;
-        }
-        .btn-cta-android-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 48px rgba(26,92,255,0.6); }
-        .btn-cta-windows {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 16px;
-            border: 1px solid var(--border-glow); cursor: pointer; transition: all 0.3s;
-            background: var(--bg-card); backdrop-filter: blur(4px);
-            box-shadow: 0 4px 20px var(--border-glow); color: var(--text-primary);
-        }
-        .btn-cta-windows:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 32px var(--border-glow); }
-        .cta-actions .fallback-link { font-size: 14px; color: var(--text-muted); transition: color 0.3s; }
-        .cta-actions .fallback-link:hover { color: var(--accent); text-decoration: underline; }
+
+        /* ===== FOOTER ===== */
         footer {
             background: var(--bg-card); backdrop-filter: blur(12px);
             color: var(--text-muted); padding: 40px 0;
@@ -311,7 +472,7 @@
         footer .footer-links a { color: var(--text-muted); transition: color 0.3s; font-size: 0.85rem; }
         footer .footer-links a:hover { color: var(--accent); }
 
-        /* ===== MODAL DE ADVERTENCIA ===== */
+        /* ===== MODAL DE ADVERTENCIA (Android) ===== */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
@@ -338,101 +499,9 @@
         .modal-actions .btn-primary { background: var(--accent-gradient); color: #fff; border-color: transparent; box-shadow: 0 4px 20px rgba(26,92,255,0.25); }
         .modal-actions .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,92,255,0.4); }
 
-        /* ===== OVERLAY DE PROGRESO ===== */
-        .progress-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.55);
-            backdrop-filter: blur(12px);
-            z-index: 3000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            flex-direction: column;
-        }
-        .progress-overlay.active { display: flex; }
-        .progress-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            max-width: 520px;
-            width: 100%;
-            border-radius: var(--radius-xl);
-            padding: 36px 32px 40px;
-            box-shadow: var(--shadow-lg), 0 0 60px var(--border-glow);
-            border: 1px solid var(--border-glow);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .progress-card .title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-        .progress-card .subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; min-height: 20px; }
-        .progress-track {
-            position: relative;
-            width: 100%;
-            height: 28px;
-            background: var(--bg-card-hover);
-            border-radius: 40px;
-            overflow: visible;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
-            border: 1px solid var(--border-glow);
-            margin-bottom: 12px;
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--accent-gradient);
-            border-radius: 40px;
-            transition: width 0.2s ease;
-            box-shadow: 0 0 20px var(--border-glow);
-            position: relative;
-        }
-        .runner {
-            position: absolute;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            left: 0%;
-            font-size: 32px;
-            line-height: 1;
-            transition: left 0.2s ease;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-            z-index: 2;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-        .runner span { display: inline-block; animation: bounceRunner 0.6s infinite alternate ease-in-out; }
-        @keyframes bounceRunner { 0% { transform: translateY(0px); } 100% { transform: translateY(-6px); } }
-        .money-particle {
-            position: absolute;
-            font-size: 20px;
-            pointer-events: none;
-            opacity: 0;
-            animation: floatMoney 1.5s ease-out forwards;
-            z-index: 1;
-        }
-        @keyframes floatMoney { 0% { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-80px) scale(1.2) rotate(20deg); } }
-        .progress-stats { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 500; }
-        .progress-stats .percent { font-weight: 700; color: var(--accent); font-size: 18px; }
-        .progress-stats .size { color: var(--text-muted); }
-        .done-message { display: none; margin-top: 12px; padding: 12px; background: rgba(16,185,129,0.12); border-radius: var(--radius); border: 1px solid rgba(16,185,129,0.2); color: #10b981; font-weight: 600; font-size: 16px; }
-        .done-message.show { display: block; }
-        .btn-close-progress {
-            margin-top: 20px;
-            padding: 10px 32px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            border: 1px solid var(--border-glow);
-            cursor: pointer;
-            transition: all 0.3s;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            backdrop-filter: blur(4px);
-            display: inline-block;
-        }
-        .btn-close-progress:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 4px 20px var(--border-glow); }
-        .btn-close-progress.hidden { display: none; }
-
+        /* ============================================================
+           RESPONSIVE (igual que antes)
+           ============================================================ */
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 50px; }
             .hero p { margin: 0 auto 32px; }
@@ -469,7 +538,6 @@
             .mockup-desktop { width: 210px; }
             .hero-mockups { gap: 16px; }
             .cta-actions .primary-group { flex-direction: column; align-items: center; }
-            .progress-card { padding: 24px 20px; }
         }
         @media (min-width: 1025px) {
             .hero h1 { font-size: 64px; }
@@ -514,9 +582,26 @@
                 <p>Administra ventas, inventario, clientes y finanzas en una sola plataforma. Offline-first, sincronización en la nube y diseño de élite.</p>
                 <div class="hero-actions">
                     <div class="primary-group">
-                        <button class="btn-android-primary download-trigger" data-platform="android64">
-                            📱 Descargar para Android (recomendado)
-                        </button>
+                        <!-- Botón principal con animación del corredor -->
+                        <div class="btn-with-runner">
+                            <button class="btn-android-primary download-trigger" data-platform="android64">
+                                📱 Descargar para Android (recomendado)
+                            </button>
+                            <!-- Pista del corredor (se superpone al botón) -->
+                            <div class="runner-track">
+                                <div class="ground"></div>
+                                <div class="runner">🏃‍♂️</div>
+                                <div class="money-bag">💰</div>
+                                <div class="finish-flag">🏁</div>
+                                <!-- Billetes cayendo -->
+                                <div class="money-particle">💵</div>
+                                <div class="money-particle">💸</div>
+                                <div class="money-particle">🪙</div>
+                                <div class="money-particle">💵</div>
+                                <div class="money-particle">💰</div>
+                            </div>
+                        </div>
+
                         <button class="btn-windows download-trigger" data-platform="windows">
                             💻 Windows
                         </button>
@@ -690,10 +775,30 @@
             <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas.<br /><span style="font-size:14px; opacity:0.6;">Siempre descargarás la última versión disponible.</span></p>
             <div class="cta-actions">
                 <div class="primary-group">
-                    <button class="btn-cta-android-primary download-trigger" data-platform="android64">📱 Descargar para Android (recomendado)</button>
-                    <button class="btn-cta-windows download-trigger" data-platform="windows">💻 Windows (RAR)</button>
+                    <!-- Botón principal con animación del corredor (CTA) -->
+                    <div class="btn-with-runner">
+                        <button class="btn-cta-android-primary download-trigger" data-platform="android64">
+                            📱 Descargar para Android (recomendado)
+                        </button>
+                        <div class="runner-track">
+                            <div class="ground"></div>
+                            <div class="runner">🏃‍♂️</div>
+                            <div class="money-bag">💰</div>
+                            <div class="finish-flag">🏁</div>
+                            <div class="money-particle">💵</div>
+                            <div class="money-particle">💸</div>
+                            <div class="money-particle">🪙</div>
+                            <div class="money-particle">💵</div>
+                            <div class="money-particle">💰</div>
+                        </div>
+                    </div>
+                    <button class="btn-cta-windows download-trigger" data-platform="windows">
+                        💻 Windows (RAR)
+                    </button>
                 </div>
-                <a href="#" class="fallback-link download-trigger" data-platform="android32">🔄 Si tu app no instala o tu móvil es antiguo, descarga esta versión (32 bits)</a>
+                <a href="#" class="fallback-link download-trigger" data-platform="android32">
+                    🔄 Si tu app no instala o tu móvil es antiguo, descarga esta versión (32 bits)
+                </a>
             </div>
             <p class="version-info">Android 5.0+ · ~15-25 MB · Windows 10+ · ~14 MB (comprimido)</p>
         </div>
@@ -734,30 +839,8 @@
         </div>
     </div>
 
-    <!-- ===== OVERLAY DE PROGRESO (con simulación realista) ===== -->
-    <div class="progress-overlay" id="progressOverlay">
-        <div class="progress-card">
-            <div class="title">📦 Descargando Tu MiPyme</div>
-            <div class="subtitle" id="progressSubtitle">Preparando descarga...</div>
-
-            <div class="progress-track">
-                <div class="progress-fill" id="progressFill"></div>
-                <div class="runner" id="runner">🏃‍♂️💰</div>
-            </div>
-
-            <div class="progress-stats">
-                <span class="percent" id="percentText">0%</span>
-                <span class="size" id="sizeText">0 / 0 MB</span>
-            </div>
-
-            <div class="done-message" id="doneMessage">✅ ¡Descarga completada! El archivo se está guardando...</div>
-
-            <button class="btn-close-progress hidden" id="closeProgressBtn">Cerrar</button>
-        </div>
-    </div>
-
     <!-- ============================================================
-    JAVASCRIPT – Descarga directa + progreso simulado realista
+    JAVASCRIPT – Sencillo: modal para Android, descarga directa para Windows
     ============================================================ -->
     <script>
         (function() {
@@ -883,30 +966,17 @@
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
             // ============================================================
-            // 6. DESCARGA DIRECTA + PROGRESO SIMULADO REALISTA
+            // 6. MANEJO DE DESCARGAS: MODAL PARA ANDROID, DIRECTO PARA WINDOWS
             // ============================================================
             const modal = document.getElementById('downloadModal');
             const cancelBtn = document.getElementById('modalCancel');
             const continueBtn = document.getElementById('modalContinue');
-
-            const progressOverlay = document.getElementById('progressOverlay');
-            const progressFill = document.getElementById('progressFill');
-            const runner = document.getElementById('runner');
-            const percentText = document.getElementById('percentText');
-            const sizeText = document.getElementById('sizeText');
-            const subtitle = document.getElementById('progressSubtitle');
-            const doneMessage = document.getElementById('doneMessage');
-            const closeBtn = document.getElementById('closeProgressBtn');
 
             let cachedAndroid64Url = '';
             let cachedAndroid32Url = '';
             let cachedWindowsUrl = '';
             let pendingPlatform = 'android64';
 
-            // Almacenar el tamaño real del archivo (obtenido de la API)
-            let fileSizeBytes = 0; // se actualizará al obtener los assets
-
-            // Obtener URLs y tamaños desde GitHub
             async function getLatestUrls() {
                 const fallback64 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme64.apk';
                 const fallback32 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme32.apk';
@@ -922,170 +992,49 @@
                     cachedAndroid64Url = apk64 ? apk64.browser_download_url : fallback64;
                     cachedAndroid32Url = apk32 ? apk32.browser_download_url : fallback32;
                     cachedWindowsUrl = rar ? rar.browser_download_url : fallbackWindows;
-                    // Guardar el tamaño del archivo (en bytes)
-                    if (apk64) fileSizeBytes = apk64.size || 0;
                 } catch {
                     cachedAndroid64Url = fallback64;
                     cachedAndroid32Url = fallback32;
                     cachedWindowsUrl = fallbackWindows;
-                    // Fallback: estimar tamaño
-                    fileSizeBytes = 23 * 1024 * 1024; // 23 MB
                 }
             }
             getLatestUrls();
 
-            // ---- Funciones de la interfaz de progreso ----
-            function showProgress(platform) {
+            function showModal(platform) {
                 pendingPlatform = platform || 'android64';
-                // Resetear UI
-                progressFill.style.width = '0%';
-                runner.style.left = '0%';
-                percentText.textContent = '0%';
-                sizeText.textContent = '0 / 0 MB';
-                subtitle.textContent = 'Iniciando descarga...';
-                doneMessage.classList.remove('show');
-                closeBtn.classList.add('hidden');
-                progressOverlay.classList.add('active');
-            }
-
-            function spawnMoneyParticle() {
-                const card = document.querySelector('.progress-card');
-                if (!card) return;
-                const el = document.createElement('div');
-                el.className = 'money-particle';
-                el.textContent = ['💵', '💰', '🪙', '💸', '🏦'][Math.floor(Math.random() * 5)];
-                el.style.left = (10 + Math.random() * 80) + '%';
-                el.style.top = (10 + Math.random() * 60) + '%';
-                el.style.fontSize = (18 + Math.random() * 18) + 'px';
-                card.appendChild(el);
-                setTimeout(() => el.remove(), 1600);
-            }
-
-            function finishProgress() {
-                progressFill.style.width = '100%';
-                runner.style.left = '100%';
-                runner.innerHTML = '🏁💰';
-                percentText.textContent = '100%';
-                subtitle.textContent = '¡Descarga completada!';
-                doneMessage.classList.add('show');
-                closeBtn.classList.remove('hidden');
-                for (let i = 0; i < 12; i++) setTimeout(spawnMoneyParticle, i * 80);
-                setTimeout(() => {
-                    const bigBag = document.createElement('div');
-                    bigBag.textContent = '💰';
-                    bigBag.style.cssText = 'position:absolute; font-size:60px; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; opacity:0.8; animation:floatMoney 2s ease-out forwards; z-index:10;';
-                    const card = document.querySelector('.progress-card');
-                    card.appendChild(bigBag);
-                    setTimeout(() => bigBag.remove(), 2000);
-                }, 300);
-            }
-
-            function closeProgress() {
-                progressOverlay.classList.remove('active');
-                document.querySelectorAll('.money-particle').forEach(el => el.remove());
-                doneMessage.classList.remove('show');
-                if (progressInterval) clearInterval(progressInterval);
-            }
-
-            closeBtn.addEventListener('click', closeProgress);
-
-            // ---- Iniciar descarga directa + progreso realista ----
-            let progressInterval = null;
-
-            function startDownloadWithRealisticProgress(url) {
-                if (!url) {
-                    alert('No se pudo obtener la URL de descarga.');
-                    closeProgress();
-                    return;
-                }
-
-                // Abrir la descarga en una nueva pestaña (o en la misma)
-                window.open(url, '_blank');
-
-                // Usar el tamaño real del archivo (si se obtuvo)
-                let totalBytes = fileSizeBytes > 0 ? fileSizeBytes : 23 * 1024 * 1024; // fallback 23 MB
-                const totalMB = totalBytes / (1024 * 1024);
-
-                // Velocidad de descarga aleatoria entre 0.15 y 0.5 MB/s (realista para Cuba)
-                const speedMBps = 0.15 + Math.random() * 0.35;
-                const totalSeconds = totalMB / speedMBps;
-                const steps = Math.max(60, Math.floor(totalSeconds)); // al menos 60 pasos
-                const stepTime = (totalSeconds / steps) * 1000; // milisegundos por paso
-
-                let currentStep = 0;
-                let downloadedMB = 0;
-
-                subtitle.textContent = `Descargando (~${speedMBps.toFixed(2)} MB/s)...`;
-
-                // Actualizar cada paso
-                progressInterval = setInterval(() => {
-                    currentStep++;
-                    const progress = Math.min(currentStep / steps, 1);
-                    const pct = progress * 100;
-                    const loadedMB = progress * totalMB;
-
-                    progressFill.style.width = pct + '%';
-                    runner.style.left = pct + '%';
-                    percentText.textContent = Math.round(pct) + '%';
-                    sizeText.textContent = `${loadedMB.toFixed(1)} / ${totalMB.toFixed(1)} MB`;
-
-                    if (pct < 30) runner.innerHTML = '🏃‍♂️💰';
-                    else if (pct < 70) runner.innerHTML = '🏃‍♂️💸';
-                    else runner.innerHTML = '🏃‍♂️💎';
-
-                    if (pct > 5 && pct < 100 && Math.random() < 0.2) spawnMoneyParticle();
-
-                    if (pct >= 100) {
-                        clearInterval(progressInterval);
-                        finishProgress();
-                    }
-                }, stepTime);
-
-                // Si la descarga real aún no ha terminado y la simulación llega al 100%,
-                // mostramos el mensaje de éxito y dejamos que el usuario cierre.
-                // En caso de que la descarga falle, el usuario puede cerrar y reintentar.
-            }
-
-            // ---- Manejadores de eventos ----
-            function handleDownloadClick(platform) {
-                if (platform === 'windows') {
-                    const url = cachedWindowsUrl;
-                    if (url) {
-                        showProgress('windows');
-                        startDownloadWithRealisticProgress(url);
-                    } else {
-                        alert('No se pudo obtener la URL de descarga para Windows.');
-                    }
-                    return;
-                }
-                // Android: mostrar modal de advertencia
-                pendingPlatform = platform;
                 modal.classList.add('active');
             }
 
-            continueBtn.addEventListener('click', function() {
-                modal.classList.remove('active');
-                let url = '';
-                if (pendingPlatform === 'android64') url = cachedAndroid64Url;
-                else if (pendingPlatform === 'android32') url = cachedAndroid32Url;
-                if (url) {
-                    showProgress(pendingPlatform);
-                    startDownloadWithRealisticProgress(url);
-                } else {
-                    alert('No se pudo obtener la URL de descarga.');
-                }
-            });
+            function closeModal() { modal.classList.remove('active'); }
 
-            cancelBtn.addEventListener('click', () => modal.classList.remove('active'));
-            modal.addEventListener('click', function(e) { if (e.target === this) modal.classList.remove('active'); });
+            function download(platform) {
+                let url = '';
+                if (platform === 'android64') url = cachedAndroid64Url;
+                else if (platform === 'android32') url = cachedAndroid32Url;
+                else if (platform === 'windows') url = cachedWindowsUrl;
+                if (url) {
+                    window.open(url, '_blank');
+                }
+            }
 
             document.querySelectorAll('.download-trigger').forEach(el => {
                 el.addEventListener('click', function(e) {
                     e.preventDefault();
                     const platform = this.dataset.platform || 'android64';
-                    handleDownloadClick(platform);
+                    if (platform === 'windows') {
+                        download('windows');
+                    } else {
+                        showModal(platform);
+                    }
                 });
             });
+
+            cancelBtn.addEventListener('click', closeModal);
+            continueBtn.addEventListener('click', function() {
+                download(pendingPlatform);
+                closeModal();
+            });
+            modal.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
             // ============================================================
             // 7. HASH
