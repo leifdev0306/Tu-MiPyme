@@ -9,7 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== Mismos estilos que antes (no cambio nada) ===== */
+        /* ============================================================
+           VARIABLES – Fondos unificados con gradientes azules
+           ============================================================ */
         :root {
             --bg-gradient: linear-gradient(145deg, #e8f0fe, #d4e2f7);
             --bg-card: rgba(255, 255, 255, 0.55);
@@ -526,7 +528,6 @@
                 </div>
             </div>
             <div class="hero-mockups">
-                <!-- Mockups igual que antes -->
                 <div class="mockup-phone">
                     <div class="mockup-screen">
                         <div class="mockup-header"><div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div><span class="title">📊 Dashboard</span></div>
@@ -559,7 +560,6 @@
             <h2 class="section-title fade-up">Todo lo que necesitas <span class="accent">para gestionar</span></h2>
             <p class="section-subtitle fade-up">Herramientas diseñadas para que tomes el control total de tu negocio.</p>
             <div class="features-grid">
-                <!-- Igual que antes, no repito todo para no alargar -->
                 <div class="feature-card fade-up"><div class="icon">⚡</div><h3>Ventas ultrarrápidas</h3><p>Interfaz optimizada para ventas en menos de 5 segundos.</p><span class="tag tag-new">Novedad v2.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">💸</div><h3>Historial de transferencias</h3><p>Registra y consulta transferencias bancarias.</p><span class="tag tag-new">Novedad v2.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">🤝</div><h3>Invitar amigos</h3><p>Comparte y gana beneficios.</p><span class="tag tag-new">Novedad v2.2</span></div>
@@ -734,7 +734,7 @@
         </div>
     </div>
 
-    <!-- ===== OVERLAY DE PROGRESO (con animación simulada) ===== -->
+    <!-- ===== OVERLAY DE PROGRESO (con simulación realista) ===== -->
     <div class="progress-overlay" id="progressOverlay">
         <div class="progress-card">
             <div class="title">📦 Descargando Tu MiPyme</div>
@@ -757,7 +757,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT – Descarga directa con animación simulada
+    JAVASCRIPT – Descarga directa + progreso simulado realista
     ============================================================ -->
     <script>
         (function() {
@@ -883,7 +883,7 @@
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
             // ============================================================
-            // 6. DESCARGA DIRECTA CON ANIMACIÓN SIMULADA
+            // 6. DESCARGA DIRECTA + PROGRESO SIMULADO REALISTA
             // ============================================================
             const modal = document.getElementById('downloadModal');
             const cancelBtn = document.getElementById('modalCancel');
@@ -902,9 +902,11 @@
             let cachedAndroid32Url = '';
             let cachedWindowsUrl = '';
             let pendingPlatform = 'android64';
-            let downloadUrl = '';
 
-            // Obtener URLs desde GitHub
+            // Almacenar el tamaño real del archivo (obtenido de la API)
+            let fileSizeBytes = 0; // se actualizará al obtener los assets
+
+            // Obtener URLs y tamaños desde GitHub
             async function getLatestUrls() {
                 const fallback64 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme64.apk';
                 const fallback32 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme32.apk';
@@ -920,10 +922,14 @@
                     cachedAndroid64Url = apk64 ? apk64.browser_download_url : fallback64;
                     cachedAndroid32Url = apk32 ? apk32.browser_download_url : fallback32;
                     cachedWindowsUrl = rar ? rar.browser_download_url : fallbackWindows;
+                    // Guardar el tamaño del archivo (en bytes)
+                    if (apk64) fileSizeBytes = apk64.size || 0;
                 } catch {
                     cachedAndroid64Url = fallback64;
                     cachedAndroid32Url = fallback32;
                     cachedWindowsUrl = fallbackWindows;
+                    // Fallback: estimar tamaño
+                    fileSizeBytes = 23 * 1024 * 1024; // 23 MB
                 }
             }
             getLatestUrls();
@@ -942,24 +948,6 @@
                 progressOverlay.classList.add('active');
             }
 
-            function updateProgressSimulated(percent) {
-                const pct = Math.min(percent, 100);
-                progressFill.style.width = pct + '%';
-                runner.style.left = pct + '%';
-                percentText.textContent = Math.round(pct) + '%';
-
-                // Estimar tamaño (ficticio)
-                const totalMB = 23.5;
-                const loadedMB = (pct / 100) * totalMB;
-                sizeText.textContent = `${loadedMB.toFixed(1)} / ${totalMB.toFixed(1)} MB`;
-
-                if (pct < 30) runner.innerHTML = '🏃‍♂️💰';
-                else if (pct < 70) runner.innerHTML = '🏃‍♂️💸';
-                else runner.innerHTML = '🏃‍♂️💎';
-
-                if (pct > 5 && pct < 100 && Math.random() < 0.2) spawnMoneyParticle();
-            }
-
             function spawnMoneyParticle() {
                 const card = document.querySelector('.progress-card');
                 if (!card) return;
@@ -973,7 +961,7 @@
                 setTimeout(() => el.remove(), 1600);
             }
 
-            function finishProgressSimulated() {
+            function finishProgress() {
                 progressFill.style.width = '100%';
                 runner.style.left = '100%';
                 runner.innerHTML = '🏁💰';
@@ -981,9 +969,7 @@
                 subtitle.textContent = '¡Descarga completada!';
                 doneMessage.classList.add('show');
                 closeBtn.classList.remove('hidden');
-                // Lanzar confeti
                 for (let i = 0; i < 12; i++) setTimeout(spawnMoneyParticle, i * 80);
-                // Bolsa grande
                 setTimeout(() => {
                     const bigBag = document.createElement('div');
                     bigBag.textContent = '💰';
@@ -998,12 +984,15 @@
                 progressOverlay.classList.remove('active');
                 document.querySelectorAll('.money-particle').forEach(el => el.remove());
                 doneMessage.classList.remove('show');
+                if (progressInterval) clearInterval(progressInterval);
             }
 
             closeBtn.addEventListener('click', closeProgress);
 
-            // ---- Iniciar descarga directa + animación simulada ----
-            function startDownloadWithAnimation(url) {
+            // ---- Iniciar descarga directa + progreso realista ----
+            let progressInterval = null;
+
+            function startDownloadWithRealisticProgress(url) {
                 if (!url) {
                     alert('No se pudo obtener la URL de descarga.');
                     closeProgress();
@@ -1013,25 +1002,48 @@
                 // Abrir la descarga en una nueva pestaña (o en la misma)
                 window.open(url, '_blank');
 
-                // Simular progreso durante 4 segundos
-                subtitle.textContent = 'Descargando...';
-                let progress = 0;
-                const totalSteps = 60; // actualizaciones
-                const stepTime = 4000 / totalSteps; // ~67ms por paso
+                // Usar el tamaño real del archivo (si se obtuvo)
+                let totalBytes = fileSizeBytes > 0 ? fileSizeBytes : 23 * 1024 * 1024; // fallback 23 MB
+                const totalMB = totalBytes / (1024 * 1024);
 
-                const interval = setInterval(() => {
-                    progress += 1;
-                    const percent = (progress / totalSteps) * 100;
-                    updateProgressSimulated(percent);
+                // Velocidad de descarga aleatoria entre 0.15 y 0.5 MB/s (realista para Cuba)
+                const speedMBps = 0.15 + Math.random() * 0.35;
+                const totalSeconds = totalMB / speedMBps;
+                const steps = Math.max(60, Math.floor(totalSeconds)); // al menos 60 pasos
+                const stepTime = (totalSeconds / steps) * 1000; // milisegundos por paso
 
-                    if (progress >= totalSteps) {
-                        clearInterval(interval);
-                        finishProgressSimulated();
+                let currentStep = 0;
+                let downloadedMB = 0;
+
+                subtitle.textContent = `Descargando (~${speedMBps.toFixed(2)} MB/s)...`;
+
+                // Actualizar cada paso
+                progressInterval = setInterval(() => {
+                    currentStep++;
+                    const progress = Math.min(currentStep / steps, 1);
+                    const pct = progress * 100;
+                    const loadedMB = progress * totalMB;
+
+                    progressFill.style.width = pct + '%';
+                    runner.style.left = pct + '%';
+                    percentText.textContent = Math.round(pct) + '%';
+                    sizeText.textContent = `${loadedMB.toFixed(1)} / ${totalMB.toFixed(1)} MB`;
+
+                    if (pct < 30) runner.innerHTML = '🏃‍♂️💰';
+                    else if (pct < 70) runner.innerHTML = '🏃‍♂️💸';
+                    else runner.innerHTML = '🏃‍♂️💎';
+
+                    if (pct > 5 && pct < 100 && Math.random() < 0.2) spawnMoneyParticle();
+
+                    if (pct >= 100) {
+                        clearInterval(progressInterval);
+                        finishProgress();
                     }
                 }, stepTime);
 
-                // Si la descarga tarda más de 4 segundos, seguimos mostrando el 100%
-                // pero la animación ya terminó.
+                // Si la descarga real aún no ha terminado y la simulación llega al 100%,
+                // mostramos el mensaje de éxito y dejamos que el usuario cierre.
+                // En caso de que la descarga falle, el usuario puede cerrar y reintentar.
             }
 
             // ---- Manejadores de eventos ----
@@ -1040,7 +1052,7 @@
                     const url = cachedWindowsUrl;
                     if (url) {
                         showProgress('windows');
-                        startDownloadWithAnimation(url);
+                        startDownloadWithRealisticProgress(url);
                     } else {
                         alert('No se pudo obtener la URL de descarga para Windows.');
                     }
@@ -1058,7 +1070,7 @@
                 else if (pendingPlatform === 'android32') url = cachedAndroid32Url;
                 if (url) {
                     showProgress(pendingPlatform);
-                    startDownloadWithAnimation(url);
+                    startDownloadWithRealisticProgress(url);
                 } else {
                     alert('No se pudo obtener la URL de descarga.');
                 }
