@@ -9,7 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== Variables y estilos base (igual que antes) ===== */
+        /* ============================================================
+           VARIABLES – Fondos unificados con gradientes azules
+           ============================================================ */
         :root {
             --bg-gradient: linear-gradient(145deg, #e8f0fe, #d4e2f7);
             --bg-card: rgba(255, 255, 255, 0.55);
@@ -30,6 +32,8 @@
             --border-glow: rgba(26, 92, 255, 0.2);
             --particle-opacity: 0.25;
         }
+
+        /* Modo oscuro – gradiente azul profundo y elegante */
         [data-theme="dark"] {
             --bg-gradient: linear-gradient(145deg, #0a1a3a, #0d2147, #0a1a3a);
             --bg-card: rgba(255, 255, 255, 0.06);
@@ -45,6 +49,10 @@
             --border-glow: rgba(74, 139, 255, 0.3);
             --particle-opacity: 0.2;
         }
+
+        /* ============================================================
+           RESET Y BASE
+           ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
         body {
@@ -401,6 +409,7 @@
             font-size: 14px;
             color: var(--text-muted);
             margin-bottom: 24px;
+            min-height: 20px;
         }
         /* Barra de progreso */
         .progress-track {
@@ -489,6 +498,18 @@
             font-size: 16px;
         }
         .done-message.show { display: block; }
+        .error-message {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(239,68,68,0.12);
+            border-radius: var(--radius);
+            border: 1px solid rgba(239,68,68,0.2);
+            color: #ef4444;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .error-message.show { display: block; }
         .btn-close-progress {
             margin-top: 20px;
             padding: 10px 32px;
@@ -965,6 +986,9 @@
             <div class="done-message" id="doneMessage">
                 ✅ ¡Descarga completada! El archivo se está guardando...
             </div>
+            <div class="error-message" id="errorMessage">
+                ❌ Error en la descarga. Por favor, revisa tu conexión.
+            </div>
 
             <button class="btn-close-progress hidden" id="closeProgressBtn">Cerrar</button>
         </div>
@@ -978,7 +1002,7 @@
             'use strict';
 
             // ============================================================
-            // 1. PARTÍCULAS DE FONDO (igual que antes)
+            // 1. PARTÍCULAS DE FONDO
             // ============================================================
             const canvas = document.getElementById('money-canvas');
             const ctx = canvas.getContext('2d');
@@ -1097,7 +1121,7 @@
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
             // ============================================================
-            // 6. MODAL DE ADVERTENCIA (Android) + PROGRESO DE DESCARGA
+            // 6. MODAL + DESCARGA CON PROGRESO (corregido)
             // ============================================================
             const modal = document.getElementById('downloadModal');
             const cancelBtn = document.getElementById('modalCancel');
@@ -1111,19 +1135,23 @@
             const sizeText = document.getElementById('sizeText');
             const subtitle = document.getElementById('progressSubtitle');
             const doneMessage = document.getElementById('doneMessage');
+            const errorMessage = document.getElementById('errorMessage');
             const closeBtn = document.getElementById('closeProgressBtn');
 
+            // URLs (se obtienen de la API de GitHub o fallback)
             let cachedAndroid64Url = '';
             let cachedAndroid32Url = '';
             let cachedWindowsUrl = '';
 
             async function getLatestUrls() {
+                // Fallback directo a las URLs de la release (deben existir)
                 const fallback64 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme64.apk';
                 const fallback32 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme32.apk';
                 const fallbackWindows = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar';
+
                 try {
                     const res = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases/latest');
-                    if (!res.ok) throw new Error();
+                    if (!res.ok) throw new Error('No se pudo obtener la información de la release');
                     const data = await res.json();
                     const assets = data.assets;
                     const apk64 = assets.find(a => a.name === 'TuMiPyme64.apk');
@@ -1132,7 +1160,8 @@
                     cachedAndroid64Url = apk64 ? apk64.browser_download_url : fallback64;
                     cachedAndroid32Url = apk32 ? apk32.browser_download_url : fallback32;
                     cachedWindowsUrl = rar ? rar.browser_download_url : fallbackWindows;
-                } catch {
+                } catch (e) {
+                    console.warn('Error al obtener assets de GitHub, usando fallback:', e);
                     cachedAndroid64Url = fallback64;
                     cachedAndroid32Url = fallback32;
                     cachedWindowsUrl = fallbackWindows;
@@ -1152,6 +1181,7 @@
                 sizeText.textContent = '0 / 0 MB';
                 subtitle.textContent = 'Iniciando descarga...';
                 doneMessage.classList.remove('show');
+                errorMessage.classList.remove('show');
                 closeBtn.classList.add('hidden');
                 progressOverlay.classList.add('active');
             }
@@ -1198,7 +1228,7 @@
             function finishProgress() {
                 progressFill.style.width = '100%';
                 runner.style.left = '100%';
-                runner.innerHTML = '🏁💰';
+                runner.innerHTML = '🏁💰';  // Llega a la meta con la bolsa
                 percentText.textContent = '100%';
                 subtitle.textContent = '¡Descarga completada!';
                 doneMessage.classList.add('show');
@@ -1207,76 +1237,98 @@
                 for (let i = 0; i < 12; i++) {
                     setTimeout(spawnMoneyParticle, i * 80);
                 }
+                // También mostrar bolsa grande al final
+                setTimeout(() => {
+                    const bigBag = document.createElement('div');
+                    bigBag.textContent = '💰';
+                    bigBag.style.cssText = 'position:absolute; font-size:60px; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; opacity:0.8; animation:floatMoney 2s ease-out forwards; z-index:10;';
+                    const card = document.querySelector('.progress-card');
+                    card.appendChild(bigBag);
+                    setTimeout(() => bigBag.remove(), 2000);
+                }, 300);
+            }
+
+            function showError(message) {
+                subtitle.textContent = '❌ Error';
+                errorMessage.textContent = message || '❌ Error en la descarga. Por favor, revisa tu conexión.';
+                errorMessage.classList.add('show');
+                closeBtn.classList.remove('hidden');
+                // Limpiar partículas
+                document.querySelectorAll('.money-particle').forEach(el => el.remove());
             }
 
             function closeProgress() {
                 progressOverlay.classList.remove('active');
-                // Limpiar partículas sobrantes
                 document.querySelectorAll('.money-particle').forEach(el => el.remove());
+                // Limpiar mensajes de error
+                errorMessage.classList.remove('show');
+                doneMessage.classList.remove('show');
             }
 
             closeBtn.addEventListener('click', closeProgress);
 
-            // ---- Descarga con fetch ----
-            async function startDownload(url, platform) {
+            // ---- Descarga usando XMLHttpRequest (más fiable) ----
+            function startDownload(url, platform) {
                 if (!url) {
-                    alert('No se pudo obtener la URL de descarga.');
-                    closeProgress();
+                    showError('No se pudo obtener la URL de descarga.');
                     return;
                 }
-                try {
-                    const response = await fetch(url);
-                    if (!response.ok) throw new Error('Error en la descarga');
-                    const contentLength = response.headers.get('content-length');
-                    const total = contentLength ? parseInt(contentLength, 10) : 0;
-                    const reader = response.body.getReader();
-                    let loaded = 0;
-                    const chunks = [];
 
-                    subtitle.textContent = 'Descargando...';
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.responseType = 'blob';
 
-                    while (true) {
-                        const { done, value } = await reader.read();
-                        if (done) break;
-                        chunks.push(value);
-                        loaded += value.length;
-                        if (total > 0) {
-                            updateProgress(loaded, total);
-                        } else {
-                            // Si no hay content-length, mostramos solo el tamaño descargado
-                            const loadedMB = (loaded / (1024 * 1024)).toFixed(1);
-                            percentText.textContent = '...';
-                            sizeText.textContent = `${loadedMB} MB descargados`;
-                            // Movemos el corredor de forma aleatoria (solo estético)
-                            const fakePct = Math.min((loaded / (5 * 1024 * 1024)) * 100, 95);
-                            progressFill.style.width = fakePct + '%';
-                            runner.style.left = fakePct + '%';
-                        }
+                let loaded = 0;
+                let total = 0;
+
+                xhr.onprogress = function(event) {
+                    if (event.lengthComputable) {
+                        total = event.total;
+                        loaded = event.loaded;
+                        updateProgress(loaded, total);
+                    } else {
+                        // Si no se puede calcular el total, usamos una estimación
+                        // Mostramos solo el tamaño descargado
+                        const loadedMB = (event.loaded / (1024 * 1024)).toFixed(1);
+                        percentText.textContent = '...';
+                        sizeText.textContent = `${loadedMB} MB descargados`;
+                        // Movemos el corredor de forma estimada (hasta 95%)
+                        const fakePct = Math.min((event.loaded / (5 * 1024 * 1024)) * 100, 95);
+                        progressFill.style.width = fakePct + '%';
+                        runner.style.left = fakePct + '%';
                     }
+                };
 
-                    // Unir los chunks en un Blob
-                    const blob = new Blob(chunks);
-                    const downloadUrl = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = downloadUrl;
-                    // Extraer nombre del archivo de la URL original
-                    const fileName = url.split('/').pop() || 'TuMiPyme.apk';
-                    a.download = fileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    setTimeout(() => URL.revokeObjectURL(downloadUrl), 5000);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // Descarga completada
+                        const blob = xhr.response;
+                        const downloadUrl = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = downloadUrl;
+                        // Extraer nombre del archivo de la URL
+                        const fileName = url.split('/').pop() || 'TuMiPyme.apk';
+                        a.download = fileName;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        setTimeout(() => URL.revokeObjectURL(downloadUrl), 5000);
 
-                    finishProgress();
-                } catch (error) {
-                    console.error('Error en la descarga:', error);
-                    subtitle.textContent = '❌ Error al descargar. Intenta de nuevo.';
-                    percentText.textContent = 'Error';
-                    doneMessage.textContent = '❌ Error en la descarga. Por favor, revisa tu conexión.';
-                    doneMessage.style.color = '#ef4444';
-                    doneMessage.classList.add('show');
-                    closeBtn.classList.remove('hidden');
-                }
+                        finishProgress();
+                    } else {
+                        showError(`Error HTTP ${xhr.status}: ${xhr.statusText}`);
+                    }
+                };
+
+                xhr.onerror = function() {
+                    showError('Error de red. Verifica tu conexión a Internet.');
+                };
+
+                xhr.onabort = function() {
+                    showError('Descarga cancelada.');
+                };
+
+                xhr.send();
             }
 
             // ---- Manejadores de eventos ----
