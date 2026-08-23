@@ -411,7 +411,6 @@
             margin-bottom: 24px;
             min-height: 20px;
         }
-        /* Barra de progreso */
         .progress-track {
             position: relative;
             width: 100%;
@@ -432,7 +431,6 @@
             box-shadow: 0 0 20px var(--border-glow);
             position: relative;
         }
-        /* Corredor con bolsa de dinero */
         .runner {
             position: absolute;
             top: 50%;
@@ -454,7 +452,6 @@
             0% { transform: translateY(0px); }
             100% { transform: translateY(-6px); }
         }
-        /* Partículas de dinero durante la descarga */
         .money-particle {
             position: absolute;
             font-size: 20px;
@@ -468,7 +465,6 @@
             20% { opacity: 1; }
             100% { opacity: 0; transform: translateY(-80px) scale(1.2) rotate(20deg); }
         }
-        /* Texto de progreso */
         .progress-stats {
             display: flex;
             justify-content: space-between;
@@ -485,7 +481,6 @@
         .progress-stats .size {
             color: var(--text-muted);
         }
-        /* Mensaje final */
         .done-message {
             display: none;
             margin-top: 12px;
@@ -532,7 +527,7 @@
         .btn-close-progress.hidden { display: none; }
 
         /* ============================================================
-           RESPONSIVE (igual que antes)
+           RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 50px; }
@@ -991,18 +986,19 @@
             </div>
 
             <button class="btn-close-progress hidden" id="closeProgressBtn">Cerrar</button>
+            <button class="btn-close-progress hidden" id="directDownloadBtn" style="margin-top:12px; background:var(--accent-gradient); color:#fff;">⬇️ Descarga directa</button>
         </div>
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT
+    JAVASCRIPT – Descarga con progreso + fallback directo
     ============================================================ -->
     <script>
         (function() {
             'use strict';
 
             // ============================================================
-            // 1. PARTÍCULAS DE FONDO
+            // 1. PARTÍCULAS DE FONDO (igual que antes)
             // ============================================================
             const canvas = document.getElementById('money-canvas');
             const ctx = canvas.getContext('2d');
@@ -1121,7 +1117,7 @@
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
             // ============================================================
-            // 6. MODAL + DESCARGA CON PROGRESO (corregido)
+            // 6. DESCARGA CON PROGRESO + FALLBACK DIRECTO
             // ============================================================
             const modal = document.getElementById('downloadModal');
             const cancelBtn = document.getElementById('modalCancel');
@@ -1137,21 +1133,21 @@
             const doneMessage = document.getElementById('doneMessage');
             const errorMessage = document.getElementById('errorMessage');
             const closeBtn = document.getElementById('closeProgressBtn');
+            const directBtn = document.getElementById('directDownloadBtn');
 
-            // URLs (se obtienen de la API de GitHub o fallback)
             let cachedAndroid64Url = '';
             let cachedAndroid32Url = '';
             let cachedWindowsUrl = '';
+            let pendingPlatform = 'android64';
+            let currentDirectUrl = '';
 
             async function getLatestUrls() {
-                // Fallback directo a las URLs de la release (deben existir)
                 const fallback64 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme64.apk';
                 const fallback32 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme32.apk';
                 const fallbackWindows = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar';
-
                 try {
                     const res = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases/latest');
-                    if (!res.ok) throw new Error('No se pudo obtener la información de la release');
+                    if (!res.ok) throw new Error();
                     const data = await res.json();
                     const assets = data.assets;
                     const apk64 = assets.find(a => a.name === 'TuMiPyme64.apk');
@@ -1160,8 +1156,7 @@
                     cachedAndroid64Url = apk64 ? apk64.browser_download_url : fallback64;
                     cachedAndroid32Url = apk32 ? apk32.browser_download_url : fallback32;
                     cachedWindowsUrl = rar ? rar.browser_download_url : fallbackWindows;
-                } catch (e) {
-                    console.warn('Error al obtener assets de GitHub, usando fallback:', e);
+                } catch {
                     cachedAndroid64Url = fallback64;
                     cachedAndroid32Url = fallback32;
                     cachedWindowsUrl = fallbackWindows;
@@ -1169,9 +1164,7 @@
             }
             getLatestUrls();
 
-            let pendingPlatform = 'android64';
-
-            // ---- Funciones de progreso ----
+            // ---- Funciones de la interfaz de progreso ----
             function showProgress(platform) {
                 pendingPlatform = platform || 'android64';
                 // Resetear UI
@@ -1183,6 +1176,7 @@
                 doneMessage.classList.remove('show');
                 errorMessage.classList.remove('show');
                 closeBtn.classList.add('hidden');
+                directBtn.classList.add('hidden');
                 progressOverlay.classList.add('active');
             }
 
@@ -1197,19 +1191,11 @@
                 const totalMB = (total / (1024 * 1024)).toFixed(1);
                 sizeText.textContent = `${loadedMB} / ${totalMB} MB`;
 
-                // Cambiar el emoji del corredor según el progreso
-                if (pct < 30) {
-                    runner.innerHTML = '🏃‍♂️💰';
-                } else if (pct < 70) {
-                    runner.innerHTML = '🏃‍♂️💸';
-                } else {
-                    runner.innerHTML = '🏃‍♂️💎';
-                }
+                if (pct < 30) runner.innerHTML = '🏃‍♂️💰';
+                else if (pct < 70) runner.innerHTML = '🏃‍♂️💸';
+                else runner.innerHTML = '🏃‍♂️💎';
 
-                // Partículas de dinero (solo si el progreso está en marcha)
-                if (pct > 5 && pct < 100 && Math.random() < 0.15) {
-                    spawnMoneyParticle();
-                }
+                if (pct > 5 && pct < 100 && Math.random() < 0.15) spawnMoneyParticle();
             }
 
             function spawnMoneyParticle() {
@@ -1228,16 +1214,13 @@
             function finishProgress() {
                 progressFill.style.width = '100%';
                 runner.style.left = '100%';
-                runner.innerHTML = '🏁💰';  // Llega a la meta con la bolsa
+                runner.innerHTML = '🏁💰';
                 percentText.textContent = '100%';
                 subtitle.textContent = '¡Descarga completada!';
                 doneMessage.classList.add('show');
                 closeBtn.classList.remove('hidden');
-                // Lanzar confeti de dinero
-                for (let i = 0; i < 12; i++) {
-                    setTimeout(spawnMoneyParticle, i * 80);
-                }
-                // También mostrar bolsa grande al final
+                for (let i = 0; i < 12; i++) setTimeout(spawnMoneyParticle, i * 80);
+                // Bolsa grande al final
                 setTimeout(() => {
                     const bigBag = document.createElement('div');
                     bigBag.textContent = '💰';
@@ -1253,26 +1236,41 @@
                 errorMessage.textContent = message || '❌ Error en la descarga. Por favor, revisa tu conexión.';
                 errorMessage.classList.add('show');
                 closeBtn.classList.remove('hidden');
-                // Limpiar partículas
+                directBtn.classList.remove('hidden');
+                // Mostrar botón de descarga directa
+                directBtn.style.display = 'inline-block';
                 document.querySelectorAll('.money-particle').forEach(el => el.remove());
             }
 
             function closeProgress() {
                 progressOverlay.classList.remove('active');
                 document.querySelectorAll('.money-particle').forEach(el => el.remove());
-                // Limpiar mensajes de error
                 errorMessage.classList.remove('show');
                 doneMessage.classList.remove('show');
+                directBtn.classList.add('hidden');
             }
 
             closeBtn.addEventListener('click', closeProgress);
 
-            // ---- Descarga usando XMLHttpRequest (más fiable) ----
+            // ---- Descarga directa (fallback) ----
+            function directDownload(url) {
+                if (url) window.location.href = url;
+            }
+
+            directBtn.addEventListener('click', function() {
+                if (currentDirectUrl) {
+                    directDownload(currentDirectUrl);
+                    closeProgress();
+                }
+            });
+
+            // ---- Descarga con XMLHttpRequest + fallback ----
             function startDownload(url, platform) {
                 if (!url) {
                     showError('No se pudo obtener la URL de descarga.');
                     return;
                 }
+                currentDirectUrl = url; // Guardar para el fallback
 
                 const xhr = new XMLHttpRequest();
                 xhr.open('GET', url, true);
@@ -1280,6 +1278,7 @@
 
                 let loaded = 0;
                 let total = 0;
+                let errorOccurred = false;
 
                 xhr.onprogress = function(event) {
                     if (event.lengthComputable) {
@@ -1287,12 +1286,9 @@
                         loaded = event.loaded;
                         updateProgress(loaded, total);
                     } else {
-                        // Si no se puede calcular el total, usamos una estimación
-                        // Mostramos solo el tamaño descargado
                         const loadedMB = (event.loaded / (1024 * 1024)).toFixed(1);
                         percentText.textContent = '...';
                         sizeText.textContent = `${loadedMB} MB descargados`;
-                        // Movemos el corredor de forma estimada (hasta 95%)
                         const fakePct = Math.min((event.loaded / (5 * 1024 * 1024)) * 100, 95);
                         progressFill.style.width = fakePct + '%';
                         runner.style.left = fakePct + '%';
@@ -1301,31 +1297,40 @@
 
                 xhr.onload = function() {
                     if (xhr.status === 200) {
-                        // Descarga completada
+                        // Éxito: guardar el blob
                         const blob = xhr.response;
                         const downloadUrl = URL.createObjectURL(blob);
                         const a = document.createElement('a');
                         a.href = downloadUrl;
-                        // Extraer nombre del archivo de la URL
                         const fileName = url.split('/').pop() || 'TuMiPyme.apk';
                         a.download = fileName;
                         document.body.appendChild(a);
                         a.click();
                         document.body.removeChild(a);
                         setTimeout(() => URL.revokeObjectURL(downloadUrl), 5000);
-
                         finishProgress();
                     } else {
-                        showError(`Error HTTP ${xhr.status}: ${xhr.statusText}`);
+                        // Fallo HTTP: usar descarga directa
+                        showError(`Error HTTP ${xhr.status}. Usando descarga directa...`);
+                        directDownload(url);
                     }
                 };
 
                 xhr.onerror = function() {
-                    showError('Error de red. Verifica tu conexión a Internet.');
+                    // Error de red: usar descarga directa
+                    showError('Error de red. Usando descarga directa...');
+                    directDownload(url);
                 };
 
                 xhr.onabort = function() {
                     showError('Descarga cancelada.');
+                };
+
+                // Timeout (30 segundos) → fallback a directa
+                xhr.timeout = 30000;
+                xhr.ontimeout = function() {
+                    showError('Tiempo de espera agotado. Usando descarga directa...');
+                    directDownload(url);
                 };
 
                 xhr.send();
@@ -1333,7 +1338,6 @@
 
             // ---- Manejadores de eventos ----
             function handleDownloadClick(platform) {
-                // Si es Windows, iniciar directamente con el progreso
                 if (platform === 'windows') {
                     const url = cachedWindowsUrl;
                     if (url) {
@@ -1344,13 +1348,11 @@
                     }
                     return;
                 }
-
-                // Para Android, mostrar el modal de advertencia primero
+                // Android: mostrar modal de advertencia
                 pendingPlatform = platform;
                 modal.classList.add('active');
             }
 
-            // Continuar desde el modal (Android)
             continueBtn.addEventListener('click', function() {
                 modal.classList.remove('active');
                 let url = '';
@@ -1367,7 +1369,6 @@
             cancelBtn.addEventListener('click', () => modal.classList.remove('active'));
             modal.addEventListener('click', function(e) { if (e.target === this) modal.classList.remove('active'); });
 
-            // Asignar eventos a todos los botones .download-trigger
             document.querySelectorAll('.download-trigger').forEach(el => {
                 el.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1387,7 +1388,6 @@
                     if (details) details.open = true;
                 }
             }
-
         })();
     </script>
 </body>
