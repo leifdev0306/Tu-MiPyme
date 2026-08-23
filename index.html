@@ -68,7 +68,7 @@
         a { color: inherit; text-decoration: none; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
 
-        /* ===== Partículas de fondo ===== */
+        /* ===== Partículas de fondo (reducidas) ===== */
         #money-canvas {
             position: fixed;
             top: 0;
@@ -147,106 +147,8 @@
         .hero-actions .primary-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
         /* ============================================================
-           CONTENEDOR DE ANIMACIÓN + BOTÓN (arriba la pista, abajo el botón)
+           BOTONES (sin animación adicional)
            ============================================================ */
-        .btn-with-runner {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            width: fit-content;
-            max-width: 100%;
-        }
-        .runner-track {
-            position: relative;
-            width: 100%;
-            min-width: 280px;
-            height: 32px;
-            background: var(--bg-card);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border-glow);
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.06), 0 0 20px var(--border-glow);
-            backdrop-filter: blur(4px);
-        }
-        .runner-track .ground {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 3px;
-        }
-        .runner-track .runner {
-            position: absolute;
-            bottom: 2px;
-            left: 100%;
-            font-size: 26px;
-            animation: runRightToLeft 8s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: 2;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-            will-change: transform;
-        }
-        .runner-track .money-bag {
-            position: absolute;
-            bottom: 2px;
-            left: 2%;
-            font-size: 22px;
-            opacity: 0;
-            animation: bagAppearLeft 8s infinite;
-            z-index: 3;
-            filter: drop-shadow(0 0 8px gold);
-        }
-        .runner-track .finish-flag {
-            position: absolute;
-            bottom: 4px;
-            left: 0%;
-            font-size: 18px;
-            opacity: 0;
-            animation: flagAppearLeft 8s infinite;
-            z-index: 1;
-        }
-        .runner-track .money-particle {
-            position: absolute;
-            top: -6px;
-            font-size: 16px;
-            animation: fall 2s infinite;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .runner-track .money-particle:nth-child(5) { left: 8%; animation-delay: 0.2s; }
-        .runner-track .money-particle:nth-child(6) { left: 25%; animation-delay: 1.4s; font-size: 20px; }
-        .runner-track .money-particle:nth-child(7) { left: 45%; animation-delay: 0.8s; }
-        .runner-track .money-particle:nth-child(8) { left: 65%; animation-delay: 1.9s; font-size: 22px; }
-        .runner-track .money-particle:nth-child(9) { left: 85%; animation-delay: 0.5s; }
-
-        @keyframes runRightToLeft {
-            0%   { left: 100%; transform: scaleX(1); }
-            80%  { left: 20%; transform: scaleX(1); }
-            85%  { left: 15%; transform: scaleX(1); }
-            90%  { left: 10%; transform: scaleX(1); }
-            95%  { left: 5%; transform: scaleX(1); }
-            100% { left: 0%; transform: scaleX(1); }
-        }
-        @keyframes bagAppearLeft {
-            0%, 85% { opacity: 0; transform: scale(0.5); }
-            90% { opacity: 1; transform: scale(1.2); }
-            95% { opacity: 1; transform: scale(1); }
-            100% { opacity: 1; }
-        }
-        @keyframes flagAppearLeft {
-            0%, 88% { opacity: 0; }
-            92% { opacity: 1; }
-            100% { opacity: 1; }
-        }
-        @keyframes fall {
-            0%   { opacity: 1; top: -6px; transform: rotate(0deg) scale(1); }
-            100% { opacity: 0; top: 100%; transform: rotate(360deg) scale(0.6); }
-        }
-
-        /* Estilos del botón (se mantienen) */
         .btn-android-primary, .btn-cta-android-primary {
             display: inline-flex;
             align-items: center;
@@ -262,15 +164,12 @@
             color: #fff;
             box-shadow: 0 8px 32px rgba(26,92,255,0.45);
             letter-spacing: 0.3px;
-            position: relative;
-            z-index: 5;
-            width: 100%;
-            justify-content: center;
         }
         .btn-android-primary:hover, .btn-cta-android-primary:hover {
             transform: translateY(-4px) scale(1.02);
             box-shadow: 0 12px 48px rgba(26,92,255,0.6);
         }
+
         .btn-windows {
             display: inline-flex;
             align-items: center;
@@ -293,6 +192,7 @@
             transform: translateY(-4px);
             box-shadow: 0 8px 32px var(--border-glow);
         }
+
         .btn-secondary {
             display: inline-flex;
             align-items: center;
@@ -503,7 +403,7 @@
         .modal-actions .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,92,255,0.4); }
 
         /* ============================================================
-           RESPONSIVE (igual que antes)
+           RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 50px; }
@@ -522,7 +422,6 @@
             .modal { padding: 32px 20px; }
             .modal-actions { flex-direction: column; }
             .theme-toggle { bottom: 16px; right: 16px; width: 44px; height: 44px; font-size: 20px; }
-            .runner-track { min-width: 200px; }
         }
         @media (max-width: 600px) {
             .hero { padding: 120px 0 80px; }
@@ -542,11 +441,6 @@
             .mockup-desktop { width: 210px; }
             .hero-mockups { gap: 16px; }
             .cta-actions .primary-group { flex-direction: column; align-items: center; }
-            .runner-track { min-width: 160px; height: 28px; }
-            .runner-track .runner { font-size: 22px; }
-            .runner-track .money-bag { font-size: 18px; }
-            .runner-track .finish-flag { font-size: 16px; }
-            .runner-track .money-particle { font-size: 14px; }
         }
         @media (min-width: 1025px) {
             .hero h1 { font-size: 64px; }
@@ -591,24 +485,9 @@
                 <p>Administra ventas, inventario, clientes y finanzas en una sola plataforma. Offline-first, sincronización en la nube y diseño de élite.</p>
                 <div class="hero-actions">
                     <div class="primary-group">
-                        <!-- Contenedor: pista arriba, botón abajo -->
-                        <div class="btn-with-runner">
-                            <div class="runner-track">
-                                <div class="ground"></div>
-                                <div class="runner">🏃‍♂️</div>
-                                <div class="money-bag">💰</div>
-                                <div class="finish-flag">🏁</div>
-                                <div class="money-particle">💵</div>
-                                <div class="money-particle">💸</div>
-                                <div class="money-particle">🪙</div>
-                                <div class="money-particle">💵</div>
-                                <div class="money-particle">💰</div>
-                            </div>
-                            <button class="btn-android-primary download-trigger" data-platform="android64">
-                                📱 Descargar para Android (recomendado)
-                            </button>
-                        </div>
-
+                        <button class="btn-android-primary download-trigger" data-platform="android64">
+                            📱 Descargar para Android (recomendado)
+                        </button>
                         <button class="btn-windows download-trigger" data-platform="windows">
                             💻 Windows
                         </button>
@@ -782,23 +661,9 @@
             <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas.<br /><span style="font-size:14px; opacity:0.6;">Siempre descargarás la última versión disponible.</span></p>
             <div class="cta-actions">
                 <div class="primary-group">
-                    <!-- Contenedor con pista arriba y botón abajo en CTA -->
-                    <div class="btn-with-runner">
-                        <div class="runner-track">
-                            <div class="ground"></div>
-                            <div class="runner">🏃‍♂️</div>
-                            <div class="money-bag">💰</div>
-                            <div class="finish-flag">🏁</div>
-                            <div class="money-particle">💵</div>
-                            <div class="money-particle">💸</div>
-                            <div class="money-particle">🪙</div>
-                            <div class="money-particle">💵</div>
-                            <div class="money-particle">💰</div>
-                        </div>
-                        <button class="btn-cta-android-primary download-trigger" data-platform="android64">
-                            📱 Descargar para Android (recomendado)
-                        </button>
-                    </div>
+                    <button class="btn-cta-android-primary download-trigger" data-platform="android64">
+                        📱 Descargar para Android (recomendado)
+                    </button>
                     <button class="btn-cta-windows download-trigger" data-platform="windows">
                         💻 Windows (RAR)
                     </button>
@@ -847,20 +712,20 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT – Sencillo: modal para Android, descarga directa para Windows
+    JAVASCRIPT – Partículas reducidas y modal para descargas
     ============================================================ -->
     <script>
         (function() {
             'use strict';
 
             // ============================================================
-            // 1. PARTÍCULAS DE FONDO (igual que antes)
+            // 1. PARTÍCULAS DE FONDO (reducidas a 15)
             // ============================================================
             const canvas = document.getElementById('money-canvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
-            const NUM_PARTICLES = 45;
+            const NUM_PARTICLES = 15; // <-- Reducido de 45 a 15
             const symbols = ['💵', '💰', '🪙', '💸', '🏦', '📈', '$', '€', '£', '¥'];
 
             function resize() {
@@ -905,11 +770,16 @@
                     ctx.restore();
                 }
             }
-            for (let i = 0; i < NUM_PARTICLES; i++) particles.push(new Particle());
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particles.push(new Particle());
+            }
 
             function drawParticles() {
                 ctx.clearRect(0, 0, width, height);
-                particles.forEach(p => { p.update(); p.draw(); });
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
                 requestAnimationFrame(drawParticles);
             }
             drawParticles();
@@ -932,16 +802,23 @@
                 themeToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
                 localStorage.setItem('theme', theme);
             }
+
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) setTheme(savedTheme);
-            else setTheme(getPreferredTheme());
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                setTheme(getPreferredTheme());
+            }
 
             themeToggle.addEventListener('click', () => {
                 const current = document.documentElement.getAttribute('data-theme');
                 setTheme(current === 'dark' ? 'light' : 'dark');
             });
+
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                if (!localStorage.getItem('theme')) setTheme(e.matches ? 'dark' : 'light');
+                if (!localStorage.getItem('theme')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
             });
 
             // ============================================================
