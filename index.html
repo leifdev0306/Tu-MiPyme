@@ -375,29 +375,81 @@
         footer .footer-links a { color: var(--text-muted); transition: color 0.3s; font-size: 0.85rem; }
         footer .footer-links a:hover { color: var(--accent); }
 
-        /* ===== MODAL DE ADVERTENCIA (Android) ===== */
+        /* ============================================================
+           MODAL DE ADVERTENCIA – VERSIÓN MEJORADA (scrollable)
+           ============================================================ */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
             z-index: 2000; display: none; align-items: center; justify-content: center;
-            padding: 24px;
+            padding: 20px;
         }
         .modal-overlay.active { display: flex; }
         .modal {
             background: var(--bg-card); backdrop-filter: blur(20px);
-            max-width: 480px; width: 100%; border-radius: var(--radius-xl);
-            padding: 44px 36px; box-shadow: var(--shadow-lg);
-            animation: fadeUp 0.4s ease; border: 1px solid var(--border-glow);
+            max-width: 440px; width: 100%; 
+            border-radius: var(--radius-xl);
+            padding: 28px 28px 20px;
+            box-shadow: var(--shadow-lg);
+            animation: fadeUp 0.4s ease; 
+            border: 1px solid var(--border-glow);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
         }
-        .modal .icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
-        .modal h3 { font-size: 22px; font-weight: 700; text-align: center; color: var(--text-primary); margin-bottom: 12px; }
-        .modal p { font-size: 16px; color: var(--text-secondary); text-align: center; line-height: 1.7; }
-        .modal .highlight { background: var(--accent-light); padding: 16px 20px; border-radius: var(--radius); border-left: 4px solid var(--accent); margin: 20px 0 16px; font-size: 14px; color: var(--text-secondary); }
+        .modal .modal-scroll {
+            overflow-y: auto;
+            flex: 1;
+            padding-right: 4px;
+        }
+        .modal .modal-scroll::-webkit-scrollbar { width: 4px; }
+        .modal .modal-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+        .modal .icon { font-size: 40px; text-align: center; margin-bottom: 8px; }
+        .modal h3 { font-size: 20px; font-weight: 700; text-align: center; color: var(--text-primary); margin-bottom: 8px; }
+        .modal p { font-size: 15px; color: var(--text-secondary); text-align: center; line-height: 1.6; margin-bottom: 12px; }
+        .modal .highlight {
+            background: var(--accent-light); 
+            padding: 14px 16px; 
+            border-radius: var(--radius); 
+            border-left: 4px solid var(--accent); 
+            margin: 12px 0 10px; 
+            font-size: 14px; 
+            color: var(--text-secondary);
+        }
         .modal .highlight strong { color: var(--text-primary); }
-        .modal .note-fallback { background: rgba(255,193,7,0.08); padding: 12px 16px; border-radius: var(--radius); border: 1px solid rgba(255,193,7,0.2); margin-bottom: 20px; font-size: 14px; color: var(--text-secondary); }
+        .modal .note-fallback {
+            background: rgba(255,193,7,0.08); 
+            padding: 10px 14px; 
+            border-radius: var(--radius); 
+            border: 1px solid rgba(255,193,7,0.2); 
+            margin-bottom: 16px; 
+            font-size: 14px; 
+            color: var(--text-secondary);
+        }
         .modal .note-fallback strong { color: var(--text-primary); }
-        .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 8px; }
-        .modal-actions .btn { flex: 1; padding: 14px 24px; border-radius: 50px; font-weight: 600; font-size: 16px; border: 1px solid var(--border-glow); cursor: pointer; transition: all 0.3s; text-align: center; background: var(--bg-card); color: var(--text-primary); }
+        .modal-actions { 
+            display: flex; 
+            gap: 10px; 
+            justify-content: center; 
+            margin-top: 6px;
+            flex-shrink: 0;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-glow);
+        }
+        .modal-actions .btn { 
+            flex: 1; 
+            padding: 12px 16px; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            font-size: 15px; 
+            border: 1px solid var(--border-glow); 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            text-align: center; 
+            background: var(--bg-card); 
+            color: var(--text-primary);
+            min-height: 44px;
+        }
         .modal-actions .btn-secondary:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 4px 20px var(--border-glow); }
         .modal-actions .btn-primary { background: var(--accent-gradient); color: #fff; border-color: transparent; box-shadow: 0 4px 20px rgba(26,92,255,0.25); }
         .modal-actions .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,92,255,0.4); }
@@ -419,9 +471,10 @@
             .menu-toggle { display: block; }
             .changelog-item { flex-wrap: wrap; gap: 8px; padding: 18px; }
             .changelog-item .version, .changelog-item .date { min-width: auto; }
-            .modal { padding: 32px 20px; }
-            .modal-actions { flex-direction: column; }
+            .modal { padding: 24px 20px 16px; max-width: 400px; }
+            .modal .modal-scroll { max-height: 60vh; }
             .theme-toggle { bottom: 16px; right: 16px; width: 44px; height: 44px; font-size: 20px; }
+            .modal-actions { flex-direction: column; }
         }
         @media (max-width: 600px) {
             .hero { padding: 120px 0 80px; }
@@ -441,6 +494,9 @@
             .mockup-desktop { width: 210px; }
             .hero-mockups { gap: 16px; }
             .cta-actions .primary-group { flex-direction: column; align-items: center; }
+            .modal { padding: 20px 16px 12px; max-width: 95%; }
+            .modal .modal-scroll { max-height: 55vh; }
+            .modal-actions .btn { font-size: 14px; padding: 10px 12px; min-height: 40px; }
         }
         @media (min-width: 1025px) {
             .hero h1 { font-size: 64px; }
@@ -688,22 +744,21 @@
         </div>
     </footer>
 
-    <!-- ===== MODAL DE ADVERTENCIA (Android) ===== -->
+    <!-- ===== MODAL DE ADVERTENCIA (mejorado) ===== -->
     <div class="modal-overlay" id="downloadModal">
         <div class="modal">
             <div class="icon">🛡️</div>
-            <h3>Antes de descargar</h3>
-            <p>Es posible que tu dispositivo muestre un mensaje de advertencia como <strong>"Esta aplicación puede dañar tu dispositivo"</strong>.</p>
-            <div class="highlight">
-                <strong>¿Por qué aparece esto?</strong><br />
-                Es un aviso estándar de Android para apps que no se descargan desde Google Play.
-                <strong>Tu MiPyme</strong> está firmada y verificada, no contiene virus ni malware.
-                Puedes instalarla con total tranquilidad.
+            <h3>Confirmación de descarga</h3>
+            <div class="modal-scroll">
+                <p>Tu dispositivo puede mostrar un aviso estándar de seguridad. <strong>Tu MiPyme</strong> es completamente segura y está firmada.</p>
+                <div class="highlight">
+                    <strong>¿Por qué aparece el aviso?</strong><br />
+                    Es un mensaje automático de Android para apps que no vienen de Google Play. La app ha sido verificada y no contiene virus.
+                </div>
+                <div class="note-fallback">
+                    <strong>💡 Para dispositivos antiguos:</strong> Si la instalación falla, prueba con la versión de <strong>32 bits</strong> que encontrarás en el enlace de la página principal.
+                </div>
             </div>
-            <div class="note-fallback">
-                <strong>💡 Nota:</strong> Si la instalación falla, prueba con la versión de <strong>32 bits</strong> (para dispositivos más antiguos). En la página principal encontrarás el enlace correspondiente.
-            </div>
-            <p style="font-size:14px; color:var(--text-muted);">Si confías en esta app, pulsa "Continuar descarga". En caso contrario, cancela.</p>
             <div class="modal-actions">
                 <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
                 <button class="btn btn-primary" id="modalContinue">Continuar descarga</button>
@@ -712,20 +767,20 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT – Partículas reducidas y modal para descargas
+    JAVASCRIPT – Partículas, tema, menú, modal mejorado
     ============================================================ -->
     <script>
         (function() {
             'use strict';
 
             // ============================================================
-            // 1. PARTÍCULAS DE FONDO (reducidas a 15)
+            // 1. PARTÍCULAS DE FONDO
             // ============================================================
             const canvas = document.getElementById('money-canvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
-            const NUM_PARTICLES = 15; // <-- Reducido de 45 a 15
+            const NUM_PARTICLES = 15;
             const symbols = ['💵', '💰', '🪙', '💸', '🏦', '📈', '$', '€', '£', '¥'];
 
             function resize() {
@@ -850,7 +905,7 @@
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
             // ============================================================
-            // 6. MANEJO DE DESCARGAS: MODAL PARA ANDROID, DIRECTO PARA WINDOWS
+            // 6. MANEJO DE DESCARGAS (modal mejorado)
             // ============================================================
             const modal = document.getElementById('downloadModal');
             const cancelBtn = document.getElementById('modalCancel');
