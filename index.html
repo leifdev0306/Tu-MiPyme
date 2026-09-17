@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tu MiPyme · Gestión inteligente para tu negocio</title>
-    <meta name="description" content="Tu MiPyme v2.3.0: ventas, inventario, gastos, clientes, sucursales, vendedores, nóminas, reportes y más. Funciona sin internet y sincroniza cuando vuelves a conectarte." />
+    <meta name="description" content="Tu MiPyme v2.3.2: ventas, inventario, gastos, clientes, sucursales, vendedores, nóminas, reportes y más. Funciona sin internet y sincroniza cuando vuelves a conectarte." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
@@ -192,6 +192,10 @@
             transform: translateY(-4px);
             box-shadow: 0 8px 32px var(--border-glow);
         }
+        .disabled-platform { opacity: 0.55; cursor: not-allowed !important; filter: grayscale(0.25); pointer-events: none; }
+        .nav-download-windows.disabled-platform { box-shadow: none; }
+        .btn-windows.disabled-platform { transform: none; box-shadow: none; }
+        .btn-cta-windows.disabled-platform { transform: none; box-shadow: none; }
 
         .btn-secondary {
             display: inline-flex;
@@ -320,6 +324,8 @@
         .btn-plan:hover { transform: translateY(-4px); box-shadow: 0 8px 36px rgba(26,92,255,0.4); }
         .btn-plan-outline { background: var(--bg-card); color: var(--text-primary); box-shadow: var(--shadow-sm); }
         .btn-plan-outline:hover { border-color: var(--accent); color: var(--accent); box-shadow: var(--shadow-md), 0 0 30px var(--border-glow); }
+
+        .plans-note { text-align:center; margin:28px auto 0; color:var(--text-secondary); font-size:15px; }
 
         /* ===== CHANGELOG ===== */
         .changelog-list { max-width: 820px; margin: 0 auto; }
@@ -523,7 +529,7 @@
                 <a href="#testimonios">Testimonios</a>
                 <button class="nav-download-android64 download-trigger" data-platform="android64">📱 64 bits</button>
                 <button class="nav-download-android32 download-trigger" data-platform="android32">📱 32 bits</button>
-                <button class="nav-download-windows download-trigger" data-platform="windows">💻 Windows</button>
+                <span class="nav-download-windows disabled-platform" aria-disabled="true">💻 Windows · Temporalmente no disponible</span>
                 <a href="https://leifdev0306.github.io/Portafolio/" target="_blank" class="nav-portfolio">Portafolio</a>
             </nav>
         </div>
@@ -534,19 +540,19 @@
         <div class="container hero-grid">
             <div class="hero-content">
                 <div class="hero-badge">
-                    🚀 v2.3.0
+                    🚀 v2.3.2
                     <a href="#changelog" class="whats-new">Novedades</a>
                 </div>
                 <h1>Gestión <span class="highlight">inteligente</span><br />para tu negocio</h1>
-                <p>Administra ventas, inventario, gastos, clientes, vendedores y sucursales desde una sola plataforma. Trabaja sin internet y sincroniza tus datos cuando vuelvas a conectarte.</p>
+                <p>Administra ventas, inventario, gastos, clientes, vendedores y sucursales desde una sola plataforma. Trabaja sin internet y sincroniza tus datos cuando vuelvas a conectarte. Disponible actualmente para Android.</p>
                 <div class="hero-actions">
                     <div class="primary-group">
                         <button class="btn-android-primary download-trigger" data-platform="android64">
-                            📱 Descargar para Android (recomendado)
+                            📱 Descargar para Android
                         </button>
-                        <button class="btn-windows download-trigger" data-platform="windows">
-                            💻 Windows
-                        </button>
+                        <span class="btn-windows disabled-platform" aria-disabled="true">
+                            💻 Windows · Temporalmente no disponible
+                        </span>
                         <a href="#features" class="btn-secondary">Explorar</a>
                     </div>
                     <a href="#" class="fallback-link download-trigger" data-platform="android32">
@@ -587,27 +593,28 @@
             <h2 class="section-title fade-up">Todo lo que necesitas <span class="accent">para gestionar</span></h2>
             <p class="section-subtitle fade-up">Herramientas diseñadas para que tomes el control total de tu negocio.</p>
             <div class="features-grid">
-                <div class="feature-card fade-up"><div class="icon">⚡</div><h3>Ventas rápidas</h3><p>Agrega productos, cantidades, método de pago y cobra en segundos.</p><span class="tag tag-new">v2.3.0</span></div>
+                <div class="feature-card fade-up"><div class="icon">⚡</div><h3>Ventas rápidas</h3><p>Agrega productos, cantidades, método de pago y cobra en segundos.</p><span class="tag tag-new">v2.3.2</span></div>
+                <div class="feature-card fade-up"><div class="icon">🔄</div><h3>Dos modos de venta</h3><p>Elige Tiempo Real para registrar cada operación al instante o Cierre Diario para calcular las ventas a partir del stock inicial y final.</p><span class="tag tag-new">v2.3.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">📦</div><h3>Inventario completo</h3><p>Stock, costos, márgenes, categorías, unidades y reabastecimiento.</p><span class="tag tag-free">Todos los planes</span></div>
                 <div class="feature-card fade-up"><div class="icon">☁️</div><h3>Funciona sin internet</h3><p>Continúa trabajando offline y sincroniza automáticamente al recuperar conexión.</p><span class="tag tag-new">Esencial</span></div>
                 <div class="feature-card fade-up"><div class="icon">🏪</div><h3>Multi-sucursal</h3><p>Administra varias sucursales desde una misma cuenta.</p><span class="tag">Premium</span></div>
-                <div class="feature-card fade-up"><div class="icon">🔄</div><h3>Movimientos entre sucursales</h3><p>Transfiere productos entre puntos de venta de forma sencilla.</p><span class="tag tag-new">v2.3.0</span></div>
+                <div class="feature-card fade-up"><div class="icon">🔄</div><h3>Movimientos entre sucursales</h3><p>Transfiere productos entre puntos de venta de forma sencilla.</p><span class="tag tag-new">v2.3.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">👥</div><h3>Vendedores y roles</h3><p>Gestiona vendedores, gestores, permisos, comisiones y desempeño.</p><span class="tag">Premium</span></div>
                 <div class="feature-card fade-up"><div class="icon">💰</div><h3>Nóminas y salarios</h3><p>Organiza empleados, salarios y comisiones dentro de la gestión del negocio.</p><span class="tag">Premium</span></div>
                 <div class="feature-card fade-up"><div class="icon">🤝</div><h3>Clientes y proveedores</h3><p>Historial, saldos, compras, relaciones y control de proveedores.</p><span class="tag tag-free">Todos los planes</span></div>
-                <div class="feature-card fade-up"><div class="icon">💳</div><h3>Deudas y cobros</h3><p>Registra saldos pendientes, pagos y cobros para no perder el control.</p><span class="tag tag-new">v2.3.0</span></div>
+                <div class="feature-card fade-up"><div class="icon">💳</div><h3>Deudas y cobros</h3><p>Registra saldos pendientes, pagos y cobros para no perder el control.</p><span class="tag tag-new">v2.3.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">📊</div><h3>Reportes y estadísticas</h3><p>Analiza ventas, ganancias, productos, sucursales y rendimiento.</p><span class="tag">Premium</span></div>
                 <div class="feature-card fade-up"><div class="icon">📄</div><h3>Exportación profesional</h3><p>Genera información para trabajar y analizar tus datos fuera de la app.</p><span class="tag">Premium</span></div>
                 <div class="feature-card fade-up"><div class="icon">🧾</div><h3>Facturación y módulo fiscal</h3><p>Herramientas integradas para facturación y gestión fiscal.</p><span class="tag">Premium</span></div>
-                <div class="feature-card fade-up"><div class="icon">⚠️</div><h3>Mermas y pérdidas</h3><p>Registra daños, pérdidas, autoconsumo y ajustes de inventario.</p><span class="tag tag-new">v2.3.0</span></div>
+                <div class="feature-card fade-up"><div class="icon">⚠️</div><h3>Mermas y pérdidas</h3><p>Registra daños, pérdidas, autoconsumo y ajustes de inventario.</p><span class="tag tag-new">v2.3.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">🎯</div><h3>Metas de ventas</h3><p>Define objetivos y mide el progreso de tu negocio.</p><span class="tag tag-free">Todos los planes</span></div>
                 <div class="feature-card fade-up"><div class="icon">📏</div><h3>Unidades y stock decimal</h3><p>Trabaja con kg, litros, metros, cajas y otras unidades personalizadas.</p><span class="tag tag-free">Todos los planes</span></div>
                 <div class="feature-card fade-up"><div class="icon">🔐</div><h3>Seguridad y permisos</h3><p>Controla accesos y limita la información visible según cada usuario.</p><span class="tag">Premium</span></div>
-                <div class="feature-card fade-up"><div class="icon">⚙️</div><h3>Configuración flexible</h3><p>Personaliza opciones de la aplicación según la forma en que trabajas.</p><span class="tag tag-new">v2.3.0</span></div>
+                <div class="feature-card fade-up"><div class="icon">⚙️</div><h3>Configuración flexible</h3><p>Personaliza opciones de la aplicación según la forma en que trabajas.</p><span class="tag tag-new">v2.3.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">💸</div><h3>Gastos y egresos</h3><p>Registra y controla los gastos para conocer el resultado real del negocio.</p><span class="tag tag-free">Todos los planes</span></div>
                 <div class="feature-card fade-up"><div class="icon">📈</div><h3>Resumen de negocio</h3><p>Consulta ventas, gastos, ganancia, clientes y stock desde el inicio.</p><span class="tag tag-free">Todos los planes</span></div>
-                <div class="feature-card fade-up"><div class="icon">💸</div><h3>Transferencias</h3><p>Registra y consulta movimientos y transferencias para mantener tus operaciones organizadas.</p><span class="tag tag-new">v2.3.0</span></div>
-                <div class="feature-card fade-up"><div class="icon">🛟</div><h3>Soporte integrado</h3><p>Contacta con soporte directamente desde la aplicación.</p><span class="tag tag-new">v2.3.0</span></div>
+                <div class="feature-card fade-up"><div class="icon">💸</div><h3>Transferencias</h3><p>Registra y consulta movimientos y transferencias para mantener tus operaciones organizadas.</p><span class="tag tag-new">v2.3.2</span></div>
+                <div class="feature-card fade-up"><div class="icon">🛟</div><h3>Soporte integrado</h3><p>Contacta con soporte directamente desde la aplicación.</p><span class="tag tag-new">v2.3.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">🎁</div><h3>Alianzas y referidos</h3><p>Herramientas para compartir la plataforma y aprovechar sus beneficios.</p><span class="tag">Incluido</span></div>
             </div>
         </div>
@@ -644,7 +651,7 @@
                 <div class="plan-card popular fade-up">
                     <div class="badge">🔥 Más popular</div>
                     <div class="name">Premium</div>
-                    <div class="price">$2,000 <small>CUP</small></div>
+                    <div class="price">$1,500 <small>CUP</small></div>
                     <div class="period">por mes</div>
                     <ul>
                         <li><span class="check">✅</span> Todo lo del plan Normal</li>
@@ -660,9 +667,10 @@
                         <li>📞 Soporte prioritario</li>
                     </ul>
                     <button class="btn-plan download-trigger" data-platform="android64" style="width:100%; justify-content:center;">Descargar ahora</button>
-                    <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Incluye 3 días de prueba gratis</p>
+                    <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Incluye 3 días de prueba gratis · Sucursal adicional: +500 CUP</p>
                 </div>
             </div>
+            <p class="plans-note">🏪 <strong>Sucursal adicional:</strong> +500 CUP/mes. Sin extras ocultos.</p>
         </div>
     </section>
 
@@ -673,20 +681,19 @@
             <p class="section-subtitle fade-up">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
             <div class="changelog-list">
                 <div class="changelog-item latest fade-up">
-                    <div class="version">v2.3.0</div>
-                    <div class="date">30 ago 2026</div>
+                    <div class="version">v2.3.2</div>
+                    <div class="date">17 sep 2026</div>
                     <div class="desc">
-                        <strong>🚀 Más control, más herramientas</strong>
+                        <strong>🚀 Nuevos modos de venta y mejoras de gestión</strong>
                         <ul>
-                            <li><strong>🛟 Soporte integrado:</strong> contacto directo desde la aplicación.</li>
-                            <li><strong>💳 Deudas de clientes:</strong> seguimiento más sencillo de saldos y cobros pendientes.</li>
-                            <li><strong>🔄 Movimientos entre sucursales:</strong> facilita el traslado de productos entre puntos de venta.</li>
-                            <li><strong>⚠️ Mermas:</strong> registra pérdidas, daños, autoconsumo y ajustes de productos.</li>
-                            <li><strong>⚙️ Panel de configuración:</strong> nuevas opciones para adaptar la app a tu forma de trabajar.</li>
-                            <li><strong>🎨 Mejoras visuales:</strong> nuevos retoques de interfaz y experiencia de uso.</li>
+                            <li><strong>⚡ Modo Tiempo Real:</strong> registra cada venta al instante.</li>
+                            <li><strong>📅 Modo Cierre Diario:</strong> ideal para negocios que trabajan por apertura y cierre de jornada.</li>
+                            <li><strong>📦 Control de stock:</strong> captura existencias y calcula las ventas del día con mayor facilidad.</li>
+                            <li><strong>🔄 Sincronización:</strong> trabaja sin internet y sincroniza al recuperar conexión.</li>
+                            <li><strong>🎨 Experiencia:</strong> ajustes visuales y mejoras de usabilidad.</li>
                         </ul>
                     </div>
-                </div>
+                </div></div>
                 <div class="changelog-item fade-up">
                     <div class="version">v2.1.7</div>
                     <div class="date">17 ago 2026</div>
@@ -727,17 +734,17 @@
             <div class="cta-actions">
                 <div class="primary-group">
                     <button class="btn-cta-android-primary download-trigger" data-platform="android64">
-                        📱 Descargar para Android (recomendado)
+                        📱 Descargar para Android
                     </button>
-                    <button class="btn-cta-windows download-trigger" data-platform="windows">
-                        💻 Windows (RAR)
+                    <button class="btn-cta-windows disabled-platform" type="button" disabled>
+                        💻 Windows · Temporalmente no disponible
                     </button>
                 </div>
                 <a href="#" class="fallback-link download-trigger" data-platform="android32">
                     🔄 Si tu app no instala o tu móvil es antiguo, descarga esta versión (32 bits)
                 </a>
             </div>
-            <p class="version-info">Android 5.0+ · ~15-25 MB · Windows 10+ · ~14 MB (comprimido)</p>
+            <p class="version-info">Android 5.0+ · ~15-25 MB · Windows · temporalmente no disponible</p>
         </div>
     </section>
 
@@ -922,13 +929,13 @@
 
             let cachedAndroid64Url = '';
             let cachedAndroid32Url = '';
-            let cachedWindowsUrl = '';
+            let cachedWindowsUrl = ''; // Windows temporalmente no disponible
             let pendingPlatform = 'android64';
 
             async function getLatestUrls() {
                 const fallback64 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme64.apk';
                 const fallback32 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme32.apk';
-                const fallbackWindows = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar';
+                const fallbackWindows = ''; // Windows temporalmente no disponible
                 try {
                     const res = await fetch('https://api.github.com/repos/Leifdev0306/Tu-MiPyme/releases/latest');
                     if (!res.ok) throw new Error();
@@ -939,11 +946,11 @@
                     const rar = assets.find(a => a.name === 'TuMiPyme.rar');
                     cachedAndroid64Url = apk64 ? apk64.browser_download_url : fallback64;
                     cachedAndroid32Url = apk32 ? apk32.browser_download_url : fallback32;
-                    cachedWindowsUrl = rar ? rar.browser_download_url : fallbackWindows;
+                    cachedWindowsUrl = ''; // Windows deshabilitado temporalmente
                 } catch {
                     cachedAndroid64Url = fallback64;
                     cachedAndroid32Url = fallback32;
-                    cachedWindowsUrl = fallbackWindows;
+                    cachedWindowsUrl = '';
                 }
             }
             getLatestUrls();
@@ -959,7 +966,7 @@
                 let url = '';
                 if (platform === 'android64') url = cachedAndroid64Url;
                 else if (platform === 'android32') url = cachedAndroid32Url;
-                else if (platform === 'windows') url = cachedWindowsUrl;
+                else if (platform === 'windows') return;
                 if (url) {
                     window.open(url, '_blank');
                 }
@@ -970,7 +977,7 @@
                     e.preventDefault();
                     const platform = this.dataset.platform || 'android64';
                     if (platform === 'windows') {
-                        download('windows');
+                        return;
                     } else {
                         showModal(platform);
                     }
