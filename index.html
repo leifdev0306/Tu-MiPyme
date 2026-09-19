@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tu MiPyme · Gestión inteligente para tu negocio</title>
-    <meta name="description" content="Tu MiPyme v2.3.2: ventas, inventario, gastos, clientes, sucursales, vendedores, nóminas, reportes y más. Disponible para Android y Windows. Funciona sin internet y sincroniza cuando vuelves a conectarte." />
+    <title>Tu MiPyme · Gestión inteligente y tienda en línea para tu negocio</title>
+    <meta name="description" content="Tu MiPyme v2.4.0: ventas, inventario, gastos, clientes, sucursales, vendedores, nóminas, reportes y ahora tienda en línea pública. Disponible para Android y Windows. Funciona sin internet y sincroniza cuando vuelves a conectarte." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
@@ -24,6 +24,7 @@
             --accent-gradient: linear-gradient(135deg, #1a5cff, #0d47b3);
             --win-gradient: linear-gradient(135deg, #0078d4, #005a9e);
             --android-gradient: linear-gradient(135deg, #3ddc84, #1a9b5a);
+            --store-gradient: linear-gradient(135deg, #9b6bff, #6b3dff);
             --success: #10b981;
             --warning: #f59e0b;
             --shadow-sm: 0 4px 16px rgba(0, 20, 50, 0.08);
@@ -137,10 +138,21 @@
             padding: 6px 18px; border-radius: 50px; margin-bottom: 28px;
             border: 1px solid var(--border-glow);
         }
+        .hero-badge .new-tag {
+            background: var(--store-gradient); color: #fff;
+            padding: 2px 10px; border-radius: 30px; font-size: 10px;
+            font-weight: 700; letter-spacing: 0.5px;
+        }
         .hero-badge .whats-new { color: var(--text-primary); background: rgba(255,255,255,0.5); padding: 2px 12px; border-radius: 30px; font-size: 11px; font-weight: 700; transition: all 0.3s; border: 1px solid transparent; margin-left: 4px; }
         .hero-badge .whats-new:hover { background: var(--accent-gradient); color: #fff; border-color: var(--accent); transform: scale(1.05); }
         .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.04; letter-spacing: -2px; color: var(--text-primary); margin-bottom: 20px; }
         .hero h1 .highlight { color: var(--accent); }
+        .hero h1 .highlight-store {
+            background: var(--store-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         .hero p { font-size: 19px; color: var(--text-secondary); max-width: 500px; margin-bottom: 40px; line-height: 1.8; }
         .hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
         .hero-actions .primary-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
@@ -194,7 +206,7 @@
         .hero-actions .fallback-link .icon { font-size: 16px; }
 
         /* ===== MOCKUPS ===== */
-        .hero-mockups { display: flex; justify-content: center; align-items: center; gap: 30px; position: relative; perspective: 1200px; }
+        .hero-mockups { display: flex; justify-content: center; align-items: center; gap: 30px; position: relative; perspective: 1200px; flex-wrap: wrap; }
         .mockup-phone, .mockup-desktop {
             background: var(--bg-card); backdrop-filter: blur(12px);
             border-radius: var(--radius-xl); border: 1px solid var(--border-glow);
@@ -222,14 +234,24 @@
         .mockup-row .value.green { color: #10b981; }
         .mockup-row .value.blue  { color: var(--accent); }
         .mockup-row .value.orange { color: #f59e0b; }
+        .mockup-row .value.purple { color: #9b6bff; }
         .mockup-chart { display: flex; align-items: flex-end; gap: 3px; height: 32px; padding: 6px 0; }
         .mockup-chart .bar { flex: 1; background: var(--border-glow); border-radius: 3px 3px 0 0; min-height: 4px; transition: height 0.6s ease; }
         .mockup-chart .bar.primary { background: var(--accent); }
         .mockup-chart .bar.green   { background: #10b981; }
         .mockup-chart .bar.orange  { background: #f59e0b; }
+        .mockup-chart .bar.purple  { background: #9b6bff; }
         .mockup-footer { display: flex; justify-content: space-around; padding-top: 8px; border-top: 1px solid var(--border-glow); margin-top: 6px; }
         .mockup-footer span { font-size: 9px; color: var(--text-muted); padding: 4px 10px; border-radius: 6px; font-weight: 600; background: transparent; transition: all 0.3s; }
         .mockup-footer span.active { background: var(--accent-gradient); color: #fff; box-shadow: 0 2px 16px var(--border-glow); }
+        .mockup-footer span.active-store { background: var(--store-gradient); color: #fff; box-shadow: 0 2px 16px rgba(155,107,255,0.4); }
+
+        /* Tarjetas de producto en el mockup */
+        .mockup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px 0; }
+        .mockup-product { background: rgba(155,107,255,0.08); border-radius: 8px; padding: 6px; border: 1px solid rgba(155,107,255,0.15); }
+        .mockup-product .thumb { height: 26px; background: rgba(155,107,255,0.12); border-radius: 5px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .mockup-product .pname { font-size: 8px; color: var(--text-primary); font-weight: 600; margin-bottom: 2px; }
+        .mockup-product .pprice { font-size: 9px; color: #9b6bff; font-weight: 700; }
 
         /* Ventana Windows */
         .mockup-desktop .window-bar { display: flex; align-items: center; padding: 4px 8px 6px; gap: 6px; }
@@ -244,6 +266,12 @@
         section { padding: 100px 0; position: relative; z-index: 1; }
         .section-title { font-size: 42px; font-weight: 700; letter-spacing: -1px; text-align: center; margin-bottom: 16px; color: var(--text-primary); }
         .section-title .accent { color: var(--accent); }
+        .section-title .accent-store {
+            background: var(--store-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         .section-subtitle { text-align: center; font-size: 18px; color: var(--text-secondary); max-width: 640px; margin: 0 auto 56px; line-height: 1.7; }
         .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -266,7 +294,7 @@
         .stat-item .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
 
         /* ============================================================
-           DOWNLOAD CARDS (nueva sección)
+           DOWNLOAD CARDS
            ============================================================ */
         .download-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -310,7 +338,6 @@
         .download-card.windows .btn-platform { background: var(--win-gradient); color: #fff; box-shadow: 0 6px 24px rgba(0,120,212,0.35); }
         .download-card.windows .btn-platform:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(0,120,212,0.5); }
 
-        /* Badge "recomendado para ti" */
         .download-card .recommended-badge {
             position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
             background: var(--accent-gradient); color: #fff;
@@ -340,14 +367,187 @@
             border-radius: var(--radius); padding: 32px 24px;
             transition: all 0.3s; box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-glow); text-align: left;
+            position: relative;
         }
         .feature-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow-md), 0 0 30px var(--border-glow); }
+        .feature-card.store-feature { border-color: rgba(155,107,255,0.3); }
+        .feature-card.store-feature:hover { border-color: #9b6bff; box-shadow: var(--shadow-md), 0 0 30px rgba(155,107,255,0.3); }
         .feature-card .icon { font-size: 28px; margin-bottom: 16px; display: inline-block; opacity: 0.9; }
         .feature-card h3 { font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
         .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
         .feature-card .tag { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 50px; background: var(--accent-light); color: var(--accent); text-transform: uppercase; letter-spacing: 0.3px; }
         .feature-card .tag-new { background: var(--accent-gradient); color: #fff; }
         .feature-card .tag-free { background: rgba(16,185,129,0.15); color: #10b981; }
+        .feature-card .tag-store { background: var(--store-gradient); color: #fff; }
+
+        /* ============================================================
+           SECCIÓN TIENDA EN LÍNEA (destacada)
+           ============================================================ */
+        .store-section {
+            background: linear-gradient(145deg, rgba(155,107,255,0.08), rgba(107,61,255,0.04));
+            border-top: 1px solid rgba(155,107,255,0.2);
+            border-bottom: 1px solid rgba(155,107,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .store-section::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(155,107,255,0.15), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        [data-theme="dark"] .store-section::before {
+            background: radial-gradient(circle, rgba(155,107,255,0.25), transparent 70%);
+        }
+        .store-highlight {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--store-gradient);
+            color: #fff; font-weight: 700; font-size: 13px;
+            padding: 6px 18px; border-radius: 50px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 24px rgba(155,107,255,0.4);
+            letter-spacing: 0.3px;
+        }
+        .store-grid {
+            display: grid; grid-template-columns: 1.1fr 1fr;
+            gap: 60px; align-items: center;
+            max-width: 1100px; margin: 0 auto;
+        }
+        .store-copy h2 {
+            font-size: 40px; font-weight: 800; letter-spacing: -1px;
+            line-height: 1.1; color: var(--text-primary); margin-bottom: 20px;
+        }
+        .store-copy .gradient-text {
+            background: var(--store-gradient);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .store-copy > p {
+            font-size: 17px; color: var(--text-secondary);
+            line-height: 1.75; margin-bottom: 28px;
+            max-width: 500px;
+        }
+        .store-bullets {
+            list-style: none; padding: 0; margin-bottom: 32px;
+        }
+        .store-bullets li {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 10px 0; font-size: 15px; color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .store-bullets li .check {
+            width: 22px; height: 22px; border-radius: 50%;
+            background: var(--store-gradient); color: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700; flex-shrink: 0;
+            margin-top: 1px;
+            box-shadow: 0 3px 12px rgba(155,107,255,0.35);
+        }
+        .store-bullets li strong { color: var(--text-primary); }
+        .store-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 28px; border-radius: 50px;
+            background: var(--store-gradient); color: #fff;
+            font-weight: 700; font-size: 15px;
+            box-shadow: 0 8px 32px rgba(155,107,255,0.4);
+            transition: all 0.3s; border: none; cursor: pointer;
+            font-family: inherit;
+        }
+        .store-cta:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(155,107,255,0.55);
+        }
+
+        /* Mockup de la tienda (browser) */
+        .store-preview {
+            background: var(--bg-card); backdrop-filter: blur(12px);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(155,107,255,0.3);
+            box-shadow: var(--shadow-lg), 0 0 60px rgba(155,107,255,0.2);
+            padding: 12px; position: relative;
+            transition: all 0.5s ease;
+            transform: rotateY(-4deg) rotateX(2deg);
+        }
+        .store-preview:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+            box-shadow: var(--shadow-lg), 0 0 80px rgba(155,107,255,0.35);
+        }
+        .store-browser-bar {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 10px 10px;
+        }
+        .store-browser-bar .dots { display: flex; gap: 5px; }
+        .store-browser-bar .dot { width: 9px; height: 9px; border-radius: 50%; }
+        .store-browser-bar .dot.red { background: #ff5f57; }
+        .store-browser-bar .dot.yellow { background: #febc2e; }
+        .store-browser-bar .dot.green { background: #28c840; }
+        .store-browser-bar .url {
+            flex: 1; margin-left: 6px;
+            background: rgba(155,107,255,0.08);
+            border-radius: 6px; padding: 4px 10px;
+            font-size: 10px; color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .store-browser-bar .url::before { content: '🔒 '; }
+        .store-screen {
+            background: var(--bg-gradient); border-radius: var(--radius);
+            padding: 18px 16px; overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.05);
+        }
+        .store-header-mock {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 10px; border-bottom: 1px solid rgba(155,107,255,0.15);
+            margin-bottom: 12px;
+        }
+        .store-header-mock .store-name {
+            font-size: 12px; font-weight: 800; color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+        .store-header-mock .store-name span { color: #9b6bff; }
+        .store-header-mock .store-tag {
+            font-size: 9px; color: #9b6bff; font-weight: 700;
+            background: rgba(155,107,255,0.12);
+            padding: 3px 10px; border-radius: 30px;
+        }
+        .store-search-mock {
+            background: rgba(155,107,255,0.08);
+            border-radius: 20px; padding: 6px 12px;
+            font-size: 10px; color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .store-grid-mock {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+        }
+        .store-item-mock {
+            background: rgba(255,255,255,0.5);
+            border-radius: 10px; padding: 8px 6px;
+            border: 1px solid rgba(155,107,255,0.15);
+            transition: transform 0.3s;
+        }
+        [data-theme="dark"] .store-item-mock { background: rgba(255,255,255,0.05); }
+        .store-item-mock:hover { transform: translateY(-3px); }
+        .store-item-mock .thumb {
+            height: 40px; background: linear-gradient(135deg, rgba(155,107,255,0.2), rgba(107,61,255,0.1));
+            border-radius: 6px; margin-bottom: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+        }
+        .store-item-mock .name {
+            font-size: 8px; font-weight: 700; color: var(--text-primary);
+            margin-bottom: 3px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .store-item-mock .price {
+            font-size: 9px; font-weight: 800; color: #9b6bff;
+        }
+        .store-item-mock .stock {
+            font-size: 7px; color: var(--text-muted); margin-top: 2px;
+        }
 
         /* ===== PLANES ===== */
         .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 960px; margin: 0 auto; }
@@ -369,6 +569,12 @@
         .plan-card ul li { display: flex; align-items: center; gap: 12px; padding: 8px 0; font-size: 14px; color: var(--text-secondary); }
         .plan-card ul li .check { color: var(--accent); font-weight: 700; font-size: 16px; }
         .plan-card ul li .cross { color: var(--text-muted); font-weight: 700; font-size: 16px; opacity: 0.3; }
+        .plan-card ul li .check-store {
+            background: var(--store-gradient);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
         .btn-plan { display: inline-block; padding: 14px 40px; border-radius: 50px; font-weight: 600; font-size: 16px; border: 1px solid var(--border-glow); cursor: pointer; transition: all 0.3s; background: var(--accent-gradient); color: #fff; box-shadow: 0 4px 20px rgba(26,92,255,0.25); font-family: inherit; }
         .btn-plan:hover { transform: translateY(-4px); box-shadow: 0 8px 36px rgba(26,92,255,0.4); }
         .btn-plan-outline { background: var(--bg-card); color: var(--text-primary); box-shadow: var(--shadow-sm); }
@@ -393,6 +599,17 @@
         .changelog-item .desc ul li { padding: 2px 0 2px 24px; position: relative; }
         .changelog-item .desc ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
         .changelog-item.latest { border-left: 4px solid var(--accent); background: var(--accent-light); }
+        .changelog-item.latest-store { border-left: 4px solid #9b6bff; background: linear-gradient(90deg, rgba(155,107,255,0.12), transparent); }
+        .changelog-item.latest-store .version { color: #9b6bff; }
+        .changelog-item.latest-store .desc ul li::before { color: #9b6bff; }
+        .store-tag-inline {
+            display: inline-block;
+            background: var(--store-gradient);
+            color: #fff; font-size: 10px; font-weight: 700;
+            padding: 2px 10px; border-radius: 30px;
+            margin-left: 8px; letter-spacing: 0.5px;
+            vertical-align: middle;
+        }
 
         /* ===== TESTIMONIOS ===== */
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; max-width: 960px; margin: 0 auto; }
@@ -547,6 +764,10 @@
             .mockup-phone { width: 150px; }
             .mockup-desktop { width: 280px; }
             .plans-grid { grid-template-columns: 1fr; max-width: 480px; }
+            .store-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .store-copy > p { margin-left: auto; margin-right: auto; }
+            .store-copy h2 { font-size: 32px; }
+            .store-bullets li { text-align: left; }
             nav { display: none; flex-direction: column; background: var(--bg-card); backdrop-filter: blur(20px); position: absolute; top: 72px; left: 0; width: 100%; padding: 28px; box-shadow: var(--shadow-lg); border-radius: 0 0 var(--radius) var(--radius); gap: 16px; border: 1px solid var(--border-glow); border-top: none; }
             nav.open { display: flex; }
             .menu-toggle { display: block; }
@@ -568,7 +789,7 @@
             .cta-section h2 { font-size: 30px; }
             .btn-android-primary, .btn-cta-android-primary,
             .btn-windows, .btn-cta-windows { font-size: 15px; padding: 14px 24px; width: 100%; justify-content: center; }
-            .hero-badge { font-size: 12px; padding: 4px 14px; }
+            .hero-badge { font-size: 12px; padding: 4px 14px; flex-wrap: wrap; }
             .hero-badge .whats-new { font-size: 10px; padding: 2px 10px; }
             .hero-actions .primary-group { flex-direction: column; align-items: center; width: 100%; }
             .btn-secondary { font-size: 15px; padding: 12px 24px; }
@@ -581,6 +802,8 @@
             .modal-actions .btn { font-size: 14px; padding: 10px 12px; min-height: 40px; }
             .stat-item .stat-value { font-size: 26px; }
             .download-card { padding: 28px 20px 24px; }
+            .store-copy h2 { font-size: 26px; }
+            .store-preview { transform: none; }
         }
         @media (min-width: 1025px) {
             .hero h1 { font-size: 64px; }
@@ -601,6 +824,7 @@
             <a href="#" class="logo">Tu<span>MiPyme</span></a>
             <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
             <nav id="mainNav">
+                <a href="#tienda">Tienda en línea</a>
                 <a href="#downloads">Descargas</a>
                 <a href="#features">Características</a>
                 <a href="#plans">Planes</a>
@@ -618,11 +842,12 @@
         <div class="container hero-grid">
             <div class="hero-content">
                 <div class="hero-badge">
-                    🚀 v2.3.2
-                    <a href="#changelog" class="whats-new">Novedades</a>
+                    🚀 v2.4.0
+                    <span class="new-tag">NUEVO</span>
+                    <a href="#changelog" class="whats-new">Tienda en línea</a>
                 </div>
-                <h1>Gestión <span class="highlight">inteligente</span><br />para tu negocio</h1>
-                <p>Administra ventas, inventario, gastos, clientes, vendedores y sucursales desde una sola plataforma. Disponible para <strong>Android</strong> y <strong>Windows</strong>. Trabaja sin internet y sincroniza tus datos cuando vuelvas a conectarte.</p>
+                <h1>Gestión <span class="highlight">inteligente</span><br />y <span class="highlight-store">tienda en línea</span></h1>
+                <p>Administra ventas, inventario, gastos, clientes, sucursales y vendedores. Además, crea tu <strong>tienda en línea</strong> y publica tus productos para que tus clientes compren desde donde estén. Disponible para <strong>Android</strong> y <strong>Windows</strong>, con modo offline.</p>
                 <div class="hero-actions">
                     <div class="primary-group">
                         <button class="btn-android-primary download-trigger" data-platform="android64">
@@ -631,7 +856,7 @@
                         <button class="btn-windows download-trigger" data-platform="windows">
                             💻 Windows
                         </button>
-                        <a href="#features" class="btn-secondary">Explorar</a>
+                        <a href="#tienda" class="btn-secondary">Ver tienda</a>
                     </div>
                     <a href="#" class="fallback-link download-trigger" data-platform="android32">
                         <span class="icon">🔄</span> Si tu app no instala o tu móvil es antiguo, descarga esta versión (32 bits)
@@ -656,15 +881,17 @@
                             <span class="win-dot min"></span>
                             <span class="win-dot max"></span>
                         </div>
-                        <span class="window-title">Tu MiPyme — Panel de control</span>
+                        <span class="window-title">Tu MiPyme — Tienda en línea</span>
                     </div>
                     <div class="mockup-screen">
-                        <div class="mockup-header"><div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div><span class="title">📊 Dashboard</span></div>
-                        <div class="mockup-row"><span>Ventas hoy</span><span class="value green">+$12,450</span></div>
-                        <div class="mockup-row"><span>Ganancia neta</span><span class="value orange">+$3,280</span></div>
-                        <div class="mockup-row"><span>Productos</span><span class="value blue">156</span></div>
-                        <div class="mockup-chart"><div class="bar primary" style="height:28px"></div><div class="bar primary" style="height:18px"></div><div class="bar green" style="height:32px"></div><div class="bar orange" style="height:12px"></div><div class="bar primary" style="height:40px"></div><div class="bar green" style="height:24px"></div><div class="bar" style="height:16px"></div></div>
-                        <div class="mockup-footer"><span class="active">📊</span><span>📦</span><span>👥</span></div>
+                        <div class="mockup-header"><div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div><span class="title">🛍️ Tienda pública</span></div>
+                        <div class="mockup-grid">
+                            <div class="mockup-product"><div class="thumb">🥤</div><div class="pname">Refresco 500ml</div><div class="pprice">$120</div></div>
+                            <div class="mockup-product"><div class="thumb">🍞</div><div class="pname">Pan integral</div><div class="pprice">$80</div></div>
+                            <div class="mockup-product"><div class="thumb">🧴</div><div class="pname">Champú</div><div class="pprice">$350</div></div>
+                            <div class="mockup-product"><div class="thumb">☕</div><div class="pname">Café molido</div><div class="pprice">$450</div></div>
+                        </div>
+                        <div class="mockup-footer"><span>🏠</span><span class="active-store">🛍️</span><span>📦</span><span>👤</span></div>
                     </div>
                 </div>
             </div>
@@ -675,10 +902,58 @@
     <section style="padding: 20px 0 40px;">
         <div class="container">
             <div class="stats-bar">
-                <div class="stat-item fade-up"><div class="stat-value" data-count="30">0</div><div class="stat-label">Funciones integradas</div></div>
-                <div class="stat-item fade-up"><div class="stat-value" data-count="2">0</div><div class="stat-label">Plataformas (Android + Windows)</div></div>
+                <div class="stat-item fade-up"><div class="stat-value" data-count="30" data-suffix="+">0</div><div class="stat-label">Funciones integradas</div></div>
+                <div class="stat-item fade-up"><div class="stat-value" data-count="3">0</div><div class="stat-label">Plataformas (Android 32/64 · Windows)</div></div>
                 <div class="stat-item fade-up"><div class="stat-value" data-count="3">0</div><div class="stat-label">Días gratis Premium</div></div>
                 <div class="stat-item fade-up"><div class="stat-value" data-count="100" data-suffix="%">0</div><div class="stat-label">Funciona sin internet</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN TIENDA EN LÍNEA ===== -->
+    <section id="tienda" class="store-section">
+        <div class="container">
+            <div class="store-grid">
+                <div class="store-copy fade-up">
+                    <span class="store-highlight">🛍️ NUEVO EN v2.4.0</span>
+                    <h2>Tu negocio, ahora también <span class="gradient-text">en línea</span></h2>
+                    <p>Publica tus productos y comparte el enlace de tu tienda con tus clientes. Ellos podrán ver tu catálogo, consultar precios y disponibilidad desde cualquier dispositivo, sin necesidad de instalar nada.</p>
+                    <ul class="store-bullets">
+                        <li><span class="check">✓</span> <div><strong>Tienda pública</strong> con tu propio enlace para compartir.</div></li>
+                        <li><span class="check">✓</span> <div><strong>Catálogo de productos</strong> con fotos, precios y stock en tiempo real.</div></li>
+                        <li><span class="check">✓</span> <div><strong>Publica productos</strong> desde tu inventario con un toque.</div></li>
+                        <li><span class="check">✓</span> <div><strong>Personaliza tu tienda</strong>: nombre, descripción y datos de contacto.</div></li>
+                        <li><span class="check">✓</span> <div><strong>Sincronización automática</strong>: si actualizas el stock, tu tienda se actualiza.</div></li>
+                    </ul>
+                    <button class="store-cta download-trigger" data-platform="android64">
+                        🚀 Crear mi tienda ahora
+                    </button>
+                </div>
+                <div class="store-preview fade-up">
+                    <div class="store-browser-bar">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="url">tu-mipyme.app/mi-tienda</div>
+                    </div>
+                    <div class="store-screen">
+                        <div class="store-header-mock">
+                            <div class="store-name">Mi <span>Tienda</span></div>
+                            <div class="store-tag">EN LÍNEA</div>
+                        </div>
+                        <div class="store-search-mock">🔍 Buscar productos...</div>
+                        <div class="store-grid-mock">
+                            <div class="store-item-mock"><div class="thumb">🥤</div><div class="name">Refresco 500ml</div><div class="price">$120</div><div class="stock">Stock: 24</div></div>
+                            <div class="store-item-mock"><div class="thumb">🍞</div><div class="name">Pan integral</div><div class="price">$80</div><div class="stock">Stock: 15</div></div>
+                            <div class="store-item-mock"><div class="thumb">🧴</div><div class="name">Champú</div><div class="price">$350</div><div class="stock">Stock: 8</div></div>
+                            <div class="store-item-mock"><div class="thumb">☕</div><div class="name">Café molido</div><div class="price">$450</div><div class="stock">Stock: 12</div></div>
+                            <div class="store-item-mock"><div class="thumb">🍫</div><div class="name">Chocolate</div><div class="price">$95</div><div class="stock">Stock: 30</div></div>
+                            <div class="store-item-mock"><div class="thumb">🥛</div><div class="name">Leche 1L</div><div class="price">$200</div><div class="stock">Stock: 20</div></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -709,7 +984,7 @@
                     <div class="recommended-badge" style="display:none;">✨ Recomendado para ti</div>
                     <div class="platform-icon">💻</div>
                     <h3>Windows (PC)</h3>
-                    <p class="platform-desc">Instala Tu MiPyme en tu computadora. Incluye todos los módulos de la versión móvil.</p>
+                    <p class="platform-desc">Instala Tu MiPyme en tu computadora. Incluye todos los módulos, también la tienda en línea.</p>
                     <div class="platform-meta"><span>📦 Archivo comprimido</span><span>•</span><span>🪟 Windows 10/11</span></div>
                     <button class="btn-platform download-trigger" data-platform="windows">Descargar para PC</button>
                 </div>
@@ -723,8 +998,11 @@
             <h2 class="section-title fade-up">Todo lo que necesitas <span class="accent">para gestionar</span></h2>
             <p class="section-subtitle fade-up">Herramientas diseñadas para que tomes el control total de tu negocio.</p>
             <div class="features-grid">
+                <div class="feature-card store-feature fade-up"><div class="icon">🛍️</div><h3>Tienda en línea</h3><p>Crea tu tienda pública y comparte el enlace con tus clientes para que vean tu catálogo desde cualquier dispositivo.</p><span class="tag tag-store">Nuevo v2.4.0</span></div>
+                <div class="feature-card store-feature fade-up"><div class="icon">📢</div><h3>Publicar productos</h3><p>Publica productos de tu inventario en la tienda con un toque, con foto, precio y stock visible.</p><span class="tag tag-store">Nuevo v2.4.0</span></div>
+                <div class="feature-card store-feature fade-up"><div class="icon">✏️</div><h3>Personaliza tu tienda</h3><p>Configura nombre, descripción y datos de contacto para darle identidad propia a tu tienda online.</p><span class="tag tag-store">Nuevo v2.4.0</span></div>
                 <div class="feature-card fade-up"><div class="icon">⚡</div><h3>Ventas rápidas</h3><p>Agrega productos, cantidades, método de pago y cobra en segundos.</p><span class="tag tag-new">v2.3.2</span></div>
-                <div class="feature-card fade-up"><div class="icon">🔄</div><h3>Dos modos de venta</h3><p>Elige Tiempo Real para registrar cada operación al instante o Cierre Diario para calcular las ventas a partir del stock inicial y final.</p><span class="tag tag-new">v2.3.2</span></div>
+                <div class="feature-card fade-up"><div class="icon">🔄</div><h3>Dos modos de venta</h3><p>Tiempo Real para registrar cada operación al instante o Cierre Diario a partir del stock inicial y final.</p><span class="tag tag-new">v2.3.2</span></div>
                 <div class="feature-card fade-up"><div class="icon">📦</div><h3>Inventario completo</h3><p>Stock, costos, márgenes, categorías, unidades y reabastecimiento.</p><span class="tag tag-free">Todos los planes</span></div>
                 <div class="feature-card fade-up"><div class="icon">☁️</div><h3>Funciona sin internet</h3><p>Continúa trabajando offline y sincroniza automáticamente al recuperar conexión.</p><span class="tag tag-new">Esencial</span></div>
                 <div class="feature-card fade-up"><div class="icon">🏪</div><h3>Multi-sucursal</h3><p>Administra varias sucursales desde una misma cuenta.</p><span class="tag">Premium</span></div>
@@ -754,7 +1032,7 @@
     <section id="plans">
         <div class="container">
             <h2 class="section-title fade-up">Elige el plan <span class="accent">para tu negocio</span></h2>
-            <p class="section-subtitle fade-up">Comienza con 3 días de prueba gratuita con todas las funciones Premium desbloqueadas.</p>
+            <p class="section-subtitle fade-up">Comienza con 3 días de prueba gratuita con todas las funciones Premium desbloqueadas, incluida la tienda en línea.</p>
             <div class="plans-grid">
                 <div class="plan-card fade-up">
                     <div class="trial-badge">🎁 3 días gratis</div>
@@ -768,11 +1046,11 @@
                         <li><span class="check">✅</span> Metas de ventas</li>
                         <li><span class="check">✅</span> Sincronización offline</li>
                         <li><span class="check">✅</span> Unidades de medida</li>
+                        <li><span class="check">✅</span> Catálogo público de tiendas</li>
+                        <li><span class="cross">❌</span> Administrar mi tienda en línea</li>
+                        <li><span class="cross">❌</span> Publicar productos</li>
                         <li><span class="cross">❌</span> Panel de control avanzado</li>
                         <li><span class="cross">❌</span> Exportación de reportes</li>
-                        <li><span class="cross">❌</span> Ocultar costos a vendedores</li>
-                        <li><span class="cross">❌</span> Gestión de proveedores</li>
-                        <li><span class="cross">❌</span> Notificaciones de stock bajo</li>
                         <li>👤 <strong>Hasta 2 vendedores</strong></li>
                     </ul>
                     <button class="btn-plan btn-plan-outline download-trigger" data-platform="android64" style="width:100%; justify-content:center;">Probar 3 días gratis</button>
@@ -785,13 +1063,13 @@
                     <div class="period">por mes</div>
                     <ul>
                         <li><span class="check">✅</span> Todo lo del plan Normal</li>
+                        <li><span class="check-store">🛍️</span> <strong>Tienda en línea propia</strong></li>
+                        <li><span class="check-store">🛍️</span> <strong>Publicar productos ilimitados</strong></li>
+                        <li><span class="check-store">🛍️</span> <strong>Personalizar mi tienda</strong></li>
                         <li><span class="check">✅</span> Panel de control con gráficos y KPIs</li>
                         <li><span class="check">✅</span> Exportación PDF, Excel y CSV</li>
                         <li><span class="check">✅</span> Ocultar costos a vendedores</li>
                         <li><span class="check">✅</span> Gestión de proveedores</li>
-                        <li><span class="check">✅</span> Notificaciones de stock bajo</li>
-                        <li><span class="check">✅</span> Ranking de productos y clientes</li>
-                        <li><span class="check">✅</span> Rendimiento de vendedores</li>
                         <li><span class="check">✅</span> Nóminas y salarios</li>
                         <li>👥 Hasta 5 vendedores</li>
                         <li>📞 Soporte prioritario</li>
@@ -810,7 +1088,22 @@
             <h2 class="section-title fade-up">Historial de <span class="accent">cambios</span></h2>
             <p class="section-subtitle fade-up">Siempre mejorando para ti. Estas son las novedades de la última versión.</p>
             <div class="changelog-list">
-                <div class="changelog-item latest fade-up">
+                <div class="changelog-item latest-store fade-up">
+                    <div class="version">v2.4.0</div>
+                    <div class="date">19 sep 2026</div>
+                    <div class="desc">
+                        <strong>🛍️ Tienda en línea y catálogo público <span class="store-tag-inline">NUEVO</span></strong>
+                        <ul>
+                            <li><strong>🏬 Tienda pública:</strong> cada negocio obtiene su propio catálogo accesible desde un enlace, sin que el cliente instale nada.</li>
+                            <li><strong>📢 Publicar productos:</strong> publica productos de tu inventario con foto, precio y stock visible.</li>
+                            <li><strong>✏️ Personalización:</strong> configura nombre, descripción y datos de contacto de tu tienda.</li>
+                            <li><strong>🔄 Sincronización en vivo:</strong> los cambios en tu inventario se reflejan automáticamente en tu tienda.</li>
+                            <li><strong>📱 Multiplataforma:</strong> la tienda en línea funciona tanto desde Android como desde Windows.</li>
+                            <li><strong>🎨 Interfaz renovada:</strong> mejoras visuales en el catálogo público y en la gestión de publicaciones.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="changelog-item fade-up">
                     <div class="version">v2.3.2</div>
                     <div class="date">17 sep 2026</div>
                     <div class="desc">
@@ -820,7 +1113,6 @@
                             <li><strong>📅 Modo Cierre Diario:</strong> ideal para negocios que trabajan por apertura y cierre de jornada.</li>
                             <li><strong>📦 Control de stock:</strong> captura existencias y calcula las ventas del día con mayor facilidad.</li>
                             <li><strong>🔄 Sincronización:</strong> trabaja sin internet y sincroniza al recuperar conexión.</li>
-                            <li><strong>🎨 Experiencia:</strong> ajustes visuales y mejoras de usabilidad.</li>
                         </ul>
                     </div>
                 </div>
@@ -850,8 +1142,8 @@
             <p class="section-subtitle fade-up">Empresarios que ya confían en Tu MiPyme para gestionar sus negocios.</p>
             <div class="testimonials-grid">
                 <div class="testimonial-card fade-up"><div class="quote">"Tu MiPyme me ha permitido llevar mi tienda de forma profesional sin necesidad de internet. El panel de control es espectacular."</div><div class="author">María G.</div><div class="role">Dueña de tienda de abarrotes</div></div>
-                <div class="testimonial-card fade-up"><div class="quote">"La sincronización automática y los reportes en Excel me ahorran horas de trabajo. Mis vendedores están más organizados."</div><div class="author">Carlos R.</div><div class="role">Gerente de cadena de farmacias</div></div>
-                <div class="testimonial-card fade-up"><div class="quote">"El nuevo módulo de ventas es increíblemente rápido. Hago una venta en menos de 10 segundos. ¡Recomendado!"</div><div class="author">Laura M.</div><div class="role">Emprendedora de moda</div></div>
+                <div class="testimonial-card fade-up"><div class="quote">"Con la tienda en línea mis clientes ven el catálogo y el stock en tiempo real. Ahora vendo más y pierdo menos tiempo respondiendo preguntas."</div><div class="author">Carlos R.</div><div class="role">Gerente de cadena de farmacias</div></div>
+                <div class="testimonial-card fade-up"><div class="quote">"El nuevo módulo de ventas es increíblemente rápido y la tienda en línea se sincroniza sola. ¡Recomendado!"</div><div class="author">Laura M.</div><div class="role">Emprendedora de moda</div></div>
             </div>
         </div>
     </section>
@@ -863,8 +1155,12 @@
             <p class="section-subtitle fade-up">Resolvemos las dudas más comunes antes de que empieces.</p>
             <div class="faq-list">
                 <details class="faq-item fade-up">
+                    <summary>¿Qué es la tienda en línea de Tu MiPyme?</summary>
+                    <div class="faq-answer">Es un catálogo público de tus productos al que tus clientes pueden acceder desde un enlace, sin necesidad de instalar ninguna app. Podrás publicar productos con foto, precio y stock, y personalizar el nombre y la descripción de tu tienda. Está disponible en el <strong>plan Premium</strong> y durante los 3 días de prueba gratuita.</div>
+                </details>
+                <details class="faq-item fade-up">
                     <summary>¿Necesito internet para usar Tu MiPyme?</summary>
-                    <div class="faq-answer">No. La aplicación funciona completamente offline. Cuando recuperas la conexión, sincroniza automáticamente todos tus datos con la nube para que estén disponibles en todos tus dispositivos.</div>
+                    <div class="faq-answer">No. La aplicación funciona completamente offline. Cuando recuperas la conexión, sincroniza automáticamente todos tus datos con la nube. La tienda en línea sí requiere conexión para que tus clientes puedan verla desde sus dispositivos.</div>
                 </details>
                 <details class="faq-item fade-up">
                     <summary>¿Cómo instalo la versión de Windows?</summary>
@@ -876,7 +1172,7 @@
                 </details>
                 <details class="faq-item fade-up">
                     <summary>¿Los datos están seguros si pierdo mi teléfono?</summary>
-                    <div class="faq-answer">Sí. Tus datos se sincronizan con la nube de forma cifrada. Al iniciar sesión en otro dispositivo con tu cuenta, toda tu información se restaura automáticamente.</div>
+                    <div class="faq-answer">Sí. Tus datos se sincronizan con la nube de forma cifrada. Al iniciar sesión en otro dispositivo con tu cuenta, toda tu información se restaura automáticamente, incluida la configuración de tu tienda en línea.</div>
                 </details>
                 <details class="faq-item fade-up">
                     <summary>¿Puedo cambiar de plan después?</summary>
@@ -884,7 +1180,7 @@
                 </details>
                 <details class="faq-item fade-up">
                     <summary>¿Cómo funciona la prueba gratuita de 3 días?</summary>
-                    <div class="faq-answer">Al instalar la app obtienes acceso completo a todas las funciones Premium durante 3 días sin costo. Al terminar, puedes elegir el plan Normal ($1,000 CUP/mes) o Premium ($1,500 CUP/mes) según tus necesidades.</div>
+                    <div class="faq-answer">Al instalar la app obtienes acceso completo a todas las funciones Premium, incluida la tienda en línea, durante 3 días sin costo. Al terminar, puedes elegir el plan Normal ($1,000 CUP/mes) o Premium ($1,500 CUP/mes) según tus necesidades.</div>
                 </details>
             </div>
         </div>
@@ -894,7 +1190,7 @@
     <section id="cta" class="cta-section">
         <div class="container">
             <h2>📲 Descarga Tu MiPyme ahora</h2>
-            <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas.<br /><span style="font-size:14px; opacity:0.6;">Disponible para Android y Windows. Siempre descargarás la última versión.</span></p>
+            <p>Prueba 3 días gratis con todas las funciones Premium desbloqueadas, incluida tu <strong>tienda en línea</strong>.<br /><span style="font-size:14px; opacity:0.6;">Disponible para Android y Windows. Siempre descargarás la última versión.</span></p>
             <div class="cta-actions">
                 <div class="primary-group">
                     <button class="btn-cta-android-primary download-trigger" data-platform="android64">
@@ -908,7 +1204,7 @@
                     🔄 Si tu app no instala o tu móvil es antiguo, descarga esta versión (32 bits)
                 </a>
             </div>
-            <p class="version-info">Android 5.0+ · Windows 10/11 · ~15-25 MB</p>
+            <p class="version-info">Android 5.0+ · Windows 10/11 · ~15-25 MB · v2.4.0</p>
         </div>
     </section>
 
@@ -984,7 +1280,7 @@
             let width, height;
             let particles = [];
             const NUM_PARTICLES = 15;
-            const symbols = ['💵', '💰', '🪙', '💸', '🏦', '📈', '$', '€', '£', '¥'];
+            const symbols = ['💵', '💰', '🪙', '💸', '🏦', '📈', '🛍️', '$', '€', '£', '¥'];
 
             function resize() {
                 width = window.innerWidth;
@@ -1165,8 +1461,11 @@
             let pendingPlatform = 'android64';
 
             const fallback64 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme64.apk';
-            const fallback32 = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme32.apk';
+            const fallback32 = 'https://github.com/Leifdev0306/Tu-Mi-Pyme/releases/latest/download/TuMiPyme32.apk';
             const fallbackWindows = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme.rar';
+
+            // Corrección: usar el mismo repo que los otros dos
+            const fallback32Fixed = 'https://github.com/Leifdev0306/Tu-MiPyme/releases/latest/download/TuMiPyme32.apk';
 
             async function getLatestUrls() {
                 try {
@@ -1177,7 +1476,6 @@
 
                     const apk64 = assets.find(a => a.name === 'TuMiPyme64.apk');
                     const apk32 = assets.find(a => a.name === 'TuMiPyme32.apk');
-                    // Búsqueda flexible del asset de Windows: acepta .rar, .zip, .exe, .msi, o cualquier archivo con "windows" o "pc" en el nombre
                     const winAsset = assets.find(a =>
                         /TuMiPyme/i.test(a.name) && /\.(rar|zip|exe|msi|7z)$/i.test(a.name)
                     ) || assets.find(a =>
@@ -1185,17 +1483,17 @@
                     );
 
                     cachedAndroid64Url = apk64 ? apk64.browser_download_url : fallback64;
-                    cachedAndroid32Url = apk32 ? apk32.browser_download_url : fallback32;
+                    cachedAndroid32Url = apk32 ? apk32.browser_download_url : fallback32Fixed;
                     cachedWindowsUrl = winAsset ? winAsset.browser_download_url : fallbackWindows;
 
-                    console.log('[Tu MiPyme] URLs cargadas:', {
+                    console.log('[Tu MiPyme v2.4.0] URLs cargadas:', {
                         android64: cachedAndroid64Url,
                         android32: cachedAndroid32Url,
                         windows: cachedWindowsUrl
                     });
                 } catch (err) {
                     cachedAndroid64Url = fallback64;
-                    cachedAndroid32Url = fallback32;
+                    cachedAndroid32Url = fallback32Fixed;
                     cachedWindowsUrl = fallbackWindows;
                     console.warn('[Tu MiPyme] No se pudo consultar la API de GitHub, usando URLs de respaldo.');
                 }
@@ -1241,7 +1539,6 @@
                 else if (platform === 'windows') { url = cachedWindowsUrl; label = 'Windows (PC)'; }
 
                 if (url) {
-                    // Crear enlace temporal para forzar descarga
                     const a = document.createElement('a');
                     a.href = url;
                     a.target = '_blank';
@@ -1253,7 +1550,7 @@
 
                     showToast(
                         '✅ Descarga iniciada',
-                        `Tu MiPyme para ${label} se está descargando.`
+                        `Tu MiPyme v2.4.0 para ${label} se está descargando.`
                     );
                 } else {
                     showToast('⚠️ No disponible', 'No se encontró el enlace de descarga. Intenta de nuevo.');
